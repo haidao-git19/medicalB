@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.SubscribeDao">
+
+    <sql id="subscribeColumn">
+         from tb_medical_order O left join tb_medical_doctor D on O.doctorID=D.doctorID 
+        	left join tb_medical_freetime F on F.doctorID=D.doctorID
+        	<where>
+        	    <if test="doctorID !=null and doctorID !=''">
+			   		and D.doctorID = #{doctorID}
+				</if>
+				<if test="freeID !=null and freeID !=''">
+			   		and F.id = #{freeID}
+				</if> 
+				<if test="orderDate !=null and orderDate != ''">
+				    and O.orderDate = #{orderDate}
+				</if> 
+				and O.state=0
+        	</where>
+    </sql>
+    
+    <select id="querySubscribe" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_order X
+        	where X.orderID in (select O.orderID <include refid="subscribeColumn"/>) 
+        		and X.startTime in (select max(O.startTime) <include refid="subscribeColumn"/>)
+    </select>
+	
+    <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+        <choose>
+            <when test="doctorID !=null and doctorID !=''">
+                select distinct O.diseaseID,O.doctorID,DATE_FORMAT(O.endTime,'%H:%i') as endTime,O.orderDate,O.orderID,O.patientID,DATE_FORMAT(O.startTime,'%H:%i') as startTime,O.state,O.type,O.price,O.purpose,P.* from tb_medical_order O left join tb_medical_patient P on O.patientID = P.patientID 
+                	<!-- left join tb_medical_disease G on O.diseaseID = G.diseaseID  --> 
+            </when>
+            <otherwise>
+                select distinct O.diseaseID,(select d.diseaseName from tb_medical_disease d where d.diseaseID = O.diseaseID) diseaseName,O.doctorID,DATE_FORMAT(O.endTime,'%H:%i') as endTime,O.orderDate,O.orderID,O.patientID,DATE_FORMAT(O.startTime,'%H:%i') as startTime,O.state,O.type,O.price,O.purpose,D.*,H.hospitalName,S.attrname sectionName from tb_medical_order O left join tb_medical_doctor D on O.doctorID=D.doctorID 
+                	left join tb_medical_hospital H on D.hospitalID=H.hospitalID
+                	left join tb_medical_hospital_section X on X.hospitalID=H.hospitalID
+                	left join tb_medical_section S on D.sectionID=S.id
+            </otherwise>
+        </choose>
+        <where>
+            <if test="doctorID !=null and doctorID !=''">
+                and O.doctorID = #{doctorID}
+            </if>
+            <if test="state ==0 and nowDate !=null and nowDate !=''">
+                and DATE_FORMAT(#{nowDate},'%y-%m-%d') &lt;= DATE_FORMAT(O.orderDate,'%y-%m-%d')
+            </if>
+            <if test="state !=null and state !=''">
+	            and O.state=#{state}
+            </if>
+            <if test="patientID !=null and patientID !=''">
+                and O.patientID = #{patientID}
+            </if>
+        </where>
+        order by O.orderDate asc,O.startTime asc 
+        
+        limit #{start},#{limit}
+    </select>
+    
+    <insert id="save" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="orderID">
+        insert tb_medical_order(doctorID,patientID,orderDate,startTime,endTime,state,isAddPrescription,paymethod,purpose,type,price) 
+        	values(#{doctorID},#{patientID},#{orderDate},#{startTime},#{endTime},'0',#{isAddPrescription},#{paymethod},#{purpose},#{type},#{price})
+    </insert>
+    
+    <select id="queryByParams" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_order 
+        <where>
+            <if test="orderID !=null and orderID !=''">
+                orderID = #{orderID}
+            </if>
+        </where>
+    </select>
+    
+    <update id="cancelOrder" parameterType="java.util.Map">
+        update tb_medical_order 
+        <set>
+            <if test="state !=null and state !=''">
+                state = #{state}
+            </if>
+        </set>
+        <where>
+            <if test="orderID !=null and orderID !=''">
+                orderID =#{orderID}
+            </if>
+        </where>
+    </update>
+    
+     <select id="callAuth" parameterType="java.util.Map" resultType="Long">
+        select timestampdiff(SECOND,NOW(),str_to_date(CONCAT(X.orderDate," ",X.endTime),'%Y-%m-%d %H:%i:%s')) leftTime from tb_medical_order X 
+        <where>
+            <![CDATA[
+            	X.state = 0 
+            	and  X.startTime <= DATE_FORMAT(now(),'%H:%i') 
+            	and X.endTime > DATE_FORMAT(now(),'%H:%i') 
+            	and DATE_FORMAT(now(),'%Y-%m-%d') = X.orderDate ]]>
+            <if test="orderID !=null and orderID !=''">
+                and X.orderID = #{orderID}
+            </if>
+        </where>
+    </select>
+    
+     <update id="modifyOrder" parameterType="java.util.Map">
+        update tb_medical_order o
+        <set>
+            o.updateTime = now()
+            <if test="state !=null and state !=''">
+                ,state = #{state}
+            </if>
+            <if test="paystate !=null and paystate !=''">
+                ,paystate = #{paystate}
+            </if>
+             <if test="isnotice !=null and isnotice !=''">
+                ,isnotice = #{isnotice}
+            </if>
+        </set>
+        <where>
+            <if test="orderID !=null and orderID !=''">
+                orderID =#{orderID}
+            </if>
+        </where>
+    </update>
+    
+     <select id="queryTodaySubscribe" parameterType="java.util.Map" resultType="Long">
+        select count(1) count from tb_medical_order X 
+        <where>
+            <![CDATA[
+            	X.state = 0 
+            	and DATE_FORMAT(now(),'%Y-%m-%d') = X.orderDate
+            	and X.doctorId = #{doctorId}
+            	 ]]>
+        </where>
+    </select>
+    
+    <select id="queryRcentiSubscribe" parameterType="java.util.Map" resultType="java.util.Map">
+        <![CDATA[
+        	select X.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_order X LEFT JOIN tb_medical_doctor d on X.doctorID = d.doctorID LEFT JOIN tb_medical_patient p on X.patientID = p.patientID where X.state in (0,-1) and X.isnotice!=1 and str_to_date(CONCAT(X.orderDate," ",X.startTime),'%Y-%m-%d %H:%i:%s') >= date_add(now(), interval -${minitue} MINUTE)
+         ]]>
+    </select>
+    
+     <select id="querySubscribeForTips" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_order X
+        	where X.orderID in (select O.orderID <include refid="subscribeColumn"/>) 
+        		and X.startTime in (select max(O.startTime) <include refid="subscribeColumn"/>)
+    </select>
+    
+</mapper>

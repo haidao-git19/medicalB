@@ -1,0 +1,31 @@
+body{ margin:0; background-color:#eeeeee; padding:0px;}
+img{ border:0;}
+a{ text-decoration:none;}
+.userbox{ height:44px; border:#c9c9c9 1px solid; background-color:#f5f5f5; width:80%; margin:0px auto; margin-top:20px; border-radius:6px 6px 0px 0px; overflow:hidden;}
+.userboxleft{ float:left;color:#4d4d4d; font-family:"微软雅黑"; font-size:18px;line-height:44px; padding-left:20px;}
+.userbox img{ display:block; float:right; padding-top:5px; padding-left:10px; padding-right:10px;}
+.userboxright{ float:right;color:#4d4d4d; font-family:"微软雅黑"; font-size:18px;line-height:44px;}
+.passwordbox{ height:44px; border:#c9c9c9 1px solid; background-color:#f5f5f5; width:80%; margin:0px auto;border-radius:0px 0px 6px 6px; border-top: none; overflow:hidden;}
+.forget{color:#fe4d00;}
+.zhuce{color:#999999; margin-right:20px;}
+.login{ height:44px; background-color:#ff6100; width:80%; margin:20px auto; border-radius:6px;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.login a{ display:block; color:#f5f5f5; font-family:"微软雅黑"; font-size:18px; text-align:center; line-height:44px; text-decoration:none;}
+.passwordbox span{color:#4d4d4d; font-family:"微软雅黑"; font-size:18px;line-height:44px; padding-left:20px; padding-right:20px; float:left;}
+.gray{ background-color:#c9c9c9; width:1px; height:100%; float:left; line-height:44px;}
+.passwordbox input{ float:left;width:50%; height:96%; margin:0; border:none;margin:0; color:#c9c9c9; background-color:#f5f5f5; font-size:16px; outline:medium;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.yanzhengma{ width:80%; margin:0px auto; margin-top:20px; overflow:hidden;}
+.shuru{ border:#c9c9c9 1px solid; background-color:#f5f5f5; height:44px; border-radius:6px; float:left; width:45%;}
+.shuru input{ width:65%; height:80%; margin:4px;border:none; color:#c9c9c9; background-color:#f5f5f5; font-size:18px; outline:medium;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.huqu{ border:#c9c9c9 1px solid; background-color:#ff6100; height:44px; border-radius:6px; float:right; width:45%;}
+.huqu a{ display:block; color:#f5f5f5; font-family:"微软雅黑"; font-size:18px; text-align:center; line-height:44px; text-decoration:none;}
+.selectbox{ width:80%; margin: 20px auto;color:#4d4d4d; font-family:"微软雅黑"; font-size:16px;}
+.select{ float:left; margin:4px; }
+
+input[type='number'] {
+    	-moz-appearance:textfield;
+	}
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}

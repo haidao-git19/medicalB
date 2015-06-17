@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="x-ua-compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<title>壹药网_网上药店领导者_网上购买药品的放心药房网</title>
+<meta name="keywords" content="网上药店,网上药房,药房网,药品网,网上买药,网上购药,壹药网"/>
+<meta name="description" content="壹药网网上药店是全国正规合法网上药店平台，并有国家执业医师提供药品购买免费咨询，为您网上买药提供超越传统药店的贴心服务。"/>
+<link rel="stylesheet" type="text/css" href="css/head201406.css">
+<link rel="stylesheet" type="text/css" href="css/head_990.min.css" />
+<link rel="stylesheet" type="text/css" href="css/index201406.min.css" />
+<link rel="stylesheet" type="text/css" href="css/privatecustom.css" />
+<link rel="stylesheet" type="text/css" href="css/guide.css" />
+<link rel='stylesheet' type='text/css' href='css/iconfont.css' />
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/global_top.min.js"></script>
+<script type="text/javascript" src="js/cart_cookie.min.js"></script>
+<script type="text/javascript" src="js/user_login_cookie.min.js"></script>
+<script type="text/javascript" src="js/cart_1.min.js"></script>
+<script type="text/javascript" src="js/autoComplete2.min.js"></script>
+<script type="text/javascript" src="js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="js/common_others.min.js"></script>
+<script type="text/javascript" src="js/index_201406.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<div class="y_head clearfix"><a name="topLink"></a>
+  <div class="site-nav">
+    <div class="site-nav-bd">
+      <ul class="site-nav-bd-l">
+        <li class="menu">
+          <div class="menu-hd province_box"> <span>欢迎访问商城</span> </div>
+        </li>
+      </ul>
+      <ul class="site-nav-bd-r">
+        <li class="menu">
+          <div id="logininfo" class="menu-hd"><a target="_self" class="red mr5" href="javascript: login();" rel="nofollow" title="登录网上药店后台">请登录</a><a title="注册会员，网上买药更简单" target="_self" href="http://passport.111.com.cn/sso/register.action" rel="nofollow">注册</a></div>
+        </li>
+        <li class="menu">
+          <div class="menu-hd"> <a rel="nofollow" href="http://my.111.com.cn/ucenter/orderList.action"> 我的订单</a> </div>
+        </li>
+        <li class="menu">
+          <div class="menu-hd head_order"> <a target="_self" class="myyaowang" href="http://my.111.com.cn/ucenter/myCenter.action" rel="nofollow">我的壹药网</a>
+            <div class="menu_bd" id="menu_bd_orther">
+              <ul class="menu_bd_panel">
+                <li><a target="_self" href="http://my.111.com.cn/ucenter/queryCoupon.action" rel="nofollow">我的优惠券</a></li>
+                <li><a target="_self" href="http://my.111.com.cn/ucenter/myFavorite.action" rel="nofollow">我的收藏夹</a></li>
+                <li><a target="_self" href="http://my.111.com.cn/ucenter/reviewList.action" rel="nofollow">商品评价</a></li>
+                <li><a title="网上药店私人定制：会员专享" target="_self" href="http://my.111.com.cn/ucenter/privateTag.action" rel="nofollow">我的私人定制</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="menu">
+          <div class="menu-hd"><a target="_blank" href="http://www.111.com.cn/cmsPage/2013073005/index.html" rel="nofollow">帮助中心</a></div>
+        </li>
+        <li class="menu li_none">
+          <div class="menu-hd"><i class="iconfont icon-phone">&#xe658;</i>
+            <div class="tellnumber">400-007-0958</div>
+          </div>
+        </li>
+        <li class="menu">
+          <div class="menu-hd head_app"> <a target="_blank" class="tell" href="http://www.111.com.cn/cmsPage/2013101101/" rel="nofollow"><em></em><span>手机APP</span></a>
+            <div class="menu_bd tell_title">&emsp;</div>
+            <div id="menu_bd_app">
+              <ul>
+                <li><span class="dimensional"></span></li>
+                <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014061304/index.html">APP首单<span class="redBold">返10元</span></a></li>
+                <li class="appmore"><a href="http://app.111.com.cn/"  rel="nofollow">更多应用<span class="rightIcon"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="menu menu_last">
+          <div class="menu-hd"><a target="_self" class="favorite" href="javascript:bookmark();" rel="nofollow"><em></em><span>收藏</span></a> </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap site_head yao_head">
+    <div class="mod_logo"><a rel="nofollow" class="logo_jieri" target="_self" href="#"></a>
+      <div class="logo"><a title="网上药店" href="http://www.111.com.cn">壹药网</a></div>
+    </div>
+    <div class="mod_tell">
+      <p>好医 · 好药 · 好健康</p>
+    </div>
+    <div class="mod_search">
+      <div class="searchForm">
+        <label class="combobox-placeholder"   id="combobox-placeholder"  for="word"></label>
+        <input maxlength="100" value="" name="kw" id="word" type="text" autocomplete="off" />
+        <button class="searchBtn" onclick="search();">搜索</button>
+        <div style="display: none;" class="search_tips_result_new" id="searchSuggest">
+          <ul>
+          </ul>
+        </div>
+      </div>
+      <div class="hotkeys">
+        <div class="word_box" id="hotkeys"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="head_wrap clearfix" id="headerNav">
+  <div class="headerNavMain">
+    <ul class="sitenav" id="sideNav">
+      <li class="s_m home"><a href="http://www.111.com.cn/" class="nav_link" target="_self">首页</a></li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover1">常见病<i></i></a>
+        <ul style="display: none;" id="navHover1">
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030501/">感冒发烧</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014061302/">皮炎癣症</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014062301/">风湿骨病</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030402/">失眠</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2015013001/">查看更多</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover2">慢性病<i></i></a>
+        <ul style="display: none;" id="navHover2">
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030301/">肺癌</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014081101/">尖锐湿疣</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014040204/">抑郁症</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014040302/">帕金森</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014121701/">查看更多</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover3">妈妈&宝宝<i></i></a>
+        <ul style="display: none;" id="navHover3">
+          <li><a rel="nofollow" href="http://www.111.com.cn/list/955412-0-0-0-0-0-0-1.html">面部护理</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2015021102/">减肥美颜</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014090502/">厨房助手</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014010302/">孕妈养成</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014072801/">查看更多</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover4">女性&男性<i></i></a>
+        <ul style="display: none;" id="navHover4">
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014111004/">补肾壮阳</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014051301/">早泄神药</a></li>
+          <li><a href="http://www.111.com.cn/list/971522-0-0-0-0-0-0-1.html">运动健康</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/list/964106-0-1_93499_138826-0-0-0-0-1.html">解酒护肝</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2015031706/">性福加油站</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover6">理疗&养生<i></i></a>
+        <ul style="display: none;" id="navHover6">
+          <li><a rel="nofollow" href="http://www.111.com.cn/list/971495-0-0-0-0-0-0-1.html/">婴儿奶粉</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014082801/">宝宝纸尿裤</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/list/965399-0-0-0-0-0-0-1.html">宝宝喂养</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014050402/">孕育总动员</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014050801/">小儿多动症</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="searchForm" style="display:none">
+      <label class="combobox-placeholder" for="fix_keyword"></label>
+      <input maxlength="100" value="" name="kw" id="fix_keyword" autocomplete="off" type="text">
+      <button class="searchBtn" onclick="javascript:searchTips();;">搜索</button>
+      <div style="display: none;" class="search_tips_result_new" id="fix_searchSuggest">
+        <ul>
+        </ul>
+      </div>
+    </div>
+    <div class="mod_minicart"> <a rel="nofollow" target="_self" href="http://buy.111.com.cn/cart/shoppingcart/queryshoppingcart.action" class="mini_cart_btn"> <em class="cart_num">1</em> <span>购物车</span> </a>
+      <div id="minicart_list" style="display: none;" class="minicart_list">
+        <div class="list_detail"> 
+          <!--购物车有商品时begin-->
+          <ul style="display: block;">
+            <li><a traget="_blank" class="pro_img" href="http://www.111.com.cn/product/10732458.html"><img heigth="40" src="http://p3.maiyaole.com/img/10732/10732458/100_100.jpg?a=933166398" onerror="imgERROR(this,'no_pic_50_50.jpg');" width="40"></a><a traget="_blank" class="pro_name" href="http://www.111.com.cn/product/10732458.html">雷诺考特 布地奈德鼻喷雾剂  32ug*120喷*1盒</a><span class="pro_price">¥40</span>
+              <div class="num_box"><b name="editName_10732458" class="minusDisable" onclick="updateCart(-1,10732458,1)"></b>
+                <input class="minicart_num" value="1" type="text">
+                <b name="editName_10732458" class="plus" onclick="updateCart(1,10732458,1)"></b><a target="_self" style="display:none;" href="javascript:removeCart(10732458,1)">删除</a></div>
+            </li>
+          </ul>
+          <div class="checkout_box" style="">
+            <p> <span class="fl"> 共<em class="fstrong">1</em>件商品</span> 合计：<em class="fstrong">¥40</em> </p>
+            <p id="miniCart_p2" style="display: none;"> <span style="color: gray;"> 满百免运费 </span> </p>
+            <a rel="nofollow" class="checkout_btn" href="http://buy.111.com.cn/cart/shoppingcart/queryshoppingcart.action" target="_self"> 去结算 </a> </div>
+          <div style="display: none;" class="none_tips"> <i> </i>
+            <p> 您的购物车里还没有商品，如已添加商品，请 <a rel="nofollow" href="javascript: login();" target="_self">登录 </a> 。 </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--头部结束--> 
+<!--内容-->
+
+<div class="wrap main_body clearfix">
+  <div class="main-l">
+    <div class="tsSlide" >
+      <div class="pro-switch">
+        <div class="slider">
+          <div class="flexslider">
+            <ul class="slides">
+              <li>
+                <div class="img"><a href="#"><img src="images/1428466155118236.jpg" height="300" width"710" alt="" /></a></div>
+              </li>
+              <li>
+                <div class="img"><img src="images/1428474874162239.jpg" height="300" width"710" alt="" /></div>
+              </li>
+              <li>
+                <div class="img"><img src="images/1428563285371248.jpg" height="300" width"710" alt="" /></div>
+              </li>
+              <li>
+                <div class="img"><img src="images/1428568775894250.jpg" height="300" width"710" alt="" /></div>
+              </li>
+              <li>
+                <div class="img"><img src="images/1428369851588216.jpg"height="300" width"710" alt="" /></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+    $(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+  </script>
+    <ul class="main_ul clearfix">
+      <li>
+        <h4><a title="最新到货 特价回馈客户" target="_blank" href="http://www.111.com.cn/product/50088462.html">最新到货 特价回馈客户</a></h4>
+        <div class="pic"> <a target="_blank" href="http://www.111.com.cn/product/50088462.html"><img src="images/100_100_016.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a> </div>
+        <div class="title"> <a target="_blank" title="强生 稳豪倍易型血糖仪 赠送25片试纸和针头" href="http://www.111.com.cn/product/50088462.html">强生 稳豪倍易型血糖仪 赠送25片试纸和针头</a> </div>
+        <span class="price_l"> <i>&#165;</i>269.0</span> <span class="price_r"> <i>&#165;</i><del>397.0</del> </span> </li>
+      <li>
+        <h4><a title="买1送2（原品&amp;玛咖干片30g）" target="_blank" href="http://www.111.com.cn/product/50082752.html">买1送2（原品&amp;玛咖干片30g）</a></h4>
+        <div class="pic"> <a target="_blank" href="http://www.111.com.cn/product/50082752.html"><img src="images/100_100_006.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a> </div>
+        <div class="title"> <a target="_blank" title="玛咖酋长 牛皮纸玛咖片500mg×60片" href="http://www.111.com.cn/product/50082752.html">玛咖酋长 牛皮纸玛咖片500mg×60片</a> </div>
+        <span class="price_l"> <i>&#165;</i>198.0</span> <span class="price_r"> <i>&#165;</i><del>238.0</del> </span> </li>
+      <li class="last">
+        <h4><a title="67味中药  三百年古方" target="_blank" href="http://www.111.com.cn/product/7151666.html">67味中药  三百年古方</a></h4>
+        <div class="pic"> <a target="_blank" href="http://www.111.com.cn/product/7151666.html"><img src="images/100_100_012.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a> </div>
+        <div class="title"> <a target="_blank" title="内蒙古鸿茅 鸿茅药酒 500ml/瓶" href="http://www.111.com.cn/product/7151666.html">内蒙古鸿茅 鸿茅药酒 500ml/瓶</a> </div>
+        <span class="price_l"> <i>&#165;</i>208.0</span> <span class="price_r"> <i>&#165;</i><del>298.0</del> </span> </li>
+      <li>
+        <h4><a title="孕妇营养销量冠军" target="_blank" href="http://www.111.com.cn/product/987630.html">孕妇营养销量冠军</a></h4>
+        <div class="pic"> <a target="_blank" href="http://www.111.com.cn/product/987630.html"><img src="images/100_100_028.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a> </div>
+        <div class="title"> <a target="_blank" title="爱乐维 复合维生素片 30片" href="http://www.111.com.cn/product/987630.html">爱乐维 复合维生素片 30片</a> </div>
+        <span class="price_l"> <i>&#165;</i>49.5</span> <span class="price_r"> <i>&#165;</i><del>152.0</del> </span> </li>
+      <li>
+        <h4><a title="花王纸尿裤仅售90元" target="_blank" href="http://www.111.com.cn/product/50066756.html">花王纸尿裤仅售90元</a></h4>
+        <div class="pic"> <a target="_blank" href="http://www.111.com.cn/product/50066756.html"><img src="images/100_100_003.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a> </div>
+        <div class="title"> <a target="_blank" title="花王Merries妙而舒 L48 纸尿裤" href="http://www.111.com.cn/product/50066756.html">花王Merries妙而舒 L48 纸尿裤</a> </div>
+        <span class="price_l"> <i>&#165;</i>90.0</span> <span class="price_r"> <i>&#165;</i><del>169.0</del> </span> </li>
+      <li class="last">
+        <h4><a title="轻熟女亮丽拍档 美妆必备" target="_blank" href="http://www.111.com.cn/product/1176476.html">轻熟女亮丽拍档 美妆必备</a></h4>
+        <div class="pic"> <a target="_blank" href="http://www.111.com.cn/product/1176476.html"><img src="images/100_100_022.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a> </div>
+        <div class="title"> <a target="_blank" title="强生 美瞳彩色隐形眼镜日抛 30片装" href="http://www.111.com.cn/product/1176476.html">强生 美瞳彩色隐形眼镜日抛 30片装</a> </div>
+        <span class="price_l"> <i>&#165;</i>159.0</span> <span class="price_r"> <i>&#165;</i><del>298.0</del> </span> </li>
+    </ul>
+  </div>
+  <div class="main-r">
+    <div id="doctor_pop" class="doctor_box">
+      <div class="consult">
+        <div class="c_b clearfix">
+          <div class="consult_title" title="合作伙伴">合作伙伴</div>
+          <div class="tel_box"> <i class="iconfont icon-phone"></i>
+            <div class="tellnumber">400-007-0958</div>
+          </div>
+          <div id="doctor_slide" class="c_slide"> <a href="javascript:" class="ccPrev" data-type="prev"></a><a href="javascript:" class="ccNext" data-type="next"></a></div>
+          <p id="doctor_a"><a rel="nofollow" data-rel="doctorSlide0" class="on" href="javascript:">&#8226;</a><a rel="nofollow" data-rel="doctorSlide1" class="" href="javascript:">&#8226;</a><a rel="nofollow" data-rel="doctorSlide2" class="" href="javascript:">&#8226;</a><a rel="nofollow" data-rel="doctorSlide3" class="" href="javascript:">&#8226;</a></p>
+        </div>
+        <div class="doctor_detail" id="doctor_detail">
+          <ul id="doctorSlide0" style="-webkit-transition: -webkit-transform 250ms linear; transition: -webkit-transform 250ms linear; -webkit-backface-visibility: hidden; -webkit-transform: translateX(0%);">
+            <li ><a href="javascript:;"  target="_blank"><span class="imgsection">
+            <img src="images/100_100_013.jpg">
+            </span></a></li>
+            <li ><a href="javascript:;"  target="_blank"><span class="imgsection">
+            <img src="images/100_100_013.jpg"></span></a></li>
+            <li><a href="javascript:;"  target="_blank"><span class="imgsection">
+            <img src="images/100_100_013.jpg"></span></a></li>
+            <li><a href="javascript:;"  target="_blank"><span class="imgsection">
+            <img src="images/100_100_013.jpg">
+            </span></a></li>
+            <li><a href="javascript:;"  target="_blank"><span class="imgsection">
+            <img src="images/100_100_013.jpg">
+            </span></a></li>
+            <li><a href="javascript:;"  target="_blank"><span class="imgsection">
+            <img src="images/100_100_013.jpg">
+            </span></a></li>
+            <li><a href="javascript:;"  target="_blank"><span class="imgsection">
+            <img src="images/100_100_013.jpg">
+            </span></a></li>
+            <li><a href="javascript:;"  target="_blank"><span class="imgsection">
+            <img src="images/100_100_013.jpg">
+            </span></a></li>
+          </ul>
+
+          <ul id="doctorSlide3" style="display:none;-webkit-transition: -webkit-transform 250ms linear; transition: -webkit-transform 250ms linear; -webkit-transform: translateX(100%); -webkit-backface-visibility: hidden;">
+            <li id="dc_1043"><a href="javascript:;" rel="nofollow" onclick="Detector.floatclick(4,1043);" target="_self"><span class="imgsection wufang"></span><b>吴药师</b></a></li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+    <script type="text/javascript">
+function initIndexDoctors(){
+	var doctorSlideUL_ = createDoctorSlideUL();
+	jQuery('#doctor_a').html(doctorSlideA_);
+	jQuery('#doctor_detail').html(doctorSlideUL_);
+	powerSwitchIndex();
+}
+
+var doctors = [{ i: 1020, n: "朱药师", s: 3, pic: "zhujunyan"}
+		, { i: 1021, n: "蔡药师", s: 3, pic: "caihui"}
+		, { i: 1024, n: "宋药师", s: 3, pic: "songziyan"}
+		, { i: 1019, n: "陈药师", s: 3, pic: "chenting"}
+		, { i: 1023, n: "美药师", s: 3, pic: "wumeiling"}
+		, { i: 1025, n: "伍药师", s: 3, pic: "wuqifeng"}
+		, { i: 1016, n: "李药师", s: 3, pic: "liyanwen"}
+		, { i: 1018, n: "卿药师", s: 3, pic: "wuyongqing"}
+		, { i: 1029, n: "廖药师", s: 3, pic: "liaolimin"}
+		, { i: 1017, n: "杨药师", s: 3, pic: "yangwanping"}
+		, { i: 1042, n: "张药师", s: 3, pic: "zhangxinli"}
+		, { i: 1022, n: "孙药师", s: 3, pic: "sunyunyun"}
+		, { i: 1043, n: "吴药师", s: 3, pic: "wufang"}
+];
+
+function _ReorderTheDoctor(){
+	doctors.sort(function(a, b){return a.s < b.s ? -1 : 1;});
+
+	doctorSlideA_ = '';
+	b_doctorSlideA_ = '';
+	if($('meta[name="index"]').length > 0){
+		$('#doctor_slide').html('');
+		initIndexDoctors();
+	}
+	$('#b_doctor_slide').html('');
+}
+
+var loaded = false;
+function _CheckOStatusCallback(i,s) {
+	if(loaded) return;
+	for(var index = 0; index < doctors.length; index++){
+		if(doctors[index].i != i) continue;
+		
+		doctors[index].s = s;
+		if(!doctors[index].times)
+			doctors[index].times = 1;
+		else
+			doctors[index].times = doctors[index].times + 1;
+		
+		if(doctors[index].times < 3) continue;
+				
+		var DR = true;
+		for(var index2 = 0; index2 < doctors.length; index2++){
+			if(doctors[index2].times < 3){DR = false;break;}
+		}
+		if(DR){_ReorderTheDoctor();loaded = true;}
+		
+		break;
+	}
+}
+
+function createDoctorSlideA(i){
+	var c = (i == 0 ? 'on' : '');
+	if(prefix && prefix=="b_"){
+		b_doctorSlideA_ += '<a rel="nofollow" data-rel="b_doctorSlide'+i+'" class="' + c + '" href="javascript:">&bull;</a>';
+	}else{
+		doctorSlideA_ += '<a rel="nofollow" data-rel="'+prefix+'doctorSlide'+i+'" class="' + c + '" href="javascript:">&bull;</a>';
+	}
+}
+
+function createDoctorSlideUL(flag) {
+	if (flag && flag == "b") {
+		prefix = "b_";
+		showSize = 3;
+	} else {
+		prefix = "";
+		showSize = 4;
+	}
+
+	var ul = '<ul id="' + prefix + 'doctorSlide0" style="-webkit-transition: -webkit-transform 250ms linear; transition: -webkit-transform 250ms linear; -webkit-backface-visibility: hidden; -webkit-transform: translateX(0%);">';
+	createDoctorSlideA(0);
+	for (var i = 0; i < doctors.length; i++) {
+		var dc = doctors[i];
+////javascript:olistclick(' + dc.i + ');
+		ul += '<li id="' + prefix + 'dc_' + dc.i + '"><a href="javascript:;" rel="nofollow"  onclick="Detector.floatclick(4,' + dc.i + ');"  target="_self"><span class="imgsection '
+			+ dc.pic + '">'
+			+ '</span><b>' + dc.n + '</b></a></li>';
+		if ((i + 1) <doctors.length && (i + 1) % showSize == 0) {
+			ul += '</ul>';
+			var ulIndex = (i + 1) / showSize;
+			if (i < doctors.length) {
+				ul += '<ul id="' + prefix + 'doctorSlide' + ulIndex + '" style="display:none;-webkit-transition: -webkit-transform 250ms linear; transition: -webkit-transform 250ms linear; -webkit-transform: translateX(100%); -webkit-backface-visibility: hidden;">';
+				createDoctorSlideA(ulIndex);
+			}
+		}
+	}
+	ul += '</ul>';
+	return ul;
+}
+</script> 
+    <script>
+var now = parseInt(new Date().format("HH"));
+var now_ = new Date().format("yyyy-MM-dd-HH-mm-ss").split('-');
+var now_2 = new Date(now_[0], now_[1], now_[2], now_[3], now_[4], now_[5]).getTime();
+
+if(now < 9){
+	$("#doctor_pop > .consult").siblings().attr("class", "d_txt grey_d_txt");
+	var d9 = new Date(now_[0], now_[1], now_[2], 9, 00, 00).getTime() - now_2;
+	window.setTimeout(function(){
+		$("#doctor_pop > .consult").siblings().attr("class", "d_txt");
+	}, d9);
+} else if(now <= 21){
+	$("#doctor_pop > .consult").siblings().attr("class", "d_txt");
+
+	var d21 = new Date(now_[0], now_[1], now_[2], 21, 00, 00).getTime() - now_2;
+	window.setTimeout(function(){
+		$("#doctor_pop > .consult").siblings().attr("class", "d_txt grey_d_txt");
+	}, d21);
+} else {
+	$("#doctor_pop > .consult").siblings().attr("class", "d_txt grey_d_txt");
+}
+</script>
+    <div class="newsbox clearfix" id="newsbox">
+      <p class="tabs"> <a class="tb1 cur">优质服务</a> </p>
+      <div class="news_list" style="display: block;">
+        <div class="service"> <a class="c_0" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page2" rel="nofollow"><i class="icon-rongyu"></i><span>权威荣誉</span></a> <a class="c_1" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page3" rel="nofollow"><i class="icon-pinpai"></i><span>品牌授权</span></a> <a class="c_2" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page4" rel="nofollow"><i class="icon-zhengpin"></i><span>正品保险</span></a> <a class="c_3" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page5" rel="nofollow"><i class="icon-yaojian"></i><span>药监认证</span></a> <a class="c_4" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page6" rel="nofollow"><i class="icon-baibaoyou"></i><span>满百包邮</span></a> <a class="c_5" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page7" rel="nofollow"><i class="icon-30tui"></i><span>30天退换</span></a> <a class="c_6" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page8" rel="nofollow"><i class="icon-yingsibz"></i><span>隐私包装</span></a> <a class="c_7" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page9" rel="nofollow"><i class="icon-jinpaiyaoshi"></i><span>金牌药师</span></a> </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix h_0"></div>
+  <div class="wrap market market-bg clearfix">
+    <div class="tabs2" id="tab_list"> <a class="tb1 cur" target="_self" href="javascript:" data-rel="tab_list1"><span style="font-style: italic;"></span>优惠活动<i></i></a> <a href="javascript:" class="prev" data-type="prev"></a><a href="javascript:" class="pause" data-type="pause"></a><a href="javascript:" class="next" data-type="next"></a></div>
+    <div class="market_mian">
+      <div class="market_box" id="tab_list1" style="display: block; transition: transform 250ms linear 0s; backface-visibility: hidden; transform: translateX(0%);">
+        <ul style="display: block;" class="product_list">
+          <li class="first">
+            <p class="pic"><a href="http://www.111.com.cn/product/50077918.html"><img alt="3M 9002V型 自吸过滤式防颗粒口罩(带呼气阀) 6只装 头戴式" src="images/120_120_006.jpg"></a></p>
+            <p class="name"><a href="http://www.111.com.cn/product/50077918.html">3M 9002V型 自吸过滤式防颗粒口罩(带呼气阀) 6只装 头戴式</a></p>
+            <span class="price_l"><i>&#165;</i>17.90</span> <span class="price_r"><i>&#165;</i><del>49.0</del></span></li>
+          <li>
+            <p class="pic"><a href="http://www.111.com.cn/product/10732458.html"><img alt="雷诺考特 布地奈德鼻喷雾剂  32ug*120喷*1盒" src="images/120_120_002.jpg"></a></p>
+            <p class="name"><a href="http://www.111.com.cn/product/10732458.html">雷诺考特 布地奈德鼻喷雾剂  32ug*120喷*1盒</a></p>
+            <span class="price_l"><i>&#165;</i>40.00</span> <span class="price_r"><i>&#165;</i><del>76.0</del></span></li>
+          <li>
+            <p class="pic"><a href="http://www.111.com.cn/product/13514759.html"><img alt="视多丽 花样系列美瞳彩色隐形眼镜月抛 2片装 花漾褐色 " src="images/120_120_017.jpg"></a></p>
+            <p class="name"><a href="http://www.111.com.cn/product/13514759.html">视多丽 花样系列美瞳彩色隐形眼镜月抛 2片装 花漾褐色 </a></p>
+            <span class="price_l"><i>&#165;</i>39.90</span> <span class="price_r"><i>&#165;</i><del>110.0</del></span></li>
+          <li>
+            <p class="pic"><a href="http://www.111.com.cn/product/971839.html"><img alt="开瑞坦 氯雷他定片 10mg*6片" src="images/120_120_010.jpg"></a></p>
+            <p class="name"><a href="http://www.111.com.cn/product/971839.html">开瑞坦 氯雷他定片 10mg*6片</a></p>
+            <span class="price_l"><i>&#165;</i>19.80</span> <span class="price_r"><i>&#165;</i><del>23.8</del></span></li>
+          <li>
+            <p class="pic"><a href="http://www.111.com.cn/product/972655.html"><img alt="力度伸 维生素C泡腾片 1g*30片" src="images/120_120_018.jpg"></a></p>
+            <p class="name"><a href="http://www.111.com.cn/product/972655.html">力度伸 维生素C泡腾片 1g*30片</a></p>
+            <span class="price_l"><i>&#165;</i>35.00</span> <span class="price_r"><i>&#165;</i><del>98.0</del></span></li>
+          <li class="last">
+            <p class="pic"><a href="http://www.111.com.cn/product/50028079.html"><img alt="诺斯清  生理海水鼻腔护理喷雾器 80ml" src="images/120_120_012.jpg"></a></p>
+            <p class="name"><a href="http://www.111.com.cn/product/50028079.html">诺斯清  生理海水鼻腔护理喷雾器 80ml</a></p>
+            <span class="price_l"><i>&#165;</i>69.00</span> <span class="price_r"><i>&#165;</i><del>128.0</del></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap tonglan mt10"><a href="http://www.111.com.cn/cmsPage/2015033103/zhengshi.html"><img onerror="$(this).hide()" src="images/1427857341950184.jpg" title="" height="60" width="1190"></a></div>
+    <div class="wrap floor clearfix">
+      <div class="floorNav">
+        <h3 class="floorName"><span>1F<a class="ml13">常见病</a></span></h3>
+      </div>
+      
+      <!-- 左侧导航 -->
+      <div class="floor_l" id="fl1"> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030501/">感冒<em class="hot"></em></a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014010703/">痛经</a> <a href="http://www.111.com.cn/list/965181-0-0-0-0-0-0-1.html">咳嗽</a> <a href="http://www.111.com.cn/list/965200-0-0-0-0-0-0-1.html">鼻炎</a> <a href="http://www.111.com.cn/list/971295-0-0-0-0-0-0-1.html">痘痘</a> <a href="http://www.111.com.cn/list/965195-0-0-0-0-0-0-1.html">眼干</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030402/">失眠</a> <a href="http://www.111.com.cn/list/971488-0-0-0-0-0-0-1.html">便秘</a> <a href="http://www.111.com.cn/list/965156-0-0-0-0-0-0-1.html">皮炎</a> <a href="http://www.111.com.cn/list/965150-0-0-0-0-0-0-1.html">消化不良</a> <a href="http://www.111.com.cn/list/965152-0-0-0-0-0-0-1.html">腹泻</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014062301/">风湿</a> <a href="http://www.111.com.cn/list/965151-0-0-0-0-0-0-1.html">胃病</a> <a href="http://www.111.com.cn/list/965179-0-0-0-0-0-0-1.html">哮喘</a> <a href="http://www.111.com.cn/list/965177-0-0-0-0-0-0-1.html">关节炎</a> <a href="http://www.111.com.cn/list/953784-0-0-0-0-0-0-1.html">肾虚<em class="hot"></em></a> <a href="http://www.111.com.cn/list/965185-0-0-0-0-0-0-1.html" class="last">上火</a> <a href="http://www.111.com.cn/list/971335-0-0-0-0-0-0-1.html" class="last ielast">更多>></a> </div>
+      <div class="floor_r" id="fr1">
+        <ul>
+          <li>
+            <h3><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030501/">感冒</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030501/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan1" class="f_img"><img src="images/1409913667958161.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/965147-0-0-0-0-0-0-1.html">肠胃不适</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/965147-0-0-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan2" class="f_img"><img src="images/1409913654113159.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/965179-0-0-0-0-0-0-1.html">哮喘</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/965179-0-0-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan3" class="f_img"><img src="images/1422506093322101.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="w990last">
+            <h3><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014022704/">缺钙</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014022704/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan4" class="f_img"><img src="images/1409913624029155.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="last">
+            <h3><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014061302/">皮肤病</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014061302/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan5" class="f_img"><img src="images/1409913600918153.jpg" alt="" height="195" width="215"></a> </li>
+        </ul>
+        <div class="showPro">
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/971779.html" target="_blank"> <img alt="感康 复方氨酚烷胺片 12片" src="images/100_100_009.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="感康 复方氨酚烷胺片 12片" href="http://www.111.com.cn/product/971779.html" target="_blank">感康 复方氨酚烷胺片 12片</a></div>
+            <span class="price_l"><i>&#165;</i>12.5</span> <a href="http://www.111.com.cn/product/971779.html" target="_blank" class="blue fr" rel="nofollow">205条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/974506.html" target="_blank"> <img alt="整肠生 地衣芽孢杆菌活菌胶囊 0.25g*6粒" src="images/100_100.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="整肠生 地衣芽孢杆菌活菌胶囊 0.25g*6粒" href="http://www.111.com.cn/product/974506.html" target="_blank">整肠生 地衣芽孢杆菌活菌胶囊 0.25g*6粒</a></div>
+            <span class="price_l"><i>&#165;</i>8.9</span> <a href="http://www.111.com.cn/product/974506.html" target="_blank" class="blue fr" rel="nofollow">49条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/974986.html" target="_blank"> <img alt="舒利迭 沙美特罗替卡松粉吸入剂 50ug/250ug*60吸" src="images/100_100_033.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="舒利迭 沙美特罗替卡松粉吸入剂 50ug/250ug*60吸" href="http://www.111.com.cn/product/974986.html" target="_blank">舒利迭 沙美特罗替卡松粉吸入剂 50ug/250ug*60吸</a></div>
+            <span class="price_l"><i>&#165;</i>267.0</span> <a href="http://www.111.com.cn/product/974986.html" target="_blank" class="blue fr" rel="nofollow">225条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/972467.html" target="_blank"> <img alt="迪巧 儿童维D钙咀嚼片 30片" src="images/100_100_017.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="迪巧 儿童维D钙咀嚼片 30片" href="http://www.111.com.cn/product/972467.html" target="_blank">迪巧 儿童维D钙咀嚼片 30片</a></div>
+            <span class="price_l"><i>&#165;</i>25.0</span> <a href="http://www.111.com.cn/product/972467.html" target="_blank" class="blue fr" rel="nofollow">294条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/990642.html" target="_blank"> <img alt="痤康王 克林霉素甲硝唑搽剂 20ml/瓶" src="images/100_100_018.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="痤康王 克林霉素甲硝唑搽剂 20ml/瓶" href="http://www.111.com.cn/product/990642.html" target="_blank">痤康王 克林霉素甲硝唑搽剂 20ml/瓶</a></div>
+            <span class="price_l"><i>&#165;</i>9.8</span> <a href="http://www.111.com.cn/product/990642.html" target="_blank" class="blue fr" rel="nofollow">151条评论</a> </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--1--> 
+    
+    <!--2-->
+    
+    <div class="wrap floor clearfix">
+      <div class="floorNav">
+        <h2 class="floorName"><span>2F<a class="ml13">慢性病</a></span></h2>
+      </div>
+      <div class="floor_l" id="fl2"> <a href="http://www.111.com.cn/list/965134-0-0-0-0-0-0-1.html">冠心病</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014052903/">高血压<em class="hot"></em></a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030301/">肺癌</a> <a href="http://www.111.com.cn/list/971289-0-0-0-0-0-0-1.html">肝癌</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014032701/">银屑病</a> <a href="http://www.111.com.cn/list/965158-0-0-0-0-0-0-1.html">白癜风</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014040204/">抑郁症</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014040302/">帕金森病</a> <a href="http://www.111.com.cn/list/965176-0-0-0-0-0-0-1.html">痛风</a> <a href="http://www.111.com.cn/list/971322-0-0-0-0-0-0-1.html">类风湿</a> <a href="http://www.111.com.cn/list/971334-0-0-0-0-0-0-1.html">老年痴呆</a> <a href="http://www.111.com.cn/list/971333-0-0-0-0-0-0-1.html">癫痫</a> <a href="http://www.111.com.cn/list/965165-0-0-0-0-0-0-1.html">妇科病<em class="hot"></em></a> <a href="http://www.111.com.cn/list/971286-0-0-0-0-0-0-1.html">男性不育</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014112001/">糖尿病</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030401/">乙肝</a> <a href="http://www.111.com.cn/list/971281-0-0-0-0-0-0-1.html" class="last">脱发</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014081101/" class="last ielast">更多>></a> </div>
+      <div class="floor_r" id="fr2">
+        <ul>
+          <li>
+            <h3><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2013121301/">妇科病</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2013121301/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan6" class="f_img"><img src="images/1409913562236151.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/965255-0-0-0-0-0-0-1.html">高血糖</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/965255-0-0-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan7" class="f_img"><img src="images/1409913541605149.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a rel="nofollow" href="http://search.111.com.cn/search/search.action?keyWord=%25E8%25A1%2580%25E5%258E%258B%25E8%25AE%25A1&amp;category=965256">高血压</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E8%25A1%2580%25E5%258E%258B%25E8%25AE%25A1&amp;category=965256&amp;utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan8" class="f_img"><img src="images/1409913524387147.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="w990last">
+            <h3><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014111004/">肾虚</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014111004/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan9" class="f_img"><img src="images/1409913503275145.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="last">
+            <h3><a href="http://www.111.com.cn/list/971267-0-0-0-0-0-0-1.html">肝病</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030401/?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan10" class="f_img"><img src="images/1422506504925103.jpg" alt="" height="195" width="215"></a> </li>
+        </ul>
+        <div class="showPro">
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/13127151.html" target="_blank"> <img alt="广誉远 定坤丹 10.8g*6丸" src="images/100_100_008.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="广誉远 定坤丹 10.8g*6丸" href="http://www.111.com.cn/product/13127151.html" target="_blank">广誉远 定坤丹 10.8g*6丸</a></div>
+            <span class="price_l"><i>&#165;</i>47.8</span> <a href="http://www.111.com.cn/product/13127151.html" target="_blank" class="blue fr" rel="nofollow">101条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50071899.html" target="_blank"> <img alt="强生 稳豪型血糖试纸50片含50支采血针" src="images/100_20140820145602632.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="强生 稳豪型血糖试纸50片含50支采血针" href="http://www.111.com.cn/product/50071899.html" target="_blank">强生 稳豪型血糖试纸50片含50支采血针</a></div>
+            <span class="price_l"><i>&#165;</i>139.0</span> <a href="http://www.111.com.cn/product/50071899.html" target="_blank" class="blue fr" rel="nofollow">34条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50028167.html" target="_blank"> <img alt="攀高语音臂式血压计PG-800B5(1)" src="images/100_100_023.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="攀高语音臂式血压计PG-800B5(1)" href="http://www.111.com.cn/product/50028167.html" target="_blank">攀高语音臂式血压计PG-800B5(1)</a></div>
+            <span class="price_l"><i>&#165;</i>129.0</span> <a href="http://www.111.com.cn/product/50028167.html" target="_blank" class="blue fr" rel="nofollow">5条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/7732881.html" target="_blank"> <img alt="汇仁 肾宝片 126片" src="images/100_100_015.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="汇仁 肾宝片 126片" href="http://www.111.com.cn/product/7732881.html" target="_blank">汇仁 肾宝片 126片</a></div>
+            <span class="price_l"><i>&#165;</i>322.0</span> <a href="http://www.111.com.cn/product/7732881.html" target="_blank" class="blue fr" rel="nofollow">394条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50027086.html" target="_blank"> <img alt="易善复 多烯磷脂酰胆碱胶囊 228mg*36粒" src="images/100_100_024.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="易善复 多烯磷脂酰胆碱胶囊 228mg*36粒" href="http://www.111.com.cn/product/50027086.html" target="_blank">易善复 多烯磷脂酰胆碱胶囊 228mg*36粒</a></div>
+            <span class="price_l"><i>&#165;</i>56.0</span> <a href="http://www.111.com.cn/product/50027086.html" target="_blank" class="blue fr" rel="nofollow">45条评论</a> </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--2--> 
+    
+    <!--3-->
+    
+    <div class="wrap floor clearfix">
+      <div class="floorNav">
+        <h2 class="floorName"><span>3F<a class="ml13">妈妈&amp;宝宝</a></span></h2>
+      </div>
+      <div class="floor_l" id="fl3"> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014010302/">造人计划<em class="hot"></em></a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014032401/">小儿难养<em class="hot"></em></a> <a href="http://www.111.com.cn/list/963431-0-0-0-0-0-0-1.html">叶酸</a> <a rel="nofollow" href="http://search.111.com.cn/search/search.action?keyWord=%25E9%2592%2599&amp;category=963422&amp;attrFilter=2_91604_131277">小儿补钙</a> <a href="http://www.111.com.cn/product/974917.html">迪巧</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014082801/">宝宝尿裤</a> <a href="http://www.111.com.cn/product/50075389.html">玛特纳</a> <a href="http://www.111.com.cn/list/971437-0-0-0-0-0-0-1.html">DHA</a> <a href="http://www.111.com.cn/product/50071706.html">伊可新</a> <a href="http://www.111.com.cn/product/50019149.html">红桃K</a> <a href="http://www.111.com.cn/list/955442-0-0-0-0-0-0-1.html">宝宝沐浴洗护</a> <a href="http://www.111.com.cn/list/971495-0-0-0-0-0-0-1.html">奶粉</a> <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E5%25B0%258F%25E5%2584%25BF&amp;category=963421">儿童维生素</a> <a href="http://www.111.com.cn/list/971341-0-0-0-0-0-0-1.html">多动症</a> <a href="http://www.111.com.cn/list/969596-0-0-0-0-0-0-1.html">小儿感冒</a> <a href="http://www.111.com.cn/list/969595-0-0-0-0-0-0-1.html">小儿肠胃</a> <a href="http://www.111.com.cn/list/969935-0-0-0-0-0-0-1.html" class="last">孕妇用药</a> <a href="http://www.111.com.cn/list/965342-0-0-0-0-0-0-1.html" class="last ielast">更多>></a> </div>
+      <div class="floor_r" id="fr3">
+        <ul>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/962285-0-1_93444_138434-0-0-0-0-1.html">孕妇补充</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/962285-0-1_93444_138434-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan11" class="f_img"><img src="images/1409913434317141.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/971495-0-0-0-0-0-0-1.html">婴儿奶粉</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/971495-0-0-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan12" class="f_img"><img src="images/1409913384292139.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/956494-0-3_93583_139677-0-0-0-0-1.html">新生儿</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/956494-0-3_93583_139677-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan13" class="f_img"><img src="images/1406613749091209.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="w990last">
+            <h3><a href="http://www.111.com.cn/list/962285-0-1_93444_138431,1_93444_138433-0-0-0-0-1.html">幼儿</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E5%25B0%258F%25E5%2584%25BF&amp;category=962285&amp;utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan14" class="f_img"><img src="images/1409913271922137.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="last">
+            <h3><a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E4%25BA%25A7%25E5%2590%258E&amp;category=958387">产后恢复</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E4%25BA%25A7%25E5%2590%258E&amp;category=958387&amp;utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan15" class="f_img"><img src="images/1409913253103135.jpg" alt="" height="195" width="215"></a> </li>
+        </ul>
+        <div class="showPro">
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/987630.html" target="_blank"> <img alt="爱乐维 复合维生素片 30片" src="images/100_100_028.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="爱乐维 复合维生素片 30片" href="http://www.111.com.cn/product/987630.html" target="_blank">爱乐维 复合维生素片 30片</a></div>
+            <span class="price_l"><i>&#165;</i>49.5</span> <a href="http://www.111.com.cn/product/987630.html" target="_blank" class="blue fr" rel="nofollow">1995条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50080274.html" target="_blank"> <img alt="美素佳儿金装3段*2罐 900g/罐" src="images/100_100_007.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="美素佳儿金装3段*2罐 900g/罐" href="http://www.111.com.cn/product/50080274.html" target="_blank">美素佳儿金装3段*2罐 900g/罐</a></div>
+            <span class="price_l"><i>&#165;</i>366.0</span> <a href="http://www.111.com.cn/product/50080274.html" target="_blank" class="blue fr" rel="nofollow">40条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/971622.html" target="_blank"> <img alt="龙牡 龙牡壮骨颗粒 5g*40袋" src="images/100_100_019.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="龙牡 龙牡壮骨颗粒 5g*40袋" href="http://www.111.com.cn/product/971622.html" target="_blank">龙牡 龙牡壮骨颗粒 5g*40袋</a></div>
+            <span class="price_l"><i>&#165;</i>26.0</span> <a href="http://www.111.com.cn/product/971622.html" target="_blank" class="blue fr" rel="nofollow">162条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/2605592.html" target="_blank"> <img alt="伊可新 维生素AD滴剂 （0-1岁）30粒" src="images/100_100_010.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="伊可新 维生素AD滴剂 （0-1岁）30粒" href="http://www.111.com.cn/product/2605592.html" target="_blank">伊可新 维生素AD滴剂 （0-1岁）30粒</a></div>
+            <span class="price_l"><i>&#165;</i>22.5</span> <a href="http://www.111.com.cn/product/2605592.html" target="_blank" class="blue fr" rel="nofollow">606条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50083583.html" target="_blank"> <img alt="东阿阿胶 桃花姬阿胶糕 210g" src="images/100_100_005.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="东阿阿胶 桃花姬阿胶糕 210g" href="http://www.111.com.cn/product/50083583.html" target="_blank">东阿阿胶 桃花姬阿胶糕 210g</a></div>
+            <span class="price_l"><i>&#165;</i>158.0</span> <a href="http://www.111.com.cn/product/50083583.html" target="_blank" class="blue fr" rel="nofollow">19条评论</a> </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--3-->
+    
+    <div class="wrap tonglan mt10"><a href="http://www.111.com.cn/cmsPage/2014092403/index.html"><img onerror="$(this).hide()" src="images/1423539888637103.jpg" title="" height="60" width="1190"></a></div>
+    <!--4-->
+    
+    <div class="wrap floor clearfix">
+      <div class="floorNav">
+        <h2 class="floorName"><span>4F<a class="ml13">女性&amp;男性</a></span></h2>
+      </div>
+      <div class="floor_l" id="fl4"><a href="http://www.111.com.cn/list/953785-0-0-0-0-0-0-1.html">女性滋补</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2013121301/">妇科炎症</a> <a href="http://www.111.com.cn/list/953784-0-0-0-0-0-0-1.html">补肾壮阳</a> <a href="http://www.111.com.cn/list/965164-0-0-0-0-0-0-1.html">避孕药</a> <a href="http://www.111.com.cn/list/965326-0-0-0-0-0-0-1.html">避孕套</a> <a href="http://www.111.com.cn/list/965356-0-0-0-0-0-0-1.html">情趣内衣</a> <a href="http://www.111.com.cn/list/965348-0-0-0-0-0-0-1.html">振动棒</a> <a href="http://www.111.com.cn/list/957835-0-0-0-0-0-0-1.html">飞机杯</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014041501/">性功能障碍<em class="hot"></em></a> <a href="http://www.111.com.cn/list/965353-0-0-0-0-0-0-1.html">延时环</a> <a href="http://www.111.com.cn/list/965142-0-0-0-0-0-0-1.html">前列腺炎</a> <a rel="nofollow" href="http://search.111.com.cn/search/search.action?keyWord=%25E8%25A7%25A3%25E9%2585%2592%25E6%258A%25A4%25E8%2582%259D&amp;category=964106">解酒护肝</a> <a href="http://www.111.com.cn/list/953787-0-0-0-0-0-0-1.html">减肥瘦身</a> <a href="http://www.111.com.cn/list/971281-0-0-0-0-0-0-1.html">生发养发</a> <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014112601/">蕾丝镜片<em class="hot"></em></a> <a href="http://www.111.com.cn/list/969937-0-0-0-0-0-0-1.html">洗眼液</a> <a href="http://www.111.com.cn/list/968235-0-0-0-0-0-0-1.html" class="last">复古框架镜</a> <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E7%25A7%2581%25E5%25A4%2584%25E4%25BF%259D%25E5%2585%25BB" class="last ielast">更多>></a> </div>
+      <div class="floor_r" id="fr4">
+        <ul>
+          <li>
+            <h3><a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E8%25A1%25A5%25E8%2582%25BE%25E5%25A3%25AE%25E9%2598%25B3">壮阳</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/971412-0-0-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan16" class="f_img"><img src="images/1409913143980133.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/965142-0-0-0-0-0-0-1.html">前列腺</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E5%2589%258D%25E5%2588%2597%25E8%2585%25BA&amp;utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan17" class="f_img"><img src="images/1406865918883107.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/960464-0-0-0-0-0-0-1.html">隐形眼镜</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/960464-0-0-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan18" class="f_img"><img src="images/1407394141384133.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="w990last">
+            <h3><a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E5%2587%258F%25E8%2582%25A5">减肥</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E5%2587%258F%25E8%2582%25A5&amp;utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan19" class="f_img"><img src="images/1409912308552129.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="last">
+            <h3><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014082103/">成人用品</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014082103/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan20" class="f_img"><img src="images/1409912293109127.jpg" alt="" height="195" width="215"></a> </li>
+        </ul>
+        <div class="showPro">
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50023221.html" target="_blank"> <img alt="拉摩力拉 玛卡片 840mg*60片" src="images/100_100_002.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="拉摩力拉 玛卡片 840mg*60片" href="http://www.111.com.cn/product/50023221.html" target="_blank">拉摩力拉 玛卡片 840mg*60片</a></div>
+            <span class="price_l"><i>&#165;</i>298.0</span> <a href="http://www.111.com.cn/product/50023221.html" target="_blank" class="blue fr" rel="nofollow">131条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50076346.html" target="_blank"> <img alt="斯旺森番茄提取物营养胶囊(富含番茄红素） 60粒" src="images/100_100_034.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="斯旺森番茄提取物营养胶囊(富含番茄红素） 60粒" href="http://www.111.com.cn/product/50076346.html" target="_blank">斯旺森番茄提取物营养胶囊(富含番茄红素） 60粒</a></div>
+            <span class="price_l"><i>&#165;</i>139.0</span> <a href="http://www.111.com.cn/product/50076346.html" target="_blank" class="blue fr" rel="nofollow">2条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50072300.html" target="_blank"> <img alt="海昌 星眸美瞳彩色隐形眼镜日抛 20片+10片装 绚金黑 【-3.00】" src="images/100_100_014.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="海昌 星眸美瞳彩色隐形眼镜日抛 20片+10片装 绚金黑 【-3.00】" href="http://www.111.com.cn/product/50072300.html" target="_blank">海昌 星眸美瞳彩色隐形眼镜日抛 20片+10片装 绚金黑 【-3.00】</a></div>
+            <span class="price_l"><i>&#165;</i>99.0</span> <a href="http://www.111.com.cn/product/50072300.html" target="_blank" class="blue fr" rel="nofollow">58条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/5067097.html" target="_blank"> <img alt="雅塑 奥利司他胶囊 0.12g*18粒" src="images/100_100_027.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="雅塑 奥利司他胶囊 0.12g*18粒" href="http://www.111.com.cn/product/5067097.html" target="_blank">雅塑 奥利司他胶囊 0.12g*18粒</a></div>
+            <span class="price_l"><i>&#165;</i>231.0</span> <a href="http://www.111.com.cn/product/5067097.html" target="_blank" class="blue fr" rel="nofollow">75条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50071432.html" target="_blank"> <img alt="冈本安全套礼享装 52片（内含纯10片+至尊10片+超润滑10片+超多润滑6片+激薄3片+质感10片+OC3片） " src="images/100_100_004.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="冈本安全套礼享装 52片（内含纯10片+至尊10片+超润滑10片+超多润滑6片+激薄3片+质感10片+OC3片） " href="http://www.111.com.cn/product/50071432.html" target="_blank">冈本安全套礼享装 52片（内含纯10片+至尊10片+超润滑10片+超多润滑6片+激薄3片+质感10片+OC3片） </a></div>
+            <span class="price_l"><i>&#165;</i>69.9</span> <a href="http://www.111.com.cn/product/50071432.html" target="_blank" class="blue fr" rel="nofollow">83条评论</a> </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--4--> 
+    
+    <!--5-->
+    
+    <div class="wrap floor clearfix">
+      <div class="floorNav">
+        <h2 class="floorName"><span>5F<a class="ml13">理疗&amp;养生</a></span></h2>
+      </div>
+      <div class="floor_l" id="fl5"><a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E4%25BA%259A%25E5%2581%25A5%25E5%25BA%25B7">亚健康</a> <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E5%25A2%259E%25E5%25BC%25BA%25E6%258A%25B5%25E6%258A%2597%25E5%258A%259B">增强抵抗力</a> <a href="http://www.111.com.cn/list/965265-0-0-0-0-0-0-1.html">电磁治疗仪</a> <a href="http://www.111.com.cn/list/956684-0-0-0-0-0-0-1.html">养生足浴盆</a> <a href="http://www.111.com.cn/list/971367-0-0-0-0-0-0-1.html">理疗贴</a> <a href="http://www.111.com.cn/list/968258-0-0-0-0-0-0-1.html">降压仪</a> <a href="http://www.111.com.cn/list/971364-0-0-0-0-0-0-1.html">保健枕</a> <a href="http://www.111.com.cn/list/971360-0-0-0-0-0-0-1.html">针灸/拔罐</a> <a href="http://www.111.com.cn/list/971360-0-0-0-0-0-0-1.html">牵引器具</a> <a href="http://www.111.com.cn/list/956673-0-0-0-0-0-0-1.html">保健护具</a> <a rel="nofollow" href="http://search.111.com.cn/search/search.action?keyWord=%25E8%2582%25A0%25E9%2581%2593&amp;category=964106">肠道养护</a> <a href="http://www.111.com.cn/list/954706-0-0-0-0-0-0-1.html?tracker_u=10820841713">高丽参</a> <a href="http://www.111.com.cn/list/969876-0-0-0-0-0-0-1.html">雾化器</a> <a href="http://www.111.com.cn/list/953785-0-0-0-0-0-0-1.html">补气补血</a> <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E5%258F%25B6%25E9%25BB%2584%25E7%25B4%25A0">叶黄素</a> <a href="http://www.111.com.cn/list/954712-0-0-0-0-0-0-1.html">冬虫夏草</a> <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E6%258F%2590%25E9%25AB%2598%25E5%2585%258D%25E7%2596%25AB%25E5%258A%259B" class="last ielast">提高免疫力<em class="hot"></em></a> <a rel="nofollow" href="http://www.111.com.cn/search/search.action?keyWord=%25E5%25BB%25B6%25E7%25BC%2593%25E8%25A1%25B0%25E8%2580%2581" class="last ielast">延缓衰老</a> </div>
+      <div class="floor_r" id="fr5">
+        <ul>
+          <li>
+            <h3><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014010902/">口腔</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2013092310/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan21" class="f_img"><img src="images/1409912222225125.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/955405-0-0-0-0-0-0-1.html">个人护理</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/955412-0-0-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan22" class="f_img"><img src="images/1409912667570131.jpg" alt="" height="195" width="215"></a> </li>
+          <li>
+            <h3><a href="http://www.111.com.cn/list/956669-0-0-0-0-0-0-1.html">辅助理疗</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/list/956669-0-0-0-0-0-0-1.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan25&amp;utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan23" class="f_img"><img src="images/1409912176291121.jpg" alt="" height="195" width="215"></a> </li>
+          <li class="w990last">
+            <h3><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014012601/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan26">参茸花茶</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014012601/index.html?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan24" class="f_img"><img src="images/1409912141229119.jpg" alt="传说中的万灵丹" height="195" width="215"></a> </li>
+          <li class="last">
+            <h3><a rel="nofollow" href="http://www.111.com.cn/jiankangtijian/">体检</a></h3>
+            <a rel="nofollow" href="http://www.111.com.cn/jiankangtijian/?utm_source=direct&amp;utm_medium=tonglan&amp;utm_campaign=tonglan25" class="f_img"><img src="images/1409912122659117.jpg" alt="" height="195" width="215"></a> </li>
+        </ul>
+        <div class="showPro">
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/8464873.html" target="_blank"> <img alt="云南白药牙膏 防止牙龈出血，修复口腔溃疡，改善牙龈肿痛" src="images/100_100_029.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="云南白药牙膏 防止牙龈出血，修复口腔溃疡，改善牙龈肿痛" href="http://www.111.com.cn/product/8464873.html" target="_blank">云南白药牙膏 防止牙龈出血，修复口腔溃疡，改善牙龈肿痛</a></div>
+            <span class="price_l"><i>&#165;</i>24.9</span> <a href="http://www.111.com.cn/product/8464873.html" target="_blank" class="blue fr" rel="nofollow">133条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/1136624.html" target="_blank"> <img alt="资生堂 洗颜专科柔澈泡沫洁面乳 120g" src="images/100_100_025.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="资生堂 洗颜专科柔澈泡沫洁面乳 120g" href="http://www.111.com.cn/product/1136624.html" target="_blank">资生堂 洗颜专科柔澈泡沫洁面乳 120g</a></div>
+            <span class="price_l"><i>&#165;</i>39.8</span> <a href="http://www.111.com.cn/product/1136624.html" target="_blank" class="blue fr" rel="nofollow">13条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/50069474.html" target="_blank"> <img alt="【居康】 摇摆型液压静音多功能运动健身机" src="images/100_100_020.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="【居康】 摇摆型液压静音多功能运动健身机" href="http://www.111.com.cn/product/50069474.html" target="_blank">【居康】 摇摆型液压静音多功能运动健身机</a></div>
+            <span class="price_l"><i>&#165;</i>229.0</span> <a href="http://www.111.com.cn/product/50069474.html" target="_blank" class="blue fr" rel="nofollow">12条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/7033156.html" target="_blank"> <img alt="雷允上 上雷 西洋参二等大片80克" src="images/100_100_021.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="雷允上 上雷 西洋参二等大片80克" href="http://www.111.com.cn/product/7033156.html" target="_blank">雷允上 上雷 西洋参二等大片80克</a></div>
+            <span class="price_l"><i>&#165;</i>169.0</span> <a href="http://www.111.com.cn/product/7033156.html" target="_blank" class="blue fr" rel="nofollow">53条评论</a> </div>
+          <div class="f_prod">
+            <div class="pic"><a href="http://www.111.com.cn/product/9369876.html" target="_blank"> <img alt="【爱康国宾】升级版关爱父母/男女通用（全国通用实体礼品卡）" src="images/100_100_032.jpg" onerror="imgERROR(this,'no_pic_80_80.jpg');"></a></div>
+            <div class="title"><a title="【爱康国宾】升级版关爱父母/男女通用（全国通用实体礼品卡）" href="http://www.111.com.cn/product/9369876.html" target="_blank">【爱康国宾】升级版关爱父母/男女通用（全国通用实体礼品卡）</a></div>
+            <span class="price_l"><i>&#165;</i>819.0</span> <a href="http://www.111.com.cn/product/9369876.html" target="_blank" class="blue fr" rel="nofollow">0条评论</a> </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--5--> 
+    
+  </div>
+</div>
+
+<!--footer start-->
+<div class="y_foot">
+  <div class="ft_friendlylink wrap">
+    <ul class="fri_tit clearfix">
+      <li class="cur">品牌旗舰店</li>
+    </ul>
+    <div class="fri_ct flagship_store clearfix"> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E6%258B%259C%25E8%2580%25B3" rel="nofollow" class="btm_logo01">拜耳</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E4%25B8%2587%25E8%2589%25BE%25E5%258F%25AF" rel="nofollow" class="btm_logo02">万艾可</a> <a href="http://www.111.com.cn/cmsPage/2014031001/index.html" rel="nofollow" class="btm_logo03">妇炎洁</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E9%25BB%2598%25E6%25B2%2599%25E4%25B8%259C&brandFilter=913206" rel="nofollow" class="btm_logo04">默沙东</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E4%25B8%25AD%25E7%25BE%258E%25E5%258F%25B2%25E5%2585%258B " rel="nofollow" class="btm_logo05">中美史克</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E6%2596%25BD%25E8%25B4%25B5%25E5%25AE%259D " rel="nofollow" class="btm_logo06">施贵宝</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E8%25AF%25BA%25E5%258D%258E" rel="nofollow" class="btm_logo07">诺华</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E9%2598%25BF%25E6%2596%25AF%25E5%2588%25A9%25E5%25BA%25B7 " rel="nofollow" class="btm_logo08">阿斯利康</a> <a href="http://www.111.com.cn/list/list.action?category=107&brandFilter=67" rel="nofollow" class="btm_logo09">罗氏</a> <a href="http://www.111.com.cn/cmsPage/2014081301/index.html" rel="nofollow" class="btm_logo10">北京同仁堂</a> <a href="http://www.111.com.cn/list/list.action?category=965326&brandFilter=3802" rel="nofollow" class="btm_logo11">冈本</a> <a href="http://www.111.com.cn/list/list.action?category=955306&amp;brandFilter=25" target="_blank" rel="nofollow" class="btm_logo12">杜蕾斯</a> <a href="http://www.111.com.cn/cmsPage/2014072801/index.html" rel="nofollow" class="btm_logo13">仙卡</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E4%25BA%2591%25E5%258D%2597%25E7%2599%25BD%25E8%258D%25AF&amp;brandFilter=6071" rel="nofollow" class="btm_logo14">云南白药</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E5%25A4%25AA%25E6%259E%2581&amp;brandFilter=904752" target="_blank" rel="nofollow" class="btm_logo15">太极集团</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E6%25A1%2582%25E9%25BE%2599" rel="nofollow" class="btm_logo16">桂龙药业</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E4%25B8%259C%25E9%2598%25BF&amp;brandFilter=911687" rel="nofollow" class="btm_logo17">东阿阿胶</a> <a href="http://www.111.com.cn/cmsPage/2014070901/index.html" target="_blank" rel="nofollow" class="btm_logo18">海昌</a> <a href="http://search.111.com.cn/search/search.action?keyWord=%25E6%25B1%25A4%25E8%2587%25A3%25E5%2580%258D%25E5%2581%25A5" rel="nofollow" class="btm_logo19">汤臣倍健</a> <a target="_blank" href="http://www.111.com.cn/cmsPage/2014070902/index.html" rel="nofollow" class="btm_logo20">海俪恩</a> </div>
+  </div>
+</div>
+<div class="wrap ft_commit"> <a class="c_0" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page2"  rel="nofollow" target="_blank"><i class="icon-rongyu"></i><span>权威荣誉</span></a> <a class="c_1" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page3"  rel="nofollow" target="_blank"><i class="icon-pinpai"></i><span>品牌授权</span></a> <a class="c_2" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page4"  rel="nofollow" target="_blank"><i class="icon-zhengpin"></i><span>正品保险</span></a> <a class="c_3" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page5"  rel="nofollow" target="_blank"><i class="icon-yaojian"></i><span>药监认证</span></a> <a class="c_4" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page6"  rel="nofollow" target="_blank"><i class="icon-baibaoyou"></i><span>满百包邮</span></a> <a class="c_5" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page7"  rel="nofollow" target="_blank"><i class="icon-30tui"></i><span>30天退换无忧</span></a> <a class="c_6" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page8"  rel="nofollow" target="_blank"><i class="icon-yingsibz"></i><span>隐私包装</span></a> <a class="c_7" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page9"  rel="nofollow" target="_blank"><i class="icon-jinpaiyaoshi"></i><span>金牌药师</span></a> <a class="c_8" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page10"  rel="nofollow" target="_blank"><i class="icon-zhengpin"></i><span>货到付款</span></a> <a class="c_9" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page11"  rel="nofollow" target="_blank"><i class="icon-yidongfuwu"></i><span>健康管家</span></a> </div>
+<div class="foot_navi">
+  <div class="wrap bottom_service_link b_bg clearfix">
+    <dl>
+      <dt>新手入门</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073110/index.html" target="_blank" rel="nofollow">常见问题</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073101/index.html" target="_blank" rel="nofollow">新会员注册</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073106/index.html" target="_blank" rel="nofollow">用户登录</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073108/index.html" target="_blank" rel="nofollow">找回密码</a></dd>
+    </dl>
+    <dl>
+      <dt>购物指南</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073113/index.html" target="_blank" rel="nofollow">购物流程</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073114/index.html" target="_blank" rel="nofollow">订单状态说明</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073111/index.html" target="_blank" rel="nofollow">隐私声明</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013111902/index.html" target="_blank" rel="nofollow">发票制度</a></dd>
+    </dl>
+    <dl>
+      <dt>配送服务</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073115/index.html" target="_blank" rel="nofollow">范围、时间及费用</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073116/index.html" target="_blank" rel="nofollow">商品验货及签收</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2014022401/index.html" target="_blank" rel="nofollow">门店自提</a></dd>
+    </dl>
+    <dl>
+      <dt>支付方式</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073117/index.html" target="_blank" rel="nofollow">货到付款</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073118/index.html" target="_blank" rel="nofollow">网上支付</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073119/index.html" target="_blank" rel="nofollow">银行转账</a></dd>
+      <dd><a href="http://my.111.com.cn/ucenter/invokeCoupon.action" target="_blank" rel="nofollow">激活优惠券</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2014101601/index.html" target="_blank" rel="nofollow">优惠券使用指南</a></dd>
+    </dl>
+    <dl>
+      <dt>售后服务</dt>
+      <dd><a href="http://www.111.com.cn/th" target="_blank" rel="nofollow">退换货政策</a></dd>
+      <dd><a href="http://www.111.com.cn/bx" target="_blank" rel="nofollow">正品保障</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073122/index.html" target="_blank" rel="nofollow">退款规则</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073121/index.html" target="_blank" rel="nofollow">品牌售后</a></dd>
+    </dl>
+    <dl>
+      <dt>企业服务</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2014101604/index.html" target="_blank" rel="nofollow">企业采购</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013112002/index.html" target="_blank" rel="nofollow">供应商合作</a></dd>
+      <dd><a href="http://openadmin.111.com.cn/" target="_blank" rel="nofollow">供应商入口</a></dd>
+    </dl>
+    <dl>
+      <dd class="yao_app"><br />
+      </dd>
+      <dd><a href="http://itunes.apple.com/cn/app/id727578007" target="_blank" class="d_iphone" rel="nofollow"></a><br />
+      </dd>
+      <dd><a href="http://m.111.com.cn/yaodian2.apk" target="_blank" class="d_android" rel="nofollow"></a><br />
+      </dd>
+    </dl>
+    <dl>
+      <dd class="yao_weixin"><br />
+      </dd>
+      <dd><a href="http://weixin.qq.com/r/K3VMVKPE5-6Yrec39yA5" target="_blank" rel="nofollow">壹药网官方微信</a></dd>
+    </dl>
+  </div>
+</div>
+<div class="gray_box">
+  <div class="wrap">
+    <p> <a href="http://www.111.com.cn/cmsPage/2015012602/" rel="nofollow">关于壹药网</a> | <a href="http://www.111.com.cn/cmsPage/2015012707/" rel="nofollow">诚征英才</a> | <a href="http://www.111.com.cn/cmsPage/2014022401/index.html?tracker_u=10952156" rel="nofollow">直营实体药房</a> | <a href="http://www.111.com.cn/cmsPage/2013101401/"  rel="nofollow">互联网药品信息服务资格证</a> | <a href="http://www.111.com.cn/cmsPage/2013101402/" rel="nofollow">互联网药品交易资格证：粤C20100001</a> </p>
+    <p> <a href="http://www.111.com.cn/cmsPage/2014041703/" rel="nofollow">连锁营业执照</a> | <a href="http://www.111.com.cn/cmsPage/2013101405/" rel="nofollow">药品经营许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101403/" rel="nofollow">保健食品卫生许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101407/" rel="nofollow">医疗器械许可证</a> | <a href="http://www.111.com.cn/315Web/"  rel="nofollow">网安备案证</a> | <a href="http://www.111.com.cn/cmsPage/2013101404/ "  rel="nofollow">食品流通许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101408/"  rel="nofollow">GSP证书</a> | <a href="http://www.111.com.cn/cmsPage/2015032501/"  rel="nofollow">ICP许可证粤B2-20150066</a> </p>
+  </div>
+</div>
+<p class="ta_center"><a href="http://www.111.com.cn/">壹药网网上药店</a>，国家药监局首批认证通过的合法网上药店，中国医药电子商务行业的开拓者领跑者。广东壹号大药房连锁有限公司 020-66391668</p>
+<div class="wrap copy_right">Copyright (C) 2010-2015 壹药网版权所有</div>
+
+<!--导航下拉js--> 
+<script src="js/jquery-powerSwitch.js"></script> 
+<script src="js/catalog_201406.min.js" ></script> 
+
+<!-- fire lzload 延时加载--> 
+<script type="text/javascript">
+function lzloadFr(){
+  try{
+      jQuery('[data-original*=""]').lazyload({threshold : 200, effect : "fadeIn", skip_invisible : true});//IE6/IE7
+  }catch(e){};
+  try{
+      jQuery('[data-original]').lazyload({threshold : 200, effect : "fadeIn", skip_invisible : true});//CHROME/FIREFOX/IE8910
+  }catch(e){};
+}
+addLoadEvent(lzloadFr);
+</script>
+<div class="wrap copyright">Copyright &copy; 2010-2015 壹药网版权所有</div>
+<!--footer end--> 
+
+<!-- 底部右侧快捷栏 -->
+<div class="float_box"  id="rightFloat" > <a href="http://www.111.com.cn/interfaces/qnaire/showQnaire.action" class="f_back" target="_blank" title="用户反馈" name="yao_docuor" rel="nofollow">用户反馈</a> <a href="javascript:;" onclick="jQuery.top();" class="f_top" target="_self" title="返回顶部" rel="nofollow">top</a> 
+  <!--药师咨询-->
+  
+  <div class="showConsult" style="display:none;">
+    <div class="consult" >
+      <div class="d_txt"> <a target="_self" rel="nofollow"  href="javascript:;" class="b_consultCol" onclick="Detector.floatclick(3,'',encodeURI('售后咨询'));">售前咨询</a> <a target="_self" rel="nofollow" href="javascript:;" class="b_consultCol" onclick="Detector.floatclick(3,'',encodeURI('售后咨询'));">售后咨询</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(4,'',encodeURI('企业采购'));" class="last">企业采购</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(4,'',encodeURI('全科药师'));">全科药师</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(14,'',encodeURI('风湿骨科'));">风湿骨科</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(14,'',encodeURI('神经科'));" class="last">神经科</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(4,'',encodeURI('男科'));">男科</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(10,'',encodeURI('肿瘤'));">肿瘤</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(11,'',encodeURI('肝病'));" class="last">肝病</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(14,'',encodeURI('心脑血管'));">心脑血管</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(11,'',encodeURI('皮肤性病'));">皮肤性病</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(4,'',encodeURI('糖尿病'));" class="last">糖尿病</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(8,'',encodeURI('散光验配'));">散光验配</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(1,'',encodeURI('营养补充'));">营养补充</a> <a target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(1,'',encodeURI('医疗器械'));" class="last">医疗器械</a> </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+//宽窄屏
+    $(document).ready(function(){
+
+    $('.float_box .f_wei').html(countCart());
+     
+    $(".float_box .f_home ,  .float_box .f_home").mouseover(function() {
+       $(".float_box .minicart_list").css("display","none");
+        $(".float_box .none_tips").css("display","none");
+       	$('.float_box .showConsult').css("display","block");
+     });
+  
+    $(".float_box .showConsult").mouseleave(function() {
+        $(".float_box .minicart_list").css("display","none");
+    	$(".float_box .showConsult").css("display","none");
+     });
+
+
+    $(".f_wei").mouseover(function() {   
+ 	$(".float_box .showConsult").css("display","none");
+    	drawBottomCart();
+    });
+    
+   
+  $(".float_box .minicart_list，.float_box .f_wei ").mouseleave(function() {
+ 	$(".float_box .showConsult").css("display","none");
+       $(".float_box .minicart_list").css("display","none");
+       $(".float_box .none_tips").css("display","none");
+    });
+
+    $(".float_box .f_back,.float_box .f_top").mouseover(function() {
+        $(".float_box .minicart_list").css("display","none");
+        $(".float_box .none_tips").css("display","none");
+       	$('.float_box .showConsult').css("display","none");
+     });
+
+     $(".float_box ").mouseleave(function() {
+        $(".float_box .showConsult").hide();
+     	$('#bottom_minicart_list').hide();
+       $(".float_box .none_tips").hide();
+    }); 
+
+})
+
+
+$(function(){
+	var uk = $.cookie('UserInfo');
+	if(!uk)return;
+        else{
+           $(".none_tips").children("p").html("您的购物车里还没有商品，立刻去购买吧。");
+        }
+	
+});
+</script> 
+<script type="text/javascript">
+if(typeof(item_status) == 'string'
+		&& item_status == '2'){
+	$("#rightFloat > [name='yao_docuor']").remove();
+	$("#rightFloat").height("80")
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+#Created by JInto - www.guh-software.de
+#Wed Nov 30 16:40:41 CST 2011
+devMode=true
+version=1.1
+loginCode=netbull
+domainName=http\://192.168.3.25:8086/dbs
+accessAddress=http://192.168.3.25:8081/resources/upload/
+templateUrl=http://192.168.3.25:8081/resources/template/
+templateUploadPath=D:\\software\\nginx-1.7.4\\resources\\template
+materialUploadPath=D:\\software\\nginx-1.7.4\\resources\\upload
+sendSmsUrl=http://121.42.144.12/ems/sendSmsServlet
+smsAccount=sfyh1
+smsPassword=000000
+oauth2Filter=anon/topay|
+wxpay_notify_url=http://localhost:8086/dbs/anon/noticeWXPay
+alipay_gatway_new=http://wappaygw.alipay.com/service/rest.htm?
+alipay_notify_url=http://localhost:8086/dbs/anon/alipayNotice
+alipay_call_back_url=http://localhost:8086/dbs/anon/alipayCallback
+alipay_merchant_url=
+WIDseller_email=m18005698069@163.com

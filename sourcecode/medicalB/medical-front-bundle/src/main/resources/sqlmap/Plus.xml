@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.section.dao.PlusDao">
+    
+	<select id="query_plus_success_count" parameterType="java.util.Map" resultType="java.lang.Long">
+	    SELECT COUNT(1) FROM tb_medical_plus t1 LEFT JOIN tb_medical_doctor t2 ON t1.doctorID=t2.doctorID
+	    WHERE t1.status=1 and t1.isPay=2 and t1.paystate=1 and t2.hospitalID=#{hospitalID} and t2.sectionID=#{sectionID}
+	</select>
+</mapper>

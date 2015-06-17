@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.doctor.entity.Doctor">
+    
+	<select id="query_for_pagination" parameterType="map" resultType="com.netbull.shop.doctor.entity.Doctor">
+		SELECT t1.*, t3.attrname sectionName, t4.true_name realName, t4.phone phone FROM tb_medical_doctor t1
+		left join tb_medical_section t3 on t1.sectionID = t3.id
+		left join vauth.user_info t4 on t1.loginID = t4.id
+		where t1.status = 1 and (t1.loginID = ${currUserId} or t1.loginID in (${childUserIds}))
+		<if test="realName!=null and realName.trim() != ''">
+			and t4.true_name like CONCAT('%', '${realName}', '%')
+	    </if>
+		<include refid="com.odchia.dao.Dao.pageComponent" />
+	</select>
+
+	<select id="totalCount" parameterType="map" resultType="long">
+		SELECT count(1) FROM tb_medical_doctor t1
+		left join tb_medical_section t3 on t1.sectionID = t3.id
+		left join vauth.user_info t4 on t1.loginID = t4.id
+		where t1.status = 1 and (t1.loginID = ${currUserId} or t1.loginID in (${childUserIds}))
+		<if test="realName!=null and realName.trim() != ''">
+			and t4.true_name like CONCAT('%', '${realName}', '%')
+	    </if>
+	</select>
+	
+	<select id="query_by_id" parameterType="long" resultType="com.netbull.shop.doctor.entity.Doctor">
+		SELECT t1.*, t2.hospitalName, t3.attrname sectionName, t4.true_name realName, t4.phone phone, t4.login_name loginAccount, t4.password loginPwd FROM tb_medical_doctor t1
+		left join tb_medical_hospital t2 on t1.hospitalID = t2.hospitalID
+		left join tb_medical_section t3 on t1.sectionID = t3.id
+		left join vauth.user_info t4 on t1.loginID = t4.id
+		where doctorID = #{id}
+	</select>
+	
+	<update id="delete_by_id" parameterType="long">
+		UPDATE tb_medical_doctor SET status = 0 where doctorID = #{id} 
+	</update>
+	
+	<delete id="delete_disease_by_doctorID" parameterType="long">
+		DELETE FROM tb_medical_doctor_disease where doctorID = #{id}
+	</delete>
+	
+	<insert id="save_doctor_disease" parameterType="map">
+		INSERT into tb_medical_doctor_disease VALUES ${doctorDiseases}
+	</insert>
+	
+	<select id="find_doctorDiseases" parameterType="long" resultType="com.netbull.shop.doctor.entity.DoctorDisease">
+		select * from tb_medical_doctor_disease where doctorID = #{doctorID}
+	</select>
+	
+	<insert id="save" parameterType="com.netbull.shop.doctor.entity.Doctor" useGeneratedKeys="true" keyProperty="doctorID">
+		INSERT INTO tb_medical_doctor(doctorName,doctorPassword,avatar, hospitalID, sectionID, doctorLevel, balance, skill, experience, ctArea, netctArea, practice, isNetCT, isVideoCT, isAudioCT, isZZ, isRecommend, creator, loginID, createTime,isVisit)
+		VALUES (#{doctorName},#{doctorPassword},#{avatar},#{hospitalID},#{sectionID},#{doctorLevel},#{balance},#{skill},#{experience},#{ctArea},#{netctArea},#{practice}, #{isNetCT},#{isVideoCT},#{isAudioCT},#{isZZ}, #{isRecommend}, #{creator}, #{loginID}, NOW(),#{isVisit})
+	</insert>
+	
+	<insert id="saveUserInfo" parameterType="com.netbull.shop.doctor.entity.UserInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT into vauth.user_info(login_name, true_name, password, phone, parentid,area_id) values(#{loginName}, #{trueName}, #{password}, #{phone}, #{parentid},'0')
+	</insert>
+	
+	<update id="updateUserInfo" parameterType="com.netbull.shop.doctor.entity.UserInfo">
+		UPDATE vauth.user_info SET  
+		true_name=#{trueName},
+		phone=#{phone}
+		WHERE login_Name=#{loginName}
+	</update>
+	
+	<insert id="saveRoleUserInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+		INSERT into vauth.role_user_info(role_id, user_id) values(#{roleId}, #{userId})
+	</insert>
+
+	<update id="update" parameterType="com.netbull.shop.doctor.entity.Doctor">
+		UPDATE tb_medical_doctor SET  
+		doctorName=#{doctorName},
+		avatar=#{avatar},
+		creator=#{creator},
+		isRecommend=#{isRecommend},
+		hospitalID=#{hospitalID},
+		sectionID=#{sectionID},
+		doctorLevel=#{doctorLevel},
+		balance=#{balance},
+		skill=#{skill},
+		experience=#{experience},
+		ctArea=#{ctArea},
+		netctArea=#{netctArea},
+		practice=#{practice},
+		isNetCT=#{isNetCT},
+		isVideoCT=#{isVideoCT},
+		isAudioCT=#{isAudioCT},
+		isZZ=#{isZZ},
+		isVisit=#{isVisit},
+		updateTime=NOW()
+		WHERE doctorID=#{doctorID}
+   </update>
+   
+	<select id="queryAllRecommDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
+        select D.doctorID,(select u.true_name from vauth.user_info u where u.id = D.loginID) as true_name,D.hospitalID,D.sectionID,D.doctorLevel,D.skill,D.avatar,H.hospitalName,S.attrname sectionName 
+        	from tb_medical_doctor D 
+        	left join tb_medical_hospital H on D.hospitalID=H.hospitalID
+        	left join tb_medical_section S on D.sectionID=S.id
+        <where>
+            and D.status=1
+            and D.isRecommend = 1
+        </where>
+    </select>
+    
+	<select id="queryByParam" parameterType="java.util.Map" resultType="com.netbull.shop.doctor.entity.Doctor">
+	    SELECT * FROM tb_medical_doctor
+	    <where>
+	        <if test="loginID !=null and loginID !=''">
+	            and loginID = #{loginID}
+	        </if>
+	    </where>
+	</select>
+</mapper>

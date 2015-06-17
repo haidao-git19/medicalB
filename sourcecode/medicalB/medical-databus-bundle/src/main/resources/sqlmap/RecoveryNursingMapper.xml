@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.RecoveryNursingDao">
+	
+   <sql id="recoveryColumn">
+       SELECT id,parentSectionID,childSectionID,diseaseID,publisher,title,url,userID,type,
+        DATE_FORMAT(createTime,"%Y-%m-%d %H:%i") createTime,DATE_FORMAT(updateTime,"%Y-%m-%d %H:%i") updateTime
+		FROM tb_medical_recovery_nursing
+   </sql>
+   <select id="queryRecoveryList" parameterType="java.util.Map" resultType="java.util.Map">
+       <include refid="recoveryColumn"/>
+       	<where>
+       	    <if test="diseaseIDList !=null and diseaseIDList !=''">
+       	        and diseaseID in
+       	        <foreach collection="diseaseIDList" item="diseaseID" index="index"
+       	            open="(" close=")" separator=",">
+       	            #{diseaseID}
+       	        </foreach>
+       	    </if>
+       	    and isShow=0
+       	</where>
+   </select>
+    
+   <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+       <include refid="recoveryColumn"/>
+       	<where>
+       	    <if test="diseaseID !=null and diseaseID !=''">
+       	        and diseaseID = #{diseaseID}
+       	    </if>
+       	    and isShow=0
+       	</where>
+   </select>
+	
+   <select id="queryDetail" parameterType="java.util.Map" resultType="java.util.Map">
+       <include refid="recoveryColumn"/>
+       <where>
+           <if test="id !=null and id !=''">
+               and id=#{id}
+           </if>
+       </where>
+   </select>
+</mapper>

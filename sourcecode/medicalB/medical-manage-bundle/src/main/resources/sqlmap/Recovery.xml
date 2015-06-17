@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.nursing.dao.RecoveryDao">
+
+    <sql id="recoveryColumn">
+        SELECT id,parentSectionID,childSectionID,diseaseID,publisher,title,content,url,isShow,userID,
+        DATE_FORMAT(createTime,"%Y-%m-%d %H:%i") createTime,DATE_FORMAT(updateTime,"%Y-%m-%d %H:%i") updateTime,
+        CASE 
+			WHEN type=0 THEN "公共"
+			WHEN type=1 THEN "科室" END type
+		FROM tb_medical_recovery_nursing
+    </sql>
+    
+    <select id="pageList" parameterType="map" resultType="map">
+	    <include refid="recoveryColumn"/> 
+	    where 1=1
+	    and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+ 		 and isShow=0
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="count" parameterType="map" resultType="long">
+        SELECT COUNT(1)  FROM (<include refid="recoveryColumn"/>) as count
+           where 1=1
+           and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+          and isShow=0
+   </select>
+    
+   <select id="queryEntityById" parameterType="java.lang.Long" resultType="com.netbull.shop.nursing.entity.Recovery">
+       SELECT * FROM tb_medical_recovery_nursing 
+       <where>
+           <if test="_parameter !=null and _parameter !=''">
+               and id = #{value}
+           </if>
+       </where>
+   </select>
+   
+	<insert id="save" parameterType="com.netbull.shop.nursing.entity.Recovery" useGeneratedKeys="true" keyProperty="id">
+	    INSERT tb_medical_recovery_nursing(diseaseID,parentSectionID,childSectionID,publisher,nursingName,title,content,url,type,isShow,userID,createTime,updateTime) 
+	    	values(#{diseaseID},#{parentSectionID},#{childSectionID},#{publisher},#{nursingName},#{title},#{content},#{url},#{type},'0',#{userID},now(),now())
+	</insert>
+	
+	<update id="update" parameterType="com.netbull.shop.nursing.entity.Recovery">
+	    UPDATE tb_medical_recovery_nursing 
+	    <set>
+	        <if test="diseaseID !=null and diseaseID !=''">
+	        	diseaseID = #{diseaseID},
+	    	</if>
+	    	<if test="parentSectionID !=null and parentSectionID !=''">
+	    	    parentSectionID=#{parentSectionID},
+	    	</if>
+	    	<if test="childSectionID !=null and childSectionID !=''">
+	    	    childSectionID = #{childSectionID},
+	    	</if>
+	    	<if test="publisher !=null and publisher !=''">
+	    	    publisher = #{publisher},
+	    	</if>
+	    	<if test="nursingName !=null and nursingName !=''">
+	        	nursingName = #{nursingName},
+	    	</if>
+	    	<if test="title !=null and title !=''">
+	    	    title = #{title},
+	    	</if>
+	    	<if test="content !=null and content !=''">
+	    	    content = #{content},
+	    	</if>
+	    	<if test="url !=null and url !=''">
+	    	    url = #{url},
+	    	</if>
+	    	<if test="type !=null and type !=''">
+	    	    type = #{type},
+	    	</if>
+	    	<if test="isShow !=null and isShow !=''">
+	    	    isShow = #{isShow},
+	    	</if>
+	    	<if test="userID !=null and userID !=''">
+	    	    userID = #{userID},
+	    	</if>
+	    	updateTime = now()
+	    </set>
+	    <where>
+	        <if test="id !=null and id !=''">
+	            id = #{id}
+	        </if>
+	    </where>
+	</update>
+   
+</mapper>

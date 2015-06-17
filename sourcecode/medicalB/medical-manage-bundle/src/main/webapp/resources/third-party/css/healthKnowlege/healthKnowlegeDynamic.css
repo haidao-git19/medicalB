@@ -1,0 +1,9 @@
+body{ margin:0; background-color:#eeeeee; padding:0px;}
+img{ border:0;}
+a{ text-decoration:none;}
+.newsbox{ border-bottom:#c9c9c9 1px solid; background-color:white;overflow:hidden;}
+.newsbox img{ margin:10px; float:left; width:90px; height:90px;}
+.biaoti{ font-size:16px; margin-top:10px;}
+.content{ font-size:14px; color:gray; margin-top:10px; margin-right:10px;}
+.ctbox a{ color:orange; float:left; margin-right:20px; display:block; margin-bottom:20px; margin-top:10px;}
+.block{ height:10px;}

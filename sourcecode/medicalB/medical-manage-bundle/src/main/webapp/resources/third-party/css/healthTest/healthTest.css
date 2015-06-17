@@ -1,0 +1,12 @@
+*{margin:0; padding:0px; }
+body{ margin:0; background-color:#eeeeee; padding:0px;}
+img{ border:0;}
+.boxbtm{ background:#fff; border-bottom:1px solid #c9c9c9; padding:10px;}
+a{ text-decoration:none;}
+.jifenbox{ background-color:#FFF; border-bottom:1px #c9c9c9 solid;}
+.content{ padding-left:68px;}
+.content span{ display:block;color:black; font-size:16px;}
+.content span a{color:orange; font-size:14px; margin-top:20px; margin-left:11px;}
+.miaoshu{ color:gray; font-size:14px; margin-top:4px;}
+.jifenbox .back{ float:right; margin-right:10px; margin-top:36px;}
+.block{ height:10px;}

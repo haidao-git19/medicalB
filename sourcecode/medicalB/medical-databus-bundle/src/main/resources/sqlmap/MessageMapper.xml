@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.MessageDao">
+
+    <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT id,patientID,content,adminID,reply,isShow,status,
+        DATE_FORMAT(replyTime,'%Y-%m-%d %H:%i') replyTime,DATE_FORMAT(createTime,'%Y-%m-%d %H:%i') createTime,DATE_FORMAT(updateTime,'%Y-%m-%d %H:%i') updateTime
+         FROM tb_medical_message 
+        <where>
+            <if test="patientID !=null and patientID !=''">
+                and patientID = #{patientID}
+            </if>
+                and status = 1
+        </where>
+    </select>
+    
+   <insert id="save" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+       INSERT tb_medical_message(patientID,adminID,content,reply,isShow,status,replyTime,createTime,updateTime) 
+       	VALUES(#{patientID},#{adminID},#{content},#{reply},'0','0',now(),now(),now())
+   </insert>
+	
+   <update id="update" parameterType="java.util.Map">
+       UPDATE tb_medical_message
+       <set>
+           <if test="adminID !=null and adminID !=''">
+               adminID = #{adminID},
+           </if>
+           <if test="reply !=null and reply !=''">
+               reply = #{reply},
+           </if>
+           <if test="isShow !=null and isShow !=''">
+               isShow = #{isShow},
+           </if>
+           <if test="status !=null and status !=''">
+               status = #{status},
+               replyTime=now(),
+           </if>
+           updateTime=now()
+       </set>
+       <where>
+           <if test="id !=null and id !=''">
+               and id = #{id}
+           </if>
+       </where>
+   </update>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.DiseaseDao">
+
+  <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+      select D.* from tb_medical_disease D 
+      <where>
+          <if test="sectionID !=null and sectionID !=''">
+              D.sectionID = #{sectionID}
+          </if>
+      </where>
+  </select>
+	
+  <select id="queryDiseaseIDList" parameterType="java.util.Map" resultType="java.lang.Integer">
+      SELECT A.diseaseID FROM tb_medical_doctor_disease A
+      LEFT JOIN tb_medical_doctor B ON A.doctorID=B.doctorID
+      LEFT JOIN tb_medical_patient_doctor C ON B.doctorID=C.doctorID
+      <where>
+          <if test="patientID !=null and patientID !=''">
+              and C.patientID = #{patientID}
+          </if>
+      </where>
+  </select>
+</mapper>

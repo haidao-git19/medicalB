@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.category.dao.CategoryAttrDao">
+
+    <sql id="categoryAttrColumn">
+        SELECT X.id,X.attrClassId,X.categoryCode,X.sortNum,X.attrName,X.attrCode,X.attrType,X.description,X.createPerson,X.updatePerson,Y.attrClassName,
+        DATE_FORMAT(X.createTime,'%Y-%m-%d %H:%i') createTime,DATE_FORMAT(X.updateTime,'%Y-%m-%d %H:%i') updateTime,
+        CASE WHEN X.attrEnterType=1 THEN "单值输入"
+        	WHEN X.attrEnterType=2 THEN "多值输入" END attrEnterType
+        FROM tb_product_category_attr X left join tb_product_category_attr_class Y on X.attrClassId=Y.id
+    </sql>
+    
+      <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+	    <include refid="categoryAttrColumn"/> 
+	    <where>
+	        <if test="attrName !=null and attrName !=''">
+	            and X.attrName like CONCAT('%',#{attrName},'%')
+	        </if>
+	        <if test="categoryCode !=null and categoryCode !=''">
+	            and X.categoryCode = #{categoryCode}
+	        </if>
+	        <if test="attrClassId !=null and attrClassId !=''">
+	            and attrClassId = #{attrClassId}
+	        </if>
+	    </where>
+       	<include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+      <select id="queryAllAttrs" parameterType="java.util.Map" resultType="com.netbull.shop.category.entity.CategoryAttr">
+          SELECT * FROM tb_product_category_attr 
+          <where>
+              <if test="categoryCode !=null and categoryCode !=''">
+                  and categoryCode = #{categoryCode}
+              </if>
+          </where>
+      </select>
+   
+   <select id="queryCount" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(1)  FROM (<include refid="categoryAttrColumn"/>
+        <where>
+	        <if test="attrName !=null and attrName !=''">
+	            and X.attrName like CONCAT('%',#{attrName},'%')
+	        </if>
+	        <if test="categoryCode !=null and categoryCode !=''">
+	            and X.categoryCode = #{categoryCode}
+	        </if>
+	        <if test="attrClassId !=null and attrClassId !=''">
+	            and attrClassId = #{attrClassId}
+	        </if>
+	    </where>) as count
+   </select>
+   
+   <select id="queryEntityById" parameterType="java.lang.Integer" resultType="com.netbull.shop.category.entity.CategoryAttr">
+       SELECT * FROM tb_product_category_attr 
+       <where>
+           <if test="_parameter !=null and _parameter !=0">
+              	and id=#{value}
+           </if>
+       </where>
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.shop.category.entity.CategoryAttr" useGeneratedKeys="true" keyProperty="id">
+       INSERT tb_product_category_attr(attrClassId,categoryCode,sortNum,attrName,attrCode,attrEnterType,attrType,description,createPerson,createTime,updatePerson,updateTime) 
+       VALUES(#{attrClassId},#{categoryCode},#{sortNum},#{attrName},#{attrCode},#{attrEnterType},#{attrType},#{description},#{createPerson},now(),#{updatePerson},now())
+   </insert>
+   
+   <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM tb_product_category_attr where id=#{id}
+   </delete>
+   
+   <update id="update" parameterType="com.netbull.shop.category.entity.CategoryAttr">
+       UPDATE tb_product_category_attr 
+       <set>
+           <if test="categoryCode !=null and categoryCode !=''">
+               categoryCode = #{categoryCode},
+           </if>
+           <if test="attrClassId !=null and attrClassId !=''">
+               attrClassId = #{attrClassId},
+           </if>
+           <if test="sortNum !=null and sortNum !=''">
+               sortNum = #{sortNum},
+           </if>
+           <if test="attrName !=null and attrName !=''">
+               attrName = #{attrName},
+           </if>
+           <if test="attrCode !=null and attrCode !=''">
+               attrCode = #{attrCode},
+           </if>
+           <if test="attrEnterType !=null and attrEnterType !=''">
+               attrEnterType = #{attrEnterType},
+           </if>
+           <if test="attrType !=null and attrType !=''">
+               attrType = #{attrType},
+           </if>
+           <if test="description !=null and description !=''">
+               description = #{description},
+           </if>
+           <if test="updatePerson !=null and updatePerson !=''">
+               updatePerson = #{updatePerson},
+           </if>
+           updateTime=now()
+       </set>
+       <where>
+           <if test="id !=null and id !=''">
+               id = #{id}
+           </if>
+       </where>
+   </update>
+   
+   <select id="queryAttrClassCollection" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT * FROM tb_product_category_attr_class 
+       <where>
+           <if test="categoryCode !=null and categoryCode !=''">
+               and categoryCode =#{categoryCode}
+           </if>
+       </where>
+   </select>
+   
+   <insert id="saveAttrClass" parameterType="com.netbull.shop.category.entity.CategoryAttr" useGeneratedKeys="true" keyProperty="id">
+       INSERT tb_product_category_attr_class(categoryCode,attrClassName,createPerson,updatePerson,createTime,updateTime) 
+       	VALUES(#{categoryCode},#{attrClassName},#{createPerson},#{updatePerson},now(),now())
+   </insert>
+   
+   <update id="updateAttrClass" parameterType="com.netbull.shop.category.entity.CategoryAttr">
+       UPDATE tb_product_category_attr_class 
+       SET attrClassName=#{attrClassName} ,updatePerson=#{updatePerson},updateTime=now()
+        WHERE id=#{id}
+   </update>
+   
+   <delete id="deleteAttrClass" parameterType="java.lang.Long">
+       DELETE FROM tb_product_category_attr_class WHERE id=#{id}
+   </delete>
+   
+    <select id="queryAttrClassList" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT C.id,C.categoryCode,C.attrClassName,C.createPerson,C.updatePerson,
+	    DATE_FORMAT(C.createTime,'%Y-%m-%d %H:%i') createTime,DATE_FORMAT(C.updateTime,'%Y-%m-%d %H:%i') updateTime
+	     FROM tb_product_category_attr_class C 
+	    <where>
+	        <if test="attrClassName !=null and attrClassName !=''">
+	            and C.attrClassName like CONCAT('%',#{attrClassName},'%')
+	        </if>
+	        <if test="categoryCode !=null and categoryCode !=''">
+	            and C.categoryCode = #{categoryCode}
+	        </if>
+	    </where>
+       	<include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="queryAttrClassCount" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(1)  FROM tb_product_category_attr_class
+        <where>
+	         <if test="attrClassName !=null and attrClassName !=''">
+	            and attrClassName like CONCAT('%',#{attrClassName},'%')
+	        </if>
+	        <if test="categoryCode !=null and categoryCode !=''">
+	            and categoryCode = #{categoryCode}
+	        </if>
+	    </where>
+   </select>
+   
+   <select id="queryAttrClassById" parameterType="java.lang.Integer" resultType="com.netbull.shop.category.entity.CategoryAttrClass">
+       SELECT * FROM tb_product_category_attr_class WHERE id= #{id}
+   </select>
+   
+   <select id="queryAttrDimList" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT D.id,D.categoryCode,D.attrCode,D.attrShowValue,D.attrValue,D.isDefault,D.sortNum,D.createPerson,D.updatePerson ,
+	    	DATE_FORMAT(D.createTime,'%Y-%m-%d %H:%i') createTime,DATE_FORMAT(D.updateTime,'%Y-%m-%d %H:%i') updateTime
+	    FROM tb_product_category_attr_dim D 
+	    <where>
+	        <if test="attrShowName !=null and attrShowName !=''">
+	            and attrShowName like CONCAT('%',#{attrShowName},'%')
+	        </if>
+	        <if test="attrCode !=null and attrCode !=''">
+	            and attrCode = #{attrCode}
+	        </if>
+	        <if test="categoryCode !=null and categoryCode !=''">
+	            and categoryCode = #{categoryCode}
+	        </if>
+	    </where>
+       	<include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="queryAttrDimCount" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(1)  FROM tb_product_category_attr_dim
+        <where>
+	          <if test="attrShowName !=null and attrShowName !=''">
+	            and attrShowName like CONCAT('%',#{attrShowName},'%')
+	        </if>
+	        <if test="attrCode !=null and attrCode !=''">
+	            and attrCode = #{attrCode}
+	        </if>
+	        <if test="categoryCode !=null and categoryCode !=''">
+	            and categoryCode = #{categoryCode}
+	        </if>
+	    </where>
+   </select>
+   
+   <select id="queryAttrDimById" parameterType="java.lang.Integer" resultType="com.netbull.shop.category.entity.CategoryAttrDim">
+       SELECT * FROM tb_product_category_attr_dim WHERE id=#{id}
+   </select>
+   
+   <insert id="saveAttrDim" parameterType="com.netbull.shop.category.entity.CategoryAttrDim" useGeneratedKeys="true" keyProperty="">
+       INSERT tb_product_category_attr_dim(categoryCode,attrCode,attrShowValue,attrValue,isDefault,sortNum,createPerson,updatePerson,createTime,updateTime) 
+       	values(#{categoryCode},#{attrCode},#{attrShowValue},#{attrValue},#{isDefault},#{sortNum},#{createPerson},#{updatePerson},now(),now())
+   </insert>
+   
+   <update id="updateAttrDim" parameterType="com.netbull.shop.category.entity.CategoryAttrDim">
+       UPDATE tb_product_category_attr_dim 
+       <set>
+           <if test=" attrShowValue!=null and  attrShowValue!=''">
+               attrShowValue=#{attrShowValue},
+           </if>
+           <if test=" attrValue!=null and  attrValue!=''">
+               attrValue=#{attrValue},
+           </if>
+           <if test="isDefault !=null and isDefault !=''">
+               isDefault=#{isDefault},
+           </if>
+           <if test="sortNum !=null and sortNum !=''">
+              sortNum =#{sortNum},
+           </if>
+           <if test="updatePerson !=null and updatePerson !=''">
+               updatePerson=#{updatePerson},
+           </if>
+           updateTime=now()
+       </set>
+       <where>
+           <if test="id !=null and id !=''">
+               and id = #{id}
+           </if>
+       </where>
+   </update>
+   <delete id="deleteAttrDim" parameterType="java.lang.Long">
+       DELETE FROM tb_product_category_attr_dim WHERE id = #{id}
+   </delete>
+</mapper>

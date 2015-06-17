@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+.syf_top{
+	width: 165px;
+	height: 61px;
+	line-height:61px;
+	padding-left:140px;
+	font-family: 微软雅黑;
+	font-size: 16px;
+	color: #656565;
+	background-image: url(../img/input-box_header.png);
+}
+.syf_name{
+	height: 30px;
+	width: 286px;
+	padding-top:12px;
+	padding-bottom:14px;
+	border-left: solid 1px #ededed;
+	border-right: solid 1px #ededed;
+	margin-left: 1px;
+}
+.syf_pwd{
+	height: 30px;
+	width: 286px;
+	padding-top:12px;
+	padding-bottom:14px;
+	border: solid 1px #ededed;
+	margin-left: 1px;
+}
+.syf_checkcode{
+	width: 286px;
+	height: 30px;
+	padding-top:12px;
+	padding-bottom:14px;
+	border-left: solid 1px #ededed;
+	border-right: solid 1px #ededed;
+	border-bottom: solid 1px #ededed;
+	margin-left: 1px;
+}
+.syf_checkcode img{
+	width: 30%;
+	height: 100%;
+	margin-left : 5px;
+}
+.syf_input{
+	padding-left: 15px;
+	font-family: 微软雅黑;
+	font-size: 16px;
+	color: #656565;
+}
+#loginName,#password,#captchaCode{
+	width: 190px;
+	border-color: #ededed;
+	letter-spacing: 2px;
+	padding:6px 5px;
+	margin : 0;
+}
+
+.syf_commit{
+	width: 303px;
+	height: 54px;
+	line-height:54px;
+	text-align:center;
+	margin-top: 10px;
+	margin-left: 1px;
+	border:0;
+	background:none;
+	background-image: url(../img/button_register.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	font-size: 24px;
+	color: #ffffff;
+	letter-spacing: 5px;
+	cursor: pointer;
+}
+.syf_tip{
+	position: relative;
+	top: -44px;
+	left: 295px;
+}

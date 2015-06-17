@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>com.netbull.shop</groupId>
+		<artifactId>seller</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<properties>
+		<bundle.symbolicName>com.netbull.shop.databus.bundle</bundle.symbolicName>
+		<bundle.namespace>com.netbull.shop.databus.web</bundle.namespace>
+	</properties>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.netbull.shop.databus</groupId>
+	<artifactId>medical-databus-bundle</artifactId>
+	<version>1.0.0</version>
+
+	<name>${bundle.symbolicName} [${bundle.namespace}]</name>
+
+	<packaging>war</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.0.2</version>
+				<executions>
+					<execution>
+						<id>skinny-war</id>
+						<goals>
+							<goal>war</goal>
+						</goals>
+						<phase>post-integration-test</phase>
+						<inherited>false</inherited>
+						<configuration>
+							<warSourceExcludes>
+								WEB-INF/lib/**
+							</warSourceExcludes>
+							<packagingExcludes>WEB-INF/lib/tomcat*.jar</packagingExcludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<finalName>medical-databus-bundle</finalName>
+	</build>
+
+	<dependencies>
+		<!-- | uncomment to add all imported (non-local) bundles to your compilation 
+			classpath <dependency> <type>pom</type> <groupId>${parent.groupId}</groupId> 
+			<artifactId>provision</artifactId> <optional>true</optional> </dependency> -->
+		<dependency>
+			<groupId>com.netbull.shop.common</groupId>
+			<artifactId>medical-common-bundle</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>quartz</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		
+		<!-- mybatis start -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.miemiedev</groupId>
+			<artifactId>mybatis-paginator</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.7.3</version>
+		</dependency>
+		<!-- mybatis end -->
+		<dependency>
+			<groupId>com.cloopen.rest</groupId>
+			<artifactId>CCP_REST_SDK_JAVA</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<!-- 极光消息推送API start -->
+		<dependency>
+		    <groupId>cn.jpush.api</groupId>
+			<artifactId>jpush-client</artifactId>
+			<version>3.2.3</version>
+		</dependency>
+		<!-- 极光消息推送API end -->
+		<dependency>  
+	        <groupId>com.google.zxing</groupId>  
+	        <artifactId>core</artifactId>  
+	        <version>2.2</version>  
+	    </dependency>  
+	    <dependency>  
+	        <groupId>com.google.zxing</groupId>  
+	        <artifactId>javase</artifactId>  
+	        <version>2.2</version>  
+	    </dependency>  
+	</dependencies>
+
+</project>

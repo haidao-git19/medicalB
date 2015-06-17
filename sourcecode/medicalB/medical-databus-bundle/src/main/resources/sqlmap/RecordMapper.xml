@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.RecordDao">
+
+    <select id="queryDetail" parameterType="java.util.Map" resultType="java.util.Map">
+        <choose>
+            <when test="recordID !=null and recordID !=''">
+                select distinct R.* from tb_medical_record R
+            </when>
+            <otherwise>
+                select distinct R.*,DATE_FORMAT(V.returnVisitTime,'%Y-%m-%d %H:%i:%s') as returnVisitTime from tb_medical_record R ,tb_medical_return_visit V
+            </otherwise>
+        </choose>
+        <where>
+            R.state != -1
+            <if test="recordID !=null and recordID !=''">
+                and R.id = #{recordID}
+            </if>
+            <if test="patientID !=null and patientID !='' and doctorID !=null and doctorID !=''">
+                and R.patientID = #{patientID}
+		        and V.returnVisitTime in (
+		            select max(returnVisitTime) from tb_medical_return_visit where patientID=#{patientID} and doctorID=#{doctorID})
+            </if>
+        </where>
+    </select>
+	
+    <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+        <choose>
+            <when test="patientCard !=null and patientCard !='' or patientName !=null and patientName !=''">
+                select R.* from tb_medical_record R 
+                 <where>
+                     R.state != -1
+		            <if test="patientCard !=null and patientCard !=''">
+		                and R.patientCard = #{patientCard}
+		            </if>
+		            <if test="patientName !=null and patientName !=''">
+		                and R.patientName LIKE CONCAT('%',#{patientName},'%')
+		            </if>
+		        </where>
+            </when>
+            <otherwise>
+                 select R.* from tb_medical_record R
+		        <where>
+		            R.state != -1
+		            <if test="patientID !=null and patientID !=''">
+		                and R.patientID = #{patientID}
+		            </if>
+		        </where>
+            </otherwise>
+        </choose>
+    </select>
+    
+     <update id="updateRecord" parameterType="java.util.Map">
+        update tb_medical_record R
+        <set>
+            <if test="patientID !=null and patientID !=''">
+                R.patientID = #{patientID}
+            </if>
+        </set>
+        <where>
+            <if test="patientCard !=null and patientCard !=''">
+		          and R.patientCard = #{patientCard}
+		    </if>
+		    <if test="patientName !=null and patientName !=''">
+		          and R.patientName =#{patientName}
+		    </if>
+        </where>
+    </update>
+    
+    <update id="updateAllRecord" parameterType="com.netbull.shop.manage.weixin.vo.EMRecord">
+        update tb_medical_record R
+        <set>
+            R.updateTime = now()
+            <if test="patientID !=null and patientID !=''">
+                ,R.patientID = #{patientID}
+            </if>
+            <if test="patientName !=null and patientName !=''">
+               ,R.patientName = #{patientName}
+            </if>
+            <if test="hospitalName !=null and hospitalName !=''">
+               ,R.hospitalName = #{hospitalName}
+            </if>
+            <if test="sectionName !=null and sectionName !=''">
+               ,R.sectionName = #{sectionName}
+            </if>
+            <if test="diseaseName !=null and diseaseName !=''">
+               ,R.diseaseName = #{diseaseName}
+            </if>
+            <if test="doctorName !=null and doctorName !=''">
+               ,R.doctorName = #{doctorName}
+            </if>
+            <if test="note !=null and note !=''">
+               ,R.note = #{note}
+            </if>
+            <if test="drug !=null and drug !=''">
+               ,R.drug = #{drug}
+            </if>
+            <if test="source !=null and source !=''">
+               ,R.source = #{source}
+            </if>
+            <if test="visitTime !=null and visitTime !=''">
+               ,R.visitTime = #{visitTime}
+            </if>
+        </set>
+        <where>
+            <if test="id !=null and id !=''">
+		          and R.id = #{id}
+		    </if>
+        </where>
+    </update>
+    
+    <update id="deleteRecord" parameterType="com.netbull.shop.manage.weixin.vo.EMRecord">
+        update tb_medical_record R
+        <set>
+            R.state = -1
+        </set>
+        <where>
+            <if test="id !=null and id !=''">
+		          and R.id = #{id}
+		    </if>
+        </where>
+    </update>
+    
+     <select id="queryRecordRelationCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) from tb_medical_record_doctor R 
+                 <where>
+		            <if test="recordID !=null and recordID !=''">
+		                and R.recordID = #{recordID}
+		            </if>
+		            <if test="doctorID !=null and doctorID !=''">
+		                and R.doctorID = #{doctorID}
+		            </if>
+		        </where>
+    </select>
+    
+    <insert id="save" parameterType="com.netbull.shop.manage.weixin.vo.EMRecord" useGeneratedKeys="true" keyProperty="id">
+        insert tb_medical_record(patientID,patientName,patientCard,hospitalName,sectionName,diseaseName,doctorName,note,drug,source,createTime,visitTime) 
+        	values(#{patientID},#{patientName},#{patientCard},#{hospitalName},#{sectionName},#{diseaseName},#{doctorName},#{note},#{drug},#{source},now(),#{visitTime})
+    </insert>
+    
+    <insert id="saveRecordRelation" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+        insert tb_medical_record_doctor(recordID,doctorID) values(#{recordID},#{doctorID})
+    </insert>
+    
+</mapper>

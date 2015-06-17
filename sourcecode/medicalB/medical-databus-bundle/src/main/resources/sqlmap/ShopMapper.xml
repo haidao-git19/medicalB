@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.ShopDao">
+
+   <select id="queryNearList" parameterType="java.util.Map" statementType="CALLABLE" resultType="java.util.Map">
+       call SEARCH_NEAR_SHOP(#{locationX,jdbcType=VARCHAR,mode=IN},#{locationY,jdbcType=VARCHAR,mode=IN},#{scope,jdbcType=VARCHAR,mode=IN})
+   </select>
+	
+   <select id="queryDetail" parameterType="java.util.Map" resultType="java.util.Map">
+       select * from tb_medical_pharmacy 
+       <where>
+           <if test="shopID !=null and shopID !=''">
+               and shopID = #{shopID}
+           </if>
+       </where>
+   </select>
+   
+   <select id="queryShopList" parameterType="java.util.Map" resultType="java.util.Map">
+       select * from tb_medical_pharmacy  where state = 0
+   </select>
+</mapper>

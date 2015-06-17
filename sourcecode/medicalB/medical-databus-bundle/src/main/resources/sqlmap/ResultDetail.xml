@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.databus.questionnaire.model.ResultDetail">
+
+	<insert id="save" parameterType="com.netbull.shop.databus.questionnaire.model.ResultDetail" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_questionnaire_result_detail(rId, caseId, caseVal, caseOptionId, exceptionFlag, level)
+		VALUES (#{rId}, #{caseId}, #{caseVal}, #{caseOptionId}, #{exceptionFlag}, #{level})
+	</insert>
+
+	<select id="find_ExceptionOption_list" parameterType="long" resultType="com.netbull.shop.databus.questionnaire.model.ExceptionOption">
+		select c.title subject, 
+		case c.type
+		when '1' then b.caseVal
+		when '2' then d.`option`
+		when '3' then d.`option`
+		end value,
+		c.unit,
+		c.type
+		from tb_questionnaire_result_detail b
+		left join tb_questionnaire_case c on b.caseId = c.id
+		left join tb_questionnaire_case_option d on d.id = b.caseOptionId
+		where b.rId = #{rId} and b.exceptionFlag = 1
+		ORDER BY c.sort asc
+	</select>
+	
+</mapper>

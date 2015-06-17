@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.GoodsDao">
+
+    <select id="queryGoods" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from tb_product_goods g where g.goodsCode in (select a.goodsCode from tb_product_goods_attr a
+			<where>
+			     <if test="key != null and key !=''">
+			        a.attrCode = 'disease' and a.attrValue like CONCAT("%",#{key},"%")
+				</if>
+			</where>
+			)
+	</select>
+	
+    <select id="queryGoodsDetail" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT g.id,g.goodsCode,g.goodsName,g.goodsVersion,g.coverImage imageUrl,r.buyNum buyCount,r.goodsStock,r.praiseNum praiseCount from tb_product_goods g LEFT JOIN tb_product_goods_report r on  g.goodsCode = r.goodsCode
+			<where>
+			    1=1
+			    <if test="goodsCode != null and goodsCode !=''">
+			        and g.goodsCode = #{goodsCode}
+				</if>
+				<if test="goodsVersion != null and goodsVersion !=''">
+			        and g.goodsVersion = #{goodsVersion}
+				</if>
+			</where>
+	</select>
+	
+    <update id="modifyGoodReport" parameterType="java.util.Map" >
+		UPDATE tb_product_goods_report F
+				set F.updateTime = now()
+				<if test="offset != null and offset !=''">
+				     ,goodsStock = goodsStock-#{offset}
+				</if>
+				<if test="goodsTotal != null and goodsTotal !=''">
+				     ,goodsTotal = #{goodsTotal}
+				</if>
+				<if test="remarkNum != null and remarkNum !=''">
+				     ,remarkNum = #{remarkNum}
+				</if>
+				<if test="offset != null and offset !=''">
+				     ,buyNum = buyNum + #{offset}
+				</if>
+				<if test="offset != null and offset !=''">
+				     ,realBuyNum = buyNum + #{offset}
+				</if>
+				<if test="collectNum != null and collectNum !=''">
+				     ,collectNum = #{collectNum}
+				</if>
+				<if test="praiseNum != null and praiseNum !=''">
+				     ,praiseNum = #{praiseNum}
+				</if>
+				<if test="consultNum != null and consultNum !=''">
+				     ,consultNum = #{consultNum}
+				</if>
+				<if test="score != null and score !=''">
+				     ,score = #{score}
+				</if>
+		WHERE F.goodsCode = #{goodsCode}
+	</update>
+	
+</mapper>

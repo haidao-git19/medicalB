@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.UserAcceptInfoDao">
+
+    <sql id="userAcceptInfoSql">
+        select id,userId,province,city,address,zipcode,acceptName,phone,telephone,status,enable,createTime,updateTime from tb_user_accept_info
+    </sql>
+    
+    <select id="queryCount" parameterType="map" resultType="java.lang.Long">
+        select count(1) from (<include refid="userAcceptInfoSql"/>) as count
+        <where>
+            <if test="userId !=null and userId !=''">
+                and userId=#{userId}
+            </if>
+            <if test="acceptName !=null and acceptName !=''">
+                and acceptName=#{acceptName}
+            </if>
+            <if test="phone !=null and phone !=''">
+                and phone=#{phone}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryList" parameterType="map" resultType="com.netbull.shop.common.vo.UserAcceptInfoVo">
+        <include refid="userAcceptInfoSql"/> 
+         <where>
+           <if test="userId !=null and userId !=''">
+                and userId=#{userId}
+            </if>
+            <if test="acceptName !=null and acceptName !=''">
+                and acceptName=#{acceptName}
+            </if>
+            <if test="phone !=null and phone !=''">
+                and phone=#{phone}
+            </if>
+        </where>
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+    <select id="queryListByUserId" parameterType="java.lang.Long" resultType="com.netbull.shop.common.vo.UserAcceptInfoVo">
+        <include refid="userAcceptInfoSql"/>
+        <where>
+            <if test="_parameter !=null and _parameter !=''">
+                userId=#{value}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryEntityByParams" parameterType="map" resultType="com.netbull.shop.common.vo.UserAcceptInfoVo">
+        <include refid="userAcceptInfoSql"/>
+        <where>
+            <if test="id !=null and id !=''">
+               and id=#{id}
+            </if>
+            <if test="userId !=null and userId !=''">
+                and userId=#{userId}
+            </if>
+            <if test="enable !=null and enable !=''">
+                and enable=#{enable}
+            </if>
+        </where>
+    </select>
+    
+	<insert id="save" parameterType="com.netbull.shop.common.vo.UserAcceptInfoVo" 
+	    useGeneratedKeys="true" keyProperty="id">
+		insert tb_user_accept_info(userId,province,city,address,zipcode,acceptName,phone,telephone,status,enable,createTime,updateTime) 
+		values(#{userId},#{province},#{city},#{address},#{zipcode},#{acceptName},#{phone},#{telephone},#{status},#{enable},now(),now())
+	</insert>
+	
+	<update id="update" parameterType="com.netbull.shop.common.vo.UserAcceptInfoVo">
+	    update tb_user_accept_info 
+	    <set>
+			<if test="province !=null and province !=''">
+			    province=#{province},
+			</if>
+			<if test="city !=null and city !=''">
+			    city=#{city},
+			</if>
+			<if test="address !=null and address !=''">
+			    address=#{address},
+			</if>
+			<if test="zipcode !=null and zipcode !=''">
+			    zipcode=#{zipcode},
+			</if>
+			<if test="acceptName !=null and acceptName !=''">
+			    acceptName=#{acceptName},
+			</if>
+			<if test="phone !=null and phone !=''">
+			    phone=#{phone},
+			</if>
+			<if test="telephone !=null and telephone !=''">
+			    telephone=#{telephone},
+			</if>
+			<if test="enable !=null and enable !=''">
+			    enable=#{enable},
+			</if>
+			updateTime=now()        
+	    </set>
+	    <where>
+	        <if test="id !=null and id !=''">
+	            and id=#{id}
+	        </if>
+	        <if test="userId !=null and userId !=''">
+	            and userId=#{userId}
+	        </if>
+	        and status=0
+	    </where>
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+	    delete from tb_user_accept_info 
+	    <where>
+	        <if test="_parameter !=null and _parameter !=''">
+	            id=#{value}
+	        </if>
+	    </where>
+	</delete>
+	
+	<select id="queryEntityById" parameterType="java.lang.Long" resultType="com.netbull.shop.common.vo.UserAcceptInfoVo">
+	    select * from tb_user_accept_info 
+	    <where>
+	        <if test="_parameter !=null and _parameter !=''">
+	            id=#{value}
+	        </if>
+	    </where>
+	</select>
+</mapper>

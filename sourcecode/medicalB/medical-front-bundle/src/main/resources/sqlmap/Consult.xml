@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.index.dao.ConsultDao">
+
+   
+   <select id="pageConsult" parameterType="map" resultType="map">
+	    SELECT  *   FROM tb_medical_consultation C
+	    where 1=1
+	     <if test="level!=null and level != ''">
+	      and  level =#{level}
+	     </if>
+	      <if test="isFree!=null and isFree != ''">
+	      and  isFree =#{isFree}
+	     </if>
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="countConsult" parameterType="map"
+  	 resultType="long">
+        SELECT COUNT(1)  FROM tb_medical_consultation C
+           where 1=1
+        <if test="level!=null and level != ''">
+	      and  level =#{level}
+	     </if>
+	      <if test="isFree!=null and isFree != ''">
+	      and  isFree =#{isFree}
+	     </if>
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.web.index.entity.Consult" useGeneratedKeys="true" keyProperty="consultationID">
+   	insert into tb_medical_consultation (userID,consultationDate,answerDate,question,answer,level,evaluation,isRepeat,sourceID,isFree,type)
+   	values (#{userID},#{consultationDate},#{answerDate},#{question},#{answer},#{level},#{evaluation},#{isRepeat},#{sourceID},#{isFree},#{type})
+   </insert>
+   
+   <update id="update" parameterType="com.netbull.web.index.entity.Consult">
+	   update tb_medical_consultation set userID=#{userID},
+	   question=#{question},
+	   answer=#{answer},
+	   level=#{level},
+	   evaluation=#{evaluation},
+	   isRepeat=#{isRepeat},
+	   sourceID=#{sourceID},
+	   isFree=#{isFree},
+	   type=#{type}
+	   where consultationID=#{consultationID}
+   </update>
+   
+   
+   
+   <select id="findByID" parameterType="java.lang.Integer"  resultType="com.netbull.web.index.entity.Consult">
+        SELECT *  FROM tb_medical_consultation C
+        where 1=1
+         <if test="consultationID!=null and consultationID != ''">
+	      and  consultationID =#{consultationID}
+	     </if>
+   </select>
+   
+   
+   <delete id="del" parameterType="java.lang.Integer" >
+  	 delete from tb_medical_consultation where  consultationID =#{consultationID}
+   </delete>
+   
+   <select id="queryDetailList" parameterType="java.util.Map" resultType="com.netbull.web.index.entity.Consult">
+		SELECT h.*,i.doctorName doctorName,q.attrname attrname,i.doctorLevel doctorLevel,c.hospitalName hospitalName,
+		CASE WHEN SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",1)>=1 
+          THEN CONCAT(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",1),"小时前")
+      WHEN SUBSTRING(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",2),1,4)='00:0'
+          THEN 
+          CONCAT(SUBSTRING(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",2),5,5),"分钟前")
+          ELSE
+           CONCAT(SUBSTRING(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",2),4,LENGTH(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",2))),"分钟前")
+          END DATEDIFF
+          FROM tb_medical_consultation h LEFT JOIN tb_medical_doctor i
+		  ON h.doctorID=i.doctorID
+		  left join tb_medical_hospital c on i.hospitalID=c.hospitalID
+		  left join tb_medical_section q on i.sectionID=q.id
+		 WHERE 1=1
+		    <if test="doctorID != null and doctorID != '' and doctorID!=''  and doctorID!=0 ">
+				 and h.doctorID=#{doctorID}
+			</if>
+			<if test="doctorID != null and doctorID != '' and doctorID='0' ">
+				 and h.doctorID is not null
+			</if>
+			<if test="sectionID != null and sectionID != '' ">
+				 and q.parentid=#{sectionID}
+			</if>
+			<if test="hospitalID != null and hospitalID != '' ">
+				 and c.hospitalID=#{hospitalID}
+			</if>
+			<if test="sortKey != null and sortKey != ''">
+				 order by h.consultationDate ${sortKey}
+			</if>
+			 LIMIT  #{start}, #{limit}
+	</select>
+	
+	 <select id="countWsConsult" parameterType="map"
+  	 resultType="long">
+        SELECT COUNT(1)  FROM tb_medical_consultation C
+           where 1=1
+   </select>
+   
+	 
+	 <select id="queryLatestConsultList" parameterType="java.util.Map" resultType="java.util.Map">
+	     SELECT t1.*,t2.doctorName,t3.attrName sectionName FROM tb_medical_consultation t1 
+	     LEFT JOIN tb_medical_doctor t2 ON t1.doctorID = t2.doctorID
+	     LEFT JOIN tb_medical_section t3 ON t2.sectionID = t3.id
+	     <where>
+	         1=1 and type in (0,1)
+	         <if test="hospitalID !=null and hospitalID !=''">
+	             and t2.hospitalID = #{hospitalID}
+	         </if>
+	         <if test="sectionID !=null and sectionID !=''">
+	             and t2.sectionID = #{sectionID}
+	         </if>
+	         <if test="doctorID !=null and doctorID !=''">
+	             and t2.doctorID = #{doctorID}
+	         </if>
+	         <if test="state !=null and state !=''">
+	             and t1.state = #{state}
+	         </if>
+	         <if test="isRepeat !=null and isRepeat !=''">
+	             and t1.isRepeat = #{isRepeat}
+	         </if>
+	     </where>
+	     ORDER BY t1.consultationDate DESC
+	      LIMIT  #{start}, #{limit}
+	 </select>
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.shop.goods.domain.Goods">
+
+	<select id="find_Goods_by_goodsCode" parameterType="java.lang.String" resultType="com.netbull.web.shop.goods.domain.Goods">
+		select
+		  a.goodsCode, 
+		  d.brandName,
+		  a.shortName goodsName, 
+		  b.text sellingPoints, 
+		  a.marketPrice, 
+		  a.shopPrice, 
+		  a.sellCharacter,
+		  c.text details,
+		  e.attrValue spec,  
+		  f.attrValue producer, 
+		  g.attrValue license, 
+		  h.attrValue weight,
+		  a.shopId
+		from tb_product_goods a 
+		LEFT JOIN tb_product_goods_clob b on a.sellingPoints = b.id 
+		LEFT JOIN tb_product_goods_clob c on a.content = c.id 
+		LEFT JOIN tb_product_brand d on a.brandId = d.id 
+		LEFT JOIN tb_product_goods_attr e on a.goodsCode = e.goodsCode and e.attrCode = 'spec' 
+		LEFT JOIN tb_product_goods_attr f on a.goodsCode = f.goodsCode and f.attrCode = 'producer' 
+		LEFT JOIN tb_product_goods_attr g on a.goodsCode = g.goodsCode and g.attrCode = 'license' 
+		LEFT JOIN tb_product_goods_attr h on a.goodsCode = h.goodsCode and h.attrCode = 'weight' 
+		where a.goodsCode = #{goodsCode}
+	</select>
+	
+	<select id="find_Goods_images_by_goodsCode" parameterType="java.lang.String" resultType="com.netbull.web.shop.goods.domain.GoodsImg">
+		select a.bigImgPath bigImg, a.smallImgPath smallImg from tb_product_goods_image a where a.goodsCode = #{goodsCode} ORDER BY a.sort
+	</select>
+	
+	<select id="query_Records_By_Condition" parameterType="map" resultType="com.netbull.web.shop.goods.domain.Goods">
+		select
+			b.goodsCode,
+			(select c.bigImgPath from tb_product_goods_image c where c.goodsCode = b.goodsCode limit 0, 1) imgPath,
+			(select d.brandName from tb_product_brand d where d.id = b.brandId) brandName,
+			b.shortName goodsName,
+			b.marketPrice,
+			b.shopPrice
+		from tb_pdt_svc_search_mapping a
+			left join tb_product_goods b on a.goodsCode = b.goodsCode 
+		where
+			a.catId = ${catId} 
+		<if test="scId > 0">
+			and a.scId = ${scId}
+	    </if>
+	    <if test="catScOptId > 0">
+			and a.catScOptId = ${catScOptId}
+	    </if>
+		<!-- order by b.shopPrice desc -->
+		limit ${offset}, ${pageSize}
+	</select>
+	
+	<select id="query_RecordSize_By_Condition" parameterType="map" resultType="int">
+		select count(1) from tb_pdt_svc_search_mapping a left join tb_product_goods b on a.goodsCode = b.goodsCode 
+		where
+			a.catId = ${catId} 
+		<if test="scId > 0">
+			and a.scId = ${scId}
+	    </if>
+	    <if test="catScOptId > 0">
+			and a.catScOptId = ${catScOptId}
+	    </if>
+	</select>
+	
+	<select id="queryCatalogTree" parameterType="map" statementType="CALLABLE" resultType="com.netbull.web.shop.goods.vo.CataNavigation">
+		call pro_show_childLst(0)
+	</select>
+	
+	<select id="queryCatalogOption" parameterType="long" resultType="com.netbull.web.shop.goods.vo.CatagoryOption">
+		select
+			a.catId, a.name optionClsName, b.scId, b.id, b.name optionName, b.sort 
+		from
+			tb_pdt_svc_cat_search_condition a
+			left join tb_pdt_svc_cat_search_condition_opt b on a.id = b.scId
+		where
+			a.catId = #{catId} and b.state = 1
+	</select>
+	
+</mapper>

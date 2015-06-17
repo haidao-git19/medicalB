@@ -1,0 +1,165 @@
+/*  
+    *@Description: 商品社区
+    *@Author: zhanghang  
+    *@Update: zhanghang(2012-10-12)  
+*/  
+
+.buyer_experience{position:static;}
+.goods_club_comment{margin:0 auto; margin-top:10px;}
+/* 百分比条 */
+.goods_club_comment .goods_club_tit{height:28px;line-height:28px;font-size:14px;padding-left:20px;border:1px solid #ddd;border-bottom:2px solid #008dbc ;background:url(../images/title_bg_x.png) repeat-x;}
+.goods_club_comment .goods_score{padding-bottom:15px;border:1px solid #ddd;border-top:0 none;}
+.goods_club_comment .evaluate_main{float:left;width:100%;}
+.goods_club_comment .evaluate_box{margin:0 200px 0 179px;padding-top:8px;}
+.goods_club_comment .percentage_bar .p_bar{height:24px;line-height:24px;padding-left:200px;}
+.goods_club_comment .percentage_bar .p_bar span{vertical-align:middle;}
+.goods_club_comment .percentage_bar .p_bar .text{_vertical-align:-2px;}
+.goods_club_comment .percentage_bar b{display:inline-block;width:130px;height:10px;line-height:10px;margin:0 5px 0 10px;text-align:left;font-size:0;background-color:#F9F9F9;border:1px solid #F2F2F2;vertical-align:middle;}
+.goods_club_comment .percentage_bar i{display:block;height:10px;background:url(../images/sprite.png) repeat-x;}
+.goods_club_comment .score_num{float:left;width:138px;height:61px;margin:15px 0 0 -100%;padding:5px 0 0 40px;border-right:1px solid #EAEAEA;}
+.goods_club_comment .score_num .num{overflow:hidden;height:36px;line-height:52px;}
+.goods_club_comment .score_num .num strong{float:left;line-height:36px;margin-right:5px;font-size:36px;color:#c00;font-family:'Arial';}
+.goods_club_comment .score_num .text{line-height:20px;color:#999;}
+.goods_club_comment .submit_comment{float:left;width:199px;height:54px;line-height:20px;margin:15px 0 0 -200px;padding-top:12px;border-left:1px solid #EAEAEA;text-align:center;color:#999;}
+/* 顾客评价条 */
+.goods_club_comment .user_evaluate{position:relative;z-index:8;height:36px;margin-bottom:10px;border:1px solid #DBDBDB;border-top:0 none;background-color:#F9F9F9;}
+.goods_club_comment .user_evaluate li{float:left;margin:0 20px 0 65px;_display:inline;}
+.goods_club_comment .user_evaluate li.cur{position:relative;z-index:1;}
+.goods_club_comment .user_evaluate .ue_tit{width: 130px;height:36px;line-height:36px;position:relative;padding-right:12px;text-align: right;}
+.goods_club_comment .user_evaluate .ue_tit b{position:absolute;right:0;top:16px;display:block;overflow:hidden;width:0px;height:0px;padding:0;font-size:0;border:4px dashed transparent;border-top-style:solid;border-top-color:#333;}
+.goods_club_comment .user_evaluate .red_text{color:#c00;}
+.goods_club_comment .user_evaluate .ue_tip{display:none;position:absolute;right:-79px;top:30px;width:250px;padding:2px;background-color:#EBEBEB;}
+.goods_club_comment .user_evaluate .ue_tip .arrow{position:absolute;right:80px;top:-2px;display:block;width:7px;height:5px;padding:0;background:url(../images/sprite.png) -131px -15px no-repeat;}
+.goods_club_comment .user_evaluate .tip_box{padding-bottom:10px;border:1px solid #DBDBDB;background-color:#fff;}
+.goods_club_comment .user_evaluate .person_num{line-height:28px;margin-bottom:5px;padding-right:12px;text-align:right;background-color:#F9F9F9;}
+.goods_club_comment .user_evaluate .percentage_bar{color:#666;}
+.goods_club_comment .user_evaluate .percentage_bar .p_bar{padding-left:9px;}
+.goods_club_comment .user_evaluate .percentage_bar .p_bar span{display:inline-block;text-align:right;vertical-align:-1px\9;*vertical-align:1px}
+.goods_club_comment .user_evaluate .percentage_bar .text{width:48px;}
+.goods_club_comment .user_evaluate .percentage_bar .percentage{width:32px;}
+/* 评价类型 */
+.goods_club_comment .evaluate_type{height:22px;line-height:22px;margin-top:10px;padding:7px 10px;border:1px solid #DBDBDB;}
+.goods_club_comment .evaluate_type ul{}
+.goods_club_comment .evaluate_type li{float:left;height:22px;margin-left:-1px;padding:0 8px;border-right:1px solid #ccc;cursor:pointer;}
+.goods_club_comment .evaluate_type li.cur{height:20px;line-height:20px;font-weight:bold;border:1px solid #E4E4E4;background-color:#F9F9F9;}
+.goods_club_comment .evaluate_type li span{color:#999;}
+.goods_club_comment .evaluate_type li.cur span{color:#333;}
+.goods_club_comment .evaluate_type .see_all_reviews{float:right;height:22px;line-height:26px\9;overflow:hidden;}
+/* 用户评论 */
+.goods_club_comment .evaluate_mian{}
+.goods_club_comment .evaluate_item{padding-top:10px;}
+.goods_club_comment .user_avatar{float:left;width:80px;text-align:center;}
+.goods_club_comment .user_avatar img{margin-bottom:10px;}
+.goods_club_comment .user_other{position:relative;float:right;width:885px;border:1px solid #DBDBDB;}
+.goods_club_comment .user_other sup{display:block;position:absolute;right:0;top:0;width:54px;height:54px;background:url(../images/sprite.png) -146px -15px no-repeat;}
+.goods_club_comment .user_other .arrow{position:absolute;left:-8px;top:20px;display:block;width:8px;height:13px;padding:0;background:url(../images/sprite.png) -138px -15px no-repeat;}
+.goods_club_comment .user_other .other_t{padding:10px;background-color:#F7F7F7;}
+.goods_club_comment .text_share{float:left;width:640px;}
+.goods_club_comment .text_share .p_item{padding:0 0 10px 60px;line-height:20px;word-wrap:break-word;}
+.goods_club_comment .text_share .p_item .tit{float:left;margin-left:-60px;width:60px;height:20px;text-align:right;color:#999;}
+.goods_club_comment .text_share .p_item .star_list{height:20px;display:inline-block;}
+.goods_club_comment .text_share .p_item .star_list img{float:left;margin-top:3px;margin-top:1px\9;}
+.goods_club_comment .feel_bar{float:right;width:210px;padding:6px 0 8px;border:1px solid #F3F3F3;background-color:#fff;}
+.goods_club_comment .feel_bar .p_bar{height:12px;line-height:12px;padding:9px 0;text-align:center;color:#999;}
+.goods_club_comment .feel_bar .p_bar span{vertical-align:middle;}
+.goods_club_comment .feel_bar .p_bar b{display:inline-block;width:88px;height:12px;margin:0 3px;background:url(../images/sprite.png) no-repeat;vertical-align:middle;}
+.goods_club_comment .feel_bar .p_bar b.feel_1{background-position:0 -13px;}
+.goods_club_comment .feel_bar .p_bar b.feel_2{background-position:0 -28px;}
+.goods_club_comment .feel_bar .p_bar b.feel_3{background-position:0 -43px;}
+.goods_club_comment .feel_bar .p_bar b.feel_4{background-position:0 -58px;}
+.goods_club_comment .feel_bar .p_bar b.feel_5{background-position:0 -73px;}
+.gropn_rvew_tit{padding:2px 0 8px 18px; background:url(../images/sprite.png) no-repeat 0 -176px;}
+.goods_club_comment .review_box{}
+.goods_club_comment .review_operate{height:27px;line-height:27px;padding:5px 10px 6px;color:#999;border-top:1px dotted #DBDBDB;}
+.goods_club_comment .review_operate .date{float:right;}
+.goods_club_comment .review_operate .btn_effect{display:inline-block;height:27px;line-height:27px;margin-right:5px;background:url(../images/sprite.png) left -90px no-repeat;color:#333;}
+.goods_club_comment .review_operate .btn_effect:hover{color:#333;}
+.goods_club_comment .review_operate .btn_effect span{display:block;margin-left:10px;padding-right:10px;background:url(../images/sprite.png) right -90px no-repeat;}
+.goods_club_comment .review_operate .btn_effect em{font-style:normal;}
+.goods_club_comment .reply_box{margin:10px;border:1px solid #DBDBDB;padding:10px;}
+.goods_club_comment .reply_box .post_reply{height:16px;line-height:16px;margin-bottom:10px;}
+.goods_club_comment .reply_box .text_box textarea{width:837px;height:54px;line-height:18px;padding:2px;border:1px solid #DBDBDB;overflow-y:scroll;resize: none;}
+.goods_club_comment .reply_box .reply_btn{margin-top:10px;}
+.goods_club_comment .reply_box .reply_btn .btn_submit{display:inline-block;height:27px;line-height:27px;margin-right:5px;background:url(../images/sprite.png) left -90px no-repeat;color:#333;}
+.goods_club_comment .reply_box .reply_btn .btn_submit input{display:block;height:27px;line-height:27px;margin-left:10px;padding-right:10px;border:0 none;background:url(../images/sprite.png) right -90px no-repeat;}
+.goods_club_comment .reply_text{padding:5px 10px 5px 23px;border-top:1px dotted #ccc;}
+.goods_club_comment .reply_text p{line-height:26px;}
+.goods_club_comment .reply_info{position:relative;height:26px;color:#999;}
+.goods_club_comment .reply_info em{margin-left:5px;font-style:normal;}
+.goods_club_comment .reply_info .time{position:absolute;right:0px;top:0;}
+.goods_club_comment .reply_text .text{word-wrap:break-word;color:#666;}
+.goods_club_comment .no_review{margin:10px 0;}
+/* 我要评论弹窗 */
+.to_comment_pop{display:none;position:absolute;left:50%;top:0;z-index:1099;width:550px;overflow:hidden;border:1px solid #DBDBDB;background-color:#fff;}
+.to_comment_pop .tit{height:28px;line-height:28px;padding:0 10px;background-color:#900;color:#fff;}
+.to_comment_pop .tit h2{float:left;font-weight:normal;font-size:12px;}
+.to_comment_pop .tit .close{float:right;padding-right:15px;background:url(../images/sprite.png) 27px -147px no-repeat;cursor:pointer;}
+.to_comment_box{}
+.to_comment_pop .product_pic{float:left;width:90px;margin:12px;display:inline;}
+.to_comment_pop .product_pic .pic{display:block;width:90px;height:90px;margin-bottom:8px;border:1px solid #DBDBDB;}
+.to_comment_pop .product_pic .product_tit{display:block;height:40px;line-height:20px;overflow:hidden;}
+.to_comment_pop .product_evaluate{float:left;width:420px;padding:10px 0 0 10px;border-left:1px dotted #DBDBDB;}
+.to_comment_pop .product_evaluate h3{height:20px;line-height:20px;padding-bottom:10px;font-size:12px;}
+.to_comment_pop .product_evaluate h3 em{color:#c00;font-style:normal;font-weight:normal;margin-right:5px;}
+.to_comment_pop .product_evaluate h3 span{color:#999;font-weight:normal;}
+.to_comment_pop .product_evaluate .shop_satisfaction{height:30px;line-height:30px;margin:10px 0;padding:0;background-color:#F7F7F8;}
+.to_comment_pop .product_evaluate .shop_satisfaction b{padding-left:13px;background:url(../images/sprite.png) -191px -152px no-repeat;}
+.to_comment_pop .proSatis{display:inline-block;*display:inline;*zoom:1;height:20px;width: 100px;position: relative;vertical-align: -6px;*vertical-align:-2px;}
+.to_comment_pop .rating-level{position: relative;z-index: 1000;width:100px;height:20px;background:url(../images/all_star.png) 0 -40px no-repeat;}
+.to_comment_pop .rating-level li{display:inline;}
+.to_comment_pop .rating-level a{height:20px;line-height:20px;position: absolute;top: 0;left: 0;text-indent: -999em;outline: none;}
+.to_comment_pop .rating-level a.one-star {width: 20%;z-index: 6;}
+.to_comment_pop .rating-level a.two-stars {width: 40%;z-index: 5;}
+.to_comment_pop .rating-level a.three-stars {width: 60%;z-index: 4;}
+.to_comment_pop .rating-level a.four-stars {width: 80%;z-index: 3;}
+.to_comment_pop .rating-level a.five-stars {width: 100%;z-index: 2;}
+.to_comment_pop .rating-level .current-rating,.to_comment_pop .rating-level a:hover{background:url(../images/all_star.png) no-repeat;}
+.to_comment_pop .rating-level a.one-star:hover,.to_comment_pop .rating-level a.two-stars:hover,.to_comment_pop .rating-level a.one-star.current-rating,.to_comment_pop .rating-level a.two-stars.current-rating{background-position:0 -80px;}
+.to_comment_pop .rating-level .three-stars .current-rating,.to_comment_pop .rating-level .four-stars .current-rating,.to_comment_pop .rating-level .five-stars .current-rating{background-position:0 0;}
+.to_comment_pop .product_evaluate .pe_item_star{height:20px;line-height:20px;padding:0 0 10px 0;}
+.to_comment_pop .product_evaluate .pe_item_star .result{color:#c00;}
+.to_comment_pop .product_evaluate .result{color:#c00;}
+.to_comment_pop .product_evaluate .pe_item{position:relative;line-height:20px;margin:0 0 10px 70px;font-weight:normal;}
+.to_comment_pop .product_evaluate .title{position:absolute;left:-60px;top:0;}
+.to_comment_pop .product_evaluate .all_num{position:relative;display:inline-block;height:20px;width:147px;vertical-align:middle;background:url(../images/all_num.png) no-repeat;}
+.to_comment_pop .product_evaluate .all_num a{position:absolute;display:block;height:20px;overflow:hidden;text-indent:-999em;}
+.to_comment_pop .product_evaluate .all_num a:hover{background:url(../images/all_num.png) 0 -136px no-repeat;}
+.to_comment_pop .product_evaluate .all_num .num_1{width:30px;z-index:6;}
+.to_comment_pop .product_evaluate .all_num .num_2{width:59px;z-index:5;}
+.to_comment_pop .product_evaluate .all_num .num_3{width:88px;z-index:4;}
+.to_comment_pop .product_evaluate .all_num .num_4{width:117px;z-index:3;}
+.to_comment_pop .product_evaluate .all_num .num_5{width:147px;z-index:2;}
+.to_comment_pop .product_evaluate .all_num .num_select{background:url(../images/all_num.png) 0 -136px no-repeat;}
+.to_comment_pop .product_evaluate .num_desc{display:inline-block;height:20px;vertical-align:middle;}
+.to_comment_pop .product_evaluate .product_reply{margin-left:5px;}
+.to_comment_pop .product_evaluate .product_reply textarea{width:400px;height:100px;line-height:18px;padding:2px;border:1px solid #DBDBDB;overflow-y:scroll;resize: none;}
+.to_comment_pop .product_evaluate .product_btn{margin-top:10px;padding-top:10px;border-top:1px dashed #DBDBDB;}
+.to_comment_pop .product_evaluate .product_btn .p_text{margin:0 10px;line-height:20px;color:#999;}
+.to_comment_pop .product_evaluate .product_btn .p_btn{padding:15px 0;line-height:26px;text-align:center;}
+.to_comment_pop .product_evaluate .product_btn .p_btn a{display:inline-block;height:26px;line-height:26px;font-weight:bold;background:url(../images/sprite.png) left -117px no-repeat;color:#fff;}
+.to_comment_pop .product_evaluate .product_btn .p_btn a:hover{color:#fff;}
+.to_comment_pop .product_evaluate .product_btn .p_btn span{display:block;margin-left:10px;padding-right:10px;background:url(../images/sprite.png) right -117px no-repeat;}
+/* 暂无评论 */
+.goods_club_comment .not_comment{height:26px;line-height:26px;padding:25px;border:1px solid #DBDBDB;}
+.goods_club_comment .not_comment .come_comment{display:inline-block;height:26px;line-height:26px;margin-left:10px;font-weight:bold;background:url(../images/sprite.png) left -117px no-repeat;color:#fff;}
+.goods_club_comment .not_comment .come_comment a:hover{color:#fff;}
+.goods_club_comment .not_comment .come_comment span{display:block;margin-left:10px;padding-right:10px;background:url(../images/sprite.png) right -117px no-repeat;}
+/* 窄屏 */
+.detailR .goods_club_comment{width:765px;}
+.detailR .goods_club_comment .user_evaluate ul{padding-left: 25px;}
+.detailR .goods_club_comment .user_evaluate li{margin:0 10px 0 15px;}
+.detailR .goods_club_comment .percentage_bar .p_bar{padding-left:100px;}
+.detailR .goods_club_comment .user_evaluate .percentage_bar .p_bar{padding-left:10px;}
+.detailR .goods_club_comment .user_other{width: 670px;}
+.detailR .goods_club_comment .text_share{width: 430px;}
+.detailR .goods_club_comment .reply_box .text_box textarea{width: 621px;}
+/* 商品详情页弹窗 
+.pe_comment_prompt{width:396px;}
+.pe_comment_prompt .pe_comment_box{overflow:hidden;}
+.pe_comment_prompt .pic_ok{float:left;margin:20px 20px 20px  125px;}
+.pe_comment_prompt .pe_comment_box h3{float:left;line-height:26px;margin-top: 23px;font-size:14px;}
+.pe_comment_prompt .pe_comment_box .p_text{line-height:18px;margin-bottom:20px;text-align:center;clear: both;}
+*/
+/* 遮罩层 */
+.popup_mask{position:absolute;left:0;top:0;z-index:1066;width:100%;background-color:#000;filter:alpha(opacity=40);opacity:0.4;}
+.popup_iframe{position:absolute;left:0;top:0;z-index:1065;width:100%;background-color:#000;filter:alpha(opacity=0);opacity:0;} 

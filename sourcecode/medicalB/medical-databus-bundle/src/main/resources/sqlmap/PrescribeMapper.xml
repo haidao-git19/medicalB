@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.PrescribeDao">
+
+    <sql id="prescribeColumn">
+        select X.commodityID,X.shopID,X.commodityName,X.commodityType,X.factory,X.updateDate,X.downDate,X.state,Z.prescribeID,Z.doctorID,Z.prescribeName,Z.summary 
+        from tb_medical_commodity X 
+        	left join tb_medical_prescribe_commodity Y on X.commodityID = Y.commodityID 
+        	left join tb_medical_prescribe Z on Y.prescribeID = Z.prescribeID 
+    </sql>
+    
+    <select id="queryPrescribeList" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_prescribe 
+        <where>
+            <if test="doctorID !=null and doctorID !=''">
+                doctorID = #{doctorID}
+            </if>
+        </where>
+        LIMIT #{start},#{limit}
+    </select>
+    
+    <select id="queryPrescribeDetailList" parameterType="java.util.Map" resultType="java.util.Map">
+        <include refid="prescribeColumn"/>
+        <where>
+            <if test="prescribeID !=null and prescribeID !=''">
+                Z.prescribeID = #{prescribeID}
+            </if>
+        </where>
+    </select>
+    
+	<insert id="save" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="prescribeID">
+	    insert tb_medical_prescribe(doctorID,prescribeName,summary) values(#{doctorID},#{prescribeName},#{summary})
+	</insert>
+	
+	<insert id="addCommodityToPrescribe" parameterType="java.util.Map">
+	    insert tb_medical_prescribe_commodity(prescribeID,commodityID) values(#{prescribeID},#{commodityID})
+	</insert>
+	
+	<insert id="bindPrescribeToPatient" parameterType="java.util.Map">
+	    insert tb_medical_patient_prescribe(patientID,prescribeID) values(#{patientID},#{prescribeID})
+	</insert>
+    
+	<update id="update" parameterType="java.util.Map">
+        UPDATE tb_medical_prescription
+        <set>
+            <if test="status !=null and status !=''">
+                status = #{status},
+            </if>
+            <if test="paystate !=null and paystate !=''">
+                paystate = #{paystate},
+            </if>
+            <if test="isnotice !=null and isnotice !=''">
+                isnotice = #{isnotice},
+            </if>
+            updateTime=now()
+        </set>
+        <where>
+            <if test="id !=null and id !=''">
+                and id = #{id}
+            </if>
+        </where>
+    </update>
+    
+	 <select id="queryRcentiPrescribe" parameterType="java.util.Map" resultType="java.util.Map">
+        <![CDATA[
+        	select X.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName,p.patientID from tb_medical_prescription X LEFT JOIN tb_medical_prescription_relation pr on X.id = pr.prescriptionId LEFT JOIN tb_medical_patient p on pr.patientId = p.patientID LEFT JOIN tb_medical_doctor d on X.doctorID = d.doctorID where X.`status`=1 and X.isnotice!=1 and str_to_date(X.createTime,'%Y-%m-%d %H:%i:%s') >= date_add(now(), interval -${minitue} MINUTE)
+         ]]>
+    </select>
+</mapper>

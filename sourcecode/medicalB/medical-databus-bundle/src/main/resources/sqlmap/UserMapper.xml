@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.UserBaseInfoDao">
+
+    <select id="queryUserBaseInfo" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.Patient">
+		select u.patientID,u.patientName,u.nickName,u.patientSex,u.patientAge,u.patientCard,u.patientPassword,u.balance,u.patientLevel,DATE_FORMAT(u.createTime,'%Y-%m-%d %H:%i:%s') createTime,u.contactPhone,DATE_FORMAT(u.updateTime,'%Y-%m-%d %H:%i:%s') updateTime,isComp from tb_medical_patient u
+			<where>
+			    <if test="patientName != null and patientName !=''">
+				     u.patientName = #{patientName}
+				</if>
+			    <if test="patientPassword != null and patientPassword !=''">
+				    and u.patientPassword = #{patientPassword}
+				</if>
+				<if test="patientID !=null and patientID !=''">
+				    and u.patientID = #{patientID}
+				</if>
+			</where>
+	</select>
+	
+	<update id="modifyUserBaseInfo" parameterType="com.netbull.shop.common.vo.Patient" >
+		UPDATE tb_medical_patient F
+				set F.updateTime = now()
+				<if test="patientName != null and patientName !=''">
+				     ,patientName = #{patientName}
+				</if>
+				<if test="nickName != null and nickName !=''">
+				     ,nickName = #{nickName}
+				</if>
+				<if test="patientSex != null and patientSex !=''">
+				     ,patientSex = #{patientSex}
+				</if>
+				<if test="patientAge != null">
+				     ,patientAge = #{patientAge}
+				</if>
+				<if test="address != null">
+				     ,address = #{address}
+				</if>
+				<if test="patientCard != null and patientCard !=''">
+				     ,patientCard = #{patientCard}
+				</if>
+				<if test="patientCard != null and patientCard !=''">
+				     ,F.isComp = 1
+				</if>
+				<if test="patientPassword != null and patientPassword !=''">
+				     ,patientPassword = #{patientPassword}
+				</if>
+				<if test="balance != null and balance !=''">
+				     ,balance = #{balance}
+				</if>
+				<if test="patientLevel != null and patientLevel !=''">
+				     ,patientLevel = #{patientLevel}
+				</if>
+				<if test="contactPhone != null and contactPhone !=''">
+				     ,contactPhone = #{contactPhone}
+				</if>
+		WHERE F.patientID = #{patientID}
+	</update>
+	
+	<update id="modifyPassword" parameterType="java.util.Map" >
+		UPDATE tb_medical_patient F
+				set F.updateTime = now()
+				<if test="patientPassword != null and patientPassword !=''">
+				     ,patientPassword = #{patientPassword}
+				</if>
+		WHERE F.patientName = #{patientName}
+	</update>
+	
+	<insert id="saveUserBaseInfo" parameterType="com.netbull.shop.common.vo.Patient" useGeneratedKeys="true" keyProperty="patientID">
+		INSERT INTO tb_medical_patient (patientName,nickName,patientSex,patientAge,patientCard,patientPassword,balance,patientLevel,createTime,contactPhone,address) 
+		VALUES(#{patientName},#{nickName},#{patientSex},#{patientAge},#{patientCard},#{patientPassword},#{balance},#{patientLevel},now(),#{contactPhone},#{address})
+	</insert>
+	
+</mapper>

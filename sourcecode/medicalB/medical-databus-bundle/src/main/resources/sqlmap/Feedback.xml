@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.databus.questionnaire.model.Feedback">
+
+	<insert id="save" parameterType="com.netbull.shop.databus.questionnaire.model.Feedback" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_questionnaire_result_feedback(rId, doctorId, feedback, createTime)
+		VALUES (#{rId}, #{doctorId}, #{feedback}, NOW())
+	</insert>
+
+	<select id="find_by_id" parameterType="long" resultType="com.netbull.shop.databus.questionnaire.model.Feedback">
+		select * from tb_questionnaire_result_feedback t
+		where t.id = #{id}
+	</select>
+	
+</mapper>

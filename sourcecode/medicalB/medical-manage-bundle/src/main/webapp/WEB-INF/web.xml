@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:spring/**/*.xml,classpath:security/applicationContext-shiro.xml</param-value>
+	</context-param>
+	
+	 <!-- 兼容Tomcat JNDI配置 -->
+    <resource-ref>
+        <description>Oracle Datasource example</description>
+        <res-ref-name>jdbc/micro</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>com.netbull.shop.common.config.ContextLoader</listener-class>
+	</listener>
+
+	<!-- Filter -->
+	<filter>
+		<filter-name>Encoding</filter-name>
+		<filter-class>com.netbull.shop.manage.common.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	 <filter>
+		<filter-name>oauth2</filter-name>
+		<filter-class>com.netbull.shop.common.filter.Oauth2Filter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>oauth2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> 
+	 
+	<filter>
+		<filter-name>RedirectFilter</filter-name>
+		<filter-class>com.netbull.shop.common.filter.RedirectFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RedirectFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 图片文件上传 Start -->
+	<servlet>
+		<servlet-name>ImageFileUploadServlet</servlet-name>
+		<servlet-class>com.netbull.shop.manage.weixin.service.FileUploadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ImageFileUploadServlet</servlet-name>
+		<url-pattern>/imageUpload</url-pattern>
+	</servlet-mapping>
+	<!-- 图片文件上传 END -->
+	
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.auth</url-pattern>
+	</servlet-mapping>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+ 
+	<!-- Shiro Security filter -->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.jsp</location>
+	</error-page>
+	
+</web-app>

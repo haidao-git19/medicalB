@@ -1,0 +1,47 @@
+{
+        "id": 1,
+        "goodsCode": "201412130985",
+		"goodsName": "手机壳1",
+		"shopPrice": "228",
+        "imageUrl": "http://180.97.81.219/resources/icon/baloon.png",
+        "praiseCount": "2",
+        "attrList": [
+			{
+				"attrKey": "适用机型",
+				"attrValue": "小米3"
+			},
+			{
+				"attrKey": "颜色",
+				"attrValue": "白底磨砂边框"
+			},
+			{
+				"attrKey": "材质",
+				"attrValue": "PC胶水"
+			}
+		],
+		"imageList": [
+			{
+				"imageUrl": "http://180.97.81.219/resources/icon/baloon.png"
+			},
+			{
+				"imageUrl": "http://180.97.81.219/resources/icon/baloon.png"
+			},
+			{
+				"imageUrl": "http://180.97.81.219/resources/icon/baloon.png"
+			}
+		],
+		"commentList": [
+			{
+				"userName":"张三",
+				"userIcon": "http://180.97.81.219/resources/icon/baloon.png",
+				"commentTime":"2014-12-16",
+				"commentContent":"质量不错"
+			},
+			{
+				"userName":"张三",
+				"userIcon": "http://180.97.81.219/resources/icon/baloon.png",
+				"commentTime":"2014-12-16",
+				"commentContent":"质量不错"
+			}
+		]
+}

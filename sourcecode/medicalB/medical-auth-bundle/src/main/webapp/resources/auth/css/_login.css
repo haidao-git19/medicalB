@@ -1,0 +1,166 @@
+
+.header{display: block;margin-top:30px;height: 50px;padding-bottom: 13px;}
+.logo{float: left;clear: left;}
+.phone{float: right;font-family: Microsoft Yahei;color: #666;margin-top: 30px;}
+.phone a{text-decoration: none;color: #666;}
+.phone a:hover{text-decoration: underline;}
+.phone span{font-size: 12px;float: right;}
+i.icon-phone{display: block;float: right;margin-left: 6px;background: url('../img/_login/icon.png') no-repeat -669px -110px;width: 11px;height: 16px;}
+/*用户登录样式*/
+.login-header{width: 918px;margin-bottom: 1px;padding-top: 8px;padding-left: 25px;padding-right: 17px;padding-bottom: 8px;background-color: #FFF;float: left;clear: both; border-bottom:1px solid #E5E5E5;}
+h2{display: inline;font-size: 18px;font-family: Microsoft Yahei;color: #218ECE;}
+h3{display: inline;font-size: 12px;font-family: Microsoft Yahei;color: #999;}
+.login-title{float: left;height: 24px;}
+.login-title h2{margin-right: 35px;line-height: 24px;}
+.login-contact{float: right;line-height: 24px;padding-top: 5px;}
+.tel-num{color:#ff7300;}
+.login-panels{width: 960px;padding-top: 43px;background-color: #FFF;float: left;clear: both;}
+.login-main{width: 578px;float: left;padding-bottom: 100px;padding-left: 32px;font-size: 12px;clear: left;}
+.login-main-app{padding-bottom: 60px;}
+.login-main dl{font-family:  Microsoft Yahei;color: #666;} 
+.login-main dd{position: relative;width: 578px;} 
+.login-main .logRow{height: 63px;}
+.login-main .logRow label{float: left\9;height: 36px\9;line-height: 36px\9;}
+.login-main dd label{font-family: Microsoft Yahei;color: #666;margin-left: 30px;margin-right: 22px;}
+.login-main .correct-tip-icon{display: inline-block;margin-left: 10px;line-height: 38px;vertical-align: middle;*margin-bottom: 20px;background: url('../img/_login/icon.png') no-repeat -807px -232px;width: 16px;height: 16px;}
+.login-main .wrong-tip-box{height: 25px;line-height: 25px;margin-left: 104px;margin-left: 100px\9;color: red}
+.login-main .wrong-tip-icon{float: left;margin-top: 5px;background: url('../img/_login/icon.png') no-repeat -781px -232px;width: 16px;height: 16px;}
+.login-main .wrong-tip{float: left;margin-left: 5px;margin-top: 3px;color: #ff0000;}
+
+
+.login-main .input-email{width: 248px;height: 36px;padding: 0 10px;border:1px solid #ccc;line-height: 36px\9;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}
+.login-main .pswtip{position: absolute;top: 12px;top:3px\9;left:87px;left: 82px\9;-left: 85px;font-family: Microsoft Yahei;z-index: 10;cursor: text;}
+.login-main .input-psw{width: 248px;height: 36px;font-family: Arial;letter-spacing: 1px;padding: 0 10px;border:1px solid #ccc;line-height: 36px\9;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}
+
+
+.login-main .remember-me{margin-left: 104px;margin-left: 98px\9;margin-right: 8px;height: 30px;line-height: 30px;vertical-align: middle;}
+.login-main .forget-psw a{margin-left: 78px;height: 30px;line-height: 30px;color: #0088cc;text-decoration: none;}
+.login-main .forget-psw a:hover{text-decoration: underline;}
+.login-main .login-btn{width: 270px;height: 36px;margin-top: 8px;margin-left: 104px;margin-left: 100px\9;border: none;background-color: #218ECE;color: #FFF;font-family: Microsoft YaHei;font-size: 14px;font-weight: bolder;cursor: pointer;outline: none;border-radius: 3px;}
+.login-main .login-btn:hover{background-color: #3baaeb;}
+.login-vice{width: 330px;float: right;padding-bottom: 10px;padding-right: 18px;border-left: 1px solid #e7eaee;font-family: Microsoft YaHei;clear: right;}
+.login-vice li{padding-left: 25px;font-size: 12px;}
+.login-vice li.regist-li{margin-bottom: 18px;}
+.regist-title{font-size: 14px;font-weight: bolder;}
+
+.seeker-regist a{display: inline;color: #218ECE;font-size: 14px;text-decoration: none}
+.seeker-regist a:hover{text-decoration: underline;}
+.recruiter-regist a{display: inline;color: #ff7300;font-size: 14px;text-decoration: none}
+.recruiter-regist a:hover{text-decoration: underline;}
+.other-loginway{color: #666;}
+.icon-sina-api a{display: block;background: url('../img/_login/icon.png') no-repeat -732px -15px;width: 104px;height: 27px;margin-top: 15px;margin-bottom: 10px;}
+.icon-sina-api a:hover{display: block;background: url('../img/_login/icon.png') no-repeat -845px -15px;width: 104px;height: 27px;}
+.icon-qq-api a{display: block;background: url('../img/_login/icon.png') no-repeat -732px -52px;width: 104px;height: 26px;}
+.icon-qq-api a:hover{display: block;background: url('../img/_login/icon.png') no-repeat -845px -52px;width: 104px;height: 26px;}
+.footer{padding-top: 25px;clear: both;font-family: Microsoft YaHei;font-size: 12px;color: #999;}
+.footer .rowList{width:780px; margin: 0 auto;line-height: 12px;*line-height: 16px;height: 30px;}
+.footer .rowList li{float: left;margin-right:10px;padding-right:10px;border-right: 1px solid #d3d3d3;}
+.footer .rowList .rowList-list{margin-top: 5px;}
+.footer .rowList li a{color: #999;text-decoration: none;vertical-align: middle;}
+.footer .rowList li a:hover{text-decoration: underline;}
+.footer .rowList .lastItem{background: none;border: none;margin-right:0px;}
+.company-job-index{clear: both;text-align: center; color: #999;}
+.company-job-index a{color: #999; margin: 0 10px;text-decoration: none;}
+.company-job-index a:hover{text-decoration: underline;}
+.copyright{margin-top:10px; text-align: center;}
+.copyright a{color: #999;text-decoration: none;}
+.copyright a:hover{text-decoration: underline;}
+.login-app-banner{width:960px;margin: 12px auto 0 auto;}
+.foot-app{ margin-top:12px;}
+
+/*用户注册样式*/
+.login-title2{float: left;height: 18px;line-height: 18px;}
+.login-title2 h2{margin-right: 17px;}
+.login-main .accept{margin-left: 104px;margin-left: 98px\9;margin-right: 8px;height: 30px;line-height: 30px;vertical-align: middle;}
+.login-main .argument{height: 30px;line-height: 30px;}
+.login-main .argument a{text-decoration: none;color: #0088cc;}
+.login-main .argument a:hover{text-decoration: underline;color: #0088cc;}
+.login-main .notic-tip-box{height: 25px;line-height: 25px;margin-left: 104px;margin-left: 100px\9;}
+.login-main .notic-tip-icon{float: left;margin-top: 2px;background: url('../img/_login/icon.png') no-repeat -836px -232px;width: 16px;height: 16px;}
+.login-main .notic-tip{float: left;margin-left: 5px;color: #ff0000;}
+.login-main .regist-btn{width: 270px;height: 36px;margin-top: 8px;margin-left: 104px;margin-left: 100px\9;border: none;background-color: #66cbff;color: #FFF;font-family: Microsoft YaHei;font-size: 14px;font-weight: bolder;cursor: pointer;outline: none;}
+.now-regist a{display: inline;color: #218ECE;font-size: 14px;text-decoration: none;}
+.now-regist a:hover {text-decoration: underline;}
+.login-main .auto-compSeek{width: 248px;padding: 5px 10px; border:1px solid #DCDCDC; background:#fff;}
+.login-main .auto-compSeek li{padding: 5px 5px;}
+.login-main .auto-compSeek .hover{background: #e7eaee;}
+
+/*医生注册样式*/
+.login-main .id-panel{height: 130px;}
+.login-main .id-logRow{height: 63px;}
+.login-main .id-logRow label{float: left\9;height: 36px\9;line-height: 36px\9}
+.login-main .id-logRow .input-email{margin-left: 10px;}
+.login-main .id-logRow .input-psw{margin-left: 10px;}
+.login-main .id-panel .wrong-tip-box{margin-top: 70px;margin-top: 80px\9;height: 25px;line-height: 25px;margin-left: 113px;}
+.login-main .id-logRow .wrong-tip-box{height: 25px;line-height: 25px;margin-left: 114px;}
+.login-main .auto-compRecr{width: 248px;position: absolute;left: 114px;top:-26px;padding: 5px 10px;z-index: 100; border:1px solid #DCDCDC; background:#fff;}
+.login-main .auto-compRecr li{padding: 5px 5px;}
+.login-main .auto-compRecr .hover{background: #e7eaee;}
+
+.login-main .id-list{position: absolute;top: 2px;left: 80px;width: 400px;}
+.id-choose{margin-bottom: 2px;vertical-align: text-bottom;margin-right: 5px;margin-bottom: 2px\9;*margin-bottom: 0px;vertical-align: middle\9;}
+.login-main .id-list li{margin-bottom: 15px;line-height: 19px;height: 19px;}
+.login-main .id-list span{color: #999;}
+.login-main .id-notic .notic-accept{margin-left: 10px;margin-left: 11px\9;}
+.login-main .id-notic .notic-tip-box{margin-left: 114px;}
+.hr-id{margin-bottom: 15px;}
+.manager-id{margin-bottom: 15px;}
+.hunter-id{margin-bottom: 28px;}
+.login-main .regist-btn2{width: 270px;height: 36px;margin-top: 8px;margin-left: 104px;margin-left: 100px\9;border: none;background-color: #ff7300;color: #FFF;font-family: Microsoft YaHei;font-size: 14px;font-weight: bolder;cursor: pointer;outline: none;border-radius: 3px;}
+
+/*发送成功样式*/
+.send-success{padding:43px;}
+i.send-email-icon{display: block;margin: 0 auto;background: url('../img/_login/icon.png') no-repeat -739px -162px;width: 68px;height: 46px;}
+.send-notice{margin-top: 15px;text-align: center;font-family: Microsoft Yahei;font-size: 12px;color: #333;}
+.send-notice-email{color: #ff7300;}
+.check-now-btn{width: 270px;height: 36px;margin-left: 300px;margin-top: 45px;margin-bottom: 70px;border: none;background-color: #6dd373;color: #FFF;font-family: Microsoft YaHei;font-size: 14px;font-weight: bolder;cursor: pointer;outline: none;}
+
+/*修改成功样式*/
+.modify-success{padding: 43px 43px 130px 43px;}
+i.modify-success-icon{display: block;margin: 0 auto;background: url('../img/_login/icon.png') no-repeat -214px -121px;width: 46px;height: 32px;}
+.modify-notice{margin-top: 15px;margin-bottom: 50px;text-align: center;font-family: Microsoft Yahei;font-size: 18px;color: #25af60;}
+.modify-success span{margin-left: 390px;font-family: Microsoft Yahei;font-size: 14px;color: #0088cc;}
+.modify-success a{font-family: Microsoft Yahei;color: #0088cc;text-decoration: underline;}
+
+/*找回密码样式*/
+.login-main .found-main .verf-code{width: 90px;height: 36px;font-family: Arial;font-size: 14px;letter-spacing: 1px;margin-bottom: 25px;color: #c7c7c7;padding: 0 10px;border:1px solid #ccc;text-align: center;line-height: 36px\9;}
+.login-main .found-main .verf-code-img{width: 100px;}
+.login-main .found-main .change-verf-code{float: right;margin-right: 205px;height: 30px;line-height: 30px;-margin-right: 202px;margin-top: 10px;}
+.login-main .found-main .change-verf-code a{color: #0088cc;display: inline-block;margin-left: 10px;}
+.login-main .found-main .send-btn{width: 270px;height: 36px;border: none;background-color: #6dd373;color: #FFF;font-family: Microsoft YaHei;font-size: 14px;font-weight: bolder;margin-top: 8px;margin-left: 104px;margin-left: 100px\9;-margin-left: 104px;cursor: pointer;outline: none;}
+.login-main .found-main .wrong-tip-box{height: 25px;line-height: 25px;margin-left: 104px;}
+.login-main .found-main .wrong-tip-icon{float: left;margin-top: 5px;background: url('../img/_login/icon.png') no-repeat -781px -232px;width: 16px;height: 16px;}
+.login-main .found-main .wrong-tip{float: left;margin-left: 5px;font-size: 12px;font-family: 'Microsoft Yahei';color: #ff0000;}
+
+/*重置密码样式*/
+.login-panels .new-psw{margin-left:245px;margin-bottom: 100px;}
+.login-panels .new-psw dl{position: relative;}
+.login-panels .known-email{height: 63px;}
+.login-panels .known-email input{width: 248px;height: 36px;background: #eee;color: #ccc;padding: 0 10px;font-family: Arial;letter-spacing: 1px;border:1px solid #ccc;line-height: 36px\9;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}
+.login-panels .known-email span{font-size: 12px;font-family: 'Microsoft Yahei';color: #0088cc;vertical-align: text-top;}
+.login-panels .new-psw label{font-size: 12px;font-family: 'Microsoft Yahei';color: #666;margin-left: 30px;margin-right: 17px;}
+.new-psw .logRow{height: 63px;}
+.new-psw .logRow label{float: left\9;height: 36px\9;line-height: 36px\9}
+.new-psw .input-new-psw{width: 248px;height: 36px;color: #c7c7c7;padding: 0 10px;font-family: Arial;letter-spacing: 1px;border:1px solid #ccc;line-height: 36px\9;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}
+.new-psw .input-confirm-psw{width: 248px;height: 36px;color: #c7c7c7;padding: 0 10px;font-family: Arial;letter-spacing: 1px;border:1px solid #ccc;line-height: 36px\9;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}
+.new-psw label.pswtip-new{position: absolute;top: 12px;top: 3px\9;left:95px;font-size: 12px;font-family: Microsoft Yahei;color: #CCC;z-index: 10;cursor: text;}
+.new-psw label.pswtip-confirm{position: absolute;top: 12px;top: 3px\9;left:95px;font-size: 12px;font-family: Microsoft Yahei;color: #CCC;z-index: 10;cursor: text;}
+.new-psw .reset-psw-btn{width: 270px;height: 36px;margin-top: 5px;margin-left: 111px;margin-left: 108px\9;border: none;background-color: #ff7300;color: #FFF;font-family: Microsoft YaHei;font-size: 14px;font-weight: bolder;cursor: pointer;outline: none;}
+.new-psw .correct-tip-icon{float: right;margin-right: 170px;margin-top: 10px;background: url('../img/_login/icon.png') no-repeat -807px -232px;width: 16px;height: 16px;}
+.new-psw .wrong-tip-box{height: 25px;line-height: 25px;margin-left: 111px;margin-left: 108px\9;}
+.new-psw .wrong-tip-icon{float: left;margin-top: 5px;background: url('../img/_login/icon.png') no-repeat -781px -232px;width: 16px;height: 16px;}
+.new-psw .wrong-tip{float: left;margin-left: 5px;margin-top: 5px;font-size: 12px;font-family: 'Microsoft Yahei';color: #ff0000;}
+
+.info_box{
+	height:40px;
+}
+/*错误信息提示*/
+.wrong_info{
+	float:left;
+	margin-left:50px;
+	margin-top:10px;
+	margin-bottom:50px;
+	font:12px '微软雅黑';
+	color:#f00;
+}
+

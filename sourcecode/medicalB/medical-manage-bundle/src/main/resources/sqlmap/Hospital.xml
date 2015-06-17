@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.hospital.dao.HospitalDao">
+
+   
+   <select id="pageHospital" parameterType="map" resultType="map">
+	    SELECT  *   FROM tb_medical_hospital C
+	    where 1=1 and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>
+	    <if test="hospitalName!=null and hospitalName != ''">
+	      and  hospitalName like CONCAT('%','${hospitalName}','%' )
+	    </if>
+	    <if test="hospitalLevel!=null and hospitalLevel != ''">
+	      and  hospitalLevel like CONCAT('%','${hospitalLevel}','%' )
+	    </if>
+	    <if test="isCooperation!=null and isCooperation != ''">
+	      and  isCooperation =#{isCooperation}
+	    </if>
+	    <if test="areaID !=null and areaID !=''">
+	        and areaID = #{areaID}
+	    </if>
+	    <if test="type !=null and type !=''">
+	        and type = #{type}
+	    </if>
+	    
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="countHospital" parameterType="map"
+  	 resultType="long">
+        SELECT COUNT(1)  FROM tb_medical_hospital C
+        where 1=1
+         and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>
+          <if test="hospitalName!=null and hospitalName != ''">
+	      and  hospitalName like CONCAT('%','${hospitalName}','%' )
+	    </if>
+	    <if test="hospitalLevel!=null and hospitalLevel != ''">
+	      and  hospitalLevel like CONCAT('%','${hospitalLevel}','%' )
+	    </if>
+	     <if test="isCooperation!=null and isCooperation != ''">
+	      and  isCooperation =#{isCooperation}
+	    </if>
+	    <if test="areaID !=null and areaID !=''">
+	        and areaID = #{areaID}
+	    </if>
+	    <if test="type !=null and type !=''">
+	        and type = #{type}
+	    </if>
+        	
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.shop.hospital.entity.Hospital" useGeneratedKeys="true" keyProperty="hospitalID">
+   	insert into tb_medical_hospital (hospitalName,linkMan,linkPhone,areaID,hospitalLevel,address,lng,lat,ctNum,cgNum,skill,type,areaName,userID,isCooperation,physicsAddress,summary,recomFlag)
+   	values (#{hospitalName},#{linkMan},#{linkPhone},#{areaID},#{hospitalLevel},#{address},#{lng},#{lat},#{ctNum},#{cgNum},#{skill},#{type},#{areaName},#{userID},#{isCooperation},#{physicsAddress},#{summary},#{recomFlag})
+   </insert>
+   
+   <update id="update" parameterType="com.netbull.shop.hospital.entity.Hospital">
+	   update tb_medical_hospital set hospitalName=#{hospitalName},
+	   linkMan=#{linkMan},
+	   linkPhone=#{linkPhone},
+	   areaID=#{areaID},
+	   hospitalLevel=#{hospitalLevel},
+	   address=#{address},
+	   lng=#{lng},
+	   lat=#{lat},
+	   ctNum=#{ctNum},
+	   cgNum=#{cgNum},
+	   skill=#{skill},
+	   type=#{type},
+	   areaName=#{areaName},
+	   summary=#{summary},
+	   recomFlag=#{recomFlag},
+	   isCooperation=#{isCooperation},
+	   physicsAddress=#{physicsAddress}
+	   where hospitalID=#{hospitalID}
+   </update>
+   
+   
+   
+   <select id="findByID" parameterType="java.lang.Integer"  resultType="com.netbull.shop.hospital.entity.Hospital">
+        SELECT *  FROM tb_medical_hospital C
+        where 1=1
+            and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach> 
+         <if test="hospitalID!=null and hospitalID != ''">
+	      and  hospitalID =#{hospitalID}
+	     </if>
+	     <if test="hospitalName!=null and hospitalName != ''">
+	      and  hospitalName =#{hospitalName}
+	    </if>
+	    <if test="isCooperation!=null and isCooperation != ''">
+	      and  isCooperation =#{isCooperation}
+	    </if>
+   </select>
+   
+   <select id="findByHospitalID" parameterType="java.lang.Integer"  resultType="com.netbull.shop.hospital.entity.Hospital">
+        SELECT *  FROM tb_medical_hospital C
+        where hospitalID = #{hospitalID}
+   </select>
+   
+   <select id="findByAreaID" parameterType="map"  resultType="com.netbull.shop.hospital.entity.Hospital">
+        SELECT * FROM tb_medical_hospital c where c.areaID = #{areaID}
+   </select>
+   
+   <delete id="del" parameterType="java.lang.Integer" >
+  	 delete from tb_medical_hospital where  hospitalID =#{hospitalID}
+   </delete>
+   
+   <select id="queryAllHospitalList" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT * FROM tb_medical_hospital
+       <where>
+          1=1 and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>
+           <if test="areaID !=null and areaID !=''">
+               and areaID = #{areaID}
+           </if>
+       </where>
+   </select>
+   
+</mapper>

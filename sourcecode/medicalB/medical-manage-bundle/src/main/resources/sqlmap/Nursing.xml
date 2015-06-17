@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.nursing.dao.NursingDao">
+
+   
+   <select id="pageList" parameterType="map" resultType="map">
+	    SELECT  *   FROM tb_medicalb_advice C
+	    where 1=1
+	    and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+	     <if test=" objectName !=null and objectName != ''">
+	      and  objectName =#{objectName}
+	     </if>
+	      <if test=" adviceTitle !=null and adviceTitle != ''">
+	      and  adviceTitle =#{adviceTitle}
+	     </if>
+	      <if test=" sectionName !=null and sectionName != ''">
+	      and  sectionName =#{sectionName}
+	     </if>
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="count" parameterType="map"
+  	 resultType="long">
+        SELECT COUNT(1)  FROM tb_medicalb_advice C
+           where 1=1
+           and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+          <if test=" objectName !=null and objectName != ''">
+	      and  objectName =#{objectName}
+	     </if>
+	      <if test=" adviceTitle !=null and adviceTitle != ''">
+	      and  adviceTitle =#{adviceTitle}
+	     </if>
+	      <if test=" sectionName !=null and sectionName != ''">
+	      and  sectionName =#{sectionName}
+	     </if>
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.shop.nursing.entity.Nursing" useGeneratedKeys="true" keyProperty="adviceID">
+   	insert into tb_medicalb_advice (objectID,objectName,adviceTitle,note,adviceType,sectionID,sectionName,userID)
+   	values (#{objectID},#{objectName},#{adviceTitle},#{note},#{adviceType},#{sectionID},#{sectionName},#{userID})
+   </insert>
+   
+   <update id="update" parameterType="com.netbull.shop.nursing.entity.Nursing">
+	   update tb_medicalb_advice set objectID=#{objectID},
+	   objectName=#{objectName},
+	   adviceTitle=#{adviceTitle},
+	   note=#{note},
+	   adviceType=#{adviceType},
+	   sectionID=#{sectionID},
+	   sectionName=#{sectionName}
+	   where adviceID=#{adviceID}
+   </update>
+   
+   
+   
+   <select id="findByID" parameterType="java.lang.Integer"  resultType="com.netbull.shop.nursing.entity.Nursing">
+        SELECT *  FROM tb_medicalb_advice C
+        where 1=1
+        and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+         <if test="adviceID!=null and adviceID != ''">
+	      and  adviceID =#{adviceID}
+	     </if>
+	     <if test=" objectName !=null and objectName != ''">
+	      and  objectName =#{objectName}
+	     </if>
+	     <if test=" sectionName !=null and sectionName != ''">
+	     	 and  sectionName =#{sectionName}
+	     </if>
+   </select>
+   
+   
+   <delete id="del" parameterType="java.lang.Integer" >
+  	 delete from tb_medicalb_advice where  adviceID =#{adviceID}
+   </delete>
+   
+   
+   
+</mapper>

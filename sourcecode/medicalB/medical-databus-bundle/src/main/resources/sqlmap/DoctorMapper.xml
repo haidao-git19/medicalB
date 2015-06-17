@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.DoctorDao">
+
+    <select id="queryDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
+        <choose>
+            <when test="sectionid !=null and sectionid !=''">
+                select distinct (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,D.*,H.hospitalName from tb_medical_doctor d
+                	left join tb_medical_hospital H on d.hospitalID=H.hospitalID where d.doctorID in (select s.doctorid from tb_medical_doctor_section s where s.sectionid = #{sectionid})
+				    or d.sectionID=#{sectionid} and d.status=1 LIMIT  #{start}, #{limit} 
+            </when>
+            <otherwise>
+                select (select u.true_name from vauth.user_info u where u.id = dd.loginID) as doctorName, dd.* from tb_medical_doctor dd,tb_medical_doctor_disease di 
+				<where>
+				    	dd.doctorID = di.doctorID
+				    	and dd.status=1 
+				    <if test="diseaseId != null and diseaseId !=''">
+					     and di.diseaseID= #{diseaseId}
+					</if>
+				</where>
+				 <include refid="com.odchia.dao.Dao.pageComponent"/>
+            </otherwise>
+        </choose>
+	</select>
+	
+    <select id="queryDoctorAllList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * from (select distinct (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,D.avatar,D.balance,D.createTime,D.creator,D.ctArea,D.doctorID,D.doctorLevel,D.experience,D.hospitalID,D.isAudioCT,D.isNetCT,D.isRecommend,D.isVideoCT,D.isVisit,D.isZZ,D.netctArea,D.netDesc,D.practice,D.sectionID,D.skill,D.`status`,D.subscribeDesc,D.subscribeFlag,D.updateTime,H.hospitalName from tb_medical_doctor d
+                	left join tb_medical_hospital H on d.hospitalID=H.hospitalID where d.status=1) XX
+               <where>
+        	    <if test="realName !=null and realName !=''">
+        	        and XX.doctorName like CONCAT("%",#{realName},"%")
+        	    </if>
+        	</where>
+	</select>
+	
+    <select id="queryDoctorListByTime" parameterType="java.util.Map" resultType="java.util.Map">
+         <![CDATA[
+        	select distinct (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,D.*,H.hospitalName from tb_medical_doctor d
+              left join tb_medical_hospital H on d.hospitalID=H.hospitalID where d.doctorID in (
+                	select s.doctorid from tb_medical_doctor_section s,tb_medical_order o  where s.doctorid = o.doctorID and s.sectionid = #{sectionid} and str_to_date(CONCAT(o.orderDate," ",o.startTime),'%Y-%m-%d %H:%i:%s')>=#{startTime} and str_to_date(CONCAT(o.orderDate," ",o.endTime),'%Y-%m-%d %H:%i:%s')<=#{endTime}
+              )
+			  and d.status=1 LIMIT  #{start}, #{limit} 
+			]]>
+	</select>
+	
+    <select id="myDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
+        select (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName, h.hospitalName,h.type,(select s.attrname from tb_medical_section s where s.id = d.sectionID) sectionName,d.* from tb_medical_doctor d LEFT JOIN tb_medical_hospital h on h.hospitalID = d.hospitalID where d.doctorID in (
+		select c.doctorID from tb_medical_consultation c where c.patientID = #{patientID}
+		UNION
+		select o.doctorID from tb_medical_order o where o.patientID = #{patientID}
+		UNION
+		select rd.doctorID from tb_medical_record r,tb_medical_record_doctor rd where r.id = rd.recordID and r.patientID=#{patientID}
+		UNION
+		select pd.doctorID from tb_medical_patient_doctor pd where pd.patientID=#{patientID}
+		)
+	</select>
+	
+	<select id="queryDoctorListByParams" parameterType="java.util.Map" resultType="java.util.Map">
+        select D.doctorID,(select u.true_name from vauth.user_info u where u.id = D.loginID) as doctorName,D.hospitalID,D.sectionID,D.doctorLevel,D.skill,D.avatar,H.hospitalName,H.type,S.attrname sectionName 
+        	from tb_medical_doctor D 
+        	left join tb_medical_hospital H on D.hospitalID=H.hospitalID
+        	left join tb_medical_section S on D.sectionID=S.id
+        <where>
+            <if test="hospitalID !=null and hospitalID !=''">
+                and D.hospitalID = #{hospitalID}
+            </if>
+            <if test="sectionID !=null and sectionID !=''">
+                and D.sectionID = #{sectionID}
+            </if>
+            and D.status=1
+        </where>
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+    <select id="queryDoctorDetail" parameterType="java.util.Map" resultType="java.util.Map">
+        select distinct (select u.true_name from vauth.user_info u where u.id = D.loginID) as doctorName,D.*,H.hospitalName,S.attrname sectionName from tb_medical_doctor D
+                	left join tb_medical_hospital H on D.hospitalID=H.hospitalID
+                	left join tb_medical_hospital_section X on X.hospitalID=H.hospitalID
+                	left join tb_medical_section S on D.sectionID=S.id
+        <where>
+            	 D.status=1 
+            	<if test="doctorName != null and doctorName !=''">
+				    and D.doctorName = #{doctorName}
+				</if>
+			    <if test="doctorPassword != null and doctorPassword !=''">
+				    and D.doctorPassword = #{doctorPassword}
+				</if>
+	            <if test="doctorID !=null and doctorID !=''">
+	                 and D.doctorID = #{doctorID}
+	            </if>
+        </where>
+    </select>
+    
+    <select id="queryRecommendDoctorList" parameterType="map" statementType="CALLABLE" resultType="map">
+        call queryRecomDoctor(#{sectionid,jdbcType=VARCHAR,mode=IN},#{start,jdbcType=VARCHAR,mode=IN},#{limit,jdbcType=VARCHAR,mode=IN})
+	</select>
+	
+    <select id="queryDoctorLogin" parameterType="map" resultType="map">
+        select u.login_name,u.true_name,u.phone,u.sex,d.* from vauth.user_info u ,tb_medical_doctor d
+         <where>
+             	u.id = d.loginID
+             	and d.status !=  0
+            	<if test="doctorName != null and doctorName !=''">
+				    and u.login_name = #{doctorName}
+				</if>
+			    <if test="doctorPassword != null and doctorPassword !=''">
+				    and u.`password` = #{doctorPassword}
+				</if>
+        </where>
+	</select>
+	
+    <select id="queryRecommendDoctorListByDisease" parameterType="java.util.Map" resultType="java.util.Map">
+		select dd.doctorID,(select u.true_name from vauth.user_info u where u.id = dd.loginID) as doctorName,dd.hospitalID,dd.sectionID from tb_medical_doctor dd,tb_medical_doctor_disease di 
+			<where>
+			    	dd.doctorID = di.doctorID
+			    	and  dd.status=1 
+			    <if test="diseaseId != null and diseaseId !=''">
+				     and di.diseaseID= #{diseaseId}
+				</if>
+			</where>
+	</select>
+	
+	<update id="modifyDoctorBaseInfo" parameterType="com.netbull.shop.manage.weixin.vo.Doctor" >
+		UPDATE tb_medical_doctor F
+				set F.updateTime = now()
+				<if test="doctorName != null and doctorName !=''">
+				     ,doctorName = #{doctorName}
+				</if>
+				<if test="hospitalID != null and hospitalID !=''">
+				     ,hospitalID = #{hospitalID}
+				</if>
+				<if test="sectionID != null and sectionID !=''">
+				     ,sectionID = #{sectionID}
+				</if>
+				<if test="phone != null and phone !=''">
+				     ,phone = #{phone}
+				</if>
+				<if test="doctorLevel != null and doctorLevel !=''">
+				     ,doctorLevel = #{doctorLevel}
+				</if>
+				<if test="balance != null and balance !=''">
+				     ,balance = #{balance}
+				</if>
+				<if test="skill != null and skill !=''">
+				     ,skill = #{skill}
+				</if>
+				<if test="experience != null and experience !=''">
+				     ,experience = #{experience}
+				</if>
+				<if test="ctArea != null and ctArea !=''">
+				     ,ctArea = #{ctArea}
+				</if>
+				<if test="netctArea != null and netctArea !=''">
+				     ,netctArea = #{netctArea}
+				</if>
+				<if test="practice != null and practice !=''">
+				     ,practice = #{practice}
+				</if>
+				<if test="ctPrice != null and ctPrice !=''">
+				     ,ctPrice = #{ctPrice}
+				</if>
+				<if test="netctPrice != null and netctPrice !=''">
+				     ,netctPrice = #{netctPrice}
+				</if>
+				<if test="isNetCT != null and isNetCT !=''">
+				     ,isNetCT = #{isNetCT}
+				</if>
+				<if test="isVideoCT != null and isVideoCT !=''">
+				     ,isVideoCT = #{isVideoCT}
+				</if>
+				<if test="isAudioCT != null and isAudioCT !=''">
+				     ,isAudioCT = #{isAudioCT}
+				</if>
+				<if test="isZZ != null and isZZ !=''">
+				     ,isZZ = #{isZZ}
+				</if>
+				<if test="videoctPrice != null and videoctPrice !=''">
+				     ,videoctPrice = #{videoctPrice}
+				</if>
+				<if test="videoAccount != null and videoAccount !=''">
+				     ,videoAccount = #{videoAccount}
+				</if>
+				<if test="audioPrice != null and audioPrice !=''">
+				     ,audioPrice = #{audioPrice}
+				</if>
+		WHERE F.doctorID = #{doctorID}
+	</update>
+	
+	<update id="modifyPassword" parameterType="java.util.Map" >
+		UPDATE tb_medical_doctor F
+				set F.updateTime = now()
+				<if test="doctorPassword != null and doctorPassword !=''">
+				     ,doctorPassword = #{doctorPassword}
+				</if>
+		WHERE F.doctorName = #{doctorName}
+	</update>
+	
+	<insert id="saveDoctorBaseInfo" parameterType="com.netbull.shop.manage.weixin.vo.Doctor" useGeneratedKeys="true" keyProperty="doctorID">
+		INSERT INTO tb_medical_doctor (doctorName,doctorPassword,hospitalID,sectionID,phone,doctorLevel,balance,skill,experience,ctArea,netctArea,practice,ctPrice,netctPrice,isNetCT,isVideoCT,isAudioCT,isZZ,videoctPrice,videoAccount,audioPrice,createTime) 
+		VALUES(#{doctorName},#{doctorPassword},#{hospitalID},#{sectionID},#{phone},#{doctorLevel},#{balance},#{skill},#{experience},#{ctArea},#{netctArea},#{practice},#{ctPrice},#{netctPrice},#{isNetCT},#{isVideoCT},#{isAudioCT},#{isZZ},#{videoctPrice},#{videoAccount},#{audioPrice},now())
+	</insert>
+	
+	
+	<select id="querySelfDoctorGroupConsulationList" parameterType="java.util.Map" resultType="java.util.Map">
+	      select gc.id,gc.state,gc.askContent,gc.askTime,gc.askDoctorId doctorID,U.true_name as doctorName,gc.patientID,p.patientName from tb_medical_group_consulation gc LEFT JOIN tb_medical_doctor d on gc.askDoctorId = d.doctorID LEFT JOIN tb_medical_patient p on gc.patientId = p.patientID inner join vauth.user_info U on d.loginID=U.id
+            <where>
+		        <if test="doctorId != null and doctorId !=''">
+					and gc.askDoctorId = #{doctorId}
+				</if>
+				<if test="gcId != null and gcId !=''">
+					and gc.id = #{gcId}
+				</if>
+		    </where>
+		    <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+	
+	<select id="queryOtherDoctorGroupConsulationList" parameterType="java.util.Map" resultType="java.util.Map">
+         select gc.id,gc.gcId,gc.answerContent,gc.answerTime,gc.sate as state,d.doctorID,U.true_name as doctorName from tb_medical_group_consulation_relation gc LEFT JOIN tb_medical_doctor d on gc.answerDoctorId = d.doctorID inner join vauth.user_info U on d.loginID=U.id
+         <where>
+		    <if test="doctorId != null and doctorId !=''">
+				 and gc.answerDoctorId = #{doctorId}
+			</if>
+			<if test="gcId != null and gcId !=''">
+				 and gc.gcId = #{gcId}
+			</if>
+		 </where>
+		 <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+	
+	<select id="queryDoctorGroupConsulationRList" parameterType="java.util.Map" resultType="java.util.Map">
+        call queryRecomDoctor(#{sectionid,jdbcType=VARCHAR,mode=IN},#{start,jdbcType=VARCHAR,mode=IN},#{limit,jdbcType=VARCHAR,mode=IN})
+	</select>
+	
+	<insert id="saveDoctorGroupConsulation" parameterType="com.netbull.shop.manage.weixin.vo.DoctorGroup" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_group_consulation (askDoctorId,askContent,patientId,state,askTime) 
+		VALUES(#{doctorId},#{content},#{patientId},'0',now())
+	</insert>
+	
+	<insert id="saveDoctorGroupConsulationR" parameterType="java.util.Map">
+		INSERT INTO tb_medical_group_consulation_relation (gcId,answerDoctorId,answerContent,answerTime,sate,seq) 
+		VALUES(#{gcId},#{doctorId},#{content},now(),'0',#{seq})
+	</insert>
+	
+	<update id="modifyDoctorGroupConsulation" parameterType="java.util.Map" >
+		UPDATE tb_medical_group_consulation F
+				set F.updateTime = now()
+				<if test="doctorId != null and doctorId !=''">
+				     ,askDoctorId = #{doctorId}
+				</if>
+				<if test="content != null and content !=''">
+				     ,askContent = #{content}
+				</if>
+				<if test="patientId != null and patientId !=''">
+				     ,patientId = #{patientId}
+				</if>
+				<if test="state != null and state !=''">
+				     ,state = #{state}
+				</if>
+		WHERE F.id = #{id}
+	</update>
+	
+	<update id="modifyDoctorGroupConsulationR" parameterType="java.util.Map" >
+		UPDATE tb_medical_group_consulation_relation F
+				set F.updateTime = now(),F.answerTime = now()
+				<if test="gcId != null and gcId !=''">
+				     ,gcId = #{gcId}
+				</if>
+				<if test="doctorId != null and doctorId !=''">
+				     ,answerDoctorId = #{doctorId}
+				</if>
+				<if test="content != null and content !=''">
+				     ,answerContent = #{content}
+				</if>
+				<if test="sate != null and sate !=''">
+				     ,sate = #{sate}
+				</if>
+		WHERE F.id = #{id}
+	</update>
+	
+	<select id="queryDoctorGroupConsulationRDetail" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_group_consulation_relation g where g.id=#{id}
+	</select>
+</mapper>

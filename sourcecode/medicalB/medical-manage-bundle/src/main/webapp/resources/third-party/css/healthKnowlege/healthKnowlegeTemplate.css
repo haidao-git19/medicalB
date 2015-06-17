@@ -1,0 +1,16 @@
+body{ margin:0; background-color:white; padding:0px;}
+img{ border:0;}
+a{ text-decoration:none;}
+.title{ font-size:18px; margin-top:20px; margin-left:20px; margin-right:20px; margin-bottom:10px;}
+.smalltitle{ overflow:hidden;}
+.smalltilte span{ font-size:12px; color:gray; margin-left:20px;display:block; float:left;}
+.smalltilte a{color:orange; display:block; margin-left:10px; float:left; font-size:12px;}
+.wnbox{ padding-top:10px;}
+.wn{ width:90%; margin-left:auto; margin-right:auto;  clear:both; margin-top:16px;}
+.wn img{ width:100%;}
+.neirong{font-size:16px;  width:90%; overflow:hidden; margin-left:auto; margin-right:auto; margin-top:16px; line-height:22px; text-indent:34px;}
+.imgbox{ width:90%; overflow:hidden; margin-left:auto; margin-right:auto; margin-top:16px;}
+.imgbox img{ width:100%;}
+.tuiguang{ margin-left:20px; margin-top:10px; color:gray;}
+.bottombox{ width:90%; margin-left:auto; margin-right:auto; margin-bottom:20px; margin-top:10px;}
+.bottombox img{ width:100%;}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.MultMediaDao">
+
+    <select id="queryMultMedia" parameterType="java.util.Map" resultType="java.util.Map">
+		select id,userId,userType,subAccountSid,subToken,voipAccount,voipPwd from tb_medical_multmedia c  
+			<where>
+			    	status = 0
+			    <if test="userId != null and userId !=''">
+				     and c.userId = #{userId}
+				</if>
+				<if test="userType != null and userType !=''">
+				     and c.userType = #{userType}
+				</if>
+				<if test="voipAccount != null and voipAccount !=''">
+				     and c.voipAccount = #{voipAccount}
+				</if>
+			</where>
+	</select>
+	
+    <update id="modifyMultMedia" parameterType="java.util.Map" >
+		UPDATE tb_medical_multmedia F
+				set F.updateTime = now()
+				<if test="status != null and status !=''">
+				     ,status = #{status}
+				</if>
+				<if test="userId != null and userId !=''">
+				     ,userId = #{userId}
+				</if>
+				<if test="userType != null and userType !=''">
+				     ,userType = #{userType}
+				</if>
+				<if test="subAccountSid != null and subAccountSid !=''">
+				     ,subAccountSid = #{subAccountSid}
+				</if>
+				<if test="subToken != null and subToken !=''">
+				     ,subToken = #{subToken}
+				</if>
+				<if test="dateCreated != null and dateCreated !=''">
+				     ,dateCreated = #{dateCreated}
+				</if>
+				<if test="voipAccount != null and voipAccount !=''">
+				     ,voipAccount = #{voipAccount}
+				</if>
+				<if test="voipPwd != null and voipPwd !=''">
+				     ,voipPwd = #{voipPwd}
+				</if>
+			<where>
+			    <if test="subAccountSid != null and subAccountSid !=''">
+				     and F.subAccountSid = #{subAccountSid}
+				</if>
+				<if test="userId != null and userId !=''">
+				     and F.userId = #{userId}
+				</if>
+				<if test="userType != null and userType !=''">
+				     and F.userType = #{userType}
+				</if>
+			</where>
+	</update>
+	
+    <insert id="saveMultMediaInfo" parameterType="java.util.Map">
+		INSERT INTO tb_medical_multmedia (userId,userType,subAccountSid,subToken,dateCreated,voipAccount,voipPwd,status,createTime) 
+		VALUES(#{userId},#{userType},#{subAccountSid},#{subToken},#{dateCreated},#{voipAccount},#{voipPwd},#{status},now())
+	</insert>
+	
+    <insert id="saveCallAuthInfo" parameterType="java.util.Map">
+		INSERT INTO tb_medical_callauth (action,orderid,type,subid,caller,called,subtype,callSid,userData,createTime,starttime,endtime,recordurl,byetype,billdata) 
+		VALUES(#{action},#{orderid},#{type},#{subid},#{caller},#{called},#{subtype},#{callSid},#{userData},now(),#{starttime},#{endtime},#{recordurl},#{byetype},#{billdata})
+	</insert>
+	
+</mapper>

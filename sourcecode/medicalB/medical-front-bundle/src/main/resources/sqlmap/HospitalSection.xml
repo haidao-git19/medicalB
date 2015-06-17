@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.hospital.dao.HospitalSectionDao">
+   
+ 	<select id="queryFirstSectionList" parameterType="map" resultType="com.netbull.web.hospital.entity.HospitalSection">
+ 	   SELECT DISTINCT b.`parentid` sectionParentid,c.`attrname` sectionName FROM tb_medical_hospital_section a,tb_medical_section b,tb_medical_section c
+ 	    <where>
+ 	        1=1
+ 	         and a.`sectionID`=b.`id` AND b.`parentid`=c.`id`
+ 	    	<if test="hospitalID!=null and hospitalID !=''">
+ 	    		and a.hospitalID=#{hospitalID}
+ 	    	</if>
+ 	    </where>
+ 	</select>
+    <select id="queryAllList" parameterType="map" resultType="com.netbull.web.hospital.entity.HospitalSection">
+ 	   SELECT a.*,b.`attrname` sectionName,b.`parentid` sectionParentid FROM tb_medical_hospital_section a,tb_medical_section b
+ 	    <where>
+ 	        1=1
+ 	         and a.`sectionID`=b.`id` 
+ 	    	<if test="hospitalID!=null and hospitalID !=''">
+ 	    		and a.hospitalID=#{hospitalID}
+ 	    	</if>
+ 	    </where>
+ 	</select>
+    
+</mapper>

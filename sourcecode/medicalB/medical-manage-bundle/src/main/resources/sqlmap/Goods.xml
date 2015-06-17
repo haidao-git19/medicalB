@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.GoodsDao">
+
+    <select id="queryList" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.GoodsVo">
+        select X.* from tb_product_goods X 
+           where 1=1 and X.isShow=1
+            <if test="goodsCode !=null and goodsCode !=''">
+                and X.goodsCode=#{goodsCode}
+            </if>
+            <if test="longName !=null and longName !=''">
+                and X.longName like CONCAT('%',#{longName},'%')
+            </if>
+            <if test="shopId !=null and shopId !=''">
+                and X.shopId = #{shopId}
+            </if>
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+    <select id="queryCount" parameterType="map" resultType="java.lang.Long">
+        select count(1) from tb_product_goods X
+         where 1=1 and X.isShow=1
+            <if test="goodsCode !=null and goodsCode !=''">
+                and X.goodsCode=#{goodsCode}
+            </if>
+            <if test="longName !=null and longName !=''">
+                and X.longName like CONCAT('%',#{longName},'%')
+            </if>
+            <if test="shopId !=null and shopId !=''">
+                and X.shopId = #{shopId}
+            </if>
+    </select>
+    
+    <insert id="save" parameterType="com.netbull.shop.common.vo.GoodsVo" 
+        useGeneratedKeys="true" keyProperty="id">
+		INSERT tb_product_goods(categoryCode,longName,mediumName,shortName,secondName,brandId,style,model,
+			imgPath,goodsCode,isDraft,marketPrice,shopPrice,goodsType,sellCharacter,sellAttr,label,status,isShow,
+				sellingPoints,packageList,buyNote,content,saleTime,shopId,createPerson,updatePerson,createTime,updateTime,navicatId)
+		
+		VALUES(#{categoryCode},#{longName},#{mediumName},#{shortName},#{secondName},#{brandId},#{style},#{model},
+			#{imgPath},#{goodsCode},#{isDraft},#{marketPrice},#{shopPrice},#{goodsType},#{sellCharacter},#{sellAttr},#{label},#{status},'1',
+				#{sellingPoints},#{packageList},#{buyNote},#{content},#{saleTime},#{shopId},#{createPerson},#{updatePerson},now(),now(),#{navicatId})
+    </insert>
+    
+    <update id="update" parameterType="com.netbull.shop.common.vo.GoodsVo">
+        update tb_product_goods 
+        <set>
+            <if test="categoryCode !=null and categoryCode !=''">
+                categoryCode=#{categoryCode},
+            </if>
+            <if test="longName !=null and longName !=''">
+                longName=#{longName},
+            </if>
+            <if test="mediumName !=null and mediumName !=''">
+                mediumName=#{mediumName},
+            </if>
+            <if test="shortName !=null and shortName !=''">
+                shortName=#{shortName},
+            </if>
+            <if test="secondName !=null and secondName !=''">
+                secondName=#{secondName},
+            </if>
+            <if test="brandId !=null and brandId !=''">
+                brandId=#{brandId},
+            </if>
+            <if test="style !=null and style !=''">
+                style=#{style},
+            </if>
+            <if test="model !=null and model !=''">
+                model=#{model},
+            </if>
+            <if test="imgPath !=null and imgPath !=''">
+                imgPath=#{imgPath},
+            </if>
+            <if test="isDraft !=null and isDraft !=''">
+                isDraft=#{isDraft},
+            </if>
+            <if test="marketPrice !=null and marketPrice !=''">
+                marketPrice=#{marketPrice},
+            </if>
+            <if test="shopPrice !=null and shopPrice !=''">
+                shopPrice=#{shopPrice},
+            </if>
+            <if test="goodsType !=null and goodsType !=''">
+                goodsType=#{goodsType},
+            </if>
+            <if test="sellCharacter !=null and sellCharacter !=''">
+                sellCharacter=#{sellCharacter},
+            </if>
+            <if test="sellAttr !=null and sellAttr !=''">
+                sellAttr=#{sellAttr},
+            </if>
+            <if test="label !=null and label !=''">
+                label=#{label},
+            </if>
+            <if test="status !=null and status !=''">
+                status=#{status},
+            </if>
+            <if test="isShow !=null and isShow !=''">
+                isShow=#{isShow},
+            </if>
+            <if test="sellingPoints !=null and sellingPoints !=''">
+                sellingPoints=#{sellingPoints},
+            </if>
+            <if test="packageList !=null and packageList !=''">
+                packageList=#{packageList},
+            </if>
+            <if test="buyNote !=null and buyNote !=''">
+                buyNote=#{buyNote},
+            </if>
+            <if test="content !=null and content !=''">
+                content=#{content},
+            </if>
+             <if test="saleTime !=null and saleTime !=''">
+                saleTime=#{saleTime},
+            </if>
+            <if test="shopId !=null and shopId !=''">
+                shopId=#{shopId},
+            </if>
+            <if test="updatePerson !=null and updatePerson !=''">
+                updatePerson=#{updatePerson},
+            </if>
+            navicatId=#{navicatId},
+            updateTime=now()
+        </set>
+        <where>
+            <if test="id !=null and id !=''">
+                id=#{id}
+            </if>
+        </where>
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.Long">
+        UPDATE tb_product_goods SET isShow=0
+        <where>
+            <if test="_parameter !=null and _parameter !=''">
+                id=#{value}
+            </if>
+        </where>
+    </delete>
+    
+	<select id="queryEntityByParams" parameterType="map" resultType="com.netbull.shop.common.vo.GoodsVo">
+	    select * from tb_product_goods 
+	    <where>
+	        <if test="goodsCode !=null and goodsCode !=''">
+	            and goodsCode=#{goodsCode}
+	        </if>
+	        <if test="id !=null and id !=''">
+	            and id=#{id}
+	        </if>
+	    </where>
+	</select>
+	
+	<select id="queryEntityById" parameterType="java.lang.Long" resultType="com.netbull.shop.common.vo.GoodsVo">
+	    select * from tb_product_goods 
+	    <where>
+	        <if test="_parameter !=null and _parameter !=''">
+	            id=#{value}
+	        </if>
+	    </where>
+	</select>
+	
+	<insert id="saveClob" parameterType="com.netbull.shop.common.vo.GoodsClob" useGeneratedKeys="true" keyProperty="id">
+	    INSERT tb_product_goods_clob(title,text) VALUES(#{title},#{text})
+	</insert>
+	
+	<select id="queryClob" parameterType="java.lang.Integer" resultType="com.netbull.shop.common.vo.GoodsClob">
+	    SELECT * FROM tb_product_goods_clob 
+	    <where>
+	        <if test="_parameter !=null and _parameter !=''">
+	            and id=#{value}
+	        </if>
+	    </where>
+	</select>
+	<update id="updateClob" parameterType="com.netbull.shop.common.vo.GoodsClob">
+	    UPDATE tb_product_goods_clob 
+	    <set>
+	        <if test="title !=null and title !=''">
+	            title=#{title},
+	        </if>
+	        <if test="text !=null and text !=''">
+	            text = #{text},
+	        </if>
+	    </set>
+	    <where>
+	        <if test="id !=null and id !=''">
+	            and id =#{id}
+	        </if>
+	    </where>
+	</update>
+</mapper>

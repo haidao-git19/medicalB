@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.category.dao.CategoryDao">
+	
+    <sql id="categoryColumn">
+        select id,categoryCode,parentCategoryCode,name,alias,description,bigImgPath,smallImgPath,isValid,sortNum,level,type,isShow,createPerson,updatePerson,DATE_FORMAT(createTime,'%Y-%m-%d %H:%i') createTime,DATE_FORMAT(updateTime,'%Y-%m-%d %H:%i') updateTime 
+        	from tb_product_category
+    </sql>
+    
+      <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+	    <include refid="categoryColumn"/>
+	    <where>
+	        <if test="name !=null and name !=''">
+	            and name like CONCAT('%',#{name},'%')
+	        </if>
+	    </where>
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="queryCount" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(1)  FROM (<include refid="categoryColumn"/>) as count
+        <where>
+	        <if test="name !=null and name !=''">
+	            and name like CONCAT('%',#{name},'%')
+	        </if>
+	    </where>
+   </select>
+   
+   <select id="queryEntityById" parameterType="java.lang.Long" resultType="com.netbull.shop.category.entity.Category">
+       SELECT * FROM tb_product_category WHERE id=#{id}
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.shop.category.entity.Category" useGeneratedKeys="true" keyProperty="id">
+       INSERT tb_product_category(categoryCode,parentCategoryCode,name,alias,description,bigImgPath,smallImgPath,isValid,sortNum,level,type,isShow,createTime,createPerson,updateTime,updatePerson)
+       	values(#{categoryCode},#{parentCategoryCode},#{name},#{alias},#{description},#{bigImgPath},#{smallImgPath},#{isValid},#{sortNum},#{level},#{type},#{isShow},now(),#{createPerson},now(),#{updatePerson})
+   </insert>
+   
+   <update id="update" parameterType="com.netbull.shop.category.entity.Category">
+       UPDATE tb_product_category
+       <set>
+           <if test="categoryCode !=null and categoryCode !=''">
+               categoryCode = #{categoryCode},
+           </if>
+           <if test="parentCategoryCode !=null and parentCategoryCode !=''">
+               parentCategoryCode = #{parentCategoryCode},
+           </if>
+           <if test="name !=null and name !=''">
+               name = #{name},
+           </if>
+           <if test="alias !=null and alias !=''">
+               alias = #{alias},
+           </if>
+           <if test="description !=null and description !=''">
+               description = #{description},
+           </if>
+           <if test="bigImgPath !=null and bigImgPath !=''">
+               bigImgPath = #{bigImgPath},
+           </if>
+           <if test="smallImgPath !=null and smallImgPath !=''">
+               smallImgPath = #{smallImgPath},
+           </if>
+           <if test="isValid !=null and isValid !=''">
+               isValid = #{isValid},
+           </if>
+           <if test="sortNum !=null and sortNum !=''">
+               sortNum = #{sortNum},
+           </if>
+           <if test="level !=null and level !=''">
+               level = #{level},
+           </if>
+           <if test="type !=null and type !=''">
+               type = #{type},
+           </if>
+           <if test="isShow !=null and isShow !=''">
+               isShow = #{isShow},
+           </if>
+           <if test="updatePerson !=null and updatePerson !=''">
+               updatePerson = #{updatePerson},
+           </if>
+           updateTime = now()
+       </set>
+       <where>
+           <if test="id !=null and id !=''">
+               id = #{id}
+           </if>
+       </where>
+   </update>
+   
+   <delete id="delete" parameterType="java.lang.Long">
+       UPDATE tb_product_category SET isValid=0 WHERE id=#{id}
+   </delete>
+   
+   <select id="queryAll" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT DISTINCT categoryCode,name FROM tb_product_category WHERE isValid=1
+   </select>
+</mapper>

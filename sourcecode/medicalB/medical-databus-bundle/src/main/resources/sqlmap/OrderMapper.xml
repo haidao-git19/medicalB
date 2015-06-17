@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.OrderInfoDao">
+
+    <select id="queryOrderInfoList" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.OrderVo">
+		select id,userId,orderCode,goodsCode,acceptId,goodsVersion,localCode,totalFee,style,type,sellTime,productNum,status,ispay from tb_product_sell_record
+			<where>
+			    status !=  -2
+			    and type != '3'
+			    and type != 'diy'
+			    <if test="userId != null and userId !=''">
+				     and userId = #{userId}
+				</if>
+			</where>
+			order by sellTime desc
+	</select>
+	
+    <select id="queryOrderDetail" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.OrderVo">
+		select id,userId,orderCode,goodsCode,acceptId,goodsVersion,localCode,totalFee,style,type,sellTime,productNum,status,ispay from tb_product_sell_record
+			<where>
+			    status !=  -2
+			    <if test="out_trade_no != null and out_trade_no !=''">
+				     and orderCode = #{out_trade_no}
+				</if>
+				 <if test="orderCode != null and orderCode !=''">
+				     and orderCode = #{orderCode}
+				</if>
+			</where>
+	</select>
+	
+	<insert id="saveOrderInfo" parameterType="java.util.Map">
+		INSERT INTO tb_product_sell_record (userId,acceptId,orderCode,goodsCode,goodsVersion,localCode,totalFee,style,type,sellTime,productNum,status,ispay,remark) 
+		VALUES(#{userId},#{acceptId},#{orderCode},#{goodsCode},#{goodsVersion},#{localCode},#{totalFee},#{style},#{type},now(),#{productNum},'0',#{ispay},#{remark})
+	</insert>
+	
+	<update id="modifyOrderInfo" parameterType="java.util.Map" >
+		UPDATE tb_product_sell_record F
+				set F.updateTime = now()
+				<if test="userId != null and userId !=''">
+				     ,userId = #{userId}
+				</if>
+				<if test="acceptId != null and acceptId !=''">
+				     ,acceptId = #{acceptId}
+				</if>
+				<if test="goodsCode != null and goodsCode !=''">
+				     ,goodsCode = #{goodsCode}
+				</if>
+				<if test="goodsVersion != null and goodsVersion !=''">
+				     ,goodsVersion = #{goodsVersion}
+				</if>
+				<if test="localCode != null and localCode !=''">
+				     ,localCode = #{localCode}
+				</if>
+				<if test="totalFee != null and totalFee !=''">
+				     ,totalFee = #{totalFee}
+				</if>
+				<if test="style != null and style !=''">
+				     ,style = #{style}
+				</if>
+				<if test="remark != null and remark !=''">
+				     ,remark = #{remark}
+				</if>
+				<if test="type != null and type !=''">
+				     ,type = #{type}
+				</if>
+				<if test="payType != null and payType !=''">
+				     ,payType = #{payType}
+				</if>
+				<if test="productNum != null and productNum !=''">
+				     ,productNum = #{productNum}
+				</if>
+				<if test="status != null and status !=''">
+				     ,status = #{status}
+				</if>
+				<if test="ispay != null and ispay !=''">
+				     ,ispay = #{ispay}
+				</if>
+		WHERE F.orderCode = #{orderCode}
+	</update>
+	
+</mapper>

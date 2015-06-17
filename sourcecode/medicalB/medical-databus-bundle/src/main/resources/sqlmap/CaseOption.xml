@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.databus.questionnaire.model.CaseOption">
+   
+	<select id="query_CaseOption_list_by_qId" parameterType="long" resultType="com.netbull.shop.databus.questionnaire.model.CaseOption">
+		select * from tb_questionnaire_case_option t where t.qId = #{qId} order by t.index asc
+	</select>
+	
+</mapper>

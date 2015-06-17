@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.CatalogDao">
+
+    <sql id="catalogColumn">
+        select X.id,X.catalogCode,X.goodsCode,X.goodsVersion,X.coverImage,X.order,Y.catalogName,Y.attrName,Y.attrValue,Z.goodsName
+        	from tb_shop_catalog_goods X 
+        		left join tb_shop_catalog Y on X.catalogCode=Y.catalogCode 
+        			left join tb_product_goods Z on X.goodsCode=Z.goodsCode and X.goodsVersion=Z.goodsVersion
+    </sql>
+    
+    <select id="queryCount" parameterType="map" resultType="java.lang.Long">
+        select count(1) from (<include refid="catalogColumn"/>) as count
+        <where>
+            <if test="catalogName !=null and catalogName !=''">
+                and catalogName like CONCAT("%",#{catalogName},"%")
+            </if>
+            <if test="goodsName !=null and goodsName !=''">
+                and goodsName like CONCAT("%",#{goodsName},"%")
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryList" parameterType="map" resultType="com.netbull.shop.common.vo.CatalogGoodsVo">
+        <include refid="catalogColumn"/>  
+         <where>
+           <if test="catalogName !=null and catalogName !=''">
+                and catalogName like CONCAT("%",#{catalogName},"%")
+            </if>
+             <if test="goodsName !=null and goodsName !=''">
+                and goodsName like CONCAT("%",#{goodsName},"%")
+            </if>
+        </where>
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+    <select id="queryListByParams" parameterType="map" resultType="com.netbull.shop.common.vo.CatalogGoodsVo">
+       	<include refid="catalogColumn"/>  
+	       <where>
+	          <if test="catalogCode !=null and catalogCode !=''">
+	              and X.catalogCode=#{catalogCode}
+	          </if>
+	        </where>
+    </select>
+    
+    <select id="queryCatalog" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.CatalogVo">
+        select * from tb_shop_catalog 
+        <where>
+            <if test="catalogCode !=null and catalogCode !=''">
+                and catalogCode=#{catalogCode}
+            </if>
+        </where>
+    </select>
+    <select id="queryCatalogGoods" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.CatalogGoodsVo">
+        select * from tb_shop_catalog_goods
+        <where>
+           <if test="catalogCode !=null and catalogCode !=''">
+  	            and catalogCode=#{catalogCode}
+  	        </if>
+  	        <if test="order !=null and order !=''">
+  	            and `order`=#{order}
+  	        </if>
+        </where>
+    </select>
+  	
+  	<insert id="saveCatalog" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+  	    insert tb_shop_catalog(catalogName,catalogCode,attrName,attrValue,createTime,updateTime,seq) 
+  	    values(#{catalogName},#{catalogCode},'风格',#{attrValue},now(),now(),#{seq})
+  	</insert>
+  	
+  	<insert id="saveCatalogGoods" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+  	    insert tb_shop_catalog_goods(catalogCode,goodsCode,goodsVersion,coverImage,`order`) 
+  	    values(#{catalogCode},#{goodsCode},#{goodsVersion},#{coverImage},#{order})
+  	</insert>
+  	
+  	<update id="updateCatalogGoods" parameterType="java.util.Map">
+  	    update tb_shop_catalog_goods
+  	    <set>
+  	        <if test="goodsCode !=null and goodsCode !=''">
+  	            goodsCode=#{goodsCode},
+  	        </if>
+  	        <if test="goodsVersion !=null and goodsVersion !=''">
+  	            goodsVersion=#{goodsVersion},
+  	        </if>
+  	        <if test="coverImage !=null and coverImage !=''">
+  	            coverImage=#{coverImage},
+  	        </if>
+  	    </set>
+  	    <where>
+  	        <if test="id !=null and id !=''">
+  	            and id=#{id}
+  	        </if>
+  	        <if test="catalogCode !=null and catalogCode !=''">
+  	            and catalogCode=#{catalogCode}
+  	        </if>
+  	        <if test="order !=null and order !=''">
+  	            and `order`=#{order}
+  	        </if>
+  	    </where>
+  	</update>
+  	
+  	<update id="updateCatalog" parameterType="java.util.Map">
+  	    update tb_shop_catalog 
+  	    <set>
+  	        <if test="catalogName !=null and catalogName !=''">
+  	            catalogName=#{catalogName},
+  	        </if>
+  	        <if test="attrValue !=null and attrValue !=''">
+  	            attrValue=#{attrValue},
+  	        </if>
+  	        <if test="seq !=null and seq !=''">
+  	            seq=#{seq},
+  	        </if>
+  	        updateTime=now()
+  	    </set>
+  	    <where>
+  	        <if test="id !=null and id !=''">
+  	            and id=#{id}
+  	        </if>
+  	        <if test="catalogCode !=null and catalogCode !=''">
+  	            and catalogCode=#{catalogCode}
+  	        </if>
+  	    </where>
+  	</update>
+  	
+  	<delete id="deleteCatalogGoods" parameterType="java.lang.Integer">
+  	    delete from tb_shop_catalog_goods 
+  	    <where>
+  	        <if test="_parameter !=null and _parameter !=''">
+  	            id=#{value}
+  	        </if>
+  	    </where>
+  	</delete>
+  	
+  	<delete id="deleteCatalog" parameterType="java.util.Map">
+  	    delete from tb_shop_catalog 
+  	    <where>
+  	        <if test="catalogCode !=null and catalogCode !=''">
+  	            catalogCode=#{catalogCode}
+  	        </if>
+  	    </where>
+  	</delete>
+  	
+  	<select id="queryFilter" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.GoodsFilter">
+  	    select X.attrvalue from tb_shop_goods_filter X left join tb_shop_goods_filter Y on X.parentid=Y.id 
+  	    <where>
+  	        <if test="attrname !=null and attrname !=''">
+  	            and Y.attrname=#{attrname}
+  	        </if>
+  	    </where>  
+  	</select>
+</mapper>

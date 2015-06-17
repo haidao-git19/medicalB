@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.GoodsAttrDao">
+
+    <sql id="goodsAttrColumn">
+        SELECT A.id,A.goodsCode,A.attrCode,A.attrValue,C.attrName ,
+        DATE_FORMAT(A.createTime,'%Y-%m-%d %H:%i') createTime,
+        DATE_FORMAT(A.updateTime,'%Y-%m-%d %H:%i') updateTime
+        FROM tb_product_goods_attr A 
+        	LEFT JOIN tb_product_category_attr C ON A.attrCode=C.attrCode
+    </sql>
+    
+    <select id="queryList" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.GoodsAttr">
+	    <include refid="goodsAttrColumn"/> 
+	    <where>
+	        <if test="goodsCode !=null and goodsCode !=''">
+	            and A.goodsCode=#{goodsCode}
+	        </if>
+	        <if test="attrName !=null and attrName !=''">
+	            and C.attrName like CONCAT('%',#{attrName},'%')
+	        </if>
+	    </where>
+	    <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+    <select id="queryCount" parameterType="map" resultType="java.lang.Long">
+        select count(1) from (<include refid="goodsAttrColumn"/> 
+        <where>
+	        <if test="goodsCode !=null and goodsCode !=''">
+	            and A.goodsCode=#{goodsCode}
+	        </if>
+	        <if test="attrName !=null and attrName !=''">
+	            and C.attrName like CONCAT('%',#{attrName},'%')
+	        </if>
+	    </where>) as count
+    </select>
+    
+	<insert id="save" parameterType="com.netbull.shop.common.vo.GoodsAttr" 
+	    useGeneratedKeys="true" keyProperty="id">
+	    insert tb_product_goods_attr(goodsCode,attrCode,attrValue,createTime,updateTime) 
+	    values(#{goodsCode},#{attrCode},#{attrValue},now(),now())
+	</insert>
+	
+	<update id="update" parameterType="com.netbull.shop.common.vo.GoodsAttr">
+	    update tb_product_goods_attr 
+	    <set>
+	        <if test="goodsCode !=null and goodsCode !=''" >
+	            goodsCode=#{goodsCode},
+	        </if>
+	        <if test="attrCode !=null and attrCode !=''" >
+	            attrCode=#{attrCode},
+	        </if>
+	        <if test="attrValue !=null and attrValue !=''" >
+	            attrValue=#{attrValue},
+	        </if>
+	        updateTime=now()
+	    </set>
+	    <where>
+	        <if test="id !=null and id !=''">
+	            id=#{id}
+	        </if>
+	    </where>
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+	    delete from tb_product_goods_attr 
+	    <where>
+	        <if test="_parameter !=null and _parameter !=''">
+	            id=#{value}
+	        </if>
+	    </where>
+	</delete>
+	
+	<select id="queryEntityById" parameterType="java.lang.Long" resultType="com.netbull.shop.common.vo.GoodsAttr">
+	     SELECT A.*, C.attrName FROM tb_product_goods_attr A 
+        	LEFT JOIN tb_product_category_attr C ON A.attrCode=C.attrCode
+	    <where>
+	        <if test="_parameter !=null and _parameter !=''">
+	            A.id=#{value}
+	        </if>
+	    </where>
+	</select>
+</mapper>

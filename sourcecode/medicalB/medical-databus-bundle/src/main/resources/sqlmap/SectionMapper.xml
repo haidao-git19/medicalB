@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.SectionDao">
+
+    <sql id="sectionColumn">
+        select X.* from tb_medical_section X 
+        	left join tb_medical_hospital_section Y on X.id = Y.sectionID 
+    </sql>
+    
+   <select id="queryParentList" parameterType="java.util.Map" resultType="java.util.Map">
+       <include refid="sectionColumn"/>
+       <where>
+           <if test="hospitalID !=null and hospitalID !=''">
+               and Y.hospitalID = #{hospitalID}
+           </if>
+           and X.parentid=0 
+           and X.level=1
+       </where>
+   </select>
+	
+   <select id="queryChildList" parameterType="java.util.Map" resultType="java.util.Map">
+       select * from tb_medical_section 
+       <where>
+           <if test="id !=null and id !=''">
+               parentid = #{id}
+           </if>
+       </where>
+   </select>
+   
+   <select id="queryDetail" parameterType="java.util.Map" resultType="java.util.Map">
+       select * from tb_medical_section 
+       <where>
+           <if test="sectionID !=null and sectionID !=''">
+               id = #{sectionID}
+           </if>
+       </where>
+   </select>
+</mapper>

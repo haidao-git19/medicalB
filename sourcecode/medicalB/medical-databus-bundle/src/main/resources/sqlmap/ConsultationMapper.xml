@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.ConsultationDao">
+
+    <select id="queryConsultationList" parameterType="java.util.Map" resultType="java.util.Map">
+		 <choose>
+            <when test="type !=null and type ==1">
+                select c.title,c.answer,c.answerDate,c.consultationDate,c.consultationID,c.doctorID,c.evaluation,c.isFree,c.isPrescribe,c.isRepeat,c.patientID,c.question,c.state,c.title,c.type,p.contactPhone,p.isComp,p.patientAge,p.patientCard,p.patientName,p.patientSex,p.patientLevel,p.nickName from tb_medical_consultation c ,tb_medical_patient p 
+				<where>
+				    c.patientID = p.patientID
+				    <if test="consultationID != null and consultationID !=''">
+					     and c.consultationID = #{consultationID}
+					</if>
+					<if test="userID != null and userID !=''">
+					     and c.userID = #{userID}
+					</if>
+					<if test="patientID != null and patientID !=''">
+					     and c.patientID = #{patientID}
+					</if>
+					<if test="isFree != null and isFree !=''">
+					     and c.isFree = ${isFree}
+					</if>
+					and c.isRepeat = 0 
+				</where>
+				 ORDER BY c.consultationDate desc
+				 LIMIT  #{start}, #{limit}
+            </when>
+            <otherwise>
+                select 
+					c.title,c.answer,c.answerDate,c.consultationDate,c.consultationID,c.doctorID,c.evaluation,c.isPrescribe,
+					c.isFree,c.isRepeat,c.patientID, e.patientName, e.patientAge, e.patientSex, c.question,c.state,c.title,c.type,d.avatar,d.ctArea,d.doctorLevel,
+					(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,
+					d.experience,d.hospitalID,d.isAudioCT,d.isNetCT,d.isRecommend,d.isVideoCT,d.isZZ,d.netctArea,
+					d.netDesc,d.practice,d.sectionID,d.skill,d.`status`,d.subscribeDesc,d.subscribeFlag 
+				from
+				    tb_medical_consultation c 
+					left join tb_medical_doctor d on c.doctorID = d.doctorID
+					left join tb_medical_patient e on c.patientID = e.patientID
+				<where>
+					<if test="doctorID != null and doctorID !=''">
+					     and c.doctorID = #{doctorID}
+					</if>
+					<if test="isFree != null and isFree !=''">
+					     and c.isFree = ${isFree}
+					</if>
+					and c.isRepeat = 0 
+				</where>
+				 LIMIT  #{start}, #{limit}
+            </otherwise>
+        </choose>
+	</select>
+	
+	<select id="queryConsultationRepeatList" parameterType="java.util.Map" resultType="java.util.Map">
+		 select c.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_consultation c LEFT JOIN tb_medical_doctor d on c.doctorID = d.doctorID left JOIN tb_medical_patient p on c.patientID = p.patientID
+		<where>
+		    c.isRepeat=1
+			<if test="consultationID != null and consultationID !=''">
+				and c.sourceID = #{consultationID}
+			</if>
+			order by c.consultationDate desc
+		</where>
+	</select>
+	
+    <select id="queryConsultationDetail" parameterType="java.util.Map" resultType="java.util.Map">
+		  select c.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_consultation c LEFT JOIN tb_medical_doctor d on c.doctorID = d.doctorID left JOIN tb_medical_patient p on c.patientID = p.patientID  
+		<where>
+		    c.isRepeat = 0
+			<if test="consultationID != null and consultationID !=''">
+				and c.consultationID = #{consultationID}
+			</if>
+		</where>
+	</select>
+	
+    <update id="modifyConsultation" parameterType="java.util.Map" >
+		UPDATE tb_medical_consultation F
+				set F.answerDate = now()
+				<if test="answer != null and answer !=''">
+				     ,answer = #{answer}
+				</if>
+				<if test="evaluation != null and evaluation !=''">
+				     ,evaluation = #{evaluation}
+				</if>
+				<if test="title != null and title !=''">
+				     ,title = #{title}
+				</if>
+				<if test="isRepeat != null and isRepeat !=''">
+				     ,isRepeat = #{isRepeat}
+				</if>
+				<if test="sourceID != null and sourceID !=''">
+				     ,sourceID = #{sourceID}
+				</if>
+				<if test="isFree != null and isFree !=''">
+				     ,isFree = #{isFree}
+				</if>
+				<if test="isPrescribe != null and isPrescribe !=''">
+				     ,isPrescribe = #{isPrescribe}
+				</if>
+				<if test="fee != null and fee !=''">
+				     ,fee = #{fee}
+				</if>
+				<if test="state != null and state !=''">
+				     ,state = #{state}
+				</if>
+				<if test="evalstate != null and evalstate !=''">
+				     ,evalstate = #{evalstate}
+				</if>
+				<if test="paystate != null and paystate !=''">
+				     ,paystate = #{paystate}
+				</if>
+				<if test="isnotice != null and isnotice !=''">
+				     ,isnotice = #{isnotice}
+				</if>
+				<if test="type != null and type !=''">
+				     ,type = #{type}
+				</if>
+		WHERE F.consultationID = #{consultationID}
+	</update>
+	
+    <select id="queryRcentiConsultation" parameterType="java.util.Map" resultType="java.util.Map">
+        <![CDATA[
+        	select X.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_consultation X LEFT JOIN tb_medical_doctor d on X.doctorID = d.doctorID LEFT JOIN tb_medical_patient p on X.patientID = p.patientID where X.state in (0,1) and X.isnotice=0 and str_to_date(X.consultationDate,'%Y-%m-%d %H:%i:%s') >= date_add(now(), interval -${minitue} MINUTE)
+         ]]>
+    </select>
+    
+    <select id="queryTodayConsultation" parameterType="java.util.Map" resultType="Long">
+        select count(1) count from tb_medical_consultation X 
+        <where>
+            <![CDATA[
+            	 and date_sub(curdate(),interval ${days} day) <= DATE_FORMAT(X.consultationDate,'%Y-%m-%d')
+            	 and X.doctorId = #{doctorId}
+            	 ]]>
+        </where>
+    </select>
+    
+    <insert id="saveConsultationInfo" parameterType="com.netbull.shop.manage.weixin.vo.ConsultationVo" useGeneratedKeys="true" keyProperty="consultationID">
+		INSERT INTO tb_medical_consultation (title,userID,consultationDate,patientID,doctorID,question,level,isRepeat,sourceID,isFree,fee,isPrescribe,type,state) 
+		VALUES(#{title},#{userID},now(),#{patientID},#{doctorID},#{question},#{level},#{isRepeat},#{sourceID},#{isFree},#{fee},#{isPrescribe},#{type},'0')
+	</insert>
+	
+</mapper>

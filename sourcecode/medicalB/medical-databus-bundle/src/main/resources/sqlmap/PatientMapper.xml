@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.PatientDao">
+	
+    <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+        select P.*,O.orderDate,O.startTime,O.endTime from tb_medical_patient P 
+        	left join tb_medical_order O on P.patientID=O.patientID and O.state=0
+        	left join tb_medical_doctor D on O.doctorID=D.doctorID
+        <where>
+            <if test="doctorID !=null and doctorID !=''">
+                and D.doctorID = #{doctorID}
+            </if>
+            <if test="nowDate !=null and nowDate !=''">
+                and DATE_FORMAT(#{nowDate},'%y-%m-%d') &lt;= DATE_FORMAT(O.orderDate,'%y-%m-%d')
+            </if>
+        </where>
+        	order by O.orderDate asc,O.startTime asc
+        <if test="start !=null and limit !=null">
+	        LIMIT #{start},#{limit}
+        </if>    
+    </select>
+    
+    <select id="myPatientList" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_patient p where p.patientID in (
+		select c.patientID from tb_medical_consultation c where c.doctorID = #{doctorID}
+		UNION
+		select o.patientID from tb_medical_order o where o.doctorID = #{doctorID}
+		UNION
+		select r.patientID from tb_medical_record r,tb_medical_record_doctor rd where r.id = rd.recordID and rd.doctorID=#{doctorID}
+		UNION
+		select pd.patientID from tb_medical_patient_doctor pd where pd.doctorID=#{doctorID}
+		)
+    </select>
+    
+    <select id="myServiceList" parameterType="java.util.Map" resultType="java.util.Map">
+        <![CDATA[
+         select DISTINCT d.sectionID,d.avatar,c.consultationID id,DATE_FORMAT(c.consultationDate,'%Y-%m-%d') time,'' as startTime,'' as endTime,d.doctorID,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,d.doctorLevel,0 as type,c.type as busistype,(select h.hospitalName from tb_medical_hospital h where h.hospitalID = d.hospitalID) as hospitalName,(select s.attrname from tb_medical_section s where s.id = d.sectionID) as sectionName,c.state,c.isFree,c.paystate,c.evalstate from tb_medical_consultation c LEFT JOIN tb_medical_doctor d on c.doctorID = d.doctorID where c.patientID = #{patientID}
+		 UNION
+		 select DISTINCT d.sectionID,d.avatar,o.orderID, DATE_FORMAT(o.orderDate,'%Y-%m-%d') time,o.startTime,o.endTime,d.doctorID,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,d.doctorLevel,1 as type,o.type as busistype,(select h.hospitalName from tb_medical_hospital h where h.hospitalID = d.hospitalID) as hospitalName,(select s.attrname from tb_medical_section s where s.id = d.sectionID) as sectionName ,( CASE WHEN o.state=1 THEN 1 WHEN o.state=-1 THEN -1 WHEN str_to_date(CONCAT(o.orderDate," ",o.endTime),'%Y-%m-%d %H:%i:%s') < now() THEN 2 WHEN o.state=0 THEN 0 END) state,'',o.paystate,'' from tb_medical_order o LEFT JOIN tb_medical_doctor d on o.doctorID = d.doctorID where o.patientID = #{patientID}
+		 UNION
+		 select DISTINCT d.sectionID,d.avatar,pr.id,DATE_FORMAT(p.createTime,'%Y-%m-%d') time, '' as startTime,'' as endTime,d.doctorID,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,d.doctorLevel,2 as type,'' as busistype,(select h.hospitalName from tb_medical_hospital h where h.hospitalID = d.hospitalID) as hospitalName,(select s.attrname from tb_medical_section s where s.id = d.sectionID) as sectionName,p.`status` as state,'',p.paystate,''  from tb_medical_prescription p LEFT JOIN tb_medical_doctor d on p.doctorID = d.doctorID,tb_medical_prescription_relation pr where p.id = pr.prescriptionId and pr.patientID = #{patientID}
+		 UNION
+		 select DISTINCT d.sectionID,d.avatar,qr.qnId,DATE_FORMAT(qr.bindTime,'%Y-%m-%d') time,'' as startTime,'' as endTime,qr.doctorId,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,d.doctorLevel,3 as type,'' as busistype,(select h.hospitalName from tb_medical_hospital h where h.hospitalID = d.hospitalID) as hospitalName,(select s.attrname from tb_medical_section s where s.id = d.sectionID) as sectionName,qr.state,'',qr.paystate,'' from tb_questionnaire_patient_mapping qr LEFT JOIN tb_medical_doctor d on qr.doctorId = d.doctorID where qr.patientId=#{patientID}
+		 UNION
+		 select DISTINCT d.sectionID,d.avatar,p.plusID id,DATE_FORMAT(p.plusTime,'%Y-%m-%d') time,'' as startTime,'' as endTime,p.doctorId,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,d.doctorLevel,4 as type,'' as busistype,(select h.hospitalName from tb_medical_hospital h where h.hospitalID = d.hospitalID) as hospitalName,(select s.attrname from tb_medical_section s where s.id = d.sectionID) as sectionName,p.`status` as state,'',p.paystate,'' from tb_medical_plus p LEFT JOIN tb_medical_doctor d on p.doctorId = d.doctorID where p.patientId=#{patientID}
+		]]>  
+    </select>
+    
+    <select id="queryDetail" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_patient 
+        <where>
+            <if test="patientID !=null and patientID !=''">
+               and patientID = #{patientID}
+            </if>
+            <if test="patientCard !=null and patientCard !=''">
+               and patientCard = #{patientCard}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryMyDoctor" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_patient_doctor 
+        <where>
+            <if test="patientID !=null and patientID !=''">
+                and patientID = #{patientID}
+            </if>
+            <if test="doctorID !=null and doctorID !=''">
+                and doctorID = #{doctorID}
+            </if>
+            <if test="doctorType !=null and doctorType !=''">
+                and doctorType = #{doctorType}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryMyDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.*,B.doctorName,B.doctorLevel,B.skill,C.hospitalID,C.hospitalName,C.hospitalLevel,B.sectionID,D.attrname sectionName
+        	from tb_medical_patient_doctor A 
+	        	left join tb_medical_doctor B on A.doctorID=B.doctorID
+	        	left join tb_medical_hospital C on B.hospitalID=C.hospitalID 
+	        	left join tb_medical_section D on B.sectionID=D.id
+	      		<where>
+	      		    <if test="patientID !=null and patientID !=''">
+	      		        and A.patientID = #{patientID}
+	      		    </if>
+	      		    <if test="doctorType !=null and doctorType !=''">
+	      		        and A.doctorType = #{doctorType}
+	      		    </if>
+	      		</where>
+    </select>
+    
+    <insert id="saveMyDoctor" parameterType="java.util.Map">
+        insert tb_medical_patient_doctor(patientID,doctorID,doctorType,createTime) 
+        	values(#{patientID},#{doctorID},#{doctorType},now())
+    </insert>
+</mapper>

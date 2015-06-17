@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.databus.prescription.model.Prescription">
+   
+	<select id="query_Prescription_by_id" parameterType="long" resultType="com.netbull.shop.databus.prescription.model.Prescription">
+		select * from tb_medical_prescription t where t.id = #{id}
+	</select>
+	
+	<select id="query_PrescriptionItems_by_PrescriptionId" parameterType="long" resultType="com.netbull.shop.databus.prescription.model.PrescriptionItem">
+		select * from tb_medical_prescription_item t where t.prescriptionId = #{prescriptionId}
+	</select>
+   
+   	<insert id="save_PrescriptionRelation" parameterType="com.netbull.shop.databus.prescription.model.PrescriptionRelation" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_prescription_relation(prescriptionId, patientId, creator, createTime)
+		VALUES (#{prescriptionId}, #{patientId}, #{creator}, NOW())
+	</insert>
+	
+	<insert id="save_PrescriptionBuyRecord" parameterType="com.netbull.shop.databus.prescription.model.PrescriptionBuyRecord" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_prescription_buy_record(patientIdPrescriptionId, drugShopId, createTime)
+		VALUES (#{patientIdPrescriptionId}, #{drugShopId}, NOW())
+	</insert>
+   
+    <insert id="save_Prescription" parameterType="com.netbull.shop.databus.prescription.model.Prescription" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_prescription(doctorId, title, application, remark, status, isShow, qrCodePath, createTime)
+		VALUES (#{doctorId}, #{title}, #{application}, #{remark}, #{status}, #{isShow}, #{qrCodePath}, NOW())
+	</insert>
+	
+	<update id="update_Prescription" parameterType="com.netbull.shop.databus.prescription.model.Prescription">
+		update tb_medical_prescription set
+		title=#{title}, application=#{application}, remark=#{remark} 
+		where id = #{id}
+	</update>
+	
+	<insert id="save_PrescriptionItem" parameterType="com.netbull.shop.databus.prescription.model.PrescriptionItem" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_prescription_item(prescriptionId, drugName, drugSpec, producer, drugType, amount, useage)
+		VALUES (#{prescriptionId}, #{drugName}, #{drugSpec}, #{producer}, #{drugType}, #{amount}, #{useage})
+	</insert>
+	
+	<update id="update_PrescriptionItem" parameterType="com.netbull.shop.databus.prescription.model.PrescriptionItem">
+		update tb_medical_prescription_item set
+		drugName=#{drugName}, drugSpec=#{drugSpec}, producer=#{producer}, drugType=#{drugType}, amount=#{amount}, useage=#{useage}
+		where id = #{id}
+	</update>
+	
+	<update id="del_Prescription_by_id" parameterType="long">
+		UPDATE tb_medical_prescription SET status = 0 WHERE id=#{id}
+	</update>
+	
+	<select id="query_for_doctorPagination" parameterType="map" resultType="com.netbull.shop.databus.prescription.model.Prescription">
+		select * from tb_medical_prescription where doctorId = #{doctorId} and isShow = 1 limit #{start}, #{pageSize}
+	</select>
+
+	<select id="query_for_doctorTotalCount" parameterType="map" resultType="long">
+		select count(1) from tb_medical_prescription where doctorId = #{doctorId} and isShow = 1 
+	</select>
+	
+	<select id="query_PatientPrescription_by_id" parameterType="map" resultType="com.netbull.shop.databus.prescription.dto.PatientPrescription">
+		select b.id, b.prescriptionId, a.title, a.application, a.remark, a.qrCodePath, b.creator binder, b.createTime bindTime
+		from tb_medical_prescription a
+		left join tb_medical_prescription_relation b on a.id = b.prescriptionId
+		where b.id = #{id}
+	</select>
+	
+	<select id="query_for_patientPagination" parameterType="map" resultType="com.netbull.shop.databus.prescription.dto.PatientPrescription">
+		select b.id, b.prescriptionId, a.title, a.application, a.remark, b.creator binder, b.createTime bindTime
+		from tb_medical_prescription a
+		left join tb_medical_prescription_relation b on a.id = b.prescriptionId
+		where b.patientId = #{patientId}
+		limit #{start}, #{pageSize}
+	</select>
+
+	<select id="query_for_patientTotalCount" parameterType="map" resultType="long">
+		select count(1) from tb_medical_prescription a
+		left join tb_medical_prescription_relation b on a.id = b.prescriptionId
+		where b.patientId = #{patientId}
+	</select>
+	
+	<select id="query_drug_pagination" parameterType="map" resultType="com.netbull.shop.databus.prescription.model.Drug">
+		select
+		    distinct
+		    a.shortName name,
+		    a.imgPath,
+		    c.attrValue spec,
+		    d.attrValue producer
+		from 
+			tb_product_goods a
+			LEFT JOIN tb_product_goods_attr b on a.goodsCode = b.goodsCode and b.attrCode = 'shortCode' 
+			LEFT JOIN tb_product_goods_attr c on a.goodsCode = c.goodsCode and c.attrCode = 'spec' 
+			LEFT JOIN tb_product_goods_attr d on a.goodsCode = d.goodsCode and d.attrCode = 'producer' 
+		where
+			upper(b.attrValue) like upper('%${shortCode}%')
+		limit
+			#{start}, #{pageSize}
+	</select>
+
+	<select id="query_drug_totalCount" parameterType="map" resultType="long">
+		select count(*) from 
+		(
+			select
+				distinct
+				a.shortName name,
+				a.imgPath,
+				c.attrValue spec,
+				d.attrValue producer
+			from tb_product_goods a
+			LEFT JOIN tb_product_goods_attr b on a.goodsCode = b.goodsCode and b.attrCode = 'shortCode' 
+			LEFT JOIN tb_product_goods_attr c on a.goodsCode = c.goodsCode and c.attrCode = 'spec' 
+			LEFT JOIN tb_product_goods_attr d on a.goodsCode = d.goodsCode and d.attrCode = 'producer' 
+			where upper(b.attrValue) like upper('%l%')
+		) t
+	</select>
+	
+	<select id="query_drug_for_nearshop" parameterType="map" resultType="com.netbull.shop.databus.prescription.model.Drug">
+		select
+			a.shortName name,
+			a.imgPath,
+			a.shopPrice price,
+			c.attrValue spec,
+			d.attrValue producer
+		from 
+			tb_product_goods a
+			LEFT JOIN tb_product_goods_attr c on a.goodsCode = c.goodsCode and c.attrCode = 'spec' 
+			LEFT JOIN tb_product_goods_attr d on a.goodsCode = d.goodsCode and d.attrCode = 'producer' 
+		where
+		    a.shopId = ${shopId} and a.shortName = '${drugName}' and c.attrValue = '${spec}' and d.attrValue = '${producer}'
+	</select>
+	
+</mapper>

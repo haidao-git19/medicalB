@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.AliPayAuthDao">
+
+	<update id="modifyAliAuthPayResp" parameterType="java.util.Map" >
+		UPDATE tb_product_alipay_auth_response F
+				set F.updateTime = now()
+				<if test="sec_id != null and sec_id !=''">
+				     ,sec_id = #{sec_id}
+				</if>
+				<if test="service != null and service !=''">
+				     ,service = #{service}
+				</if>
+				<if test="sign != null and sign !=''">
+				     ,sign = #{sign}
+				</if>
+				<if test="res_data != null and res_data !=''">
+				     ,res_data = #{res_data}
+				</if>
+				<if test="res_error != null and res_error !=''">
+				     ,res_error = #{res_error}
+				</if>
+				<if test="request_token != null and request_token !=''">
+				     ,request_token = #{request_token}
+				</if>
+				<if test="code != null and code !=''">
+				     ,code = #{code}
+				</if>
+				<if test="sub_code != null and sub_code !=''">
+				     ,sub_code = #{sub_code}
+				</if>
+				<if test="msg != null and msg !=''">
+				     ,msg = #{msg}
+				</if>
+				<if test="detail != null and detail !=''">
+				     ,detail = #{detail}
+				</if>
+		WHERE F.req_id = #{req_id} and partner = #{partner}
+	</update>
+	
+	<insert id="saveAliPayAuthReq" parameterType="java.util.Map">
+		INSERT INTO tb_product_alipay_auth_request (service,format,partner,req_id,sec_id,sign,req_data,subject,out_trade_no,total_fee,seller_account_name,out_user,pay_expire,agent_id,createTime) 
+		VALUES(#{service},#{format},#{partner},#{req_id},#{sec_id},#{sign},#{req_data},#{subject},#{out_trade_no},#{total_fee},#{seller_account_name},#{out_user},#{pay_expire},#{agent_id},now())
+	</insert>
+	
+	<insert id="saveAliPayAuthResp" parameterType="java.util.Map">
+		INSERT INTO tb_product_alipay_auth_response (partner,req_id,sec_id,service,sign,res_data,res_error,request_token,code,sub_code,msg,detail,createTime) 
+		VALUES(#{partner},#{req_id},#{sec_id},#{service},#{sign},#{res_data},#{res_error},#{request_token},#{code},#{sub_code},#{msg},#{detail},now())
+	</insert>
+	
+</mapper>

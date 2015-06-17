@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.databus.order.model.OrderBase">
+
+	<insert id="save_OrderBase" parameterType="com.netbull.shop.databus.order.model.OrderBase" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medicalb_order_base(orderNumber, userId, totalPrice, createTime, state)
+		VALUES (#{orderNumber}, #{userId}, #{totalPrice}, NOW(), 1)
+	</insert>
+	
+	<insert id="save_OrderPayment" parameterType="com.netbull.shop.databus.order.model.OrderPayment" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medicalb_order_payment(orderNumber, payPrice, payStatus, payMode, payPlatformCode, payTime)
+		VALUES (#{orderNumber}, #{payPrice}, #{payStatus}, #{payMode}, #{payPlatformCode}, NOW())
+	</insert>
+	
+	<insert id="save_ServiceOrder" parameterType="com.netbull.shop.databus.order.model.ServiceOrder" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medicalb_order_service(orderNumber, patientId, doctorId, serviceType, serviceNumber, shopId, prescriptionId, unionTradeNumber, unionTradeMsg, unionTradeState)
+		VALUES (#{orderNumber}, #{patientId}, #{doctorId}, #{serviceType}, #{serviceNumber}, #{shopId}, #{prescriptionId}, #{unionTradeNumber}, #{unionTradeMsg}, #{unionTradeState})
+	</insert>
+	
+	<update id="update_OrderPayment" parameterType="com.netbull.shop.databus.order.model.OrderPayment">
+		update tb_medicalb_order_payment a
+		set a.payStatus=#{payStatus}, a.payTime=NOW()
+		where a.orderNumber=#{orderNumber}
+	</update>
+	
+	<select id="patientOrderListTotalCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(1)
+		from tb_medicalb_order_service a
+		left join tb_medicalb_order_base b on a.orderNumber = b.orderNumber
+		left join tb_medical_doctor c on a.doctorId = c.doctorID
+		left join tb_medical_hospital d on c.hospitalID = d.hospitalID
+		where a.patientId = ${patientId} and a.serviceType in (${serviceType})
+	</select>
+
+	<select id="patientOrderList" parameterType="java.util.HashMap" resultType="com.netbull.shop.databus.order.dto.PatientOrder">
+		select a.orderNumber, a.doctorId, (select e.true_name from vauth.user_info e where e.id = c.loginID) doctorName, 
+		d.hospitalName, a.serviceType, a.serviceNumber, a.shopId, a.prescriptionId, b.totalPrice fee, b.createTime 
+		from tb_medicalb_order_service a
+		left join tb_medicalb_order_base b on a.orderNumber = b.orderNumber
+		left join tb_medical_doctor c on a.doctorId = c.doctorID
+		left join tb_medical_hospital d on c.hospitalID = d.hospitalID
+		where a.patientId = ${patientId} and a.serviceType in (${serviceType})
+		limit ${pageIndex}, ${pageSize}
+	</select>
+	
+	<select id="doctorOrderListTotalCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(1)
+		from tb_medicalb_order_service a
+		left join tb_medicalb_order_base b on a.orderNumber = b.orderNumber
+		where a.doctorId = ${doctorId} and a.serviceType in (${serviceType})
+	</select>
+
+	<select id="doctorOrderList" parameterType="java.util.HashMap" resultType="com.netbull.shop.databus.order.dto.DoctorOrder">
+		select a.orderNumber, a.patientId, a.serviceType, a.serviceNumber, b.totalPrice fee, b.createTime 
+		from tb_medicalb_order_service a
+		left join tb_medicalb_order_base b on a.orderNumber = b.orderNumber
+		where a.doctorId = ${doctorId} and a.serviceType in (${serviceType})
+		limit ${pageIndex}, ${pageSize}
+	</select>
+	
+	<select id="totalIncome" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select sum(b.totalPrice)
+		from tb_medicalb_order_service a
+		left join tb_medicalb_order_base b on a.orderNumber = b.orderNumber
+		where a.doctorId = ${doctorId}
+	</select>
+
+	<select id="recentMonthIncome" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select sum(b.totalPrice)
+		from tb_medicalb_order_service a
+		left join tb_medicalb_order_base b on a.orderNumber = b.orderNumber
+		where a.doctorId = ${doctorId} and b.createTime > ${firstDayOfMonth}
+	</select>
+	
+	<select id="shopOrderListTotalCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(1)
+		from tb_medicalb_order_service a
+		left join tb_medicalb_order_base b on a.orderNumber = b.orderNumber
+		where a.shopId = ${shopId} and a.serviceType in (${serviceType})
+	</select>
+
+	<select id="shopOrderList" parameterType="java.util.HashMap" resultType="com.netbull.shop.databus.order.dto.ShopOrder">
+		select a.orderNumber, a.patientId, a.serviceType, a.shopId, a.prescriptionId, b.totalPrice fee, b.createTime 
+		from tb_medicalb_order_service a
+		left join tb_medicalb_order_base b on a.orderNumber = b.orderNumber
+		where a.shopId = ${shopId} and a.serviceType in (${serviceType})
+		limit ${pageIndex}, ${pageSize}
+	</select>
+	
+	<select id="findServiceOrderByOrderNumber" parameterType="java.lang.String" resultType="com.netbull.shop.databus.order.model.ServiceOrder">
+		select * from tb_medicalb_order_service a where a.orderNumber=#{orderNumber}
+	</select>
+	
+</mapper>

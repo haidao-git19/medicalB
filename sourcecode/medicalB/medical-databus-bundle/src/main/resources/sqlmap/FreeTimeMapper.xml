@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.FreeTimeDao">
+
+    <select id="queryDutyTimeList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM tb_medical_freetime WHERE weekFlag=0 and weekNum >=#{weekNum} and doctorID=#{doctorID} and type=#{type}
+        UNION
+        SELECT * FROM tb_medical_freetime WHERE weekFlag=1 and doctorID=#{doctorID} and type=#{type}
+    </select>
+    
+    <select id="queryFreeTimeList" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_freetime 
+        <where>
+            <if test="doctorID !=null and doctorID !=''">
+                and doctorID = #{doctorID}
+            </if>
+            <if test="weekFlag !=null and weekFlag !=''">
+                and weekFlag = #{weekFlag}
+            </if>
+            <if test="type !=null and type !=''">
+                and type = #{type}
+            </if>
+        </where>
+    </select>
+	
+    <select id="queryFreeTime" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from tb_medical_freetime 
+        <where>
+            <if test="freeID !=null and freeID !=''">
+                id = #{freeID}
+            </if>
+        </where>
+    </select>
+</mapper>

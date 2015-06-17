@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.QuestionDao">
+
+    <select id="queryQuestion" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT q.questionID,q.patientID,q.title,q.disease,q.description,q.everTreat,q.wantHelp,q.status,
+        DATE_FORMAT(q.createTime,'%Y-%m-%d %H:%i') createTime,DATE_FORMAT(q.updateTime,'%Y-%m-%d %H:%i') updateTime,d.*
+         FROM tb_medical_patient_question q LEFT JOIN tb_medical_doctor d ON q.doctorID = d.doctorID
+        <where>
+            <if test="status !=null and status !=''">
+                and status=#{status}
+            </if>
+            <if test="questionID !=null and questionID !=''">
+                and questionID=#{questionID}
+            </if>
+            <if test="doctorID !=null and doctorID !=''">
+                and doctorID=#{doctorID}
+            </if>
+        </where>
+    </select>
+   
+    <insert id="save" parameterType="com.netbull.shop.common.vo.QuestionVo" useGeneratedKeys="true" keyProperty="questionID">
+        INSERT tb_medical_patient_question(patientID,doctorID,title,disease,description,everTreat,wantHelp,status,createTime,updateTime) 
+        VALUES(#{patientID},#{doctorID},#{title},#{disease},#{description},#{everTreat},#{wantHelp},'0',now(),now())
+    </insert>
+    
+    <update id="update" parameterType="java.util.Map">
+        UPDATE tb_medical_patient_question
+        <set>
+            <if test="status !=null and status !=''">
+                status = #{status},
+            </if>
+            updateTime=now()
+        </set>
+        <where>
+            <if test="questionID !=null and questionID !=''">
+                and questionID = #{questionID}
+            </if>
+        </where>
+    </update>
+	
+    <insert id="saveReply" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        INSERT tb_medical_patient_question_reply(questionID,submitterID,submitterType,replyContent,replyTime) 
+        	VALUES(#{questionID},#{submitterID},#{submitterType},#{replyContent},now())
+    </insert>
+    
+    <select id="queryReply" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT id,questionID,submitterID,submitterType,replyContent,
+        DATE_FORMAT(replyTime,'%Y-%m-%d %H:%i') replyTime
+         FROM tb_medical_patient_question_reply 
+        <where>
+            <if test="questionID !=null and questionID !=''">
+                and questionID = #{questionID}
+            </if>
+        </where>
+        ORDER BY replyTime ASC
+    </select>
+</mapper>

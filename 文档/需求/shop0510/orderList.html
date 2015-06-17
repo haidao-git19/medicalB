@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>我的订单</title>
+<meta name="Keywords" content="风湿骨科用药,风湿骨科吃什么药好" />
+<meta name="Description" content="壹药网在线销售风湿骨科用药，100%正品，提供风湿骨科用药大全、风湿骨科吃什么药好等信息。" />
+<link rel="stylesheet" type="text/css" href="css/head201406.css">
+<link rel="stylesheet" type="text/css" href="css/head_990.min.css" />
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel='stylesheet' type='text/css' href='css/usercenter.css' />
+<link rel='stylesheet' type='text/css' href='css/center_part.css' />
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/global_top.min.js"></script>
+<script type="text/javascript" src="js/cart_cookie.min.js"></script>
+<script type="text/javascript" src="js/user_login_cookie.min.js"></script>
+<script type="text/javascript" src="js/cart_1.min.js"></script>
+<script type="text/javascript" src="js/autoComplete2.min.js"></script>
+<script type="text/javascript" src="js/common_others.min.js"></script>
+<script type="text/javascript" src="js/index_201406.js"></script>
+<script type="text/javascript" src="js/search.list.js"></script>
+</head>
+</head>
+<body>
+<div class="y_head clearfix">
+  <div class="site-nav">
+    <div class="site-nav-bd">
+      <ul class="site-nav-bd-l">
+        <li class="menu">
+          <div class="menu-hd province_box"> <span>欢迎访问商城</span> </div>
+        </li>
+      </ul>
+      <ul class="site-nav-bd-r">
+        <li class="menu">
+          <div id="logininfo" class="menu-hd"><a target="_self" class="red mr5" href="javascript: login();" rel="nofollow" title="登录网上药店后台">请登录</a><a title="注册会员，网上买药更简单" target="_self" href="http://passport.111.com.cn/sso/register.action" rel="nofollow">注册</a></div>
+        </li>
+        <li class="menu">
+          <div class="menu-hd"> <a rel="nofollow" href="http://my.111.com.cn/ucenter/orderList.action"> 我的订单</a> </div>
+        </li>
+        <li class="menu">
+          <div class="menu-hd head_order"> <a target="_self" class="myyaowang" href="http://my.111.com.cn/ucenter/myCenter.action" rel="nofollow">我的壹药网</a>
+            <div class="menu_bd" id="menu_bd_orther">
+              <ul class="menu_bd_panel">
+                <li><a target="_self" href="http://my.111.com.cn/ucenter/queryCoupon.action" rel="nofollow">我的优惠券</a></li>
+                <li><a target="_self" href="http://my.111.com.cn/ucenter/myFavorite.action" rel="nofollow">我的收藏夹</a></li>
+                <li><a target="_self" href="http://my.111.com.cn/ucenter/reviewList.action" rel="nofollow">商品评价</a></li>
+                <li><a title="网上药店私人定制：会员专享" target="_self" href="http://my.111.com.cn/ucenter/privateTag.action" rel="nofollow">我的私人定制</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="menu">
+          <div class="menu-hd"><a target="_blank" href="http://www.111.com.cn/cmsPage/2013073005/index.html" rel="nofollow">帮助中心</a></div>
+        </li>
+        <li class="menu li_none">
+          <div class="menu-hd"><i class="iconfont icon-phone">&#xe658;</i>
+            <div class="tellnumber">400-007-0958</div>
+          </div>
+        </li>
+        <li class="menu">
+          <div class="menu-hd head_app"> <a target="_blank" class="tell" href="http://www.111.com.cn/cmsPage/2013101101/" rel="nofollow"><em></em><span>手机APP</span></a>
+            <div class="menu_bd tell_title">&emsp;</div>
+            <div id="menu_bd_app">
+              <ul>
+                <li><span class="dimensional"></span></li>
+                <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014061304/index.html">APP首单<span class="redBold">返10元</span></a></li>
+                <li class="appmore"><a href="http://app.111.com.cn/"  rel="nofollow">更多应用<span class="rightIcon"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="menu menu_last">
+          <div class="menu-hd"><a target="_self" class="favorite" href="javascript:bookmark();" rel="nofollow"><em></em><span>收藏</span></a> </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap site_head yao_head">
+    <div class="mod_logo"><a rel="nofollow" class="logo_jieri" target="_self" href="#"></a>
+      <div class="logo"><a title="网上药店" href="http://www.111.com.cn">壹药网</a></div>
+    </div>
+    <div class="mod_tell">
+      <p>好医 · 好药 · 好健康</p>
+    </div>
+    <div class="mod_search">
+      <div class="searchForm">
+        <label class="combobox-placeholder"   id="combobox-placeholder"  for="word"></label>
+        <input maxlength="100" value="" name="kw" id="word" type="text" autocomplete="off" />
+        <button class="searchBtn" onclick="search();">搜索</button>
+        <div style="display: none;" class="search_tips_result_new" id="searchSuggest">
+          <ul>
+          </ul>
+        </div>
+      </div>
+      <div class="hotkeys">
+        <div class="word_box" id="hotkeys"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="head_wrap clearfix" id="headerNav">
+  <div class="headerNavMain">
+    <ul class="sitenav"  id="sideNav">
+      <li class="s_m home"><a href="http://www.111.com.cn/" class="nav_link" target="_self">首页</a></li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover1">常见病<i></i></a>
+        <ul id="navHover1">
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030501/">感冒发烧</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014061302/">皮炎癣症</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014062301/">风湿骨病</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030402/">失眠</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2015013001/">查看更多</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a class="nav_link"  data-rel="navHover2">重大疾病<i></i></a>
+        <ul id="navHover2">
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014030301/">肺癌</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014081101/">尖锐湿疣</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014040204/">抑郁症</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014040302/">帕金森</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014121701/">查看更多</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover3">女性<i></i></a>
+        <ul id="navHover3">
+          <li><a rel="nofollow" href="http://www.111.com.cn/list/955412-0-0-0-0-0-0-1.html">面部护理</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2015021102/">减肥美颜</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014090502/">厨房助手</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014010302/">孕妈养成</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014072801/">祛疤神器</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover4">男性<i></i></a>
+        <ul id="navHover4">
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014111004/">补肾壮阳</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014051301/">早泄神药</a></li>
+          <li><a href="http://www.111.com.cn/list/971522-0-0-0-0-0-0-1.html">运动健康</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/list/964106-0-1_93499_138826-0-0-0-0-1.html">解酒护肝</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2015031706/">性福加油站</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a class="nav_link" data-rel="navHover6">婴幼儿<i></i></a>
+        <ul id="navHover6">
+          <li><a rel="nofollow" href="http://www.111.com.cn/list/971495-0-0-0-0-0-0-1.html/">婴儿奶粉</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014082801/">宝宝纸尿裤</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/list/965399-0-0-0-0-0-0-1.html">宝宝喂养</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014050402/">孕育总动员</a></li>
+          <li><a rel="nofollow" href="http://www.111.com.cn/cmsPage/2014050801/">小儿多动症</a></li>
+        </ul>
+      </li>
+      <li class="s_m"><a data-rel="navHover5" class="nav_link index_tuan" href="http://t.111.com.cn">团购<em class="pinkage"></em></a></li>
+      <li class="s_m"><a data-rel="navHover5" class="nav_link caiji_tuan" href="http://www.111.com.cn/cmsPage/2014120101/" rel="nofollow">企业采购</a></li>
+      <li class="s_m s_app"><a class="nav_link" data-rel="navHover7"><span>&nbsp;</span>掌上壹药网<i></i></a>
+        <ul id="navHover7" class="app_qrcode">
+          <li><a href="http://app.111.com.cn/yihaoyaodian.html">1号药店APP<span class="yyw_qrcode"><i>一号药店App</i></span></a></li>
+          <li><a href="http://app.111.com.cn/question.html">易诊APP<span class="yz_qrcode"><i>易诊App</i></span></a></li>
+          <li><a href="http://app.111.com.cn/guanzhao.html">关照APP<span class="gz_qrcode"><i>关照App</i></span></a></li>
+          <li><a href="http://app.111.com.cn/weixin.html">微信/微博<span class="wx_qrcode"><i>壹药网官方微信/微博</i></span></a></li>
+        </ul>
+      </li>
+      <li class="s_m s_app"><a class="nav_link" data-rel="navHover8">健康服务<i></i></a>
+        <ul id="navHover8">
+          <li><a href="http://yz.111.com.cn/">易诊健康问答</a></li>
+          <li><a href="http://ypk.111.com.cn/">药品查询</a></li>
+          <li><a href="http://jbk.111.com.cn/">疾病查询</a></li>
+          <li><a href="http://www.111.com.cn/bbs/">健康论坛</a></li>
+          <li><a href="http://www.111.com.cn/jkbk/">健康百科</a></li>
+          <li><a href="http://www.111.com.cn/news/">健康资讯</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="searchForm" style="display:none">
+      <label class="combobox-placeholder" for="fix_keyword"></label>
+      <input maxlength="100" value="" name="kw" id="fix_keyword" type="text" autocomplete="off" />
+      <button class="searchBtn" onclick="javascript:searchTips();;">搜索</button>
+      <div style="display: none;" class="search_tips_result_new" id="fix_searchSuggest">
+        <ul>
+        </ul>
+      </div>
+    </div>
+    <div class="mod_minicart"> <a rel="nofollow"  target="_self" href="http://buy.111.com.cn/cart/shoppingcart/queryshoppingcart.action" class="mini_cart_btn"> <em class="cart_num">0</em> <span>购物车</span> </a>
+      <div id="minicart_list" style="display: none" class="minicart_list">
+        <div class="list_detail"> 
+          <!--购物车有商品时begin-->
+          <ul style="display: block;">
+          </ul>
+          <div class="checkout_box" style="display: blcok">
+            <p> <span class="fl"> 共<em class="fstrong">0</em>件商品</span> 合计：<em class="fstrong">0.0</em> </p>
+            <p id="miniCart_p2" style="display: none;"> <span style="color: gray;"> 满百免运费 </span> </p>
+            <a rel="nofollow" class="checkout_btn" href="http://buy.111.com.cn/cart/shoppingcart/queryshoppingcart.action" target="_self"> 去结算 </a> </div>
+          <div style="display: none;" class="none_tips"> <i> </i>
+            <p> 您的购物车里还没有商品，如已添加商品，请 <a rel="nofollow" href="javascript: login();" target="_self">登录 </a> 。 </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--head end-->
+<div class="clearfix" id="container">
+  <div class="breadcrumb"> 您现在的位置： <a href="http://www.111.com.cn" class="aBlu">壹药网</a> &gt; <a href="/ucenter/myCenter.action" class="aBlu">我的壹药网</a> &gt; 我的订单 </div>
+  <div class="columnleft" id="myYihaodianLeftMenu" style="display: block; float: left;">
+    <dl>
+      <dt> 订单查询 </dt>
+      <dd class="current" id="orderhtml"> <a href="http://my.111.com.cn/ucenter/orderList.action">我的订单</a> </dd>
+    </dl>
+    <dl>
+      <dt> 个人信息管理 </dt>
+      <dd id="userinfohtml"> <a href="http://my.111.com.cn/ucenter/userInfo.action">编辑个人资料</a> </dd>
+      <dd id="usersafehtml"> <a href="http://my.111.com.cn/ucenter/userSafe.action">安全中心</a> </dd>
+      <dd id="addresshtml"> <a href="http://my.111.com.cn/ucenter/acceptAddress.action">地址簿管理</a> </dd>
+    </dl>
+  </div>
+  <div class="columnright">
+    <div class="com_ttl">我的订单</div>
+    <div class="div_search clearfix">
+      <button class="search_btn" onclick="searchOrder('0');"> 搜 索 </button>
+      <input id="txtSearch" class="ipt" value="请输入商品名称、商品ID、订单号" onfocus="if(this.value=='请输入商品名称、商品ID、订单号'){this.value='';}" onblur="if(this.value==''){this.value='请输入商品名称、商品ID、订单号';}" name="txtSearch" type="text">
+    </div>
+    <div id="myOrderList" class="tab_tb mb10">
+      <div class="my_order clearfix">
+        <div class="selectBox">
+          <select class="" onchange="selectChange();" id="dateStatus">
+            <option value="1" selected="selected"> 3个月内订单 </option>
+            <option value="2"> 历史订单 </option>
+            <option value="0"> 全部订单 </option>
+          </select>
+        </div>
+        <ul class="myOderNav list_tab clearfix">
+          <li class="cur"> <a> 全部 <cite>(1)</cite> </a> </li>
+          <li class=""> <a>待支付 <cite>(0)</cite><span></span> </a> </li>
+          <li class=""> <a> 待发货 <cite>(0)</cite> </a> </li>
+          <li class=""> <a>已发货 <cite>(0)</cite> </a> </li>
+          <li class=""> <a>待评论 <cite>(0)</cite><span></span> </a> </li>
+          <li class="" onclick="changeStatus(5);"> <a>已取消 <cite>(1)</cite> </a> </li>
+          <li class="end"> <a>已完成 <cite>(0)</cite> </a> </li>
+        </ul>
+      </div>
+      <div class="packageBox">
+        <table style="z-index:99;" class="com_table packageInfo" cellpadding="0" cellspacing="0">
+          <colgroup>
+          <col width="55%">
+          <col width="23%">
+          </colgroup>
+          <tbody>
+            <tr class="packageTit">
+              <th class="orderNumber ">订单号： <a target="_blank" href="/ucenter/orderDetail.action?orderId=20150506234322268949">20150506234322268949 </a> <del>(
+                2015-05-06
+                )</del> </th>
+              <th class="orderAmount">订单金额： <b>￥676.5 </b> <del> &nbsp;
+                网上支付 </del> </th>
+              <th><div class="orderReceiptInfo">收货信息： <a href="javascript:void(0)">查看 <i>&nbsp;</i> <span class="boxShadow">本柑 <br>
+                  上海
+                  
+                  上海市
+                  松江区 看看情况 23 24 霜 <br>
+                  (15555342213&nbsp;) </span> </a> </div></th>
+            </tr>
+            <tr class="tdBd ">
+              <td class="productListB" width="460"><div class="packageNum"> <b>包裹1 </b> </div>
+                <ul>
+                  <li> <a class="img" target="_blank" href="http://www.111.com.cn/product/50071141.html"> <img src="http://p4.maiyaole.com/img/50071/50071141/50_50.jpg?a=2096548487" onerror="imgERROR(this,'no_pic_50_50.jpg');" alt="惠氏 启赋（Wyeth illuma）婴幼儿配方奶粉(2段 6-18个月) 900g/罐 原装进口"></a> <span class="tit_span"> <i> <a target="_blank" class="tit" href="http://www.111.com.cn/product/50071141.html">惠氏 启赋（Wyeth illuma）婴幼儿配方奶粉(2段 6-18个月) 900g/罐 原装进口 </a> </i> </span>
+                    <p> <b>￥329.0</b> x2 </p>
+                  </li>
+                </ul></td>
+              <td class="packageSendInfo"><strong>( <i class="txt_red">等待付款</i> )</strong> <strong>包裹号：<br>
+                1 </strong>
+                <div class="packageSendInfoList orderList_order_status_track" style="z-index:98"> <b>跟踪包裹<s></s> </b>
+                  <ul style="display: none;" class="boxShadow">
+                    <li> <i> 2015-5-6 </i> 23:43:22
+                      您提交了订单请等待系统处理。 </li>
+                  </ul>
+                </div></td>
+              <td class="operateLink" rowspan="2"><a target="_blank" href="/ucenter/orderDetail.action?orderId=20150506234322268949" class="aBlu viewOrder">查看订单详情</a>
+                <p> <a onclick="fastAddtoCart('0','50071141,974506')" href="javascript:void(0);" class="concelOrder orderListAgain aBlu">再次购买</a> </p>
+                <div class="timeLeft" onclick="showTime('20150506234322268949','86395330')">
+                  <p> 距订单取消还有<br>
+                    <span id="hours_20150506234322268949">23</span>小时 <span id="minutes_20150506234322268949">59</span>分 <span id="seconds_20150506234322268949">03</span>秒 </p>
+                  <div id="timeTip_0" style="display: none" class="cancelDateShow">
+                    <div class="topTri"></div>
+                    提交订单后24小时未支付，订单自动取消。 </div>
+                </div>
+                <a onclick="toPay('20150506234322268949','500')" href="javascript:void(0);" class="newBt4 netPayButton">立即支付</a>
+                <p id="modifyPaymentMethodLink_130058867"> <a href="http://buy.111.com.cn/interfaces/order/onlySuccess.action?orderid=20150506234322268949" class="aBlu concelOrder">修改支付方式</a> </p>
+                <p id="modifyAddressLink_126055389" style=""> <a class="aBlu concelOrder" href="javascript:void(0)" onclick="modifyAddress('20150506234322268949')">修改收货地址</a> </p>
+                <p> <a onclick="cancelOrder('20150506234322268949')" href="javascript:void(0)" class="concelOrder orderListAgain aBlu">取消订单</a> </p></td>
+            </tr>
+            <tr class="tdBd ">
+              <td class="productListB" width="460"><div class="packageNum"> <b>包裹2 </b> </div>
+                <ul>
+                  <li> <a class="img" target="_blank" href="http://www.111.com.cn/product/974506.html"> <img src="http://p2.maiyaole.com/img/974/974506/50_50.jpg?a=1057236461" onerror="imgERROR(this,'no_pic_50_50.jpg');" alt="整肠生 地衣芽孢杆菌活菌胶囊 0.25g*6粒"> </a> <span class="tit_span"> <i> <a target="_blank" class="tit" href="http://www.111.com.cn/product/974506.html">整肠生 地衣芽孢杆菌活菌胶囊 0.25g*6粒 </a> </i> </span>
+                    <p> <b>￥8.5</b> x1 </p>
+                  </li>
+                </ul></td>
+              <td class="packageSendInfo"><strong>( <i class="txt_red">等待付款</i> )</strong> <strong>包裹号：<br>
+                2 </strong>
+                <div class="packageSendInfoList orderList_order_status_track" style="z-index:97"> <b>跟踪包裹<s></s> </b>
+                  <ul style="display: none;" class="boxShadow">
+                    <li> <i> 2015-5-6 </i> 23:43:22
+                      您提交了订单请等待系统处理。 </li>
+                  </ul>
+                </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <p class="pages"> <span class="page-prev">上一页<b></b> </span> <span class="cur">1 </span> <span class="page-next">下一页<b></b> </span> 共1页，到第
+          <input class="txt" id="pageIndex" type="text">
+          页 <a class="page-btn" onclick="return OnClickButton(0)" type="submit">确定</a> </p>
+      </div>
+    </div>
+    <div id="pms_order_list"></div>
+  </div>
+</div>
+
+<!--footer-->
+<div class="wrap ft_commit"> <a class="c_0" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page2"  rel="nofollow" target="_blank"><i class="icon-rongyu"></i><span>权威荣誉</span></a> <a class="c_1" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page3"  rel="nofollow" target="_blank"><i class="icon-pinpai"></i><span>品牌授权</span></a> <a class="c_2" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page4"  rel="nofollow" target="_blank"><i class="icon-zhengpin"></i><span>正品保险</span></a> <a class="c_3" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page5"  rel="nofollow" target="_blank"><i class="icon-yaojian"></i><span>药监认证</span></a> <a class="c_4" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page6"  rel="nofollow" target="_blank"><i class="icon-baibaoyou"></i><span>满百包邮</span></a> <a class="c_5" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page7"  rel="nofollow" target="_blank"><i class="icon-30tui"></i><span>30天退换无忧</span></a> <a class="c_6" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page8"  rel="nofollow" target="_blank"><i class="icon-yingsibz"></i><span>隐私包装</span></a> <a class="c_7" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page9"  rel="nofollow" target="_blank"><i class="icon-jinpaiyaoshi"></i><span>金牌药师</span></a> <a class="c_8" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page10"  rel="nofollow" target="_blank"><i class="icon-zhengpin"></i><span>货到付款</span></a> <a class="c_9" href="http://www.111.com.cn/cmsPage/2015011601/index.html#page11"  rel="nofollow" target="_blank"><i class="icon-yidongfuwu"></i><span>健康管家</span></a> </div>
+<div class="foot_navi">
+  <div class="wrap bottom_service_link b_bg clearfix">
+    <dl>
+      <dt>新手入门</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073110/index.html" target="_blank" rel="nofollow">常见问题</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073101/index.html" target="_blank" rel="nofollow">新会员注册</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073106/index.html" target="_blank" rel="nofollow">用户登录</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073108/index.html" target="_blank" rel="nofollow">找回密码</a></dd>
+    </dl>
+    <dl>
+      <dt>购物指南</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073113/index.html" target="_blank" rel="nofollow">购物流程</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073114/index.html" target="_blank" rel="nofollow">订单状态说明</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073111/index.html" target="_blank" rel="nofollow">隐私声明</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013111902/index.html" target="_blank" rel="nofollow">发票制度</a></dd>
+    </dl>
+    <dl>
+      <dt>配送服务</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073115/index.html" target="_blank" rel="nofollow">范围、时间及费用</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073116/index.html" target="_blank" rel="nofollow">商品验货及签收</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2014022401/index.html" target="_blank" rel="nofollow">门店自提</a></dd>
+    </dl>
+    <dl>
+      <dt>支付方式</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073117/index.html" target="_blank" rel="nofollow">货到付款</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073118/index.html" target="_blank" rel="nofollow">网上支付</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073119/index.html" target="_blank" rel="nofollow">银行转账</a></dd>
+      <dd><a href="http://my.111.com.cn/ucenter/invokeCoupon.action" target="_blank" rel="nofollow">激活优惠券</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2014101601/index.html" target="_blank" rel="nofollow">优惠券使用指南</a></dd>
+    </dl>
+    <dl>
+      <dt>售后服务</dt>
+      <dd><a href="http://www.111.com.cn/th" target="_blank" rel="nofollow">退换货政策</a></dd>
+      <dd><a href="http://www.111.com.cn/bx" target="_blank" rel="nofollow">正品保障</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073122/index.html" target="_blank" rel="nofollow">退款规则</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013073121/index.html" target="_blank" rel="nofollow">品牌售后</a></dd>
+    </dl>
+    <dl>
+      <dt>企业服务</dt>
+      <dd><a href="http://www.111.com.cn/cmsPage/2014101604/index.html" target="_blank" rel="nofollow">企业采购</a></dd>
+      <dd><a href="http://www.111.com.cn/cmsPage/2013112002/index.html" target="_blank" rel="nofollow">供应商合作</a></dd>
+      <dd><a href="http://openadmin.111.com.cn/" target="_blank" rel="nofollow">供应商入口</a></dd>
+    </dl>
+    <dl>
+      <dd class="yao_app"><br />
+      </dd>
+      <dd><a href="http://itunes.apple.com/cn/app/id727578007" target="_blank" class="d_iphone" rel="nofollow"></a><br />
+      </dd>
+      <dd><a href="http://m.111.com.cn/yaodian2.apk" target="_blank" class="d_android" rel="nofollow"></a><br />
+      </dd>
+    </dl>
+    <dl>
+      <dd class="yao_weixin"><br />
+      </dd>
+      <dd><a href="http://weixin.qq.com/r/K3VMVKPE5-6Yrec39yA5" target="_blank" rel="nofollow">壹药网官方微信</a></dd>
+    </dl>
+  </div>
+</div>
+<div class="gray_box">
+  <div class="wrap">
+    <p> <a href="http://www.111.com.cn/cmsPage/2015012602/" rel="nofollow">关于壹药网</a> | <a href="http://www.111.com.cn/cmsPage/2015012707/" rel="nofollow">诚征英才</a> | <a href="http://www.111.com.cn/cmsPage/2014022401/index.html?tracker_u=10952156" rel="nofollow">直营实体药房</a> | <a href="http://www.111.com.cn/cmsPage/2013101401/"  rel="nofollow">互联网药品信息服务资格证</a> | <a href="http://www.111.com.cn/cmsPage/2013101402/" rel="nofollow">互联网药品交易资格证：粤C20100001</a> </p>
+    <p> <a href="http://www.111.com.cn/cmsPage/2014041703/" rel="nofollow">连锁营业执照</a> | <a href="http://www.111.com.cn/cmsPage/2013101405/" rel="nofollow">药品经营许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101403/" rel="nofollow">保健食品卫生许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101407/" rel="nofollow">医疗器械许可证</a> | <a href="http://www.111.com.cn/315Web/"  rel="nofollow">网安备案证</a> | <a href="http://www.111.com.cn/cmsPage/2013101404/ "  rel="nofollow">食品流通许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101408/"  rel="nofollow">GSP证书</a> | <a href="http://www.111.com.cn/cmsPage/2015032501/"  rel="nofollow">ICP许可证粤B2-20150066</a> </p>
+  </div>
+</div>
+<p class="ta_center"><a href="http://www.111.com.cn/">壹药网网上药店</a>，国家药监局首批认证通过的合法网上药店，中国医药电子商务行业的开拓者领跑者。广东壹号大药房连锁有限公司 020-66391668</p>
+<div class="wrap copy_right">Copyright (C) 2010-2015 壹药网版权所有</div>
+
+<!--导航下拉js--> 
+<script src="js/jquery-powerSwitch.js"></script> 
+<script src="js/catalog_201406.min.js" ></script>
+<div class="wrap copyright">Copyright &copy; 2010-2014 壹药网版权所有</div>
+<div class="float_box"  id="rightFloat" > <a href="http://www.111.com.cn/interfaces/qnaire/showQnaire.action" class="f_back" target="_blank" title="用户反馈" name="yao_docuor" rel="nofollow">用户反馈</a> <a href="javascript:;" onclick="jQuery.top();" class="f_top" target="_self" title="返回顶部" rel="nofollow">top</a> 
+  <!--药师咨询--> 
+  
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.shop.index.entity.Floor">
+
+	<select id="queryAllFloor" parameterType="map" resultType="com.netbull.web.shop.index.entity.Floor">
+		select * from tb_medicalb_floor
+	</select>
+	
+	<select id="queryFloorItems" parameterType="int" resultType="com.netbull.web.shop.index.entity.FloorItem">
+		select
+			a.type, 
+			a.catid,
+			b.name catname,
+			b.coverimg,
+			b.link,
+			a.goodscode,
+			d.brandname,
+			c.shortname goodsname,
+			e.attrvalue spec, 
+			(select f.bigimgpath from tb_product_goods_image f where f.goodscode = a.goodscode limit 0, 1) imgpath,
+			c.marketprice,
+			c.shopprice
+		from
+			tb_medicalb_floor_item a
+			left join tb_pdt_svc_cat b on a.catid = b.id
+			left join tb_product_goods c on a.goodscode = c.goodscode
+			left join tb_product_brand d on c.brandid = d.id 
+			left join tb_product_goods_attr e on c.goodscode = e.goodscode and e.attrcode = 'spec' 
+		where
+			a.floor = #{floor}
+	</select>
+
+</mapper>

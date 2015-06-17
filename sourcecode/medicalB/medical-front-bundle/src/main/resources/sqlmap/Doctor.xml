@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.index.entity.Doctor">
+    
+	<select id="query_for_bigSerction" parameterType="java.lang.Integer" resultType="com.netbull.web.index.entity.Doctor">
+		SELECT t1.*, t3.attrname sectionName,t4.hospitalName hospitalName  FROM tb_medical_doctor t1,tb_medical_section t3,tb_medical_hospital t4
+		WHERE t1.`sectionID`=t3.`id` AND t1.status = 1 and t1.hospitalID=t4.hospitalID AND t3.parentid=${sectionid} 
+		AND isRecommend=1 
+	</select>
+
+	
+	<select id="query_by_id" parameterType="long" resultType="com.netbull.web.index.entity.Doctor">
+		SELECT t1.*, t2.hospitalName,t2.address, t3.attrname sectionName, t4.true_name realName, t4.phone phone, t4.login_name loginAccount, t4.password loginPwd FROM tb_medical_doctor t1
+		left join tb_medical_hospital t2 on t1.hospitalID = t2.hospitalID
+		left join tb_medical_section t3 on t1.sectionID = t3.id
+		left join vauth.user_info t4 on t1.loginID = t4.id
+		where doctorID = #{id}
+	</select>
+	
+	<select id="query_by_hosid" parameterType="map" resultType="com.netbull.web.index.entity.Doctor">
+		SELECT t1.*, t2.hospitalName, t3.attrname sectionName, t4.true_name realName, t4.phone phone, t4.login_name loginAccount, t4.password loginPwd FROM tb_medical_doctor t1
+		left join tb_medical_hospital t2 on t1.hospitalID = t2.hospitalID
+		left join tb_medical_section t3 on t1.sectionID = t3.id
+		left join vauth.user_info t4 on t1.loginID = t4.id
+		where t1.isRecommend=1 and  t1.hospitalID = #{hospitalID}
+		LIMIT  #{start}, #{limit}
+	</select>
+	
+	<select id="queryRecomDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT t1.*,t5.*,t3.hospitalName,t4.attrname sectionName FROM tb_medical_doctor t1 
+	    LEFT JOIN tb_medical_doctor_disease t2 ON t1.doctorID=t2.doctorID
+	    LEFT JOIN tb_medical_hospital t3 ON t1.hospitalID=t3.hospitalID
+	    LEFT JOIN tb_medical_section t4 ON t1.sectionID=t4.id
+	    LEFT JOIN tb_medical_disease t5 ON t5.diseaseID=t2.diseaseID
+	    <where>
+	        <if test="hospitalID !=null and hospitalID !=''">
+	            and t1.hospitalID = #{hospitalID}
+	        </if>
+	        <if test="sectionID !=null and sectionID !=''">
+	            and t1.sectionID = #{sectionID}
+	        </if>
+	        <if test="diseaseID !=null and diseaseID !=''">
+	            and t2.diseaseID = #{diseaseID}
+	        </if>
+	    </where>
+	    GROUP BY t5.diseaseID 
+	</select>
+	
+	<select id="queryDoctorDutyList" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT * FROM tb_medical_doctor t1
+	    LEFT JOIN tb_medical_freetime t2 ON t1.doctorID= t2.doctorID
+	    <where>
+	        <if test="hospitalID !=null and hospitalID !=''">
+	            and t1.hospitalID = #{hospitalID}
+	        </if>
+	        <if test="sectionID !=null and sectionID !=''">
+	            and t1.sectionID = #{sectionID}
+	        </if>
+	    </where>
+	</select>
+	
+	<select id="query_subscribe_plus_count" parameterType="java.util.Map" resultType="java.lang.Long">
+	    SELECT COUNT(t1.doctorID) as subscribe_plus_count FROM tb_medical_doctor t1 
+	    WHERE t1.hospitalID=#{hospitalID} and t1.sectionID=#{sectionID} 
+	</select>
+	
+	<select id="query_isAudioCT_count" parameterType="java.util.Map" resultType="java.lang.Long">
+	    SELECT COUNT(t1.doctorID) as subscribe_plus_count FROM tb_medical_doctor t1 
+	    WHERE t1.hospitalID=#{hospitalID} and t1.sectionID=#{sectionID} and isAudioCT=1
+	</select>
+</mapper>

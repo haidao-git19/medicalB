@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.questionnaire.dao.QuestionnaireDao">
+    <!-- Questionnaire -->
+    <sql id="questionnaireColumn">
+        SELECT X.id,X.name,X.note,X.doctorId,Y.doctorName,DATE_FORMAT(X.createTime,'%Y-%m-%d %H:%i') createTime 
+        FROM tb_questionnaire X LEFT JOIN tb_medical_doctor Y ON X.doctorId=Y.doctorID
+    </sql>
+    
+    <select id="queryQuestionnaireList" parameterType="java.util.Map" resultType="java.util.Map">
+        <include refid="questionnaireColumn"/> 
+        <where>
+            <if test="doctorId !=null and doctorId !=''">
+                and X.doctorId = #{doctorId}
+            </if>
+            <if test="name !=null and name !=''">
+                and X.name like CONCAT('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryQuestionnaireCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT count(1) FROM (<include refid="questionnaireColumn"/>
+        <where>
+            <if test="doctorId !=null and doctorId !=''">
+                and X.doctorId = #{doctorId}
+            </if>
+            <if test="name !=null and name !=''">
+                and X.name like CONCAT('%',#{name},'%')
+            </if>
+        </where>
+        ) as count
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+    <select id="queryQuestionnaire" parameterType="java.util.Map" resultType="com.netbull.shop.questionnaire.entity.Questionnaire">
+        SELECT * FROM tb_questionnaire
+        <where>
+            <if test="id !=null and id !=''">
+                and id = #{id}
+            </if>
+        </where>
+    </select>
+    
+   <insert id="saveQuestionnaire" parameterType="com.netbull.shop.questionnaire.entity.Questionnaire" useGeneratedKeys="true" keyProperty="id">
+       INSERT tb_questionnaire(doctorId,name,createTime,note) VALUES(#{doctorId},#{name},now(),#{note})
+   </insert>
+   
+   <update id="updateQuestionnaire" parameterType="com.netbull.shop.questionnaire.entity.Questionnaire">
+       UPDATE tb_questionnaire 
+       <set>
+           <if test="name !=null and name !=''">
+               name = #{name},
+           </if>
+           <if test="note !=null and note !=''">
+               note = #{note},
+           </if>
+       </set>
+       <where>
+           <if test="id !=null and id !=''">
+               and id = #{id}
+           </if>
+       </where>
+   </update>
+   
+   <delete id="deleteQuestionnaire" parameterType="java.lang.Integer">
+       DELETE FROM tb_questionnaire WHERE id=#{id}
+   </delete>
+   
+   <!-- QuestionnaireCaseClass -->
+   <sql id="questionnaireCaseClassColumn">
+       SELECT X.*,Y.name qnName FROM tb_questionnaire_case_class X LEFT JOIN tb_questionnaire Y ON X.qnId=Y.id
+   </sql>
+   <select id="queryQuestionnaireCaseClassList" parameterType="java.util.Map" resultType="java.util.Map">
+        <include refid="questionnaireCaseClassColumn"/>
+        <where>
+            <if test="name !=null and name !=''">
+                and X.name like CONCAT('%',#{name},'%')
+            </if>
+            <if test="qnId !=null and qnId !=''">
+                and X.qnId = #{qnId}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryQuestionnaireCaseClassCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT count(1) FROM (<include refid="questionnaireCaseClassColumn"/>
+        <where>
+             <if test="name !=null and name !=''">
+                and X.name like CONCAT('%',#{name},'%')
+            </if>
+            <if test="qnId !=null and qnId !=''">
+                and X.qnId = #{qnId}
+            </if>
+        </where>
+         ) as count
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+    <select id="queryQuestionnaireCaseClass" parameterType="java.util.Map" resultType="com.netbull.shop.questionnaire.entity.QuestionnaireCaseClass">
+        SELECT * FROM tb_questionnaire_case_class 
+        <where>
+            <if test="id !=null and id !=''">
+                and id = #{id}
+            </if>
+            <if test="qnId !=null and qnId !=''">
+                and qnId = #{qnId}
+            </if>
+        </where>
+    </select>
+   
+   <insert id="saveQuestionnaireCaseClass" parameterType="com.netbull.shop.questionnaire.entity.QuestionnaireCaseClass" useGeneratedKeys="true" keyProperty="id">
+       INSERT tb_questionnaire_case_class(name,qnId,sort) VALUES(#{name},#{qnId},#{sort})
+   </insert>
+   
+   <update id="updateQuestionnaireCaseClass" parameterType="com.netbull.shop.questionnaire.entity.QuestionnaireCaseClass">
+       UPDATE tb_questionnaire_case_class SET name=#{name} WHERE id=#{id}
+   </update>
+   
+   <delete id="deleteQuestionnaireCaseClass" parameterType="java.lang.Long">
+       DELETE FROM tb_questionnaire_case_class WHERE id=#{id}
+   </delete>
+   
+   <!-- QuestionnaireCase -->
+   <sql id="questionnaireCaseColumn">
+       SELECT X.*,Y.name qnName,Z.name className FROM tb_questionnaire_case X LEFT JOIN tb_questionnaire Y ON X.qnId=Y.id LEFT JOIN tb_questionnaire_case_class Z ON X.classId=Z.id
+   </sql>
+   <select id="queryQuestionnaireCaseList" parameterType="java.util.Map" resultType="java.util.Map">
+        <include refid="questionnaireCaseColumn"/> 
+        <where>
+            <if test="title !=null and title !=''">
+                and X.title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="qnId !=null and qnId !=''">
+                and X.qnId = #{qnId}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryQuestionnaireCaseCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT count(1) FROM (<include refid="questionnaireCaseColumn"/>
+        <where>
+             <if test="title !=null and title !=''">
+                and X.title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="qnId !=null and qnId !=''">
+                and X.qnId = #{qnId}
+            </if>
+        </where>
+        ) as count
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+    <select id="queryQuestionnaireCase" parameterType="java.util.Map" resultType="com.netbull.shop.questionnaire.entity.QuestionnaireCase">
+        SELECT * FROM tb_questionnaire_case
+        <where>
+            <if test="id !=null and id !=''">
+                and id = #{id}
+            </if>
+            <if test="qnId !=null and qnId !=''">
+                and qnId = #{qnId}
+            </if>
+        </where>
+    </select>
+   
+   <insert id="saveQuestionnaireCase" parameterType="com.netbull.shop.questionnaire.entity.QuestionnaireCase" useGeneratedKeys="true" keyProperty="id">
+       INSERT tb_questionnaire_case(qnId,classId,type,title,unit,state,createTime,sort) VALUES(#{qnId},#{classId},#{type},#{title},#{unit},#{state},now(),#{sort})
+   </insert>
+   
+    <update id="updateQuestionnaireCase" parameterType="com.netbull.shop.questionnaire.entity.QuestionnaireCase">
+       UPDATE tb_questionnaire_case 
+       <set>
+           <if test="classId !=null and classId !=''">
+               classId = #{classId},
+           </if>
+           <if test="type !=null and type !=''">
+               type = #{type},
+           </if>
+           <if test="title !=null and title !=''">
+               title = #{title},
+           </if>
+           <if test="unit !=null and unit !=''">
+               unit = #{unit},
+           </if>
+       </set>
+       <where>
+           <if test="id !=null and id !=''">
+               and id = #{id}
+           </if>
+       </where>
+   </update>
+   
+    <delete id="deleteQuestionnaireCase" parameterType="java.lang.Long">
+       DELETE FROM tb_questionnaire_case WHERE id=#{id}
+   </delete>
+   
+   <!-- QuestionnaireCaseOption -->
+   <sql id="questionnaireCaseOptionColumn">
+       SELECT X.*,Y.title qName,Y.type FROM tb_questionnaire_case_option X LEFT JOIN tb_questionnaire_case Y ON X.qId=Y.id
+   </sql>
+   <select id="queryQuestionnaireCaseOptionList" parameterType="java.util.Map" resultType="java.util.Map">
+        <include refid="questionnaireCaseOptionColumn"/>
+        <where>
+            <if test="option !=null and option !=''">
+                and X.`option` like CONCAT('%',#{option},'%')
+            </if>
+            <if test="qId !=null and qId !=''">
+                and X.qId = #{qId}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryQuestionnaireCaseOptionCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT count(1) FROM (<include refid="questionnaireCaseOptionColumn"/>
+        <where>
+            <if test="option !=null and option !=''">
+                and X.`option` like CONCAT('%',#{option},'%')
+            </if>
+            <if test="qId !=null and qId !=''">
+                and X.qId = #{qId}
+            </if>
+        </where>
+        ) as count
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+   
+   <select id="queryQuestionnaireCaseOption" parameterType="java.util.Map" resultType="com.netbull.shop.questionnaire.entity.QuestionnaireCaseOption">
+        SELECT * FROM tb_questionnaire_case_option
+        <where>
+            <if test="id !=null and id !=''">
+                and id = #{id}
+            </if>
+            <if test="qId !=null and qId !=''">
+                and qId = #{qId}
+            </if>
+        </where>
+    </select>
+   
+   <insert id="saveQuestionnaireCaseOption" parameterType="com.netbull.shop.questionnaire.entity.QuestionnaireCaseOption" useGeneratedKeys="true" keyProperty="id">
+	   INSERT tb_questionnaire_case_option(`option`,qId,`note`,exceptionFlag,level,`index`,rangeFrom,rangeTo,exactlyVal) 
+	   VALUES(#{option},#{qId},#{note},#{exceptionFlag},#{level},#{index},#{rangeFrom},#{rangeTo},#{exactlyVal})   
+   </insert>
+   
+   <update id="updateQuestionnaireCaseOption" parameterType="com.netbull.shop.questionnaire.entity.QuestionnaireCaseOption">
+       UPDATE tb_questionnaire_case_option
+       <set>
+           <if test="option !=null and option !=''">
+               `option` = #{option},
+           </if>
+           <if test="note !=null and note !=''">
+               `note` = #{note},
+           </if>
+           <if test="exceptionFlag !=null and exceptionFlag !=''">
+               exceptionFlag = #{exceptionFlag},
+           </if>
+           <if test="level !=null and level !=''">
+               level = #{level},
+           </if>
+           <if test="index !=null and index !=''">
+               `index` = #{index},
+           </if>
+           <if test="rangeFrom !=null and rangeFrom !=''">
+               rangeFrom = #{rangeFrom},
+           </if>
+           <if test="rangeTo !=null and rangeTo !=''">
+               rangeTo = #{rangeTo},
+           </if>
+           <if test="exactlyVal !=null and exactlyVal !=''">
+               exactlyVal = #{exactlyVal},
+           </if>
+       </set>
+       <where>
+           <if test="id !=null and id !=''">
+               and id = #{id}
+           </if>
+       </where>
+   </update>
+   
+   <delete id="deleteQuestionnaireCaseOption" parameterType="java.lang.Long">
+       DELETE FROM tb_questionnaire_case_option where id = #{id}
+   </delete>
+</mapper>

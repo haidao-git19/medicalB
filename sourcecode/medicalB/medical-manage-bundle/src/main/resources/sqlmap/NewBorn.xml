@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.newborn.dao.NewBornDao">
+
+   
+   <select id="pageList" parameterType="map" resultType="map">
+	    SELECT  *   FROM tb_medicalb_newborn C
+	    where 1=1
+	     and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+	     <if test=" babiName !=null and babiName != ''">
+	      and  babiName =#{babiName}
+	     </if>
+	      <if test=" mamu !=null and mamu != ''">
+	      and  mamu like CONCAT('%','${mamu}','%' )
+	     </if>
+	      <if test=" father !=null and father != ''">
+	      and  father like CONCAT('%','${father}','%' )
+	     </if>
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="count" parameterType="map"
+  	 resultType="long">
+        SELECT COUNT(1)  FROM tb_medicalb_newborn C
+           where 1=1
+            and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+         <if test=" babiName !=null and babiName != ''">
+	      and  babiName =#{babiName}
+	     </if>
+	      <if test=" mamu !=null and mamu != ''">
+	       and  mamu like CONCAT('%','${mamu}','%' )
+	     </if>
+	      <if test=" father !=null and father != ''">
+		 and  father like CONCAT('%','${father}','%' )
+	     </if>
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.shop.newborn.entity.NewBorn" useGeneratedKeys="true" keyProperty="id">
+   	insert into tb_medicalb_newborn (babiName,bornAddr,mamu,mamuIDCard,father,fatherIDCard,bornAddrType,bornOrgName,bornCode,issueDate,userID)
+   	values (#{babiName},#{bornAddr},#{mamu},#{mamuIDCard},#{father},#{fatherIDCard},#{bornAddrType},#{bornOrgName},#{bornCode},#{issueDate},#{userID})
+   </insert>
+   
+   <update id="update" parameterType="com.netbull.shop.newborn.entity.NewBorn">
+	   update tb_medicalb_newborn set babiName=#{babiName},
+	   bornAddr=#{bornAddr},
+	   mamu=#{mamu},
+	   mamuIDCard=#{mamuIDCard},
+	   father=#{father},
+	   fatherIDCard=#{fatherIDCard},
+	   bornAddrType=#{bornAddrType},
+	   bornOrgName=#{bornOrgName},
+	   bornCode=#{bornCode},
+	   issueDate=#{issueDate}
+	   where id=#{id}
+   </update>
+   
+   
+   
+   <select id="findByID" parameterType="java.lang.Integer"  resultType="com.netbull.shop.newborn.entity.NewBorn">
+        SELECT *  FROM tb_medicalb_newborn C
+        where 1=1
+         and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+         <if test="id!=null and id != ''">
+	      and  id =#{id}
+	     </if>
+	     <if test=" babiName !=null and babiName != ''">
+	      and  babiName =#{babiName}
+	     </if>
+	     <if test=" mamuIDCard !=null and mamuIDCard != ''">
+	     	 and  mamuIDCard =#{mamuIDCard}
+	     </if>
+   </select>
+   
+   
+   <delete id="del" parameterType="java.lang.Integer" >
+  	 delete from tb_medicalb_newborn where  id =#{id}
+   </delete>
+   
+   
+     <update id="updatePicture" parameterType="com.netbull.shop.patient.entity.Patient">
+	   update tb_medical_picture set picUrl=#{img}
+	   where objectID=#{patientID} and objectType='patient'
+   </update>
+   
+     <update id="savePicture" parameterType="com.netbull.shop.patient.entity.Patient">
+	  	insert into tb_medical_picture (objectID,objectType,picUrl,picDesc)
+   		values (#{patientID},'patient',#{img},'patient_img')
+   </update>
+   
+    <select id="findPicture"  parameterType="map"  resultType="com.netbull.shop.patient.entity.Picture">
+	  	select * from  tb_medical_picture where objectID=#{patientID} and objectType='patient'
+   </select>
+   
+</mapper>

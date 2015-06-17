@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>成功提交</title>
+<meta name="Keywords" content="壹药网,网上药房,网上药店,网上买药, 合法网上药房" />
+<meta name="Description"  content="网上药店" />
+<link rel='stylesheet' type='text/css' href='css/head.css' />
+<link rel='stylesheet' type='text/css' href='css/orderConfirm2014.css' />
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<style>
+.province_box {
+	display:none
+}
+;
+</style>
+</head>
+<body>
+<input type="hidden" id="orderSelectBank" value="0" />
+<div class="site-nav">
+  <div class="site-nav-bd">
+      <ul class="site-nav-bd-l">
+        <li class="menu">
+          <div class="menu-hd"><span>欢迎访问商城</span> </div>
+        </li>
+      </ul>
+      <ul class="site-nav-bd-r">
+        <li class="menu">
+          <div class="menu-hd" id='logininfo'><span>您好！ </span><a href="javascript: login();" class="blue mr5" target="_self">请登录</a><a href="http://passport.111.com.cn/sso/register.action" class="blue" target="_self">注册</a></div>
+        </li>
+        <li class="site-nav-pipe">|</li>
+        <li class="menu">
+          <div class="menu-hd"><a href="http://my.111.com.cn/ucenter/orderList.action" target="_self">我的订单</a></div>
+        </li>
+        <li class="site-nav-pipe">|</li>
+        <li class="menu">
+          <div class="menu-hd"> <a href="http://my.111.com.cn/ucenter/myCenter.action" class="myyaowang" target="_self">&nbsp;我的壹药网&nbsp;</a>
+            <div id="menu_bd_orther" class="menu_bd">
+              <ul class="menu_bd_panel" style="display: none;">
+                <li><a href="http://my.111.com.cn/ucenter/orderList.action" target="_self" target="_self">我的订单</a></li>
+                <li><a href="http://my.111.com.cn/ucenter/queryCoupon.action" target="_self" target="_self">我的优惠券</a></li>
+                <li><a href="http://my.111.com.cn/ucenter/myFavorite.action" target="_self" target="_self">我的收藏夹</a></li>
+                <li><a href="http://my.111.com.cn/ucenter/reviewList.action" target="_self" target="_self">评价商品</a></li>
+                <li><a href="http://my.111.com.cn/ucenter/privateTag.action" target="_self">我的私人订制</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="site-nav-pipe">|</li>
+        <li class="menu">
+          <div class="menu-hd"><a href="http://www.111.com.cn/cmsPage/origPage/14038.html?topicId=14038" target="_blank">帮助中心</a></div>
+        </li>
+        <li class="site-nav-pipe">|</li>
+      </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.menu').mousemove(function(){
+		$(this).find('.menu_bd_panel').show();
+	});
+	$('.menu').mouseleave(function(){
+		$(this).find('.menu_bd_panel').hide();
+	});
+        $(".open_ag").click(function(){
+            $(".ag_ul").removeClass("fix_ag");
+            $(".open_ag").hide();
+        });
+    });
+    // 鼠标延迟执行方法
+    (function($){
+        $.fn.hoverDelay = function(options){
+            var defaults = {
+                hoverDuring: 100,
+                outDuring: 100,
+                hoverEvent: function(){
+                    $.noop();
+                },
+                outEvent: function(){
+                    $.noop();
+                }
+            };
+            var sets = $.extend(defaults,options || {});
+            var hoverTimer, outTimer, that = this;
+            return $(this).each(function(){
+                $(this).hover(function(){
+                    clearTimeout(outTimer);
+                    hoverTimer = setTimeout(function(){sets.hoverEvent.apply(that)}, sets.hoverDuring);
+                },function(){
+                    clearTimeout(hoverTimer);
+                    outTimer = setTimeout(function(){sets.outEvent.apply(that)}, sets.outDuring);
+                });
+            });
+        }
+    })(jQuery);
+    $(".province_box").each(function(){
+        var that = $(this)
+        that.hoverDelay({
+            outDuring: 1000,
+            hoverEvent: function(){
+                $(".province_box .province_name").addClass("hd_fold");
+                $("#headerAllProvince").show();
+            },
+            outEvent: function(){
+                $(".province_box .province_name").removeClass("hd_fold")
+                $("#headerAllProvince").hide();
+            }
+        });
+    });
+</script>
+<div class="c_head">
+  <h1 id="logo"> <a title="壹号药网" target="_top" class="logo" href="http://www.111.com.cn">壹号药网<span class="i"></span></a> </h1>
+</div>
+<div class="c_content">
+  <div class="flow-steps">
+    <ol class="num5">
+      <li class="done"><span>1. 我的购物车</span></li>
+      <li class="done current-prev"><span>2. 填写核对订单信息</span></li>
+      <li class="last current"><span><i class="ok"></i> 成功提交订单</span></li>
+    </ol>
+  </div>
+  <!--(网上支付)成功提交-->
+  
+  <div class="success_box zaixin">
+    <div class="s_inner clearfix">
+      <div class="s_l"><i class="s_ok"></i></div>
+      <div class="s_r">
+        <h4>订单已提交成功，请您尽快付款！</h4>
+        <p>请您在提交订单后<b class="red">3天内</b>内完成支付，否则订单会自动取消。 </p>
+        <div class="s_o">
+          <p class="mb10"><b>订单编号：</b><a href="http://my.111.com.cn/ucenter/orderDetail.action?orderId=20150503215620264301" target="_blank" class="blue mr10">20150503215620264301</a> <span class="ml20"> 订单金额：<span class="red">&nbsp;<em class="f_a">&yen;</em>&nbsp;329.00</span></span></p>
+          <a class="print_box blue" href="http://p1.maiyaole.com/images/order/zhonghang.gif" target="_blank" ><i class="print_icon"></i>打印转账信息</a>
+          <div class="bank_trans"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--页脚-->
+
+<div class="wrap footer_service"> <a href="http://www.111.com.cn/about.html" class="s1">&#12288;</a><a href="http://www.111.com.cn/cms/view.do?topicId=14032&amp;merchant=1" target="_blank" class="s2">&#12288;</a><a href="http://www.111.com.cn/cms/view.do?topicId=14038&amp;merchant=1" target="_blank" class="s3">&#12288;</a> </div>
+<div class="footer">
+  <p><a href="http://www.111.com.cn/cms/view.do?topicId=14027" target="_blank">关于1号药网</a> | <a href="http://image.111.com.cn/images/yaowang/describe/hlwypxxfwzgzzs.jpg" rel="nofollow" target="_blank">互联网药品信息服务资格证</a> | <a href="http://image.111.com.cn/statics/global/images/hlwypjyzgz.jpg" rel="nofollow" target="_blank">互联网药品交易资格证：粤C20100001</a></p>
+  <p><a href="http://image.111.com.cn/images/yaowang/describe/lsyyzzzs.jpg" target="_blank">连锁营业执照</a> | <a href="http://image.111.com.cn/images/yaowang/describe/ypjyxkzzs.jpg" target="_blank">药品经营许可证</a> | <a href="http://image.111.com.cn/images/yaowang/describe/bjspwsxkzzs.jpg" target="_blank">保健食品卫生许可证</a> | <a href="http://image.111.com.cn/images/yaowang/describe/yiliaoqixiezheng1.jpg" target="_blank">医疗器械许可证</a> | <a href="http://image.111.com.cn/images/yaowang/describe/shipingliutong1.jpg" target="_blank">食品流通许可证</a> | <a href="http://image.111.com.cn/images/yaowang/describe/GSPzhengshu.jpg" target="_blank">GSP证书</a> | <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备12015869号</a></p>
+  <p>Copyright &copy; 1号药网&mdash;&mdash;广东壹号大药房连锁有限公司 2010-2013，All Rights Reserved</p>
+</div>
+
+</body>
+</html>

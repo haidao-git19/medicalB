@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.emr.entity.EMRecord">
+    
+	<select id="query_for_pagination" parameterType="map" resultType="com.netbull.shop.emr.entity.EMRecord">
+		SELECT t.*, t2.doctorName creatorName FROM tb_medical_record t 
+		left join tb_medical_patient t1 on t.patientID = t1.patientID
+		left JOIN tb_medical_doctor t2 on t.creator = t2.loginID and t.source = 2
+		WHERE t.creator = ${creator} 
+		<if test="patientName!=null and patientName.trim() != ''">
+			and t.patientName like CONCAT('%', '${patientName}', '%')
+	    </if>
+	    <if test="patientCard!=null and patientCard.trim() != ''">
+			and t.patientCard like CONCAT('%', '${patientCard}', '%')
+	    </if>
+		<include refid="com.odchia.dao.Dao.pageComponent" />
+	</select>
+
+	<select id="totalCount" parameterType="map" resultType="long">
+		SELECT count(1) FROM tb_medical_record t 
+		left join tb_medical_patient t1 on t.patientID = t1.patientID
+		left JOIN tb_medical_doctor t2 on t.creator = t2.loginID and t.source = 2
+		WHERE t.creator = ${creator} 
+		<if test="patientName!=null and patientName.trim() != ''">
+			and t.patientName like CONCAT('%', '${patientName}', '%')
+	    </if>
+	    <if test="patientCard!=null and patientCard.trim() != ''">
+			and t.patientCard like CONCAT('%', '${patientCard}', '%')
+	    </if>
+	</select>
+	
+	<select id="query_by_id" parameterType="long" resultType="com.netbull.shop.emr.entity.EMRecord">
+		SELECT * FROM tb_medical_record t
+		WHERE id = #{id}
+	</select>
+	
+	<delete id="delete_by_id" parameterType="long">
+		DELETE FROM tb_medical_record WHERE id = #{id}
+	</delete>
+	
+	 <insert id="save" parameterType="com.netbull.shop.emr.entity.EMRecord" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_record(patientID, patientName, patientCard, hospitalName, sectionName, diseaseName, note, drug, source, creator, createTime)
+		VALUES (#{patientID}, #{patientName}, #{patientCard}, #{hospitalName}, #{sectionName}, #{diseaseName}, #{note}, #{drug}, #{source}, #{creator}, NOW())
+	</insert>
+
+	<update id="update" parameterType="com.netbull.shop.emr.entity.EMRecord">
+		UPDATE tb_medical_record SET  
+		patientID=#{patientID},
+		patientName=#{patientName},
+		patientCard=#{patientCard},
+		hospitalName=#{hospitalName},
+		sectionName=#{sectionName},
+		diseaseName=#{diseaseName},
+		note=#{note},
+		drug=#{drug},
+		source=#{source},
+		creator=#{creator},
+		updateTime=NOW()
+		WHERE id=#{id}
+   </update>
+   
+</mapper>

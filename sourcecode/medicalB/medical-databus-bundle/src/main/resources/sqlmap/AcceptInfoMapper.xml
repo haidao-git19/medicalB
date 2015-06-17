@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.AcceptInfoDao">
+
+    <select id="queryAcceptInfoList" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.UserAcceptInfoVo">
+		select u.id,u.userId,u.province,u.city,u.area,u.address,u.zipcode,u.acceptName,u.phone,u.telephone,u.enable from tb_user_accept_info u
+			<where>
+			    	u.status = 0
+			    <choose>
+			        <when test="userId != null and userId != ''">
+			            and u.userId = #{userId}
+			        </when>
+			        <otherwise>
+			            and u.userId = -1
+			        </otherwise>
+			    </choose>
+			</where>
+	</select>
+	
+     <select id="queryAcceptInfo" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.UserAcceptInfoVo">
+		select u.id,u.userId,u.province,u.city,u.area,u.address,u.zipcode,u.acceptName,u.phone,u.telephone,u.enable from tb_user_accept_info u
+			<where>
+			    	u.status = 0 and id = #{id}
+			</where>
+	</select>
+	
+	<update id="modifyAcceptInfo" parameterType="com.netbull.shop.common.vo.UserAcceptInfoVo" >
+		UPDATE tb_user_accept_info F
+				set F.updateTime = now()
+				<if test="userId != null and userId !=''">
+				     ,userId = #{userId}
+				</if>
+				<if test="province != null and province !=''">
+				     ,province = #{province}
+				</if>
+				<if test="city != null and city !=''">
+				     ,city = #{city}
+				</if>
+				<if test="area != null and area !=''">
+				     ,area = #{area}
+				</if>
+				<if test="address != null and address !=''">
+				     ,address = #{address}
+				</if>
+				<if test="zipcode != null and zipcode !=''">
+				     ,zipcode = #{zipcode}
+				</if>
+				<if test="acceptName != null and acceptName !=''">
+				     ,acceptName = #{acceptName}
+				</if>
+				<if test="phone != null and phone !=''">
+				     ,phone = #{phone}
+				</if>
+				<if test="status != null and status !=''">
+				     ,status = #{status}
+				</if>
+				<if test="enable != null and enable !=''">
+				     ,enable = #{enable}
+				</if>
+		WHERE F.id = #{id}
+	</update>
+	
+	<insert id="saveAcceptInfo" parameterType="com.netbull.shop.common.vo.UserAcceptInfoVo" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tb_user_accept_info (userId,province,city,area,address,zipcode,acceptName,phone,telephone,status,enable,createTime) 
+		VALUES(#{userId},#{province},#{city},#{area},#{address},#{zipcode},#{acceptName},#{phone},#{telephone},'0',#{enable},now())
+	</insert>
+	
+	<delete id="deleteAcceptInfoById" parameterType="java.lang.Integer">
+  	    delete from tb_user_accept_info
+  	    <where>
+			<if test="_parameter != null and _parameter !=''">
+				   id = #{value}
+			</if>
+		</where>
+  	</delete>
+</mapper>

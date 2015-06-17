@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.emr.entity.EMRecordAtta">
+    
+	<select id="query_for_pagination" parameterType="map" resultType="com.netbull.shop.emr.entity.EMRecordAtta">
+		SELECT * FROM tb_medical_record_atta t
+		WHERE t.recordID = #{recordID}
+		<include refid="com.odchia.dao.Dao.pageComponent" />
+	</select>
+
+	<select id="totalCount" parameterType="map" resultType="long">
+		SELECT count(1) FROM tb_medical_record_atta t
+		WHERE t.recordID = #{recordID}
+	</select>
+	
+	<select id="query_by_id" parameterType="long" resultType="com.netbull.shop.emr.entity.EMRecordAtta">
+		SELECT * FROM tb_medical_record_atta t
+		WHERE attaID = #{id}
+	</select>
+	
+	<delete id="delete_by_id" parameterType="long">
+		DELETE FROM tb_medical_record_atta WHERE attaID = #{id}
+	</delete>
+	
+	<delete id="delete_by_recordID" parameterType="long">
+		DELETE FROM tb_medical_record_atta WHERE recordID = #{recordID}
+	</delete>
+	
+	<insert id="save" parameterType="com.netbull.shop.emr.entity.EMRecordAtta" useGeneratedKeys="true" keyProperty="attaID">
+		INSERT INTO tb_medical_record_atta(attaURL, attaName, recordID)
+		VALUES (#{attaURL}, #{attaName}, #{recordID})
+	</insert>
+
+	<update id="update" parameterType="com.netbull.shop.emr.entity.EMRecordAtta">
+		UPDATE tb_medical_record_atta SET  
+		attaURL=#{attaURL},
+		attaName=#{attaName}
+		WHERE attaID=#{attaID}
+   </update>
+   
+</mapper>

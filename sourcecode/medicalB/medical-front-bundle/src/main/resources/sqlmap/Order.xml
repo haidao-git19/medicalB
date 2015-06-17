@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.shop.order.domain.OrderBase">
+
+	<insert id="save_OrderBase" parameterType="com.netbull.web.shop.order.domain.OrderBase" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medicalb_order_base(orderNumber, userId, totalPrice, createTime, state)
+		VALUES (#{orderNumber}, #{userId}, #{totalPrice}, NOW(), 1)
+	</insert>
+	
+	<insert id="save_OrderItem" parameterType="com.netbull.web.shop.order.domain.OrderItem" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medicalb_order_item(orderNumber, goodsCode, name, amount, price, goodsType, shopId)
+		VALUES (#{orderNumber}, #{goodsCode}, #{name}, #{amount}, #{price}, #{goodsType}, #{shopId})
+	</insert>
+	
+	<insert id="save_OrderPayment" parameterType="com.netbull.web.shop.order.domain.OrderPayment" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medicalb_order_payment(orderNumber, payPrice, payStatus, payMode, payPlatformCode, payTime)
+		VALUES (#{orderNumber}, #{payPrice}, #{payStatus}, #{payMode}, #{payPlatformCode}, NOW())
+	</insert>
+	
+	<insert id="save_OrderDelivery" parameterType="com.netbull.web.shop.order.domain.OrderDelivery" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medicalb_order_delivery(orderNumber, address, name, tel)
+		VALUES (#{orderNumber}, #{address}, #{name}, #{tel})
+	</insert>
+	
+	<insert id="save_ServiceOrder" parameterType="com.netbull.web.shop.order.domain.ServiceOrder" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medicalb_order_service(orderNumber, patientId, doctorId, serviceType, serviceNumber, unionTradeNumber, unionTradeMsg, unionTradeState)
+		VALUES (#{orderNumber}, #{patientId}, #{doctorId}, #{serviceType}, #{serviceNumber}, #{unionTradeNumber}, #{unionTradeMsg}, #{unionTradeState})
+	</insert>
+	
+	<update id="update_OrderPayment" parameterType="com.netbull.web.shop.order.domain.OrderPayment">
+		update tb_medicalb_order_payment a
+		set a.payStatus=#{payStatus}, a.payTime=NOW()
+		where a.orderNumber=#{orderNumber}
+	</update>
+
+</mapper>

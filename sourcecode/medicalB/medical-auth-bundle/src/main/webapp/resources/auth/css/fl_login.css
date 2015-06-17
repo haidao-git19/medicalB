@@ -1,0 +1,131 @@
+*{ margin:0;padding:0;}
+body,html{
+	width:100%;
+	height:100%;
+	min-width:1024px;
+	overflow:hidden;
+	background:url(../img/login/main_bg.jpg);
+	background-size:cover;
+	position:relative;
+}
+.mainbody{
+	position:absolute;
+	left:0;
+	top:0;
+}
+.mainbody_content{
+	width:800px;
+	margin-top:100px;
+	color:#fff;
+}
+.logo_box{
+	margin-bottom:50px;
+}
+.login_box{
+	margin-bottom:20px;
+}
+.info_box{
+	height:40px;
+}
+
+.titlepng{
+	margin:auto;
+}
+
+.input_box{
+	float:left;
+	margin-left:20px;
+}
+.input_name{
+	float:left;
+	font:600 24px '微软雅黑';
+}
+.input_tank{
+	float:left;
+	height:24px;
+	width:200px;
+	font:200 18px '微软雅黑';
+	margin-top:3px;
+	margin-left:10px;
+	border:1px #999999 solid;
+}
+.login_btn{
+	width:100px;
+	height:30px;
+}
+.userbg{
+	background:url(../img/login/user_bg.png);
+}
+.passwordbg{
+	background:url(../img/login/password_bg.png);
+}
+/*验证码部分*/
+.verify{
+	float:left;
+	margin-left:210px;
+}
+.verify_input{
+	float:left;
+	height:30px;
+	width:100px;
+}
+.verify_img{
+	float:left;
+	margin-left:10px;
+	margin-top:2px;
+}
+/*记住我框*/
+.remember_me{
+	float:left;
+	font:14px '微软雅黑';
+	color:#666;
+	margin-left:50px;
+	margin-left:270px;
+	margin-top:10px;
+	line-height: 2px;
+}
+/*错误信息提示*/
+.wrong_info{
+	float:left;
+	margin-left:50px;
+	margin-top:10px;
+	margin-bottom:50px;
+	font:12px '微软雅黑';
+	color:#f00;
+}
+/*超级链接*/
+.slink_box{
+	float:left;
+	width:100%;
+	margin-left:180px;
+	margin-top:150px;
+}
+.slink_ul{
+	width:100%;
+	margin:0 auto;
+}
+.slink_li{
+	list-style:none;
+	float:left;
+	font:12px '微软雅黑';
+	color:#fff;
+	width:80px;
+	border-right:1px solid #999;
+	cursor:pointer;
+}
+.slink_li:hover{
+	color:#CCC;
+}
+
+.copyright_ul{
+	width:100%;
+	margin:0 auto;
+}
+
+.copyright_li{
+	list-style:none;
+	float:left;
+	font:12px '微软雅黑';
+	color:#fff;
+	width:480px;
+}

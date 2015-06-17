@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.GoodsReportDao">
+    
+    <update id="update" parameterType="java.util.Map" >
+		UPDATE tb_product_goods_report F
+				set F.updateTime = now()
+				<if test="goodsStock != null and goodsStock !=''">
+				     ,goodsStock = #{goodsStock}
+				</if>
+				<if test="goodsTotal != null and goodsTotal !=''">
+				     ,goodsTotal = #{goodsTotal}
+				</if>
+				<if test="remarkNum != null and remarkNum !=''">
+				     ,remarkNum = #{remarkNum}
+				</if>
+				<if test="buyNum != null and buyNum !=''">
+				     ,buyNum = #{buyNum}
+				</if>
+				<if test="realBuyNum != null and realBuyNum !=''">
+				     ,realBuyNum = #{realBuyNum}
+				</if>
+				<if test="collectNum != null and collectNum !=''">
+				     ,collectNum = #{collectNum}
+				</if>
+				<if test="praiseNum != null and praiseNum !=''">
+				     ,praiseNum = #{praiseNum}
+				</if>
+				<if test="consultNum != null and consultNum !=''">
+				     ,consultNum = #{consultNum}
+				</if>
+				<if test="score != null and score !=''">
+				     ,score = #{score}
+				</if>
+		WHERE F.goodsCode = #{goodsCode}
+	</update>
+	
+    <select id="queryByParams" parameterType="map" resultType="com.netbull.shop.common.vo.GoodsReport">
+	    select * from tb_product_goods_report
+	    <where>
+	        <if test="goodsCode !=null and goodsCode !=''">
+	            and goodsCode=#{goodsCode}
+	        </if>
+	    </where>
+	</select>
+</mapper>

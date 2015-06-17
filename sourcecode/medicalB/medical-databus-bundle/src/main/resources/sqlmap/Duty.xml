@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.DutyDao">
+    
+	<delete id="delete_by_id" parameterType="long">
+		DELETE FROM tb_medical_freetime where id = #{id}
+	</delete>
+	
+	 <insert id="save" parameterType="com.netbull.shop.manage.weixin.vo.Duty" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_freetime(doctorID, weekFlag, weekNum, dayFlag, startTime, endTime, type, isLater, operTime)
+		VALUES (#{doctorID}, #{weekFlag}, #{weekNum}, #{dayFlag}, #{startTime}, #{endTime}, #{type}, #{isLater}, NOW())
+	</insert>
+
+	<update id="update" parameterType="com.netbull.shop.manage.weixin.vo.Duty">
+		UPDATE tb_medical_freetime SET  
+			operTime=NOW()
+			<if test="doctorID != null and doctorID !=''">
+				,doctorID = #{doctorID}
+			</if>
+			<if test="weekFlag != null and weekFlag !=''">
+				,weekFlag = #{weekFlag}
+			</if>
+			<if test="weekNum != null and weekNum !=''">
+				,weekNum = #{weekNum}
+			</if>
+			<if test="dayFlag != null and dayFlag !=''">
+				,dayFlag = #{dayFlag}
+			</if>
+			<if test="startTime != null and startTime !=''">
+				,startTime = #{startTime}
+			</if>
+			<if test="endTime != null and endTime !=''">
+				,endTime = #{endTime}
+			</if>
+			<if test="type != null and type !=''">
+				,type = #{type}
+			</if>
+			<if test="isLater != null and isLater !=''">
+				,isLater = #{isLater}
+			</if>
+		WHERE id=#{id}
+   </update>
+   
+</mapper>

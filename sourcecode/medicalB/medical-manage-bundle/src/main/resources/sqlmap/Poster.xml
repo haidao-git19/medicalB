@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.PosterDao">
+
+    <select id="queryOne" parameterType="java.lang.Integer" resultType="com.netbull.shop.common.vo.PosterVo">
+        select * from tb_shop_poster 
+        <where>
+            and status=0
+            <if test="_parameter !=null and _parameter !=''">
+                and id=#{value}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryCount" parameterType="map" resultType="java.lang.Long">
+        select count(1) from tb_shop_poster
+        <where>
+            and status=0
+            <if test="posterName !=null and posterName !=''">
+                and posterName like CONCAT("%",#{posterName},"%")
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryList" parameterType="map" resultType="com.netbull.shop.common.vo.PosterVo">
+        select * from tb_shop_poster 
+         <where>
+             and status=0
+            <if test="posterName !=null and posterName !=''">
+                and posterName like CONCAT("%",#{posterName},"%")
+            </if>
+        </where>
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+    <insert id="save" parameterType="com.netbull.shop.common.vo.PosterVo" 
+        useGeneratedKeys="true" keyProperty="id">
+        insert tb_shop_poster(posterName,startTime,endTime,goodsCode,goodsVersion,type,url,createTime,updateTime,image)
+        	values(#{posterName},#{startTime},#{endTime},#{goodsCode},#{goodsVersion},#{type},#{url},now(),now(),#{image})
+    </insert>
+    
+    <update id="update" parameterType="com.netbull.shop.common.vo.PosterVo">
+        update tb_shop_poster 
+        <set>
+            <if test="posterName !=null and posterName !=''">
+                posterName=#{posterName},
+            </if>
+            <if test="startTime !=null and startTime !=''">
+                startTime=#{startTime},
+            </if>
+            <if test="endTime !=null and endTime !=''">
+                endTime=#{endTime},
+            </if>
+            <if test="goodsCode !=null and goodsCode !=''">
+                goodsCode=#{goodsCode},
+            </if>
+            <if test="goodsVersion !=null and goodsVersion !=''">
+                goodsVersion=#{goodsVersion},
+            </if>
+            <if test="type !=null and type !=''">
+                type=#{type},
+            </if>
+            <if test="url !=null and url !=''">
+                url=#{url},
+            </if>
+            <if test="image !=null and image !=''">
+                image=#{image},
+            </if>
+            <if test="status !=null and status !=''">
+                status=#{status},
+            </if>
+            updateTime=now()
+        </set>
+        <where>
+            <if test="id !=null and id !=''">
+                id=#{id}
+            </if>
+        </where>
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from tb_shop_poster 
+        <where>
+            <if test="_parameter !=null and _parameter !=''">
+                id=#{value}
+            </if>
+        </where>
+    </delete>
+</mapper>

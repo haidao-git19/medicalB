@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.doctor.entity.Duty">
+    
+    
+    <select id="query_by_doctorID_weekFlag" parameterType="map" resultType="com.netbull.shop.doctor.entity.Duty">
+		select * from tb_medical_freetime t where t.doctorID = #{doctorID} and t.weekFlag = #{weekFlag}
+	</select>
+	
+	<select id="query_by_id" parameterType="long" resultType="com.netbull.shop.doctor.entity.Duty">
+		SELECT t1.* FROM tb_medical_freetime t1 where t1.id = #{id}
+	</select>
+	
+	<delete id="delete_by_id" parameterType="long">
+		DELETE FROM tb_medical_freetime where id = #{id}
+	</delete>
+	
+	 <insert id="save" parameterType="com.netbull.shop.doctor.entity.Duty" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_freetime(doctorID, weekFlag, weekNum, dayFlag, startTime, endTime, type, isLater, operTime)
+		VALUES (#{doctorID}, #{weekFlag}, #{weekNum}, #{dayFlag}, #{startTime}, #{endTime}, #{type}, #{isLater}, NOW())
+	</insert>
+
+	<update id="update" parameterType="com.netbull.shop.doctor.entity.Duty">
+		UPDATE tb_medical_freetime SET  
+		doctorID=#{doctorID},
+		weekFlag=#{weekFlag},
+		weekNum=#{weekNum},
+		dayFlag=#{dayFlag},
+		startTime=#{startTime},
+		endTime=#{endTime},
+		type=#{type},
+		isLater=#{isLater},
+		operTime=NOW()
+		WHERE id=#{id}
+   </update>
+   
+</mapper>

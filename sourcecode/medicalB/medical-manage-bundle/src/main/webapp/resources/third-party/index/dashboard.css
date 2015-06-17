@@ -1,0 +1,57 @@
+html,body {
+	margin: 0;
+	padding: 0;
+	background:
+		url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAQACAIAAAAP+8yGAAACoklEQVR4Xu3dwQ0CMQxEUTtKvbRCC3RqjtwR3g3WSwP/MDOObaIlH89XdJ4VzQcAACBiZzcgMvs1AAAAAFCu3WiR3YCYcKMBACh2AKopgFJBA7Xoo4Fip1TQAEAtkmQASXZlalsAJLk/aC59AICdSQNJ7ge4DwRN0ORAbypociAHgsamliHWmlwkB7oKnZ0caH7lQA40v3LApmqRHPiBAsBCSvsOYCHFpuZkfZEcsCmbsqn2/XSbchGAHLApm3q9D6Cz07YAaB19oZWLaCAHbHoiwBf52BRADtiUTb1KAJAD384B8Gkbzx4APOyWAwAjlKCx6eQky4GgyYGgCZocAAiapSCAoLkPJBnA03QASZZkGgAoFVpHczKAWmQIVIsAAOxNARQ7AAB9kUEcQLn+/gCopgAAbjQ3Gg1cOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANV8aAAAAADwi7Pr/5+DVt2tAQAAgGK3I6oZUANEBgDQtigVACFoYQBhUwBBEzQAORA0NmVTOWBTADYlMptyEQCbEhnAOzsALjpPA88e6rJ3FUTmIi7Sm3IRF3ERkS1miaxUEFmpILJSURN6UyIT2QhlALHxIjKRiUxk+yKTPpGJbNInMpEN4sMARAawDBG06SIL2goi21UIGpFpcJlNjbFENuEQmQY0MGUaQEyZRBY0QRM0U6YpkwZEFjTrHFMmDTS/RCayKdOUacoUNH+4I2hENmX2AIhMZGMskWlgjCUyke2LNF5EJjINiExkGy8bL8uQCSIbxIlspcZFJn0iE1mpsEogsjGWi7iIi4jMRVzERfamAJaC52sAwEUANl5sCsCmXGRG89e6bEoDOWBTADmQAwBBk4MRAABJFjQAAIBqPvdrAPAGv7GBbaSCtb0AAAAASUVORK5CYII=");
+	background-attachment: fixed;
+	background-size: contain;
+}
+
+.sys-icons .promptumenu_window {
+	margin: 0 auto;
+	border: none;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	background: transparent none;
+	cursor : auto;
+}
+
+.sys-icons ul li {
+	cursor: pointer;
+}
+
+.sys-icons ul li img {
+	width: 96px;
+	height: 96px;
+	display: block;
+	margin: 15px auto;
+	border-radius : 10px;
+	-moz-border-radius : 15px;
+	-webkit-border-radius : 15px;
+}
+
+.sys-icons ul li a {
+	display: block;
+	margin: 10px auto;
+	text-align: center;
+	color: rgb(255, 255, 255);
+	text-shadow: rgba(0, 0, 0, 0.247059) 0px 7px 15px;
+	font-family: "Microsoft YaHei";
+	line-height: 1.2;
+	font-weight: 300;
+	-webkit-font-smoothing: antialiased;
+	text-decoration: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 150px;
+}
+
+/**消除当前焦点虚框 */
+:focus,:active {
+	outline: 0 !important;
+}
+
+* {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

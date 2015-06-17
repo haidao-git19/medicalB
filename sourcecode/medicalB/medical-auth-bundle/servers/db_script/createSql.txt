@@ -1,0 +1,119 @@
+CREATE DATABASE  IF NOT EXISTS `vbusiness` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `vbusiness`;
+-- MySQL dump 10.13  Distrib 5.6.17, for osx10.6 (i386)
+--
+-- Host: localhost    Database: vbusiness
+-- ------------------------------------------------------
+-- Server version	5.6.19
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tb_micro_bespeak_field`
+--
+
+DROP TABLE IF EXISTS `tb_micro_bespeak_field`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_micro_bespeak_field` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bespeak_field_type` varchar(50) NOT NULL COMMENT '字段类型',
+  `bespeak_field_name` varchar(100) NOT NULL COMMENT '字段名称',
+  `bespeak_type` varbinary(100) NOT NULL COMMENT '预约类型',
+  `bespeak_field_value` varchar(255) DEFAULT NULL COMMENT '字段值',
+  `bespeak_is_display` varchar(4) DEFAULT NULL COMMENT '是否显示',
+  `bespeak_is_required` varchar(4) DEFAULT NULL COMMENT '是否必填',
+  `bespeak_field_display_name` varchar(255) NOT NULL COMMENT '字段显示名称',
+  `bespeak_sort` int(11) DEFAULT '0' COMMENT '排序号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='预约字段表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_micro_bespeak_field`
+--
+
+LOCK TABLES `tb_micro_bespeak_field` WRITE;
+/*!40000 ALTER TABLE `tb_micro_bespeak_field` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_micro_bespeak_field` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_micro_bespeak_type`
+--
+
+DROP TABLE IF EXISTS `tb_micro_bespeak_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_micro_bespeak_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+  `bespeak_type` varchar(100) NOT NULL COMMENT '预约类型',
+  `bespeak_name` varchar(100) NOT NULL COMMENT '预约名称',
+  `bespeak_phone` varchar(50) DEFAULT NULL COMMENT '预约电话',
+  `bespeak_keyword` varchar(100) DEFAULT NULL COMMENT '关键词',
+  `bespeak_image_text_title` varchar(100) DEFAULT NULL COMMENT '图文标题',
+  `bespeak_image_text_cover` varchar(100) DEFAULT NULL COMMENT '图文封面',
+  `bespeak_image_text_info` varchar(500) DEFAULT NULL COMMENT '图文简介',
+  `bespeak_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `bespeak_last_modify_time` datetime DEFAULT NULL COMMENT '最后一次修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='预约类型表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_micro_bespeak_type`
+--
+
+LOCK TABLES `tb_micro_bespeak_type` WRITE;
+/*!40000 ALTER TABLE `tb_micro_bespeak_type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_micro_bespeak_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_micro_notify_log`
+--
+
+DROP TABLE IF EXISTS `tb_micro_notify_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_micro_notify_log` (
+  `NOTIFY_TIME` datetime DEFAULT NULL,
+  `WHERE_CONDITION` varchar(255) DEFAULT NULL,
+  `PK_VALUES` varchar(255) DEFAULT NULL,
+  `TABLE_NAME` varchar(255) DEFAULT NULL,
+  `CMD_TYPE` varchar(255) DEFAULT NULL,
+  `SN` int(255) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`SN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_micro_notify_log`
+--
+
+LOCK TABLES `tb_micro_notify_log` WRITE;
+/*!40000 ALTER TABLE `tb_micro_notify_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_micro_notify_log` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-07-07 20:58:36
+
+ALTER TABLE tb_micro_bespeak_type ADD COLUMN fileUrl varchar(500)

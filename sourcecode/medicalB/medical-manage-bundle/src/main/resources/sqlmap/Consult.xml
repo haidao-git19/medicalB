@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.consultation.dao.ConsultDao">
+
+   
+   <select id="pageConsult" parameterType="map" resultType="map">
+	    SELECT  *   FROM tb_medical_consultation C
+	    where 1=1
+	     <if test="level!=null and level != ''">
+	      and  level =#{level}
+	     </if>
+	      <if test="isFree!=null and isFree != ''">
+	      and  isFree =#{isFree}
+	     </if>
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="countConsult" parameterType="map"
+  	 resultType="long">
+        SELECT COUNT(1)  FROM tb_medical_consultation C
+           where 1=1
+        <if test="level!=null and level != ''">
+	      and  level =#{level}
+	     </if>
+	      <if test="isFree!=null and isFree != ''">
+	      and  isFree =#{isFree}
+	     </if>
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.shop.consultation.entity.Consult" useGeneratedKeys="true" keyProperty="consultationID">
+   	insert into tb_medical_consultation (userID,consultationDate,answerDate,question,answer,level,evaluation,isRepeat,sourceID,isFree,type)
+   	values (#{userID},#{consultationDate},#{answerDate},#{question},#{answer},#{level},#{evaluation},#{isRepeat},#{sourceID},#{isFree},#{type})
+   </insert>
+   
+   <update id="update" parameterType="com.netbull.shop.consultation.entity.Consult">
+	   update tb_medical_consultation set userID=#{userID},
+	   question=#{question},
+	   answer=#{answer},
+	   level=#{level},
+	   evaluation=#{evaluation},
+	   isRepeat=#{isRepeat},
+	   sourceID=#{sourceID},
+	   isFree=#{isFree},
+	   type=#{type}
+	   where consultationID=#{consultationID}
+   </update>
+   
+   
+   
+   <select id="findByID" parameterType="java.lang.Integer"  resultType="com.netbull.shop.consultation.entity.Consult">
+        SELECT *  FROM tb_medical_consultation C
+        where 1=1
+         <if test="consultationID!=null and consultationID != ''">
+	      and  consultationID =#{consultationID}
+	     </if>
+   </select>
+   
+   
+   <delete id="del" parameterType="java.lang.Integer" >
+  	 delete from tb_medical_consultation where  consultationID =#{consultationID}
+   </delete>
+   
+</mapper>

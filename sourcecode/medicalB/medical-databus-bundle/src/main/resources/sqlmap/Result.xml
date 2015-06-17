@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.databus.questionnaire.model.Result">
+
+	<insert id="save" parameterType="com.netbull.shop.databus.questionnaire.model.Result" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_questionnaire_result(qnId, doctorId, patientId, commitTime, state)
+		VALUES (#{qnId}, #{doctorId}, #{patientId}, NOW(), 1)
+	</insert>
+	
+	<select id="find_exceptionResults" parameterType="long" resultType="com.netbull.shop.databus.questionnaire.dto.ExceptionResult">
+		select
+			b.id rId,
+			b.commitTime commitTime, 
+			(select c.patientName from tb_medical_patient c where c.patientID = b.patientId) patientName,
+			(select IFNULL(d.patientSex, '未知') from tb_medical_patient d where d.patientID = b.patientId) gender,
+			IFNULL(g.hospitalName, '未知') hospitalName
+		from
+			tb_questionnaire_patient_mapping a, tb_questionnaire_result b
+			left join tb_medical_patient_doctor e on e.patientID = b.patientId
+			left join tb_medical_doctor f on f.doctorID = e.doctorID
+			left join tb_medical_hospital g on g.hospitalID = f.hospitalID
+		where
+			a.qnId = b.qnId and a.patientId = b.patientId and a.doctorId = #{doctorId}
+			and b.id in (select DISTINCT t.rId from tb_questionnaire_result_detail t where t.exceptionFlag = 1)
+	</select>
+
+</mapper>

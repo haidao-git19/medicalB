@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.pharmacy.dao.PharmacyDao">
+
+   
+   <select id="pageList" parameterType="map" resultType="map">
+	    SELECT  *   FROM tb_medical_pharmacy C
+	    where 1=1
+	    	and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+	     <if test="shopName!=null and shopName != ''">
+	      	and  shopName like CONCAT('%','${shopName}','%' )
+	     </if>
+	     <if test="latnId!=null and latnId != ''">
+	      	and  latnId =#{latnId}
+	     </if>
+	     <if test="type !=null and type !=''">
+	        and type = #{type}
+	     </if>
+	     and state = 0
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="count" parameterType="map" resultType="long">
+        SELECT COUNT(1)  FROM tb_medical_pharmacy C
+           where 1=1
+           and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+  	     <if test="shopName!=null and shopName != ''">
+	      	and  shopName like CONCAT('%','${shopName}','%' )
+	     </if>
+	     <if test="latnId!=null and latnId != ''">
+	      	and  latnId =#{latnId}
+	     </if>
+	     <if test="type !=null and type !=''">
+	        and type = #{type}
+	     </if>
+	     and state = 0
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.shop.pharmacy.entity.Pharmacy" useGeneratedKeys="true" keyProperty="shopID">
+   	insert into tb_medical_pharmacy (shopName,code,description,userID,crtDate,address,latnId,lng,lat,physicsAddress,type,logo,phone,state,creator,loginID,url)
+   	values (#{shopName},#{code},#{description},#{userID},#{crtDate},#{address},#{latnId},#{lng},#{lat},#{physicsAddress},#{type},#{logo},#{phone},'0',#{creator},#{loginID},#{url})
+   </insert>
+   
+   <update id="update" parameterType="com.netbull.shop.pharmacy.entity.Pharmacy">
+	   update tb_medical_pharmacy 
+	   <set>
+	       <if test="shopName !=null and shopName !=''">
+	           shopName = #{shopName},
+	       </if>
+	       <if test="code !=null and code !=''">
+	           code = #{code},
+	       </if>
+	       <if test="description !=null and description !=''">
+	           description = #{description},
+	       </if>
+	       <if test="userID !=null and userID !=''">
+	           userID = #{userID},
+	       </if>
+	       <if test="latnId !=null and latnId !=''">
+	           latnId = #{latnId},
+	       </if>
+	       <if test="address !=null and address !=''">
+	           address = #{address},
+	       </if>
+	       <if test="physicsAddress !=null and physicsAddress!=''">
+	           physicsAddress = #{physicsAddress},
+	       </if>
+	       <if test="lng !=null and lng !=''">
+	           lng = #{lng},
+	       </if>
+	       <if test="lat !=null and lat !=''">
+	           lat = #{lat},
+	       </if>
+	       <if test="type !=null and type !=''">
+	           type = #{type},
+	       </if>
+	       <if test="logo !=null and logo !=''">
+	           logo = #{logo},
+	       </if>
+	       <if test="phone !=null and phone !=''">
+	           phone = #{phone},
+	       </if>
+	       <if test="state !=null and state !=''">
+	           state = #{state},
+	       </if>
+	       <if test="url !=null and url !=''">
+	           url = #{url},
+	       </if>
+	   </set>
+	   <where>
+	       <if test="shopID !=null and shopID !=''">
+	           and shopID = #{shopID}
+	       </if>
+	   </where>
+   </update>
+   
+   
+   
+   <select id="findByParam" parameterType="java.util.Map"  resultType="com.netbull.shop.pharmacy.entity.Pharmacy">
+        SELECT C.*,U.login_name loginAccount,U.password loginPwd 
+        	FROM tb_medical_pharmacy C LEFT JOIN vauth.user_info U on C.loginID = U.id
+        where 1=1
+        and C.userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+ 		 <if test="shopID!=null and shopID != ''">
+	      	and  C.shopID =#{shopID}
+	     </if>
+	     <if test="shopName !=null and shopName!=''">
+	         and C.shopName = #{shopName}
+	     </if>
+   </select>
+   
+   
+   <delete id="del" parameterType="java.lang.Integer" >
+  	 DELETE FROM tb_medical_pharmacy where  shopID =#{shopID}
+   </delete>
+   
+   <insert id="saveUserInfo" parameterType="com.netbull.shop.pharmacy.entity.UserInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT into vauth.user_info(login_name, true_name, password, phone, parentid) values(#{loginName}, #{trueName}, #{password}, #{phone}, #{parentid})
+	</insert>
+   
+   <update id="updateUserInfo" parameterType="com.netbull.shop.pharmacy.entity.UserInfo">
+		UPDATE vauth.user_info SET  
+		true_name=#{trueName},
+		phone=#{phone}
+		WHERE id=#{id}
+	</update>
+	
+   <insert id="saveRoleUserInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+		INSERT into vauth.role_user_info(role_id, user_id) values(#{roleId}, #{userId})
+	</insert>
+</mapper>

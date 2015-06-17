@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.NewsDao">
+    
+    <select id="queryCount" parameterType="map" resultType="java.lang.Long">
+ 		select count(1) from tb_medical_news
+ 		    <where>
+ 	        1=1
+ 	         and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+ 	    	<if test="title!=null and title !=''">
+ 	    		and title like CONCAT('%',#{title},'%')
+ 	    	</if>
+ 	    </where>
+ 	</select>
+ 	
+ 	<select id="queryList" parameterType="map" resultType="com.netbull.shop.common.vo.HealthKnowlege">
+ 	   select * from tb_medical_news
+ 	    <where>
+ 	        1=1
+ 	         and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+ 	    	<if test="title!=null and title !=''">
+ 	    		and title like CONCAT('%',#{title},'%')
+ 	    	</if>
+ 	    </where>
+ 	    <include refid="com.odchia.dao.Dao.pageComponent"/>
+ 	</select>
+    
+    <select id="queryOne" parameterType="map" resultType="com.netbull.shop.common.vo.HealthKnowlege">
+        select * from tb_medical_news 
+         <where>
+          userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+            <if test="_parameter !=null and _parameter !=''">
+               and id=#{id}
+            </if>
+        </where>
+    </select>
+    
+    <insert id="save" parameterType="com.netbull.shop.common.vo.HealthKnowlege" 
+        useGeneratedKeys="true" keyProperty="id">
+        insert tb_medical_news(title,coverImage,content,textContent,detailUrl,createTime,updateTime,author,userID) 
+        values(#{title},#{coverImage},#{content},#{textContent},#{detailUrl},now(),now(),#{author},#{userID})
+    </insert>
+    
+   	<update id="update" parameterType="com.netbull.shop.common.vo.HealthKnowlege">
+   	    update tb_medical_news 
+   	    <set>
+   	        <if test="title !=null and title !=''">
+   	            title=#{title},
+   	        </if>
+   	        <if test="coverImage !=null and coverImage !=''">
+   	            coverImage=#{coverImage},
+   	        </if>
+   	        <if test="content !=null and content !=''">
+   	            content=#{content},
+   	        </if>
+   	        <if test="textContent !=null and textContent !=''">
+   	            textContent=#{textContent},
+   	        </if>
+   	        <if test="detailUrl !=null and detailUrl !=''">
+   	            detailUrl=#{detailUrl},
+   	        </if>
+   	        <if test="status !=null and status !=''">
+   	            status=#{status},
+   	        </if>
+   	          <if test="author !=null and author !=''">
+   	            author=#{author},
+   	        </if>
+   	    updateTime=now()
+   	    </set>
+   	    <where>
+   	        <if test="id !=null and id !=''">
+   	            id=#{id}
+   	        </if>
+   	    </where>
+   	</update>
+   	
+   	<delete id="delete" parameterType="java.lang.Integer">
+   	    delete from tb_medical_news
+   	    <where>
+   	        <if test="_parameter !=null and _parameter !=''">
+   	            id=#{value}
+   	        </if>
+   	    </where>
+   	</delete>
+   	
+   	<!-- 微信 -->
+   	
+   	<select id="queryDetailList" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from tb_medical_news h
+			<if test="sortKey != null and sortKey != ''">
+				 order by h.createTime ${sortKey}
+			</if>
+			 LIMIT  #{start}, #{limit}
+	</select>
+	
+     <select id="queryDetailCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(1) from tb_medical_news
+	</select>
+</mapper>

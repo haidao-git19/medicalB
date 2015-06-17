@@ -1,0 +1,696 @@
+CREATE DATABASE  IF NOT EXISTS `vbusiness` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `vbusiness`;
+-- MySQL dump 10.13  Distrib 5.6.17, for osx10.6 (i386)
+--
+-- Host: localhost    Database: vbusiness
+-- ------------------------------------------------------
+-- Server version	5.6.19
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tb_micro_survey_content`
+--
+
+DROP TABLE IF EXISTS `tb_micro_survey_content`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_micro_survey_content` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+  `surveyTypeId` int(11) DEFAULT NULL COMMENT '调研类型',
+  `titleName` varchar(200) DEFAULT NULL COMMENT '题目名称',
+  `answerNum` int(11) DEFAULT '1' COMMENT '答案数量',
+  `answerType` varchar(6) DEFAULT NULL COMMENT '答案类型',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='调研内容表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_micro_survey_content`
+--
+
+LOCK TABLES `tb_micro_survey_content` WRITE;
+/*!40000 ALTER TABLE `tb_micro_survey_content` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_micro_survey_content` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_micro_survey`
+--
+
+DROP TABLE IF EXISTS `tb_micro_survey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_micro_survey` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+  `userName` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '姓名',
+  `mobilePhone` varchar(20) DEFAULT NULL COMMENT '手机号码',
+  `surveryTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '调研时间',
+  `surveyTypeId` int(11) DEFAULT NULL COMMENT '调研类型ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='调研表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_micro_survey`
+--
+
+LOCK TABLES `tb_micro_survey` WRITE;
+/*!40000 ALTER TABLE `tb_micro_survey` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_micro_survey` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_micro_survey_result`
+--
+
+DROP TABLE IF EXISTS `tb_micro_survey_result`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_micro_survey_result` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `surveyId` int(11) DEFAULT NULL,
+  `surveyContentId` int(11) DEFAULT NULL,
+  `titleName` varchar(200) DEFAULT NULL,
+  `answer` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_micro_survey_result`
+--
+
+LOCK TABLES `tb_micro_survey_result` WRITE;
+/*!40000 ALTER TABLE `tb_micro_survey_result` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_micro_survey_result` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_micro_survey_type`
+--
+
+DROP TABLE IF EXISTS `tb_micro_survey_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_micro_survey_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+  `surveyName` varchar(100) DEFAULT NULL COMMENT '活动名称',
+  `surveyStartTime` datetime DEFAULT NULL COMMENT '活动开始时间',
+  `surveyEndTime` datetime DEFAULT NULL COMMENT '活动结束时间',
+  `surveyEnable` varchar(20) DEFAULT '1' COMMENT '状态',
+  `surveyAbstract` varchar(5000) DEFAULT NULL COMMENT '摘要',
+  `surveyImageTextCover` varchar(500) DEFAULT NULL COMMENT '封面',
+  `surveyStartInfo` text COMMENT '活动开始说明',
+  `surveyCreateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `surveyLastModifyTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次修改时间',
+  `surveryEndInfo` varchar(1000) DEFAULT NULL COMMENT '结束活动说明',
+  `surveyKeyword` varchar(100) DEFAULT NULL COMMENT '关键词',
+  `isWrite` varchar(6) DEFAULT 'yes',
+  `fileUrl` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='调研类型表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_micro_survey_type`
+--
+
+LOCK TABLES `tb_micro_survey_type` WRITE;
+/*!40000 ALTER TABLE `tb_micro_survey_type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_micro_survey_type` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-07-30 22:41:43
+
+CREATE DATABASE  IF NOT EXISTS `vbusiness` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `vbusiness`;
+-- MySQL dump 10.13  Distrib 5.6.17, for osx10.6 (i386)
+--
+-- Host: localhost    Database: vbusiness
+-- ------------------------------------------------------
+-- Server version	5.6.19
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tb_micro_options`
+--
+
+DROP TABLE IF EXISTS `tb_micro_options`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_micro_options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+  `surveyContentId` int(11) DEFAULT NULL COMMENT '预约类型',
+  `optionsName` varchar(200) DEFAULT NULL COMMENT '预约名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='选项表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tb_micro_options` WRITE;
+/*!40000 ALTER TABLE `tb_micro_options` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_micro_options` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-08-05 14:48:59
+
+-- XIA 2014-09-15 11:48:59
+DROP TABLE IF EXISTS `tb_micro_prize`;
+CREATE TABLE `tb_micro_prize` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `actId` int(11) DEFAULT NULL,
+  `prizeName` varchar(255) DEFAULT NULL,
+  `prizeTotal` int(11) DEFAULT NULL,
+  `prizeOdds` double DEFAULT NULL,
+  `dayTimes` int(11) DEFAULT NULL,
+  `perTimes` int(11) DEFAULT NULL,
+  `perDayTimes` int(11) DEFAULT NULL,
+  `prizeDesc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- XIA 2014-09-15 11:48:59
+DROP TABLE IF EXISTS `tb_micro_activity`;
+CREATE TABLE `tb_micro_activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `wechatId` varchar(255) DEFAULT NULL,
+  `activityName` varchar(255) DEFAULT NULL,
+  `keyword` varchar(255) DEFAULT NULL COMMENT '触发关键字',
+  `actStatus` varchar(255) DEFAULT NULL,
+  `goMsgTitle` varchar(255) DEFAULT NULL,
+  `goMsgPic` varchar(255) DEFAULT NULL,
+  `goMsgSummary` varchar(255) DEFAULT NULL,
+  `goDescription` varchar(255) DEFAULT NULL,
+  `goStartTime` varchar(255) DEFAULT NULL,
+  `goEndTime` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+-- XIA 2014-09-15 11:48:59
+DROP TABLE IF EXISTS `tb_micro_participate_record`;
+CREATE TABLE `tb_micro_participate_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `actId` int(11) DEFAULT NULL,
+  `openId` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `participateTime` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=901 DEFAULT CHARSET=utf8;
+
+
+
+-- XIA 2014-09-15 11:48:59
+DROP TABLE IF EXISTS `tb_micro_rule`;
+CREATE TABLE `tb_micro_rule` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `actId` int(11) DEFAULT NULL,
+  `perInvolveTimes` int(11) DEFAULT NULL,
+  `perDayInvolveTimes` int(11) DEFAULT NULL,
+  `perWinTimes` int(11) DEFAULT NULL,
+  `perDayWinTimes` int(11) DEFAULT NULL,
+  `showPrizeTotal` varchar(20) DEFAULT '0',
+  `baseNum` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- XIA 2014-09-15 11:48:59
+DROP TABLE IF EXISTS `tb_micro_sncode`;
+CREATE TABLE `tb_micro_sncode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `actId` int(11) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `snStatus` varchar(255) DEFAULT NULL,
+  `prizeId` int(11) DEFAULT NULL,
+  `participateId` int(11) DEFAULT NULL,
+  `storeId` int(11) DEFAULT NULL,
+  `useTime` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
+
+-- XIA 2014-09-15 11:48:59
+DROP TABLE IF EXISTS `tb_micro_store`;
+CREATE TABLE `tb_micro_store` (
+  `id` int(11) NOT NULL,
+  `storeName` varchar(255) DEFAULT NULL,
+  `wechatId` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--add by guzx 
+DROP TABLE IF EXISTS `tb_micro_graphics`;
+CREATE TABLE `tb_micro_graphics` (
+  `id` int(11) AUTO_INCREMENT NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `keyword` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  `wechatId` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `tb_micro_houses`;
+CREATE TABLE `tb_micro_houses` (
+  `id` int(11) NOT NULL COMMENT '楼盘信息表',
+  `graphicsId` int(11) DEFAULT NULL,
+  `wechatId` int(11) DEFAULT NULL,
+  `houseName` varchar(255) DEFAULT NULL,
+  `housePrice` varchar(255) DEFAULT NULL,
+  `houseAddress` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `locationX` varchar(255) DEFAULT NULL,
+  `locationY` varchar(255) DEFAULT NULL,
+  `state` varchar(10) DEFAULT '0',
+  `image` varchar(255) DEFAULT NULL,
+  `vedioUrl` varchar(255) DEFAULT NULL,
+  `trafficInfo` varchar(4000) DEFAULT NULL,
+  `projectIntro` varchar(3000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_point_record`;
+CREATE TABLE `tb_micro_point_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `registerId` varchar(100) DEFAULT NULL,
+  `openId` varchar(255) DEFAULT NULL,
+  `wechatId` varchar(255) DEFAULT NULL,
+  `ruleId` varchar(255) DEFAULT NULL,
+  `availablePoint` varchar(100) DEFAULT '0' COMMENT '可用积分',
+  `totalPoint` varchar(100) DEFAULT '0' COMMENT '总积分',
+  `consumePoint` varchar(255) DEFAULT '0' COMMENT '已使用',
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `consumeTime` date DEFAULT NULL,
+  `state` varchar(10) DEFAULT NULL COMMENT '0:正常；1：异常；',
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `tb_micro_point_rule`;
+CREATE TABLE `tb_micro_point_rule` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `ruleName` varchar(50) DEFAULT NULL,
+  `wechatId` varchar(255) DEFAULT NULL,
+  `ruleKey` varchar(255) DEFAULT NULL COMMENT '规则表达式；',
+  `ruleValue` varchar(20) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `remark` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `tb_micro_order`;
+CREATE TABLE `tb_micro_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) DEFAULT NULL,
+  `hotelId` int(11) DEFAULT NULL,
+  `roomId` int(11) DEFAULT NULL,
+  `hotelName` varchar(255) DEFAULT NULL,
+  `roomName` varchar(255) DEFAULT NULL,
+  `openId` varchar(255) DEFAULT NULL,
+  `registerId` int(11) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `startTime` date DEFAULT NULL,
+  `endTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0' COMMENT '0:正常；1：异常；',
+  `payState` varchar(255) DEFAULT '1' COMMENT '1:未支付；0：支付成功',
+  `roomNum` int(11) DEFAULT NULL,
+  `totalPrice` float DEFAULT NULL,
+  `remark` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+--add by xiawq
+
+DROP TABLE IF EXISTS `tb_micro_type`;
+CREATE TABLE `tb_micro_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `typeName` varchar(255) DEFAULT NULL,
+  `typeValue` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `owerName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_sale`;
+CREATE TABLE `tb_micro_sale` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `saleName` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `duty` varchar(255) DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_live_photo`;
+CREATE TABLE `tb_micro_live_photo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `graphicsId` int(11) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_house_type`;
+CREATE TABLE `tb_micro_house_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `serialNumber` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `structure` varchar(255) DEFAULT NULL,
+  `referenceArea` int(255) DEFAULT NULL,
+  `introduction` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_house_impression`;
+CREATE TABLE `tb_micro_house_impression` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `impressionName` varchar(255) DEFAULT NULL,
+  `impressionValue` int(11) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_graphics`;
+CREATE TABLE `tb_micro_graphics` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `owerId` int(11) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `keyword` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  `wechatId` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9735 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_file_attr`;
+CREATE TABLE `tb_micro_file_attr` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `graphicsId` int(11) DEFAULT NULL,
+  `attrId` int(11) NOT NULL,
+  `fileName` varchar(100) DEFAULT NULL,
+  `owerType` varchar(50) DEFAULT NULL,
+  `owerId` int(10) DEFAULT NULL,
+  `fileSize` int(100) DEFAULT NULL,
+  `fileDesc` varchar(255) DEFAULT NULL,
+  `filePath` varchar(200) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `state` varchar(20) DEFAULT '0',
+  `fileContent` varchar(1000) DEFAULT NULL,
+  `remark` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_attr_type`;
+CREATE TABLE `tb_micro_attr_type` (
+  `id` int(10) NOT NULL,
+  `attrName` varchar(50) DEFAULT NULL,
+  `attrTypeCode` varchar(50) DEFAULT NULL,
+  `remark` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ 
+---add by xiawq
+
+DROP TABLE IF EXISTS `tb_micro_house_impression`;
+CREATE TABLE `tb_micro_house_impression` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `impressionName` varchar(255) DEFAULT NULL,
+  `impressionValue` varchar(255) DEFAULT NULL,
+  `clickTimes` int(11) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_type`;
+CREATE TABLE `tb_micro_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `wechatId` varchar(11) DEFAULT NULL,
+  `typeName` varchar(255) DEFAULT NULL,
+  `typeValue` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `owerName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_house_type`;
+CREATE TABLE `tb_micro_house_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `serialNumber` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `parentType` varchar(255) DEFAULT NULL,
+  `structure` varchar(255) DEFAULT NULL,
+  `referenceArea` varchar(255) DEFAULT NULL,
+  `introduction` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+
+--add by guzx
+DROP TABLE IF EXISTS `BizInfo`;
+CREATE TABLE `BizInfo` (
+  `BizId` int(11) NOT NULL,
+  `BizName` varchar(255) DEFAULT NULL,
+  `BizCnName` varchar(255) DEFAULT NULL,
+  `BizType` varchar(255) DEFAULT NULL,
+  `MspAppId` varchar(255) DEFAULT NULL,
+  `Status` varchar(255) DEFAULT NULL,
+  `BizDesc` varchar(255) DEFAULT NULL,
+  `BizNumber` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`BizId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--add by xiawq
+
+DROP TABLE IF EXISTS `tb_micro_houses`;
+CREATE TABLE `tb_micro_houses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '楼盘信息表',
+  `graphicsId` int(11) DEFAULT NULL,
+  `wechatId` int(11) DEFAULT NULL,
+  `houseName` varchar(255) DEFAULT NULL,
+  `housePrice` varchar(255) DEFAULT NULL,
+  `houseAddress` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `locationX` varchar(255) DEFAULT NULL,
+  `locationY` varchar(255) DEFAULT NULL,
+  `state` varchar(10) DEFAULT '0',
+  `image` varchar(255) DEFAULT NULL,
+  `vedioUrl` varchar(255) DEFAULT NULL,
+  `trafficInfo` varchar(4000) DEFAULT NULL,
+  `projectIntro` varchar(3000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_house_impression`;
+CREATE TABLE `tb_micro_house_impression` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `impressionName` varchar(255) DEFAULT NULL,
+  `impressionValue` varchar(255) DEFAULT NULL,
+  `clickTimes` int(11) DEFAULT '0',
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+
+---add by xiawq
+
+DROP TABLE IF EXISTS `tb_micro_activity`;
+CREATE TABLE `tb_micro_activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `wechatId` varchar(255) DEFAULT NULL,
+  `typeId` int(11) DEFAULT NULL,
+  `activityName` varchar(255) DEFAULT NULL,
+  `keyword` varchar(255) DEFAULT NULL COMMENT '触发关键字',
+  `actStatus` varchar(255) DEFAULT NULL,
+  `goMsgTitle` varchar(255) DEFAULT NULL,
+  `goMsgPic` varchar(255) DEFAULT NULL,
+  `goMsgSummary` varchar(255) DEFAULT NULL,
+  `goDescription` varchar(255) DEFAULT NULL,
+  `goStartTime` varchar(255) DEFAULT NULL,
+  `goEndTime` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_house_type`;
+CREATE TABLE `tb_micro_house_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `serialNumber` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `parentTypeId` int(11) DEFAULT NULL,
+  `structure` varchar(255) DEFAULT NULL,
+  `referenceArea` varchar(255) DEFAULT NULL,
+  `introduction` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_house_impression`;
+CREATE TABLE `tb_micro_house_impression` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `houseId` int(11) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `impressionName` varchar(255) DEFAULT NULL,
+  `impressionValue` varchar(255) DEFAULT NULL,
+  `clickTimes` int(11) DEFAULT '0',
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `state` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+
+---add by xiawq
+
+DROP TABLE IF EXISTS `tb_micro_house_dynamic`;
+CREATE TABLE `tb_micro_house_dynamic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `accessTimes` int(11) DEFAULT '0',
+  `url` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `wechatId` varchar(255) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `owerId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tb_micro_house_dynamic`;
+CREATE TABLE `tb_micro_house_dynamic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `accessTimes` int(11) DEFAULT '0',
+  `url` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `wechatId` varchar(255) DEFAULT NULL,
+  `graphicsId` int(11) DEFAULT NULL,
+  `owerId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+
+--add by xiawq 2014-10-24 19:11
+
+DROP TABLE IF EXISTS `AnnouncementInfo`;
+CREATE TABLE `AnnouncementInfo` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `wechatId` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+---add by xiawq 
+
+DROP TABLE IF EXISTS `CarouselInfo`;
+CREATE TABLE `CarouselInfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) DEFAULT NULL,
+  `createTime` date DEFAULT NULL,
+  `updateTime` date DEFAULT NULL,
+  `wechatId` varchar(255) DEFAULT NULL,
+  `state` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
+---add by xiawq
+
+ALTER TABLE `CarouselInfo`
+ADD COLUMN `title`  varchar(255) NULL AFTER `id`;
+

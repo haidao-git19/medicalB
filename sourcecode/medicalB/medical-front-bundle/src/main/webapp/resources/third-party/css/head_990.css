@@ -1,0 +1,80 @@
+@charset "gb2312";
+.wrap,.site-nav .site-nav-bd{width:990px;}
+.searchForm input { width:290px;}
+.mod_search { width: 585px;}
+.mod_search .hotkeys { width: 585px;}
+.mod_minicart {right:-858px;}
+.sitenav {width:990px;}
+.bottom_service_link dl{margin:28px 5px 0 10px;}
+.searchForm .search_tips_result_new {width: 306px;}
+.head_wrap .headerNavMain{width: 990px;}
+.ft_friendlylink img{
+	width: 90px;
+}
+.tsSlide { width:510px;}
+.main-l{width:510px;}
+.market_box{ width:988px;}
+.floor_l{
+	width: 179px;
+}
+.floor_l a{
+	width: 89px;
+}
+.floor_r{ width:807px;}
+
+.floor_r li.w990last {
+    border-right: 0 none;
+	width: 200px;
+}
+.main_ul{
+	width: 513px;
+	margin-right: -3px;
+}
+
+.main_ul li{
+	width: 245px;
+}
+
+.main_ul li.last{
+	border-right: 1px solid #e6e6e6;
+}
+
+.product_list li.first{
+	 width: 140px;
+}
+.sitenav .index_tuan,.sitenav .caiji_tuan { cursor:pointer; padding:0 10px;}
+.center_col{width:488px;}
+.center_col .center_col_div a{margin-left:3px; padding-left:0;}
+.center_col .center_col_title li{width:97px;}
+.center_col .center_col_title .first_li{width:96px;}
+.center_col .center_col_div{padding-left:8px;}
+.center_col .center_col_two li{width:230px; margin-left:2px; margin-right:5px; _margin-left:0;}
+.center_col .center_col_two a{ _margin-left:3px;}
+.center_col .center_col_four a{width:117px; padding-left:0; _width:114px;}
+.center_col .center_col_five a{width:93px; _width:89px;}
+.headerNavMain .sitenav .home a{padding: 0 12px;}
+
+.flagship_store a { width: 90px;background-size: 966px 104px;}
+.flagship_store .btm_logo02 { background-position: -97px top;}
+.flagship_store .btm_logo03 { background-position: -193px top;}
+.flagship_store .btm_logo04 { background-position: -290px top;}
+.flagship_store .btm_logo05 { background-position: -387px top;}
+.flagship_store .btm_logo06 { background-position: -483px top;}
+.flagship_store .btm_logo07 { background-position: -580px top;}
+.flagship_store .btm_logo08 { background-position: -676px top;}
+.flagship_store .btm_logo09 { background-position: -773px top;}
+.flagship_store .btm_logo10 { background-position: -869px top;}
+.flagship_store .btm_logo12 { background-position: -97px -53px;}
+.flagship_store .btm_logo13 { background-position: -193px -53px;}
+.flagship_store .btm_logo14 { background-position: -290px -53px;}
+.flagship_store .btm_logo15 { background-position: -387px -53px;}
+.flagship_store .btm_logo16 { background-position: -483px -53px;}
+.flagship_store .btm_logo17 { background-position: -580px -53px;}
+.flagship_store .btm_logo18 { background-position: -676px -53px;}
+.flagship_store .btm_logo19 { background-position: -773px -53px;}
+.flagship_store .btm_logo20 { background-position: -869px -53px;}
+
+.searchForm .combobox-placeholder{width: 290px;}
+.ft_commit a{ width: 99px;}
+img{ max-width: 990px;}
+

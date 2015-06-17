@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.HospitalDao">
+
+   <select id="queryRecomList" parameterType="java.util.Map" resultType="java.util.Map">
+       select * from tb_medical_hospital 
+       <where>
+           <if test="recomFlag !=null and recomFlag !=''">
+               recomFlag = #{recomFlag}
+           </if>
+       </where>
+   </select>
+    
+   <select id="queryNearList" parameterType="java.util.Map" statementType="CALLABLE" resultType="java.util.Map">
+       call SEARCH_NEAR_HOSPITAL(#{locationX,jdbcType=VARCHAR,mode=IN},#{locationY,jdbcType=VARCHAR,mode=IN},#{scope,jdbcType=VARCHAR,mode=IN}) 
+   </select>
+   
+   <select id="queryVirtualHospital" parameterType="java.util.Map" resultType="java.util.Map">
+        select s.id, CONCAT(s.attrvalue,"专科医院") hospitalName,'1' as isRecommend from tb_medical_section s where s.id in (select d.sectionID from tb_medical_doctor d where d.isRecommend = 1 and d.doctorID NOT in (select pd.doctorID from tb_medical_patient_doctor pd where pd.doctorType = 0))
+		UNION
+		select s.id, CONCAT(s.attrvalue,"专科医院") hospitalName,'0' as isRecommend from tb_medical_section s where s.id in (select d.sectionID from tb_medical_doctor d where d.isRecommend = 0 and d.doctorID NOT in (select pd.doctorID from tb_medical_patient_doctor pd where pd.doctorType = 0)) 
+   </select>
+</mapper>

@@ -1,0 +1,30 @@
+body{ margin:0; background-color:#eeeeee; padding:0px;}
+img{ border:0;}
+a{ text-decoration:none;}
+.headbox{ height:50px; background-color:orange; color:#f5f5f5;font-size:20px; text-align:center; line-height:50px; position:relative;}
+.backleft{ display:block; padding-top:8px; padding-left:20px;position:absolute;}
+.backright{ display:block; padding-top:8px; position:absolute; right:20px;}
+.photobox{background-image:url(../../images/bg_02.png);background-size:100%; margin-bottom:10px; position:relative; padding-bottom:20px;}
+.photobox a{ display:block;color:white;font-size:18px;line-height:18px; text-align:center;}
+.photobox .touxiang{ padding-top:20px; margin-left:auto; margin-right:auto; width:90px;}
+.touxiang img{border-radius:20px;}
+.nc{ display:block; border-top:#e4e4e4 1px solid; background-color:white; height:44px;margin-left:auto; margin-right:auto;overflow:hidden;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.nc1{ border-bottom:#e4e4e4 1px solid; margin-bottom:10px;}
+.nc span{ float:left;color:#4d4d4d;font-size:16px;line-height:44px; margin-left:5px;}
+.nc img{ float:left; margin-left:10px; margin-top:10px;}
+.nc div img{ float:right; margin-right:10px; margin-top:5px;}
+.touming{background-image: url(../../images/touming_02.png);height: 50px;width: 100%;position: absolute;bottom:0px; color:#FFF; font-family:"微软雅黑"; font-size:14px; text-align:center; padding-bottom:4px;}
+.touming div{ width:33%; float:left; margin-top:4px; line-height:28px;}
+.touming a{ text-decoration:none;font-size:14px;-webkit-tap-highlight-color:rgba(0,0,0,0); }
+.tmleft{border-right:1px solid #FFF;}
+.tmmiddle{border-right:1px solid #fff;}
+.tmright{}
+.vip{  margin-top:2px; background: url(../../images/icon-vip.png) no-repeat left top; display:block; padding-left:26px;filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+-moz-background-size:23px 23px;  
+    background-size:23px 23px; }
+.nvip{  margin-top:2px; background: url(../../images/icon-nvip.png) no-repeat left top; display:block; padding-left:26px;filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+-moz-background-size:23px 23px;  
+    background-size:23px 23px; }
+.xm{ width:100%;text-align:center;}
+.xm img{ display:inline;}
+.xm a{ display:inline;}

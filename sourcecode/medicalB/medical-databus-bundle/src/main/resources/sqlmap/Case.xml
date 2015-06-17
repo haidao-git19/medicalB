@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.databus.questionnaire.model.Case">
+   
+	<select id="query_Case_list_by_classId" parameterType="long" resultType="com.netbull.shop.databus.questionnaire.model.Case">
+		select * from tb_questionnaire_case t where t.classId = #{classId} and t.state = 1 order by t.sort asc
+	</select>
+	
+</mapper>

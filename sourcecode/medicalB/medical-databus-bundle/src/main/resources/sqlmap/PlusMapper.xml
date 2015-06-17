@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.PlusDao">
+
+    <select id="queryDetail" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT p.plusID,p.doctorID,p.patientID,p.status,p.price,p.isPay,p.plusTime,p.paystate,
+        DATE_FORMAT(p.createTime,'%Y-%m-%d %H:%i') createTime,DATE_FORMAT(p.updateTime,'%Y-%m-%d %H:%i') updateTime
+        ,d.*,pa.patientID, pa.patientName,pa.nickName, pa.patientAge, pa.patientSex FROM tb_medical_plus p LEFT JOIN tb_medical_doctor d ON p.doctorID = d.doctorID LEFT JOIN tb_medical_patient pa on p.patientID = pa.patientID
+        <where>
+            <if test="plusID !=null and plusID !=''">
+                and p.plusID = #{plusID}
+            </if>
+            <if test="patientID !=null and patientID !=''">
+                and p.patientID = #{patientID}
+            </if>
+            <if test="doctorID !=null and doctorID !=''">
+                and p.doctorID = #{doctorID}
+            </if>
+        </where>
+        order by p.plusTime desc
+    </select>
+	
+    <insert id="save" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="plusID">
+        INSERT tb_medical_plus(doctorID,patientID,status,isPay,plusTime,createTime,updateTime) 
+        	VALUES(#{doctorID},#{patientID},'0','0',#{plusTime},now(),now())
+    </insert>
+    
+    <update id="update" parameterType="java.util.Map">
+        UPDATE tb_medical_plus
+        <set>
+            <if test="status !=null and status !=''">
+                status = #{status},
+            </if>
+            <if test="isPay !=null and isPay !=''">
+                isPay = #{isPay},
+            </if>
+            <if test="paystate !=null and paystate !=''">
+                paystate = #{paystate},
+            </if>
+            <if test="isnotice !=null and isnotice !=''">
+                isnotice = #{isnotice},
+            </if>
+            updateTime=now()
+        </set>
+        <where>
+            <if test="plusID !=null and plusID !=''">
+                and plusID = #{plusID}
+            </if>
+            <if test="doctorID !=null and doctorID !=''">
+                and doctorID = #{doctorID}
+            </if>
+        </where>
+    </update>
+    
+    <select id="queryRcentiPlus" parameterType="java.util.Map" resultType="java.util.Map">
+        <![CDATA[
+        	select X.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_plus X LEFT JOIN tb_medical_doctor d on X.doctorID = d.doctorID LEFT JOIN tb_medical_patient p on X.patientID = p.patientID where X.`status`=1 and X.isnotice!=1 and str_to_date(X.createTime,'%Y-%m-%d %H:%i:%s') >= date_add(now(), interval -${minitue} MINUTE)
+         ]]>
+    </select>
+</mapper>

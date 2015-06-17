@@ -1,0 +1,117 @@
+@charset "gb2312";
+
+/******公共按钮*******/
+.grey_border_btn,
+.red_border_btn { border: 1px solid #d7d7d7; width: 114px; display: block; line-height: 34px; color: #868686; text-align: center; font-size: 14px; font-weight: bold;}
+.grey_border_btn:hover,
+.red_border_btn:hover { background-color: #0083ce; border:1px solid #0083ce; color: #fff; text-decoration: none;}
+.red_border_btn { border:1px solid #e71a0f; color:#e71a0f;}
+.red_border_btn:hover { border: 1px solid #d80000;background-color: #d80000;}
+
+.red_btn,
+.bule_btn,
+.yellow_btn,
+.grey_btn { background-color: #e71a0f; color: #fff; font-weight: bold; font-size: 14px; line-height: 34px; border-bottom: 2px solid #a00; width: 116px; text-align: center; display: block;}
+.red_btn:hover,
+.grey_btn:hover,
+.yellow_btn:hover,
+.bule_btn:hover { background-color: #0083ce;border-bottom: 2px solid #0083ce; color: #fff; text-decoration: none;}
+.red_btn:hover{ background-color: #d80000; border-bottom: 2px solid #d80000;}
+
+.grey_btn { background-color: #ccc; border-bottom: 2px solid #bbb;}
+.grey_btn:hover {background-color: #bbb;border-bottom: 2px solid #bbb;}
+.yellow_btn { background-color: #fe9a00; border-bottom: 2px solid #d58001;}
+.yellow_btn:hover { background-color: #d58001;border-bottom: 2px solid #d58001;}
+.bule_btn {background-color: #0099f1; border-bottom: 2px solid #0083ce;}
+.bule_btn:hover { background-color: #0083ce;border-bottom: 2px solid #0083ce;}
+
+
+/*******弹出层 商品加入购物车********/
+img { vertical-align: top;}
+.spop{ width:496px; background-color: #fff; border:1px solid #0083ce;height:auto; position:absolute; left:50%; top:50%; margin-left:-248px; margin-top:-125px;}
+.spoptop{ background-color: #0083ce; color: #fff; font-size: 14px; font-weight: bold; padding: 0 10px 0 15px; line-height: 35px; width: auto;}
+.spoptop a{float:right; width: 30px; background: url(http://s.maiyaole.com/images/product/icon_detail.png) no-repeat 5px -383px; text-decoration: none; text-indent: -9999px;}
+.spoptop a:hover {background-position: -47px -383px;}
+.spopro{padding: 15px 20px;}
+.spopimg { float: left;}
+.spopimg div{ width:120px; height:120px; display: table-cell; vertical-align: middle; text-align: center;}
+.spopimg img { display: inline-block; vertical-align: middle;}
+.spopbox{float: right; width: 308px; font-size: 12px; line-height: 1.7;}
+.spopstitle{ font-size: 14px; font-weight: bold; margin-bottom: 5px; display: block;}
+.spopro span{ display:block; color:#666;line-height: 1.7;}
+.spopro span span{ display:inline; color:#c00; font-size: 14px; font-weight: bold;}
+.spopbtn{padding-top:8px; overflow: hidden; zoom: 1;}
+.spopbtn a{ display: block; float: left; margin-right: 10px;}
+
+.spop .bfd_ls_title_dt { margin: 0 auto; float: none; width: 438px; color: #666;font-size: 14px;}
+.spop .bfd_dts_rst { width:468px; margin: 0 auto; overflow: hidden; zoom: 1;}
+.spop .bfd_dts_rst ul { float: none;}
+.spop .bfd_dt3_li {width: 148px;margin: 10px 4px 0;}
+.spop .bfd_ls_a_t {margin-top: 3px;}
+.spop .price { text-align: left; margin: 4px 6px 0 0;}
+.spop .bfd_ls_price,
+.spop .bfd_ls_del { display: block; margin: 0; line-height: 1.2; font-family: Arial;}
+.spop .bfd_ls_price { font-size: 14px;}
+.spop .price .cart_link { display: block; width: 30px; float: right; position: relative; margin-top: 0;}
+.spop .price .cart_link img { width: 30px; height: 30px;}
+
+
+/*******弹出层 商品加入购物车********/
+.buy_tcdiv .ov{margin:8px 0 8px 20px;}
+.buy_tcdiv{position:fixed;_position:absolute;left:50%;top:50%;z-index:10000;width:448px;overflow:hidden;margin-left:-224px;border:1px solid #b3b3b3;background:#fff;font-size:12px;line-height:18px;}
+.buy_tcdiv form{padding:16px 0 32px 64px;}
+.buy_tcdiv .buy_tctop{background-color: #0083ce; color: #fff; font-size: 14px; font-weight: bold; padding: 0 10px 0 15px; margin-bottom: 20px; line-height: 35px; width: auto;}
+.buy_tctop h5{margin:0;float:left;font-size:100%;font-style:normal;font-weight:normal;}
+.buy_tctop span{float:right; width: 30px; background: url(http://s.maiyaole.com/images/product/icon_detail.png) no-repeat 5px -383px; text-decoration: none; text-indent: -9999px; cursor: pointer;}
+.buy_tctop span:hover {background-position: -47px -383px;}
+.buy_color,.buy_size{padding-left:55px;}
+.buy_size span,.buy_size a,.buy_color span,.buy_color a{color:#333;cursor:pointer;display:inline;float:left;white-space:pre;}
+.buy_color span,.buy_size span{float:left;margin-left:-55px;width:55px; font-size: 14px; font-weight: bold;line-height: 30px;}
+.buy_size a,.buy_color a{border:1px solid #CCC;margin: 0 5px 5px 0;position:relative;z-index:0; display: inline-block; width: 45px; line-height: 28px; text-align: center; color: #5e5e5e;}
+.buy_size a { font-family: Arial;}
+.buy_color a:hover,.buy_color a.select,.buy_size a:hover,.buy_size a.select{background: url(http://s.maiyaole.com/images/common/pop_ico.png) no-repeat right bottom;border-color:#C00; color: #e72418; font-weight: bold; text-decoration: none;}
+.buy_color .disable,.buy_size .disable,.buy_color .disable:hover,.buy_size .disable:hover{filter:alpha(opacity=30);opacity:.3;border-color:#ccc;background:#fff;cursor:not-allowed;}
+.buy_color .partDisable,.buy_size .partDisable,.buy_color .partDisable,.buy_size .partDisable:hover{filter:alpha(opacity=30);opacity:.3;border-color:#ccc;background:#fff;cursor:not-allowed;}
+.buy_color .partDisable:hover{filter:alpha(opacity=30);opacity:.3;border-color:#ccc;background:#fff;cursor:not-allowed;}
+.buy_size a{font-size:12px;height:18px;line-height:16px;margin-bottom:5px;text-align:center;}
+.buy_selection{color:#5e5e5e; font-size: 14px; font-weight: bold; padding-top: 10px;}
+.buy_selection span{color:#ff9900;margin-left:4px;}
+.buy_tcdiv p{padding:20px 0 30px;text-align:center;}
+.buy_tcdiv button{ border: 0; border-bottom: 2px solid #a00; margin: 0 auto; cursor: pointer;}
+
+
+/*******弹出层 btn********/
+.pop_div .red_btn,
+.pop_div .bule_btn,
+.pop_div .yellow_btn,
+.pop_div .grey_btn,
+.pop_div .grey_border_btn,
+.pop_div .red_border_btn { font-size: 16px; font-weight: normal;}
+
+/*******弹出层 common********/
+.pop_div { width: 496px; margin: 0 auto; background-color: #fff; border: 1px solid #0083ce; padding-bottom: 50px; line-height: 1.5; color: #666; position: fixed; _position: absolute; left: 50%; top: 50%; margin: -115px 0 0 -249px; z-index:90000;}
+.title_div { background-color: #0083ce; color: #fff; font-size: 14px; font-weight: bold; padding: 0 10px 0 15px; line-height: 35px;}
+.title_div .closeBtn { float:right; width: 30px; background: url(http://s.maiyaole.com/images/product/icon_detail.png) no-repeat 5px -383px; text-decoration: none; text-indent: -9999px; cursor:pointer;}
+.title_div .closeBtn:hover { background-position: -47px -383px;}
+.pop_txt01 { text-align: center; line-height: 30px; padding: 37px 0 32px;}
+.pop_txt01 span { display: inline-block; color: #ff9900; font-size: 14px; font-weight: bold; background: url(http://s.maiyaole.com/images/common/ico_01.png) no-repeat left top; padding-left: 36px;}
+.com_btn_list { text-align:center; margin:0 auto;}
+.com_btn_list li { display:inline; padding: 0 8px;}
+.com_btn_list li a { display:inline-block;}
+
+/*******弹出层 添加收藏夹********/
+.pop_div02 { width: 426px; padding-bottom: 25px; margin: 0 0 0 -213px; top: 20%;}
+.add_favorites { padding: 25px 20px 70px; font-size: 14px;}
+.add_favorites dt { float: left;}
+.add_favorites dd { padding: 0 0 15px 70px;}
+.add_favorites dd input { width: 250px; height: 33px; margin-top: -6px; outline: none; background: 0; border: 1px solid #ededed; padding: 0 8px;}
+.add_favorites dd p { color: #b5b5b5; font-size: 12px; margin-top: 8px;}
+
+.com_pop { padding-bottom:35px;}
+.com_pop p { padding: 30px 20px; text-align:center;}
+.com_pop p i { display:inline-block; background:url(http://s.maiyaole.com/images/common/ico_01.png) no-repeat left -44px; width:17px; height:17px; vertical-align:middle; margin:-2px 5px 0 0;}
+
+.w426 { width:426px !important; margin-left:-213px !important;}
+.w167 { width:167px !important;}
+.com_pop .com_notes { color:#ff9900; font-size:14px; font-weight:bold;}
+.com_pop .com_notes i { background-position:0 0; width:30px; height:30px;}

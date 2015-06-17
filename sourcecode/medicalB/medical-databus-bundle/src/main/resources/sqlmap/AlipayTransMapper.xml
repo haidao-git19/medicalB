@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.AliPayTransDao">
+
+	<update id="modifyAliTransPayResp" parameterType="java.util.Map" >
+		UPDATE tb_product_alipay_transaction_response F
+				set F.updateTime = now()
+				<if test="sec_id != null and sec_id !=''">
+				     ,sec_id = #{sec_id}
+				</if>
+				<if test="service != null and service !=''">
+				     ,service = #{service}
+				</if>
+				<if test="sign != null and sign !=''">
+				     ,sign = #{sign}
+				</if>
+				<if test="result != null and result !=''">
+				     ,result = #{result}
+				</if>
+				<if test="trade_no != null and trade_no !=''">
+				     ,trade_no = #{trade_no}
+				</if>
+				<if test="request_token != null and request_token !=''">
+				     ,request_token = #{request_token}
+				</if>
+				<if test="notify_data != null and notify_data !=''">
+				     ,notify_data = #{notify_data}
+				</if>
+				<if test="payment_type != null and payment_type !=''">
+				     ,payment_type = #{payment_type}
+				</if>
+				<if test="subject != null and subject !=''">
+				     ,subject = #{subject}
+				</if>
+				<if test="buyer_email != null and buyer_email !=''">
+				     ,buyer_email = #{buyer_email}
+				</if>
+				<if test="gmt_create != null and gmt_create !=''">
+				     ,gmt_create = #{gmt_create}
+				</if>
+				<if test="notify_type != null and notify_type !=''">
+				     ,notify_type = #{notify_type}
+				</if>
+				<if test="quantity != null and quantity !=''">
+				     ,quantity = #{quantity}
+				</if>
+				<if test="notify_time != null and notify_time !=''">
+				     ,notify_time = #{notify_time}
+				</if>
+				<if test="seller_id != null and seller_id !=''">
+				     ,seller_id = #{seller_id}
+				</if>
+				<if test="trade_status != null and trade_status !=''">
+				     ,trade_status = #{trade_status}
+				</if>
+				<if test="is_total_fee_adjust != null and is_total_fee_adjust !=''">
+				     ,is_total_fee_adjust = #{is_total_fee_adjust}
+				</if>
+				<if test="total_fee != null and total_fee !=''">
+				     ,total_fee = #{total_fee}
+				</if>
+				<if test="gmt_payment != null and gmt_payment !=''">
+				     ,gmt_payment = #{gmt_payment}
+				</if>
+				<if test="seller_email != null and seller_email !=''">
+				     ,seller_email = #{seller_email}
+				</if>
+				<if test="gmt_close != null and gmt_close !=''">
+				     ,gmt_close = #{gmt_close}
+				</if>
+				<if test="price != null and price !=''">
+				     ,price = #{price}
+				</if>
+				<if test="buyer_id != null and buyer_id !=''">
+				     ,buyer_id = #{buyer_id}
+				</if>
+				<if test="notify_id != null and notify_id !=''">
+				     ,notify_id = #{notify_id}
+				</if>
+				<if test="use_coupon != null and use_coupon !=''">
+				     ,use_coupon = #{use_coupon}
+				</if>
+				<if test="refund_status != null and refund_status !=''">
+				     ,refund_status = #{refund_status}
+				</if>
+				<if test="gmt_refund != null and gmt_refund !=''">
+				     ,gmt_refund = #{gmt_refund}
+				</if>
+		WHERE F.out_trade_no = #{out_trade_no} and partner = #{partner}
+	</update>
+	
+	<insert id="saveAliPayTransReq" parameterType="java.util.Map">
+		INSERT INTO tb_product_alipay_transaction_request (service,format,partner,req_id,sec_id,sign,req_data,request_token,createTime) 
+		VALUES(#{service},#{format},#{partner},#{req_id},#{sec_id},#{sign},#{req_data},#{request_token},now())
+	</insert>
+	
+	<insert id="saveAliPayTransResp" parameterType="java.util.Map">
+		INSERT INTO tb_product_alipay_transaction_response (partner,sec_id,service,sign,result,out_trade_no,trade_no,request_token,notify_data,payment_type,subject,buyer_email,gmt_create,notify_type,quantity,notify_time,seller_id,trade_status,is_total_fee_adjust,total_fee,gmt_payment,seller_email,gmt_close,price,buyer_id,notify_id,use_coupon,refund_status,gmt_refund,createTime) 
+		VALUES(#{partner},#{sec_id},#{service},#{sign},#{result},#{out_trade_no},#{trade_no},#{request_token},#{notify_data},#{payment_type},#{subject},#{buyer_email},#{gmt_create},#{notify_type},#{quantity},#{notify_time},#{seller_id},#{trade_status},#{is_total_fee_adjust},#{total_fee},#{gmt_payment},#{seller_email},#{gmt_close},#{price},#{buyer_id},#{notify_id},#{use_coupon},#{refund_status},#{gmt_refund},now())
+	</insert>
+	
+</mapper>

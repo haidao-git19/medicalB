@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.ContentDao">
+
+    <sql id="contentColumn">
+        select id,title,summary,text,type,url,createTime,updateTime,state from tb_product_content
+    </sql>
+    
+    <select id="queryCount" parameterType="map" resultType="java.lang.Long">
+        select count(1) from tb_product_content 
+        <where>
+            <if test="title !=null and title !=''">
+                and title=#{title}
+            </if>
+            <if test="type !=null and type !=''">
+                and type=#{type}
+            </if>
+            and state=0
+        </where>
+    </select>
+    
+    <select id="queryList" parameterType="map" resultType="com.netbull.shop.common.vo.ContentVo">
+        <include refid="contentColumn"/>  
+         <where>
+           <if test="title !=null and title !=''">
+                and title=#{title}
+            </if>
+            <if test="type !=null and type !=''">
+                and type=#{type}
+            </if>
+            and state=0
+        </where>
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
+    
+  	<select id="queryOne" parameterType="java.lang.Integer" resultType="com.netbull.shop.common.vo.ContentVo">
+  	    <include refid="contentColumn"/> 
+  	    <where>
+  	        <if test="_parameter !=null and _parameter !=''">
+  	            and id=#{value}
+  	        </if>
+  	        and state=0
+  	    </where>
+  	</select>
+  	
+  	<insert id="save" parameterType="com.netbull.shop.common.vo.ContentVo" useGeneratedKeys="true" keyProperty="id">
+  	    insert tb_product_content(title,type,summary,text,url,createTime,updateTime) 
+  	    values(#{title},#{type},#{summary},#{text},#{url},now(),now())
+  	</insert>
+  	
+  	<update id="update" parameterType="com.netbull.shop.common.vo.ContentVo">
+  	    update tb_product_content
+  	    <set>
+  	        <if test="title !=null and title !=''">
+  	            title=#{title},
+  	        </if>
+  	        <if test="type !=null and type !=''">
+  	            type=#{type},
+  	        </if>
+  	        <if test="summary !=null and summary !=''">
+  	            summary=#{summary},
+  	        </if>
+  	        <if test="text !=null and text !=''">
+  	            text=#{text},
+  	        </if>
+  	        <if test="url !=null and url !=''">
+  	            url=#{url},
+  	        </if>
+  	         <if test="state !=null and state !=''">
+  	            state=#{state},
+  	        </if>
+  	        updateTime=now()
+  	    </set>
+  	    <where>
+  	        <if test="id !=null and id !=''">
+  	            and id=#{id}
+  	        </if>
+  	    </where>
+  	</update>
+  	
+  	<delete id="delete" parameterType="java.lang.Integer">
+  	    delete from tb_product_content 
+  	    <where>
+  	        <if test="_parameter !=null and _parameter !=''">
+  	            id=#{value}
+  	        </if>
+  	    </where>
+  	</delete>
+</mapper>

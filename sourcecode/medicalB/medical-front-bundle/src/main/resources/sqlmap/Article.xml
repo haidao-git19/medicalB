@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.index.dao.ArticleDao">
+    
+    <select id="queryCount" parameterType="map" resultType="java.lang.Long">
+ 		select count(1) from tb_medical_doctor_article
+ 		    <where>
+ 	        1=1 and status=0
+ 	         
+ 	    	<if test="doctorId!=null and doctorId !=''">
+ 	    		and doctorId=#{doctorId}
+ 	    	</if>
+ 	    </where>
+ 	    ORDER BY createTime desc 
+ 	</select>
+ 	
+ 	<select id="queryList" parameterType="map" resultType="com.netbull.web.index.entity.Article">
+ 	   select * from tb_medical_doctor_article
+ 	    <where>
+ 	        1=1  and status=0
+ 	        
+ 	    	<if test="doctorId!=null and doctorId !=''">
+ 	    		and doctorId=#{doctorId}
+ 	    	</if>
+ 	    </where>
+ 	      <if test="sortKey != null and sortKey != ''">
+				 order by createTime ${sortKey}
+			</if>
+			 LIMIT  #{start}, #{limit}
+ 	</select>
+    
+    <select id="queryOne" parameterType="map" resultType="com.netbull.web.index.entity.Article">
+        select * from tb_medical_doctor_article 
+         <where>
+          1=1
+            <if test="id !=null and id !=''">
+               and id=#{id}
+            </if>
+        </where>
+    </select>
+    
+</mapper>

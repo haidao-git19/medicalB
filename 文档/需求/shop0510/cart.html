@@ -1,0 +1,845 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="Keywords" content="我的购物车-壹药网（原1号药网）_中国网上药店领导者|网上药房"/>
+<meta name="Description" content="我的购物车-壹药网（原1号药网）_中国网上药店领导者|网上药房"/>
+<title>我的购物车-壹药网（原1号药网）_中国网上药店领导者|网上药房_壹药网（原1号药网）</title>
+<link href="css/head.css" rel="stylesheet" type="text/css"/>
+<link href="css/cart.css" rel="stylesheet" type="text/css"/>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/cart/zDialog.js"></script>
+<script type="text/javascript" src="js/cart/zDrag.js"></script>
+<script type="text/javascript" src="js/cart/popDialog.js"></script>
+<script src="js/cart/wd_shopdetail.js" type="text/javascript"></script>
+<script src="js/cart/review.js" type="text/JavaScript"></script>
+<script src="js/cart/cart.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- new stepInfo cart --> 
+<!-- header END --> 
+<!-- main BEGIN -->
+<div id="cartbody"> 
+  
+  <!-- check promotion -->
+  <div class="site-nav">
+    <div class="site-nav-bd">
+      <ul class="site-nav-bd-l">
+        <li class="menu">
+          <div class="menu-hd"><span>欢迎访问商城</span> </div>
+        </li>
+      </ul>
+      <ul class="site-nav-bd-r">
+        <li class="menu">
+          <div class="menu-hd" id='logininfo'><span>您好！ </span><a href="javascript: login();" class="blue mr5" target="_self">请登录</a><a href="http://passport.111.com.cn/sso/register.action" class="blue" target="_self">注册</a></div>
+        </li>
+        <li class="site-nav-pipe">|</li>
+        <li class="menu">
+          <div class="menu-hd"><a href="http://my.111.com.cn/ucenter/orderList.action" target="_self">我的订单</a></div>
+        </li>
+        <li class="site-nav-pipe">|</li>
+        <li class="menu">
+          <div class="menu-hd"> <a href="http://my.111.com.cn/ucenter/myCenter.action" class="myyaowang" target="_self">&nbsp;我的壹药网&nbsp;</a>
+            <div id="menu_bd_orther" class="menu_bd">
+              <ul class="menu_bd_panel" style="display: none;">
+                <li><a href="http://my.111.com.cn/ucenter/orderList.action" target="_self" target="_self">我的订单</a></li>
+                <li><a href="http://my.111.com.cn/ucenter/queryCoupon.action" target="_self" target="_self">我的优惠券</a></li>
+                <li><a href="http://my.111.com.cn/ucenter/myFavorite.action" target="_self" target="_self">我的收藏夹</a></li>
+                <li><a href="http://my.111.com.cn/ucenter/reviewList.action" target="_self" target="_self">评价商品</a></li>
+                <li><a href="http://my.111.com.cn/ucenter/privateTag.action" target="_self">我的私人订制</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="site-nav-pipe">|</li>
+        <li class="menu">
+          <div class="menu-hd"><a href="http://www.111.com.cn/cmsPage/origPage/14038.html?topicId=14038" target="_blank">帮助中心</a></div>
+        </li>
+        <li class="site-nav-pipe">|</li>
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('.menu').mousemove(function(){
+		$(this).find('.menu_bd_panel').show();
+	});
+	$('.menu').mouseleave(function(){
+		$(this).find('.menu_bd_panel').hide();
+	});
+        $(".open_ag").click(function(){
+            $(".ag_ul").removeClass("fix_ag");
+            $(".open_ag").hide();
+        });
+    });
+    // 鼠标延迟执行方法
+    (function($){
+        $.fn.hoverDelay = function(options){
+            var defaults = {
+                hoverDuring: 100,
+                outDuring: 100,
+                hoverEvent: function(){
+                    $.noop();
+                },
+                outEvent: function(){
+                    $.noop();
+                }
+            };
+            var sets = $.extend(defaults,options || {});
+            var hoverTimer, outTimer, that = this;
+            return $(this).each(function(){
+                $(this).hover(function(){
+                    clearTimeout(outTimer);
+                    hoverTimer = setTimeout(function(){sets.hoverEvent.apply(that)}, sets.hoverDuring);
+                },function(){
+                    clearTimeout(hoverTimer);
+                    outTimer = setTimeout(function(){sets.outEvent.apply(that)}, sets.outDuring);
+                });
+            });
+        }
+    })(jQuery);
+    $(".province_box").each(function(){
+        var that = $(this)
+        that.hoverDelay({
+            outDuring: 1000,
+            hoverEvent: function(){
+                $(".province_box .province_name").addClass("hd_fold");
+                $("#headerAllProvince").show();
+            },
+            outEvent: function(){
+                $(".province_box .province_name").removeClass("hd_fold")
+                $("#headerAllProvince").hide();
+            }
+        });
+    });
+</script>
+  <div class="c_head">
+    <h1 id="logo"> <a title="壹号药网" target="_top" class="logo" href="http://www.111.com.cn">壹号药网<span class="i"></span></a> </h1>
+  </div>
+  <div class="c_content">
+    <div class="flow-steps">
+      <ol class="num5">
+        <li class="current"> <span>1. 我的购物车</span> </li>
+        <li> <span>2. 填写核对订单信息</span> </li>
+        <li class="last"> <span>3. 成功提交订单</span> </li>
+      </ol>
+    </div>
+    <div class="cart-first-bar">
+      <ul>
+        <li class="mycarttitle"> 我的购物车 </li>
+        <li class="cart_pay"> <span><a href="javascript:void(0);" onclick="cartnullalert(event,'http://buy.111.com.cn/','http://www.111.com.cn',3);return false;">结算</a> </span> </li>
+        <li class="cart_note"> 为避免选购商品售罄或恢复原价，请尽快 </li>
+      </ul>
+    </div>
+    <div class="t-location"> <a class="province_name" href="javascript:void(0);" id="selectedProvince"></a>
+      <ul class="hd_provinceList" id="AllProvince">
+        <li> <i>A</i><a href="javascript:void(0);" id="p_13" onclick="selectProvince(13,'安徽')">安徽</a> </li>
+        <li> <i>B</i><a href="javascript:void(0);" id="p_2" onclick="selectProvince(2,'北京')"><b>北京</b> </a> </li>
+        <li> <i>C</i><a href="javascript:void(0);" id="p_7" onclick="selectProvince(7,'重庆')">重庆</a> </li>
+        <li> <i>G</i><a href="javascript:void(0);" id="p_20" onclick="selectProvince(20,'广东')"><b>广东</b> </a><a href="javascript:void(0);" id="p_21" onclick="selectProvince(21,'广西')">广西</a><a
+									href="javascript:void(0);" id="p_23" onclick="selectProvince(23,'贵州')">贵州</a><a
+									href="javascript:void(0);" id="p_27" onclick="selectProvince(27,'甘肃')">甘肃</a> </li>
+        <li> <i>F</i><a href="javascript:void(0);" id="p_14" onclick="selectProvince(14,'福建')">福建</a> </li>
+        <li> <i>H</i><a href="javascript:void(0);" id="p_4" onclick="selectProvince(4,'河北')">河北</a><a
+									href="javascript:void(0);" id="p_11" onclick="selectProvince(11,'黑龙江')">黑龙江</a><a
+									href="javascript:void(0);" id="p_22" onclick="selectProvince(22,'海南')">海南</a><a
+									href="javascript:void(0);" id="p_18" onclick="selectProvince(18,'湖北')">湖北</a><a
+									href="javascript:void(0);" id="p_19" onclick="selectProvince(19,'湖南')">湖南</a><a
+									href="javascript:void(0);" id="p_17" onclick="selectProvince(17,'河南')">河南</a> </li>
+        <li> <i>J</i><a href="javascript:void(0);" id="p_5" onclick="selectProvince(5,'江苏')">江苏</a><a
+									href="javascript:void(0);" id="p_10" onclick="selectProvince(10,'吉林')">吉林</a><a
+									href="javascript:void(0);" id="p_15" onclick="selectProvince(15,'江西')">江西</a> </li>
+        <li> <i>L</i><a href="javascript:void(0);" id="p_9" onclick="selectProvince(9,'辽宁')">辽宁</a> </li>
+        <li> <i>N</i><a href="javascript:void(0);" id="p_8" onclick="selectProvince(8,'内蒙古')">内蒙古</a><a
+									href="javascript:void(0);" id="p_30" onclick="selectProvince(30,'宁夏')">宁夏</a> </li>
+        <li> <i>Q</i><a href="javascript:void(0);" id="p_28" onclick="selectProvince(28,'青海')">青海</a> </li>
+        <li> <i>S</i><a href="javascript:void(0);" id="p_1" onclick="selectProvince(1,'上海')"><b>上海</b> </a><a href="javascript:void(0);" id="p_16" onclick="selectProvince(16,'山东')">山东</a><a
+									href="javascript:void(0);" id="p_32" onclick="selectProvince(32,'山西')">山西</a><a
+									href="javascript:void(0);" id="p_12" onclick="selectProvince(12,'四川')">四川</a><a
+									href="javascript:void(0);" id="p_26" onclick="selectProvince(26,'陕西')">陕西</a> </li>
+        <li> <i>T</i><a href="javascript:void(0);" id="p_3" onclick="selectProvince(3,'天津')">天津</a> </li>
+        <li> <i>X</i><a href="javascript:void(0);" id="p_25" onclick="selectProvince(25,'西藏')">西藏</a><a
+									href="javascript:void(0);" id="p_29" onclick="selectProvince(29,'新疆')">新疆</a> </li>
+        <li> <i>Y</i><a href="javascript:void(0);" id="p_24" onclick="selectProvince(24,'云南')">云南</a> </li>
+        <li> <i>Z</i><a href="javascript:void(0);" id="p_6" onclick="selectProvince(6,'浙江')">浙江</a> </li>
+      </ul>
+    </div>
+    <div class="cart-main">
+      <div class="cart-table-th">
+        <div class="wp">
+          <div class="th th-chk">
+            <div class="select-all J_SelectAll">
+              <label>
+              <label class="cart-checkbox  cart-checkbox-selected  ">
+                <input type="checkbox" onclick="checkAll(this);" name="allselect"
+                                           checked="checked" />
+                <span>勾选此店铺下所有商品</span></label>
+              全选
+              </label>
+            </div>
+          </div>
+          <div class="th th-item"> 商品信息 </div>
+          <div class="th th-price"> 金额 </div>
+          <div class="th th-amount"> 数量 </div>
+          <div class="th th-weight"> 重量 </div>
+          <div class="th th-location"> &nbsp; </div>
+          <div class="th th-sum"> 小计 </div>
+          <div class="th th-op"> 操作 </div>
+        </div>
+      </div>
+      <div class="orderHolder"> 
+        <!-- 店铺头 -->
+        <div class="itemHeShop clearfix">
+          <label class="cart-checkbox  cart-checkbox-selected  ">
+            <input type="checkbox" onclick="checkVenderAll(this,'2011102716210000');" name="allselect"
+                               checked="checked" />
+            <span>勾选此店铺下所有商品</span></label>
+          <a class="makePoint" title="壹药网" href="javascript:;">壹药网</a> </div>
+        <!-- 店铺商品 -->
+        
+        <input type="hidden" class="bfd" itemid="10732458" price="40.0" itemCount="1" catalogId="965193" catalogName="鼻炎" >
+        <div class="item-body clearfix  ">
+          <ul class="item-content clearfix">
+            <li class="td td-chk">
+              <div class="td-inner">
+                <input type="hidden" name="cart_pid" value="10732458" id="cart_ref_10732458"/>
+                <input type="hidden" name="cart_pid" value="1" id="cart_itype_10732458"/>
+                <label class="cart-checkbox cart-checkbox-selected " >
+                  <input type="checkbox" onclick="checkItemStatus(this);" value="10732458"  itype="1" name="cart2Checkbox"
+                                               checked="true"  />
+                  <span>勾选此店铺下所有商品</span> </label>
+              </div>
+            </li>
+            <li class="td td-item">
+              <div class="td-inner">
+                <div class="item-pic"> <a
+                                                href="http://www.111.com.cn/product/10732458.html"
+                                                target="_blank"><img
+                                                onerror="imgERROR(this, 'no_pic_50_50.jpg')"
+                                                src="http://p4.maiyaole.com/img/10732/10732458/50_50.jpg?a=1080608484" alt="雷诺考特 布地奈德鼻喷雾剂  32ug*120喷*1盒" class="itempic"> </a> </div>
+                <div class="item-info"> <a
+                                                href="http://www.111.com.cn/product/10732458.html"
+                                                target="_blank" class="item-title">雷诺考特 布地奈德鼻喷雾剂  32ug*120喷*1盒</a> </div>
+              </div>
+            </li>
+            <li class="td td-price">
+              <div class="td-inner"> <em>&yen;</em>40.0 </div>
+            </li>
+            <li class="td td-amount">
+              <div class="td-inner" limitbuy="0"
+                                     catal="0">
+                <div class="item-amount ">
+                  <input type="button" class="btn-reduce" 
+                                               onclick="minusitem(this)"/>
+                  <input name="a" refmainitemid="10732458"
+                                               itemid="10732458" itype="1"
+                                               id="w7c10732458_1_10732458"
+                                               class="text-amount" maxlength="3" value="1"
+                                               onchange="prompt(this)" type="text"
+                                                />
+                  <!----> 
+                  <!---->
+                  
+                  <input type="button" class="btn-plus" onclick="additem(this)" />
+                </div>
+                <div class="amount-msg" style="display: none;"
+                                         id="w7t10732458_1_10732458"> 商品数量已修改为&nbsp;<span style="color: red;">1</span> <em></em> </div>
+              </div>
+            </li>
+            <li class="td td-weight">
+              <div class="td-inner"> <em class="number">0.02kg</em> </div>
+            </li>
+            <li class="td td-location">
+              <div class="td-inner"> 有货 </div>
+            </li>
+            <li class="td td-sum">
+              <div class="td-inner red"> <em>&yen;</em> 40.00 </div>
+            </li>
+            <li class="td td-op">
+              <div class="td-inner"> <a id="favorites_1179343" class="fav"
+                                           href="javascript:void(0);"
+                                         onclick="javascript:addFavoriteCart(10732458);return false;">收藏</a> <a href="javascript:;"
+                                     onclick="deleteitem(10732458,1,10732458)"
+                                       class="deleteButton">删除</a> </div>
+            </li>
+          </ul>
+        </div>
+        <input type="hidden" class="bfd" itemid="1087828" price="708.0" itemCount="2" catalogId="965171" catalogName="腰椎病" >
+        <div class="item-body clearfix  ">
+          <ul class="item-content clearfix">
+            <li class="td td-chk">
+              <div class="td-inner">
+                <input type="hidden" name="cart_pid" value="1087828" id="cart_ref_1087828"/>
+                <input type="hidden" name="cart_pid" value="1" id="cart_itype_1087828"/>
+                <label class="cart-checkbox cart-checkbox-selected " >
+                  <input type="checkbox" onclick="checkItemStatus(this);" value="1087828"  itype="1" name="cart2Checkbox"
+                                               checked="true"  />
+                  <span>勾选此店铺下所有商品</span> </label>
+              </div>
+            </li>
+            <li class="td td-item">
+              <div class="td-inner">
+                <div class="item-pic"> <a
+                                                href="http://www.111.com.cn/product/1087828.html"
+                                                target="_blank"><img
+                                                onerror="imgERROR(this, 'no_pic_50_50.jpg')"
+                                                src="http://p1.maiyaole.com/img/1087/1087828/50_50.jpg?a=200060142" alt="陈李济 舒筋健腰丸 45g*10瓶" class="itempic"> </a> </div>
+                <div class="item-info"> <a
+                                                href="http://www.111.com.cn/product/1087828.html"
+                                                target="_blank" class="item-title">陈李济 舒筋健腰丸 45g*10瓶</a> </div>
+              </div>
+            </li>
+            <li class="td td-price">
+              <div class="td-inner"> <em>&yen;</em>708.0 </div>
+            </li>
+            <li class="td td-amount">
+              <div class="td-inner" limitbuy="0"
+                                     catal="0">
+                <div class="item-amount ">
+                  <input type="button" class="btn-reduce" 
+                                               onclick="minusitem(this)"/>
+                  <input name="a" refmainitemid="1087828"
+                                               itemid="1087828" itype="1"
+                                               id="w7c1087828_1_1087828"
+                                               class="text-amount" maxlength="3" value="2"
+                                               onchange="prompt(this)" type="text"
+                                                />
+                  <!----> 
+                  <!---->
+                  
+                  <input type="button" class="btn-plus" onclick="additem(this)" />
+                </div>
+                <div class="amount-msg" style="display: none;"
+                                         id="w7t1087828_1_1087828"> 商品数量已修改为&nbsp;<span style="color: red;">2</span> <em></em> </div>
+              </div>
+            </li>
+            <li class="td td-weight">
+              <div class="td-inner"> <em class="number">0.12kg</em> </div>
+            </li>
+            <li class="td td-location">
+              <div class="td-inner"> 有货 </div>
+            </li>
+            <li class="td td-sum">
+              <div class="td-inner red"> <em>&yen;</em> 1416.00 </div>
+            </li>
+            <li class="td td-op">
+              <div class="td-inner"> <a id="favorites_1179343" class="fav"
+                                           href="javascript:void(0);"
+                                         onclick="javascript:addFavoriteCart(1087828);return false;">收藏</a> <a href="javascript:;"
+                                     onclick="deleteitem(1087828,1,1087828)"
+                                       class="deleteButton">删除</a> </div>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 店铺尾 -->
+        <div class="clearfix">
+          <ul class="dianzongji">
+            <li>重量合计<span class="red">0.14kg</span> </li>
+            <li>运费<span class="red"><b>&yen;</b>0.00</span></li>
+            <li>优惠<span class="red"><b>&yen;</b>0.00</span></li>
+            <li>商品金额<span class="red"><b>&yen;</b>1456.00</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <ul class="cartOperation">
+      <li class="fr"><a href="http://www.111.com.cn" id="shoppingCart2Index"><span class="gt">&lt;&lt;</span> 继续购物</a></li>
+    </ul>
+    <!--结算内容-->
+    <div class="float_bar clearfix" id="cart_float">
+      <ul class="cartOperation">
+        <li>
+          <label class="cart-checkbox  cart-checkbox-selected  ">
+            <input type="checkbox" onclick="checkAll(this);" name="allselect"
+                           checked="checked" />
+            <span>勾选此店铺下所有商品</span></label>
+          全选</li>
+        <li class="operations"> <a href="javascript:void(0);" onclick="deleteCheckedItem();return false;">删除</a> </li>
+        <li class="clearitem"> <a href="javascript:void(0);" onclick="deleteall();" id="clearAllCart">清空购物车</a> </li>
+      </ul>
+      <div class="pay_bar clearfix">
+        <div class="price_check_box">
+          <p class="item"> <span class="t">商品总重：</span> <span>0.14kg</span> </p>
+          <!--p class="item"> <span class="t">总价：</span>&yen; <span>1456.0</span> </p-->
+          <p class="item"> <span class="t">优惠：</span> - &yen; <span>0.0</span> </p>
+          <p class="item"> <span class="t">运费：</span><b class="red"> &yen; <span>0.0</span> </b> </p>
+        </div>
+      </div>
+      <ul class="c_pay">
+        <li class="wrap_btn"> <a class="btn_order" onclick="cartnullalert(event,'http://buy.111.com.cn/','http://www.111.com.cn',5);return false;" href="javascript:void(0);">去结算</a> </li>
+        <li class="item"> 商品总价 <b>&yen;</b><span>1456.00</span> </li>
+      </ul>
+    </div>
+    
+    <!--请在购物车页展示推荐栏位置添加以下div-->
+    <div id="bfd_screc"></div>
+    <div id="bfd_screc2"></div>
+    <!--弹出层--> 
+    
+    <!--结算内容--> 
+    <!--凑单换购-->
+    <div class="bottom_prod" id="redemptionPromotionList" style="display:none;"></div>
+    <!--凑单换购--> 
+    
+    <!--帮你免邮-->
+    <input type="hidden" id="cartThefei" value="0.0" />
+    <a id="mianyou"></a>
+    <div class="bottom_prod" id="mianyoucart" style="display: none;"> </div>
+    <input type="hidden" id="cartHasPrescription" value="0">
+    <div class="pop_div com_pop w426" style="display: none;" id="kfDialogDiv">
+      <div class="title_div"><a class="closeBtn" href="javascript:;" onclick="javascript:$('#kfDialogDiv').hide();">&nbsp;</a>壹药网温馨提示</div>
+      <p class="com_notes"><i></i>结算商品中包含处方药，请联系药师。</p>
+      <ul class="com_btn_list clearfix">
+        <li><a class="bule_btn w167" target="_self" rel="nofollow" href="javascript:;" onclick="Detector.floatclick(4,'',encodeURI('全科药师'));">联系药师</a></li>
+      </ul>
+    </div>
+    <div class="bottom_prod" id="mianyoucart" style=""> 
+      
+      <!--选择药店-->
+      <ul class="b_tabs" id="sy">
+        <span class="tab_title">合肥市 请选择药店</span>
+        <li class="on" onmouseover="ntabs(this,0);" id="li_0"><a href="javascript:void(0);">包河区</a></li>
+        <li class="" onmouseover="ntabs(this,1);" id="li_1"><a href="javascript:void(0);">蜀山区</a></li>
+        <li class="" onmouseover="ntabs(this,2);" id="li_2"><a href="javascript:void(0);">庐阳区</a></li>
+        <li class="" onmouseover="ntabs(this,3);" id="li_3"><a href="javascript:void(0);">经开区</a></li>
+      </ul>
+      <ul style="display: block;" class="b_prod " name="recommedList" id="recommedList_0">
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+
+      </ul>
+      <ul style="display: none;" class="b_prod " name="recommedList" id="recommedList_1">
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+      </ul>
+      <ul style="display: none;" class="b_prod " name="recommedList" id="recommedList_2">
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+      </ul>
+      <ul style="display: none;" class="b_prod " name="recommedList" id="recommedList_3">
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+<li>
+  <p class="pic">  <img src="images/100_100_013.jpg"> </p>
+  <p class="name"><label> <input type="radio" name="radio" id="radio" value="radio" />合肥大22222222药店</label></p>
+</li>
+      </ul>
+    </div>
+  </div>
+  </script> 
+  <script type="text/javascript">
+    $(".t-location").each(function(){
+        var that = $(this)
+            that.hoverDelay({
+                outDuring: 1000,
+                hoverEvent: function(){
+                    $(".t-location .province_name").addClass("hd_fold");
+                    $("#AllProvince").show();
+                },
+                outEvent: function(){
+                    $(".t-location .province_name").removeClass("hd_fold")
+                    $("#AllProvince").hide();
+                }
+            });
+    });
+    $(".province_box").each(function(){
+        var that = $(this)
+        that.hoverDelay({
+            outDuring: 1000,
+            hoverEvent: function(){
+                $(".province_box .province_name").addClass("hd_fold");
+                $("#headerAllProvince").show();
+            },
+            outEvent: function(){
+                $(".province_box .province_name").removeClass("hd_fold")
+                $("#headerAllProvince").hide();
+            }
+        });
+    });
+   
+    //jQuery下的层的智能浮动
+    $.fn.smartFloat = function() {
+        var position = function(element) {
+            var ch=document.documentElement.clientHeight;//屏幕的高度
+            var fh=$(".pay_bar").position().top+250;
+            var top = element.position().top, pos = element.css("position");
+            if(fh<ch){
+				element.css("position","relative");
+				element.removeClass("floating");
+			}else{
+				element.css("position","fixed");
+				element.addClass("floating");
+			}
+            $(window).scroll(function() {
+                var scrolls = $(this).scrollTop();
+                if (scrolls+ch > fh) {
+                    if (window.XMLHttpRequest) {
+                        element.css({
+                            position: "relative"
+                        });
+                        element.removeClass("floating")
+                    } else {
+                        element.css({
+                            position: "relative"
+                        });
+                    }
+                }else {
+                    element.css({
+                        position: "fixed"
+                    });
+                    element.addClass("floating")
+                }
+            });
+        };
+        return $(this).each(function() {
+            position($(this));
+        });
+    };
+ 	$("#cart_float").smartFloat();
+
+</script> 
+  <script type="text/javascript">
+
+
+
+function initSelectDegree(id){
+    var activeSe = 0;
+	$(".selected").click(function(e){
+		//$('.modify_txt').hide();
+		//$('#modify_txt_'+id).show();
+		e.stopPropagation();
+		activeSe = 1;
+		$(this).parent().find('.selectvalue').slideToggle("fast");
+	});
+	$(".selectvalue li").hover(function(){
+		$(this).addClass("hover");
+	},function(){
+		$(this).removeClass("hover");
+	});
+	$(".selectvalue li").click(function(){
+		//alert(id);
+	    var reg = /^[-]{0,1}(\d+)[\.]+(\d+)$/;
+		//var reg = /^(\d+)$/;
+		var selectValue = $(this).text();
+		//var no = $(this).attr('no');
+		var itemid = $(this).attr('itemid');
+		//reg.test(selectValue)
+		//alert(selectValue);
+		//alert(itemid);
+		//alert(escape(selectValue).indexOf("%u") >0);
+		//alert(escape('请选择光度').indexOf("%u"))>0;
+		if(escape(selectValue).indexOf("%u") < 0){
+			$(this).parent().parent().find(".selected").text($(this).text());
+			$('#selectValue_'+id).val(itemid);
+			$('.btn_div > a').removeClass('grey_btn');
+		}else{
+			var selectValueInfo= $('#selectValueInfo_'+id).val();
+			$(this).parent().parent().find(".selected").text(selectValueInfo);
+			$('#selectValue_'+id).val(selectValueInfo);
+			$('.btn_div > a').addClass('grey_btn');
+		}
+		$('#pop_info_'+id).show();
+		$(this).parent().slideUp('fast');
+	});
+	$('body').click(function(e){
+		e.stopPropagation();
+		if(activeSe === 1){
+            $('.selectvalue').hide();
+        }
+	});
+	$('#editInvoiceDiv').click(function(e){
+		e.stopPropagation();
+		if(activeSe === 1){
+            $('.selectvalue').hide();
+        }
+	});
+}
+
+function init_pop_info(){
+    /* $(".pop_info").mouseover(function(){
+        $(this).show();
+    });
+	
+	$(".pop_info").mouseout(function(){
+        $(this).hide();
+    }); */
+	$(".pop_info").click(function(e){
+		//alert('pop_info');
+		e.stopPropagation();
+		});
+}
+
+function initSelectColor(id){
+    $('.colorList > li').click(function(){
+	//var color = $(this).attr('title');
+	//var id = $(this).attr('id');
+	//var no = $(this).attr('no');
+	//getSpecial(id,no);
+	//$('#colorList_'+id).val(color);
+	$(this).addClass('select-pro'); 
+	$(this).siblings().removeClass('select-pro'); 
+   });
+}
+
+/*function initModify_txt() {
+            $(".modify_txt").each(function () {
+                var This = $(this);
+                This.click(function () {
+                    alert(This.index());
+                });
+            });
+        };*/
+
+function saveSpecial(id,itemType,refmainitemid){
+var selectValue = $('#selectValue_'+id).val();
+if(selectValue==''||escape(selectValue).indexOf("%u") >=0){
+	$(".pop_info").hide();
+	window.location= "http://buy.111.com.cn/cart/shoppingcart/queryshoppingcart.action"
+	return;
+}
+if(selectValue==id){
+	$(".pop_info").hide();
+	window.location= "http://buy.111.com.cn/cart/shoppingcart/queryshoppingcart.action"
+	return;
+}
+var cart =  readCart();
+var itemCount = $(':input[type="text"][itemid="'+id+'"]').attr("value");
+var item = {'iy':parseInt(itemType),'ri':parseInt(refmainitemid),'ic':parseInt(itemCount),'ii':parseInt(id),'pr':0,'ps':parseInt(id),'pc':0,'ss':0,'sh':0};
+var newitem = {'iy':parseInt(itemType),'ri':parseInt(selectValue),'ic':parseInt(itemCount),'ii':parseInt(selectValue),'pr':0,'ps':parseInt(selectValue),'pc':0,'ss':0,'sh':0};
+//var itemCount=$("#giftItemCount"+ri).html();
+//$("#giftItemCount"+ri).html(parseInt(itemCount)+parseInt(ic));
+var mergerFlag = false;
+if(cart){
+	for(var i in cart){
+		if(cart[i].ii == item.ii && cart[i].iy == item.iy){
+			cart[i].ss = -2;
+		}
+	}
+    for(var i in cart){
+        if(cart[i].ii == newitem.ii && cart[i].iy == newitem.iy){
+           cart[i].ic = cart[i].ic +  newitem.ic;
+           mergerFlag = true;
+           break;
+        }
+    }
+    if(!mergerFlag){
+        cart[cart.length] = newitem;
+    }
+	writeCart(cart);
+}else{
+	writeCart([newitem]);
+}
+$(".pop_info").hide();
+window.location= "http://buy.111.com.cn/cart/shoppingcart/queryshoppingcart.action"
+//var itemType = itemType;
+//var refmainitemid = refmainitemid;
+//var selectValue = $('#selectValue_'+id).val();
+//alert(selectValue);
+//$("#pop_info_"+id).toggleClass('open');
+//$(".pop_info").hide();
+//$('.modify_txt').show();
+}
+        
+        var provinceSite = {1: "2,30,28,27,26,17,16,11,29,3,4,32,8,10,9", 2: "1,5,6,13", 3: "18,14,25,24,23,12,7,22,15,20,19,21"};
+        function getSite() {
+        	var a = $.cookie("provinceId");
+        	for (var b in provinceSite) {
+        		if (provinceSite[b].split(",").indexOf(a) != -1) {
+        			return b
+        		}
+        	}
+        }
+        
+
+function changeColor(id,thisId,no,itemType,refmainitemid){
+	 		$('#selectValue_'+id).val(thisId);
+			var content = '<div class="pop_inr"> <i class="i_arrow">&nbsp;</i> <dl class="clearfix">';
+			var colorListContent = '';
+			var selectvalueContent = '';
+			var buttonContent = '';
+			var itemCount = $(':input[type="text"][itemid="'+id+'"]').attr("value");
+			var provinceId = $.cookie("provinceId");
+			var saleArea = getSite();
+			$.ajax({
+				url:"http://www.111.com.cn/interfaces/specials.action",
+				type:"GET",
+				dataType:"json",
+				data :{"itemid":thisId, "pno":no, "provinceId":provinceId},
+				/*success:function(msg){
+					alert(msg);
+					alert(msg['attr1']);
+				}*/		
+				complete: function(rep, err){
+					var a = rep.responseText;
+					var json=eval('('+a+')');
+					var attr1 = json.attr1;
+					var sortAttr1 = new Array();
+					var priority = json.priority;
+					var k1 = 0;
+					for(var i = 0;i<priority.length;i++){
+					    for(var j=0;j<attr1.length;j++){
+							if(attr1[j].attvalue==priority[i]){
+								sortAttr1[k1]=attr1[j];
+								k1++;
+							}
+						}
+					}
+					for(var i = 0;i<sortAttr1.length;i++){
+						if(sortAttr1[i].itemid==thisId){
+							colorListContent +='<li class="select-pro" onclick="changeColor('+id+','+sortAttr1[i].itemid+','+sortAttr1[i].productNo+','+itemType+','+refmainitemid+')"><a href="javascript:void(0);"><img title="'+sortAttr1[i].attvalue+'" alt="'+sortAttr1[i].attvalue+'" src="'+sortAttr1[i].mainimg6+'"><span class="iconSelect">&nbsp;</span></a></li>';
+						}else{
+							colorListContent +='<li onclick="changeColor('+id+','+sortAttr1[i].itemid+','+sortAttr1[i].productNo+','+itemType+','+refmainitemid+')"><a href="javascript:void(0);"><img title="'+sortAttr1[i].attvalue+'" alt="'+sortAttr1[i].attvalue+'" src="'+sortAttr1[i].mainimg6+'"><span class="iconSelect">&nbsp;</span></a></li>';
+						}
+					}
+					var attr2 = json.attr2;
+					var sortAttr2 = new Array();
+					var stocks = json.stocks;
+					var stock = new Array();
+					var k2 = 0;
+					var displayName = new Array();
+					var mainItem = json.mainItem;
+					for(var i=0;i<mainItem.length-1;i++){
+						displayName[i]=mainItem[i].showname;
+					}
+					var displayNameIndex = 0 ;
+					for(var i = 0;i<priority.length;i++){
+					    for(var j=0;j<attr2.length;j++){
+							if(attr2[j].attvalue==priority[i]){
+								sortAttr2[k2]=attr2[j];
+								k2++;
+							}
+						}
+					}
+					for(var i = 0;i<sortAttr2.length;i++ ){
+						for(var j = 0;j< stocks.length;j++){
+							if(stocks[j].indexOf(sortAttr2[i].productNo+"_"+saleArea+"_")==0||stocks[j].indexOf(sortAttr2[i].productNo+"_"+4+"_")==0){
+							   stock = stocks[j].split("_");
+							   if(stock[2]<=0||stock[2]<parseInt(itemCount)){
+								   selectvalueContent+='<li class="quehuo" no='+sortAttr2[i].productNo+' itemid='+sortAttr2[i].itemid+'>'+sortAttr2[i].attvalue+'(缺货)</li>';
+							   }else{
+								  selectvalueContent+='<li no='+sortAttr2[i].productNo+' itemid='+sortAttr2[i].itemid+'>'+sortAttr2[i].attvalue+'</li>';
+							   }
+							}
+						}
+					}
+					if(colorListContent!=''){
+						if(displayName.length>displayNameIndex){
+							content += '<dt>'+displayName[displayNameIndex]+'：</dt> <dd> <ul class="colorList clearfix">'
+							content +=colorListContent;
+							content +="</ul></dd></dl>";
+							displayNameIndex++;
+						}
+					}
+					if(selectvalueContent!=''){
+						if(displayName.length>displayNameIndex){
+						if(displayName[displayNameIndex]=='光度'){
+							content +='<dl class="clearfix"><dt>'+displayName[displayNameIndex]+'：</dt><dd><ul class="selectBox clearfix"><li><div class="select"><div class="selected">请选择'+displayName[displayNameIndex]+'</div><ul class="selectvalue">';							
+						}else{
+							content +='<dl class="clearfix"><dt>'+displayName[displayNameIndex]+'：</dt><dd><ul class="selectBox clearfix"><li><div class="select"><div class="selected">请选择'+displayName[displayNameIndex]+'</div><ul class="selectvalue" style="height:auto">';
+						}
+						content +=selectvalueContent;
+						content +='</ul></div></li></ul></dd></dl>';
+						$('#selectValueInfo_'+id).val('请选择'+displayName[displayNameIndex]);
+						}
+					}
+					content +='<div class="btn_div">';
+					buttonContent  ='<a href="#" onclick="saveSpecial('+id+','+itemType+','+refmainitemid+')">保存</a></div>';
+					content +=buttonContent;
+					//$('.colorList').html("");
+					//$('.colorList').html(colorListContent);
+					//$('.selectvalue').html("");
+					//$('.selectvalue').html(selectvalueContent);
+					$("#pop_info_"+id).html("");
+					$("#pop_info_"+id).html(content);
+					initSelectColor(id);
+					initSelectDegree(id);
+				}
+			});
+}
+
+</script> 
+</div>
+
+<!-- main END --> 
+<!-- footer BEGIN -->
+<div class="footer">
+  <p> <a href="http://www.111.com.cn/about.html" target="_blank">关于壹药网</a> | <a href="http://www.111.com.cn/cmsPage/2013101401/zhengshi.html" rel="nofollow" target="_blank">互联网药品信息服务资格证</a> | <a href="http://www.111.com.cn/cmsPage/2013101402/zhengshi.html" rel="nofollow" target="_blank">互联网药品交易资格证：粤C20100001</a> | <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备12015869号</a> </p>
+  <p> <a href="http://p1.maiyaole.com/images/201306/images/describe/lsyyzzzs.jpg" target="_blank">连锁营业执照</a> | <a href="http://www.111.com.cn/cmsPage/2013101405/zhengshi.html" target="_blank">药品经营许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101403/zhengshi.html" target="_blank">保健食品卫生许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101407/zhengshi.html" target="_blank">医疗器械许可证</a> | <a href="http://www.111.com.cn/315Web/" target="_blank">网安备案证</a> | <a href="http://www.111.com.cn/cmsPage/2013101404/zhengshi.html" target="_blank">食品流通许可证</a> | <a href="http://www.111.com.cn/cmsPage/2013101408/zhengshi.html" target="_blank">GSP证书</a> | <a href="http://www.111.com.cn/cmsPage/2014031002/index.html">保健食品经营企业安全示范点</a> </p>
+  <p>Copyright &#169; 壹药网——广东壹号大药房连锁有限公司 2010-2015，All Rights Reserved</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.navicate.dao.NavicateDao">
+    
+	<select id="queryCatList" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT * FROM tb_pdt_svc_cat 
+	 	<where>
+	 	    <if test="pid !=null and pid !=''">
+	 	        and pid = #{pid}
+	 	    </if>
+	 	</where>
+	</select>
+   
+	<select id="queryById" parameterType="java.lang.Integer" resultType="java.util.Map">
+	    SELECT * FROM tb_pdt_svc_cat WHERE id=#{id}
+	</select>
+	
+	<select id="querySearchConditionList" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT * FROM tb_pdt_svc_cat_search_condition 
+	    <where>
+	        <if test="catId !=null and catId !=''">
+	            and catId = #{catId}
+	        </if>
+	    </where>
+	</select>
+	
+	<select id="queryConditionOptList" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT * FROM tb_pdt_svc_cat_search_condition_opt 
+	    <where>
+	        <if test="scId !=null and scId !=''">
+	            and scId = #{scId}
+	        </if>
+	    </where>
+	</select>
+	
+	<select id="queryOptById" parameterType="java.lang.Long" resultType="java.util.Map">
+	    SELECT * FROM tb_pdt_svc_cat_search_condition_opt WHERE id = #{id}
+	</select>
+	
+	<select id="queryScMappingByParam" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT * FROM tb_pdt_svc_search_mapping
+	    <where>
+	        <if test="goodsCode !=null and goodsCode !=''">
+	            and goodsCode = #{goodsCode}
+	        </if>
+	    </where>
+	</select>
+	
+	<insert id="saveScMapping" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+	    INSERT tb_pdt_svc_search_mapping(goodsCode,catId,scId,catScOptId,creator,updator,createTime,updateTime) 
+	    VALUES(#{goodsCode},#{catId},#{scId},#{catScOptId},#{creator},#{updator},now(),now())
+	</insert>
+	
+	<delete id="deleteScMapping" parameterType="java.util.Map">
+	    DELETE FROM tb_pdt_svc_search_mapping 
+	    <where>
+	        <if test="goodsCode !=null and goodsCode !=''">
+	            and goodsCode = #{goodsCode}
+	        </if>
+	    </where>
+	</delete>
+</mapper>

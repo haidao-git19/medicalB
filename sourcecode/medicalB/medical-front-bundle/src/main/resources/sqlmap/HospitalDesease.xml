@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.web.hospital.dao.HospitalDeseaseDao">
+
+   
+   <select id="queryDisDeseaList" parameterType="map" resultType="com.netbull.web.hospital.entity.HospitalDesease">
+ 	   SELECT DISTINCT a.`diseaseID`,b.`diseaseName` FROM tb_medical_doctor_disease a,tb_medical_disease b,tb_medical_doctor c
+ 	    <where>
+ 	        1=1
+ 	         and a.`diseaseID`=b.`diseaseID` AND a.`doctorID`=c.doctorID
+ 	    	<if test="hospitalID!=null and hospitalID !=''">
+ 	    		and c.hospitalID=#{hospitalID}
+ 	    	</if>
+ 	    </where>
+ 	</select>
+    <select id="queryHosAllList" parameterType="map" resultType="com.netbull.web.hospital.entity.HospitalDesease">
+ 	   SELECT a.*,b.`diseaseName`,c.`doctorName` FROM tb_medical_doctor_disease a,tb_medical_disease b,tb_medical_doctor c
+ 	    <where>
+ 	        1=1
+ 	        and a.`diseaseID`=b.`diseaseID` AND a.`doctorID`=c.doctorID
+ 	    	<if test="hospitalID!=null and hospitalID !=''">
+ 	    		and c.hospitalID=#{hospitalID}
+ 	    	</if>
+ 	    </where>
+ 	</select>
+   
+</mapper>

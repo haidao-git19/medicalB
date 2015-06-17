@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.patient.dao.PatientDao">
+
+   
+   <select id="pagePatient" parameterType="map" resultType="map">
+	    SELECT  *   FROM tb_medical_patient C
+	    where 1=1
+	    	and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+	     <if test="patientName!=null and patientName != ''">
+	      and  patientName =#{patientName}
+	     </if>
+	      <if test="contactPhone!=null and contactPhone != ''">
+	      and  contactPhone =#{contactPhone}
+	     </if>
+	        <if test=" patientCard !=null and patientCard != ''">
+	      and  patientCard =#{patientCard}
+	     </if>
+       <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+   
+   
+   <select id="countPatient" parameterType="map"
+  	 resultType="long">
+        SELECT COUNT(1)  FROM tb_medical_patient C
+           where 1=1
+           and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+        <if test="patientName!=null and patientName != ''">
+	      and  patientName =#{patientName}
+	     </if>
+	      <if test="contactPhone!=null and contactPhone != ''">
+	      and  contactPhone =#{contactPhone}
+	     </if>
+	     <if test=" patientCard !=null and patientCard != ''">
+	      and  patientCard =#{patientCard}
+	     </if>
+   </select>
+   
+   <insert id="save" parameterType="com.netbull.shop.patient.entity.Patient" useGeneratedKeys="true" keyProperty="patientID">
+   	insert into tb_medical_patient (patientName,patientSex,patientAge,patientCard,patientPassword,patientLevel,createTime,contactPhone,userID)
+   	values (#{patientName},#{patientSex},#{patientAge},#{patientCard},#{patientPassword},#{patientLevel},#{createTime},#{contactPhone},#{userID})
+   </insert>
+   
+   <update id="update" parameterType="com.netbull.shop.patient.entity.Patient">
+	   update tb_medical_patient set patientName=#{patientName},
+	   patientSex=#{patientSex},
+	   patientAge=#{patientAge},
+	   patientCard=#{patientCard},
+	   patientPassword=#{patientPassword},
+	   patientLevel=#{patientLevel},
+	   contactPhone=#{contactPhone}
+	   where patientID=#{patientID}
+   </update>
+   
+   
+   
+   <select id="findByID" parameterType="java.lang.Integer"  resultType="com.netbull.shop.patient.entity.Patient">
+        SELECT *  FROM tb_medical_patient C
+        where 1=1
+        and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+         <if test="patientID!=null and patientID != ''">
+	      and  patientID =#{patientID}
+	     </if>
+	     <if test=" patientCard !=null and patientCard != ''">
+	      and  patientCard =#{patientCard}
+	     </if>
+   </select>
+   
+   <select id="findByPatientCard" parameterType="java.lang.String"  resultType="com.netbull.shop.patient.entity.Patient">
+        SELECT *  FROM tb_medical_patient 
+        where patientCard = #{patientCard}
+   </select>
+   
+   <delete id="del" parameterType="java.lang.Integer" >
+  	 delete from tb_medical_patient where  patientID =#{patientID}
+   </delete>
+   
+   
+     <update id="updatePicture" parameterType="com.netbull.shop.patient.entity.Picture">
+	   update tb_medical_picture set picUrl=#{picUrl}
+	   where objectID=#{objectID} and objectType=#{objectType}
+	     <if test=" id !=null and id != ''">
+	      and  id =#{id}
+	     </if>
+   </update>
+   
+     <update id="savePicture" parameterType="com.netbull.shop.patient.entity.Picture">
+	  	insert into tb_medical_picture (objectID,objectType,picUrl,picDesc)
+   		values (#{objectID},#{objectType},#{picUrl},#{picDesc})
+   </update>
+   
+    <select id="findPicture"  parameterType="map"  resultType="com.netbull.shop.patient.entity.Picture">
+	  	select * from  tb_medical_picture where objectID=#{objectID} and objectType=#{objectType}
+	  	  <if test=" id !=null and id != ''">
+	      and  id =#{id}
+	     </if>
+   </select>
+   
+</mapper>

@@ -1,0 +1,1079 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>医保宝 - 首页</title>
+<meta http-equiv='Cache-Control' content='no-siteapp' />
+<link href='css/global-v5.css' rel='stylesheet' type='text/css' />
+<link href='css/index.css' rel='stylesheet' type='text/css' />
+<link href='css/popup.css' rel='stylesheet' type='text/css' />
+        
+<script type='text/javascript' src='js/jquery.js'></script>
+<script type='text/javascript' src='js/global.js'></script>
+
+<script type="text/javascript" src="js/function.js"></script><!--按医院找-->
+<script type="text/javascript" src="js/jquery.superslide.2.1.1.js"></script><!--切换图-->
+
+    </head>
+    <body>
+
+
+<!--头部开始-->
+
+<div class="top-wrap">
+    <div class="top-body clearfix">
+      <ul class="top-login-status clearfix" id="top-login-status">
+        <li>您好，欢迎来到医保宝网</li>
+        <li class="service-phone"><a href="login.html">请登录</a> <a href="reg.html">免费注册</a></li>
+      </ul>
+      <ul class="media-link clearfix">
+      <li><a rel="nofollow" href="/mobile.php" class="gomhome png">手机版</a></li>
+        <li class="my-account"><a href="/contact.html" target="_blank">联系我们</a></li>
+        <li><a href="#" onClick="addFavorite('http://www.cn','医保宝');">加入收藏</a></li>
+        
+
+      </ul>
+    </div>
+  </div>
+
+<!--头部结束-->
+
+
+
+
+
+
+
+<div class="head"> 
+  <div class="logo"><a href="/"><img src="img/logo.gif" width="200" height="50" alt="医保宝"></a></div>
+  <div class="search">
+    
+  </div>
+  <div class="clear"></div>
+  <div class="nav"> 
+    <ul>
+      <li  class="current"><a href="/">首页</a></li>
+      <li ><a href="hospital/zhaoyiyuan.html">按医院找</a></li>
+      <li ><a href="hospital/zhaokeshi.html">按科室找</a></li>
+      <li ><a href="#/">网络咨询</a></li>
+      <li ><a href="#">在线咨询</a></li>
+      <li ><a href="#">转约预诊</a></li>
+      <li ><a href="#">看病攻略</a></li>
+      <li ><a href="#">网上商城</a></li>
+    </ul>
+    <div class="nav-cj2"></div>
+    <div class="nav-cj3"></div>
+  </div>
+
+</div>
+<div class="blk20 clear"></div>
+
+
+<div class="main">
+
+<div class="mid">
+
+<div class="left">
+<!-- 代码 开始 -->
+<div class="pic_banner">
+    <ul class="pics">
+        <li><a href="#" target="_blank"><img src="images/0.jpg" /></a></li>
+        <li><a href="#" target="_blank"><img src="images/1.jpg" /></a></li>
+        <li><a href="#" target="_blank"><img src="images/2.jpg" /></a></li>
+        <li><a href="#" target="_blank"><img src="images/3.jpg" /></a></li>
+        <li><a href="#" target="_blank"><img src="images/4.jpg" /></a></li>
+        <li><a href="#" target="_blank"><img src="images/5.jpg" /></a></li>
+        <li><a href="#" target="_blank"><img src="images/6.jpg" /></a></li>
+        <li><a href="#" target="_blank"><img src="images/7.jpg" /></a></li>
+    </ul>
+    <a class="prev" href="javascript:void(0)"></a>
+    <a class="next" href="javascript:void(0)"></a>
+    <div class="num">
+    	<ul></ul>
+    </div>
+</div>
+<script>
+/*鼠标移过，左右按钮显示*/
+$(".pic_banner").hover(function(){
+	$(this).find(".prev,.next").fadeTo("show",0.1);
+},function(){
+	$(this).find(".prev,.next").hide();
+})
+/*鼠标移过某个按钮 高亮显示*/
+$(".prev,.next").hover(function(){
+	$(this).fadeTo("show",0.7);
+},function(){
+	$(this).fadeTo("show",0.1);
+})
+$(".pic_banner").slide({ titCell:".num ul" , mainCell:".pics" , effect:"fold", autoPlay:true, delayTime:700 , autoPage:true });
+</script>
+<!-- 代码 结束 -->
+
+	<div class="show-box"></div>
+
+<div class="blk8 clear"></div>
+
+
+<div class="wlr-box">
+  <div class="wlr-box-hd">
+    <div class="wlr-box-ctrl2"> <a href="javascript:;" class="wlr-box-ctrl2-hr btn_top_fans1 active">按医院找大夫</a><a href="javascript:;" class="wlr-box-ctrl2-lt btn_top_fans2 ">按科室找大夫</a></div>
+  </div>
+  <div class="wlr-box-bd">
+    <ul class="infoimg-list2 cf ul_top_fans1">
+
+
+<!--按医院找 -->
+<div class="J_tab">
+<div class="menu J_menu">
+<a id="jh_0" class="menu-active" target="_blank" href="#">合肥</a>
+<a id="jh_1" class="normal" target="_blank" href="#">芜湖</a>
+<a id="jh_2" class="normal" target="_blank" href="/yiyuan/guangdong/list.htm">宣城</a>
+<a id="jh_3" class="normal" target="_blank" href="/yiyuan/sichuan/list.htm">安庆</a>
+<a id="jh_4" class="normal" target="_blank" href="/yiyuan/shandong/list.htm">蚌埠</a>
+<a id="jh_5" class="normal" target="_blank" href="/yiyuan/jiangsu/list.htm">亳州</a>
+<a id="jh_6" class="normal" target="_blank" href="/yiyuan/hubei/list.htm">淮南</a>
+<a id="jh_7" class="normal" target="_blank" href="/yiyuan/hunan/list.htm">淮北</a>
+<a id="jh_8" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">阜阳</a>
+<a id="jh_9" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">阜阳</a>
+<a id="jh_10" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">阜阳</a>
+<a id="jh_11" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">阜阳</a>
+<a id="jh_12" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">阜阳</a>
+<a id="jh_13" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">阜阳</a>
+<a id="jh_14" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">阜阳</a>
+<a id="jh_15" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">马鞍山</a>
+<a id="jh_16" class="normal" target="_blank" href="/yiyuan/zhejiang/list.htm">六安</a>
+</div>
+<div class="menu_con J_content">
+<div id="jhcon_0" style="display: block;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4rIxMvCogR-EoxrURJ3U3.htm" target="_blank">协和医院</a><span class="gray">(1312)</span></li>
+  <li><a href="/hospital/DE4roiYGYZw0hEIKBtDEBxt8k.htm" target="_blank">301医院</a><span class="gray">(1421)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwWGNldz13dpO1a1.htm" target="_blank">北医三院</a><span class="gray">(808)</span></li>
+  <li><a href="/hospital/DE4rIxMvCoglyo3WJbWRFh5.htm" target="_blank">同仁医院</a><span class="gray">(717)</span></li>
+  <li><a href="/hospital/DE4raCNSz6ONgokwMDQuPMuk.htm" target="_blank">儿童医院</a><span class="gray">(468)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXwIaCFVHDuJVht.htm" target="_blank">北京中医院</a><span class="gray">(382)</span></li>
+  <li><a href="/hospital/DE4raCNSz6ONDnJPvy76rvKc.htm" target="_blank">人民医院</a><span class="gray">(908)</span></li>
+  <li><a href="/hospital/DE4raCNSz6ONZORxEH4FVECt.htm" target="_blank">阜外医院</a><span class="gray">(633)</span></li>
+  <li><a href="/hospital/DE4raCNSz6Omx7149dVHU9sf.htm" target="_blank">妇产医院</a><span class="gray">(283)</span></li>
+  <li><a href="/hospital/DE4raCNSz6OYw20RBSRSxBFl.htm" target="_blank">天坛医院</a><span class="gray">(733)</span></li>
+  <li><a href="/hospital/DE4raCNSz6ONSaQTyscBtyq4.htm" target="_blank">北大医院</a><span class="gray">(908)</span></li>
+  <li><a href="/hospital/DE4raCNSz6OWZplJ2IkvT2YR.htm" target="_blank">积水潭医院</a><span class="gray">(554)</span></li>
+  <li><a href="/hospital/DE4raCNSz6Om-9cfC2nM4CIa.htm" target="_blank">安贞医院</a><span class="gray">(689)</span></li>
+  <li><a href="/hospital/DE4roiYGYZw0CXaCFVHDuJVht.htm" target="_blank">北大口腔</a><span class="gray">(373)</span></li>
+  <li><a href="/hospital/DE4raCNSz6Omic7eSMfL7SHT.htm" target="_blank">朝阳医院</a><span class="gray">(572)</span></li>
+  <li><a href="/hospital/DE4raCNSz6O0h1aaH6PKRH5e.htm" target="_blank">宣武医院</a><span class="gray">(752)</span></li>
+  <li><a href="/hospital/DE4raCNSz6OmG3OUNZWCWNv0.htm" target="_blank">中日医院</a><span class="gray">(776)</span></li>
+  <li><a href="/hospital/DE4raCNSz6O0K3OUNZWCWNv0.htm" target="_blank">友谊医院</a><span class="gray">(475)</span></li>
+  <li><a href="/hospital/DE4raCNSz6OmCsr8uGmz1uDn.htm" target="_blank">医科院肿瘤</a><span class="gray">(322)</span></li>
+  <li><a href="/hospital/DE4raCNSz6OmK5b7qp0yaqEm.htm" target="_blank">儿研所</a><span class="gray">(337)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwWGEmS30yF9V0wc.htm" target="_blank">北大肿瘤</a><span class="gray">(291)</span></li>
+  <li><a href="/hospital/DE4rIxMvCogWH26171mm-bs.htm" target="_blank">地坛医院</a><span class="gray">(187)</span></li>
+  <li><a href="/hospital/DE4raCNSz6ONwplJ2IkvT2YR.htm" target="_blank">安定医院</a><span class="gray">(127)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwWG0YFEgXN3cgkJ.htm" target="_blank">北医六院</a><span class="gray">(111)</span></li>
+  <li><a href="/yiyuan/beijing/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_1" style="display: none;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4roiYGYZwXGaOyZJ9SvRJb8.htm" target="_blank">华山医院</a><span class="gray">(695)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXhEaCFVHDuJVht.htm" target="_blank">瑞金医院</a><span class="gray">(694)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXhXnG6rsvdwrU4.htm" target="_blank">上海九院</a><span class="gray">(634)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXhYmS30yF9V0wc.htm" target="_blank">中山医院</a><span class="gray">(750)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXhIOyZJ9SvRJb8.htm" target="_blank">新华医院</a><span class="gray">(643)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXGnaCFVHDuJVht.htm" target="_blank">红房子医院</a><span class="gray">(308)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwX-IqNN8Z2K18e0.htm" target="_blank">仁济医院</a><span class="gray">(844)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXhapHKRSoDWRPl.htm" target="_blank">长海医院</a><span class="gray">(539)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXGopHKRSoDWRPl.htm" target="_blank">五官科医院</a><span class="gray">(223)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXi27o5nM-zfnJT.htm" target="_blank">上海肿瘤</a><span class="gray">(318)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXhmIKBtDEBxt8k.htm" target="_blank">上海六院</a><span class="gray">(587)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwX-U7o5nM-zfnJT.htm" target="_blank">龙华医院</a><span class="gray">(435)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXhno-DwIIFQwlR.htm" target="_blank">儿童医学中心</a><span class="gray">(253)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXhoUz-mzZSmmxP.htm" target="_blank">长征医院</a><span class="gray">(451)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXKXIKBtDEBxt8k.htm" target="_blank">上海一院</a><span class="gray">(578)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXK0nG6rsvdwrU4.htm" target="_blank">第一妇婴</a><span class="gray">(138)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwX-o3XIhpq-4h0m.htm" target="_blank">曙光医院</a><span class="gray">(322)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXKmaCFVHDuJVht.htm" target="_blank">儿童医院</a><span class="gray">(143)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXxXaCFVHDuJVht.htm" target="_blank">东方肝胆</a><span class="gray">(157)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXh0EZsOEX6TORQ.htm" target="_blank">复旦儿科</a><span class="gray">(198)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwIi1d9CWC6I0WTb.htm" target="_blank">精神卫生中心</a><span class="gray">(240)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXKEo-DwIIFQwlR.htm" target="_blank">肺科医院</a><span class="gray">(220)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXiprEpjdCy8jrf.htm" target="_blank">胸科医院</a><span class="gray">(167)</span></li>
+  <li><a href="/yiyuan/shanghai/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_2" style="display: none;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4roiYGYZwXCabML76GGU71e.htm" target="_blank">省中医院</a><span class="gray">(1055)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXxnpHKRSoDWRPl.htm" target="_blank">省人民医院</a><span class="gray">(1007)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXCoqNN8Z2K18e0.htm" target="_blank">中医药一附院</a><span class="gray">(638)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXCUrEpjdCy8jrf.htm" target="_blank">中山二院</a><span class="gray">(779)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXiEUz-mzZSmmxP.htm" target="_blank">中山一院</a><span class="gray">(761)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXCO1YXfLKC7fiV.htm" target="_blank">南方医院</a><span class="gray">(796)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEhp1YXfLKC7fiV.htm" target="_blank">深圳北大医院</a><span class="gray">(619)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXxOqNN8Z2K18e0.htm" target="_blank">广州妇儿中心</a><span class="gray">(526)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXC25IqlG3HelVn.htm" target="_blank">中山三院</a><span class="gray">(530)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXin2LHUopZaUWW.htm" target="_blank">中大肿瘤医院</a><span class="gray">(385)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXCI2LHUopZaUWW.htm" target="_blank">广医一院</a><span class="gray">(433)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXiaqNN8Z2K18e0.htm" target="_blank">眼科中心</a><span class="gray">(116)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0hXzSkhlkqINLVW.htm" target="_blank">深圳儿童医院</a><span class="gray">(181)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXxa2LHUopZaUWW.htm" target="_blank">军区总医院</a><span class="gray">(367)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXCp3XIhpq-4h0m.htm" target="_blank">珠江医院</a><span class="gray">(335)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwX-2sp9b25Lgbma.htm" target="_blank">省妇幼</a><span class="gray">(368)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXCnUz-mzZSmmxP.htm" target="_blank">广医三院</a><span class="gray">(298)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXxIUz-mzZSmmxP.htm" target="_blank">暨大附一院</a><span class="gray">(327)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXiIbML76GGU71e.htm" target="_blank">光华口腔</a><span class="gray">(177)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXxobML76GGU71e.htm" target="_blank">广州市一</a><span class="gray">(681)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXCEpHKRSoDWRPl.htm" target="_blank">广医二院</a><span class="gray">(446)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXxEOyZJ9SvRJb8.htm" target="_blank">省口腔</a><span class="gray">(142)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXxU3XIhpq-4h0m.htm" target="_blank">脑科医院</a><span class="gray">(206)</span></li>
+  <li><a href="/yiyuan/guangdong/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_3" style="display:none;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4roiYGYZwXJq43vTNHYjTjw.htm" target="_blank">华西医院</a><span class="gray">(1231)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmGapHKRSoDWRPl.htm" target="_blank">省人民医院</a><span class="gray">(965)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmCO3XIhpq-4h0m.htm" target="_blank">省中医院</a><span class="gray">(510)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmKobML76GGU71e.htm" target="_blank">华西妇儿医院</a><span class="gray">(233)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmxnUz-mzZSmmxP.htm" target="_blank">华西口腔医院</a><span class="gray">(220)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmy1d9CWC6I0WTb.htm" target="_blank">泸医附院</a><span class="gray">(427)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0yU22m0TUy35vjf.htm" target="_blank">成都妇产科医院</a><span class="gray">(290)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwai265Sxq9XkxnU.htm" target="_blank">成都军总医院</a><span class="gray">(440)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmyrBdz13dpO1a1.htm" target="_blank">绵阳中心医院</a><span class="gray">(300)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmCaqNN8Z2K18e0.htm" target="_blank">成都第一医院</a><span class="gray">(239)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmCbsp9b25Lgbma.htm" target="_blank">省肿瘤医院</a><span class="gray">(198)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmCIbML76GGU71e.htm" target="_blank">成都第三医院</a><span class="gray">(291)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmCU5IqlG3HelVn.htm" target="_blank">省妇幼保健院</a><span class="gray">(78)</span></li>
+  <li><a href="/yiyuan/sichuan/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_4" style="display:none;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4roiYGYZwXJp7o5nM-zfnJT.htm" target="_blank">省立医院</a><span class="gray">(850)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmGIOyZJ9SvRJb8.htm" target="_blank">齐鲁医院</a><span class="gray">(720)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwaJ3uuYe-Bqregr.htm" target="_blank">山东省中医院</a><span class="gray">(479)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwExprEpjdCy8jrf.htm" target="_blank">青医附院</a><span class="gray">(728)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwIzsSCFVHDuJVht.htm" target="_blank">济南军总医院</a><span class="gray">(431)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwE-1tsGQuzElQch.htm" target="_blank">烟台毓璜顶医院</a><span class="gray">(445)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEJ386yaYLonaQx.htm" target="_blank">青岛市立医院</a><span class="gray">(579)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEyOc2dcByMhc7g.htm" target="_blank">济宁医附院</a><span class="gray">(454)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwIz9ZyZJ9SvRJb8.htm" target="_blank">济南中心医院</a><span class="gray">(348)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEJb65Sxq9XkxnU.htm" target="_blank">济南儿童医院</a><span class="gray">(92)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEy186yaYLonaQx.htm" target="_blank">济南妇幼</a><span class="gray">(80)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwaC243vTNHYjTjw.htm" target="_blank">山大口腔医院</a><span class="gray">(106)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0jOEmi88QpNK6eR.htm" target="_blank">省妇幼保健院</a><span class="gray">(31)</span></li>
+  <li><a href="/yiyuan/shandong/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_5" style="display:none;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4roiYGYZwXy1tsGQuzElQch.htm" target="_blank">江苏省中医院</a><span class="gray">(632)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXJ165Sxq9XkxnU.htm" target="_blank">南京军总医院</a><span class="gray">(620)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwX-bc2dcByMhc7g.htm" target="_blank">省人民医院</a><span class="gray">(724)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXyq65Sxq9XkxnU.htm" target="_blank">南京鼓楼医院</a><span class="gray">(469)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwECOrEpjdCy8jrf.htm" target="_blank">苏州大学一附院</a><span class="gray">(574)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEiI1YXfLKC7fiV.htm" target="_blank">南京儿童医院</a><span class="gray">(280)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwECq9quPKsNiPfO.htm" target="_blank">南京妇幼保健院</a><span class="gray">(159)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEi2c2dcByMhc7g.htm" target="_blank">南京脑科医院</a><span class="gray">(201)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwECnbML76GGU71e.htm" target="_blank">苏北人民医院</a><span class="gray">(354)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwaiqd9CWC6I0WTb.htm" target="_blank">中大医院</a><span class="gray">(295)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwaJ2d9CWC6I0WTb.htm" target="_blank">南京口腔医院</a><span class="gray">(167)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwECa1YXfLKC7fiV.htm" target="_blank">省肿瘤医院</a><span class="gray">(203)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXJorEpjdCy8jrf.htm" target="_blank">省妇幼保健中心</a><span class="gray">(172)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEi165Sxq9XkxnU.htm" target="_blank">省口腔医院</a><span class="gray">(115)</span></li>
+  <li><a href="/yiyuan/jiangsu/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_6" style="display:none;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4roiYGYZwXyb43vTNHYjTjw.htm" target="_blank">武汉同济医院</a><span class="gray">(721)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwXyUc2dcByMhc7g.htm" target="_blank">武汉协和医院</a><span class="gray">(853)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmxmOyZJ9SvRJb8.htm" target="_blank">省人民医院</a><span class="gray">(644)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0GYHVx47TZMZ31t.htm" target="_blank">湖北省中医院</a><span class="gray">(332)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmiOrEpjdCy8jrf.htm" target="_blank">省妇幼保健院</a><span class="gray">(197)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwm-O5IqlG3HelVn.htm" target="_blank">武汉第一医院</a><span class="gray">(431)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwm-I1YXfLKC7fiV.htm" target="_blank">中南医院</a><span class="gray">(376)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwm-p7o5nM-zfnJT.htm" target="_blank">武汉妇保中心</a><span class="gray">(216)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmiq9quPKsNiPfO.htm" target="_blank">省口腔医院</a><span class="gray">(230)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwai186yaYLonaQx.htm" target="_blank">武汉陆军总医院</a><span class="gray">(313)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwm-2c2dcByMhc7g.htm" target="_blank">武汉中医院</a><span class="gray">(254)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0GmHDjfh42XHZ0l.htm" target="_blank">武汉第四医院</a><span class="gray">(194)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwm-b9quPKsNiPfO.htm" target="_blank">武汉中心医院</a><span class="gray">(365)</span></li>
+  <li><a href="/yiyuan/hubei/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_7" style="display: none;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4roiYGYZwXy3d9CWC6I0WTb.htm" target="_blank">湘雅医院</a><span class="gray">(952)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmxoqNN8Z2K18e0.htm" target="_blank">湘雅二医院</a><span class="gray">(860)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwny7Fvoi5u5tiO7.htm" target="_blank">中医附一医院</a><span class="gray">(374)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0hnMxaOQhHsdycT.htm" target="_blank">省第二人民医院</a><span class="gray">(303)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmhnOyZJ9SvRJb8.htm" target="_blank">省人民医院</a><span class="gray">(383)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmxO1YXfLKC7fiV.htm" target="_blank">湘雅三医院</a><span class="gray">(551)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwnyq86yaYLonaQx.htm" target="_blank">省儿童医院</a><span class="gray">(313)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwny5eFEgXN3cgkJ.htm" target="_blank">省肿瘤医院</a><span class="gray">(308)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwny1Bdz13dpO1a1.htm" target="_blank">省妇幼保健院</a><span class="gray">(133)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwny3PBM4FM2b44i.htm" target="_blank">省中医院</a><span class="gray">(185)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0hEzZljbt3pIpm0.htm" target="_blank">长沙市中心医院</a><span class="gray">(335)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0hELG0lPR5qqdfm.htm" target="_blank">长沙市中医院</a><span class="gray">(167)</span></li>
+  <li><a href="/yiyuan/hunan/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_8" style="display:none;" class="menu_con_bg">
+<ul>
+  <li><a href="/hospital/DE4roiYGYZwmGEaCFVHDuJVht.htm" target="_blank">浙大一院</a><span class="gray">(587)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmGYmS30yF9V0wc.htm" target="_blank">浙医二院</a><span class="gray">(720)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmhmaCFVHDuJVht.htm" target="_blank">省中医院</a><span class="gray">(437)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEH7VD2kvYsPktj.htm" target="_blank">浙大妇产医院</a><span class="gray">(214)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwmhpqNN8Z2K18e0.htm" target="_blank">省人民医院</a><span class="gray">(649)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwnJp9quPKsNiPfO.htm" target="_blank">温医二院</a><span class="gray">(813)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEHqBdz13dpO1a1.htm" target="_blank">杭州市中医院</a><span class="gray">(273)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEH3uuYe-Bqregr.htm" target="_blank">邵逸夫医院</a><span class="gray">(325)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0Co0LPQrVFGoqUr.htm" target="_blank">浙大儿童医院</a><span class="gray">(236)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0xO0LPQrVFGoqUr.htm" target="_blank">温医一院</a><span class="gray">(512)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0CoYk8JOrYZEIRi.htm" target="_blank">李惠利医院</a><span class="gray">(240)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEH2d9CWC6I0WTb.htm" target="_blank">杭州妇幼</a><span class="gray">(370)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0xONQ4wkiNDMHtx.htm" target="_blank">宁波第一医院</a><span class="gray">(328)</span></li>
+  <li><a href="/hospital/DE4roiYGYZwEHb86yaYLonaQx.htm" target="_blank">红十字会医院</a><span class="gray">(219)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0CoElfmw7E-sSlj.htm" target="_blank">省肿瘤医院</a><span class="gray">(203)</span></li>
+  <li><a href="/hospital/DE4rO-XCoLU0xnRCObWl99uMTa.htm" target="_blank">杭州七院</a><span class="gray">(92)</span></li>
+  <li><a href="/yiyuan/zhejiang/list.htm" target="_blank" class="blue2">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<!--按医院找 end-->
+
+    </ul>
+    <ul class="infoimg-list2 cf ul_top_fans2" style="display: none;" >
+
+
+
+<div class="find_jb">
+<div class="find_jb_l"><strong>内 科</strong>
+<ul>
+	<li><a target="_blank" class="black_link" href="/jibing/yigan/daifu.htm">乙肝</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/tangniaobing/daifu.htm">糖尿病</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/jiakang/daifu.htm">甲亢</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/weikuiyang/daifu.htm">胃溃疡</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/feiyan/daifu.htm">肺炎</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xiaochuan/daifu.htm">哮喘</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/leifengshixingguanjieyan/daifu.htm">类风湿</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/hongbanlangchuang/daifu.htm">红斑狼疮</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/pinxue/daifu.htm">贫血</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/shenyan/daifu.htm">肾炎</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/naogengsi/daifu.htm">脑梗塞</a></li>
+	<li><a class="blue2" target="_blank" href="/jibing/neike/list.htm">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+<strong>外 科</strong>
+<ul>
+	
+	<li><a target="_blank" class="black_link" href="/jibing/qixiong/daifu.htm">气胸</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/danjieshi/daifu.htm">胆结石</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/jingmaiquzhang/daifu.htm">静脉曲张</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/ruxianxianweiliu/daifu.htm">乳腺纤维瘤</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/shenjieshi/daifu.htm">肾结石</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/zhichuang/daifu.htm">痔疮</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/chunelie/daifu.htm">唇腭裂</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/sanchashenjingtong/daifu.htm">三叉神经痛</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/jingzhuibing/daifu.htm">颈椎病</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/guzhizengsheng/daifu.htm">骨关节炎</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/yaozhuijianpantuchu/daifu.htm">腰间盘突出</a></li>
+	<li><a class="blue2" target="_blank" href="/jibing/waike/list.htm">更多&gt;&gt;</a></li>
+</ul>
+<strong>心 脏</strong>
+<ul>
+	<li><a target="_blank" class="black_link" href="/jibing/guanxinbing/daifu.htm">冠心病</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/fengshixingxinzangbing/daifu.htm">风心病</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xiantianxingxinzangbing/daifu.htm">先心病</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/fangchan/daifu.htm">房颤</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/gaoxueya/daifu.htm">高血压</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xinjibing/daifu.htm">心肌病</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xinlvbuqi/daifu.htm">心律失常</a></li>
+	<li><a class="blue2" target="_blank" href="/jibing/xinxueguanneike/list.htm">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<div class="find_jb_r">
+<strong>妇 科</strong>
+<ul>
+	<li><a target="_blank" class="black_link" href="/jibing/buyunbuyu/daifu.htm">不孕不育</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/yuejingshitiao/daifu.htm">月经失调</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/penqiangyan/daifu.htm">盆腔炎</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/zigongjiliu/daifu.htm">子宫肌瘤</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/duonangluanchao/daifu.htm">多囊卵巢</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/luanchaonangzhong/daifu.htm">卵巢囊肿</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/chanqianjiancha/daifu.htm">产前检查</a></li>
+	<li><a class="blue2" target="_blank" href="/jibing/fuchanke/list.htm">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+
+<strong>儿 科</strong>
+<ul>
+	<li><a target="_blank" class="black_link" href="/jibing/xiaoerdianxian/daifu.htm">小儿癫痫</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xiaoerfuxie/daifu.htm">小儿腹泻</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xiaoerxiaochuan/daifu.htm">小儿哮喘</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xiaoershizhen/daifu.htm">小儿湿疹</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xiaoerduodongzheng/daifu.htm">小儿多动症</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xiaoerxieshi/daifu.htm">小儿斜视</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/xinzaoshu/daifu.htm">性早熟</a></li>
+	<li><a class="blue2" target="_blank" href="/jibing/xiaoerke/list.htm">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+<strong>肿 瘤</strong>
+<ul>
+	<li><a target="_blank" class="black_link" href="/jibing/feiai/daifu.htm">肺癌</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/ganai/daifu.htm">肝癌</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/weiai/daifu.htm">胃癌</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/ruxianai/daifu.htm">乳腺癌</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/linbaliu/daifu.htm">淋巴瘤</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/shenai/daifu.htm">肾癌</a></li>
+	<li><a target="_blank" class="black_link" href="/jibing/biyanai/daifu.htm">鼻咽癌</a></li>
+	<li><a class="blue2" target="_blank" href="/jibing/zhongliuke/list.htm">更多&gt;&gt;</a></li>
+</ul>
+<div class="clear"></div>
+<strong>其 他</strong>
+<ul>
+	 <li><a target="_blank" class="black_link" href="/jibing/qingguangyan/daifu.htm">青光眼</a></li>
+	 <li><a target="_blank" class="black_link" href="/jibing/yahejixing/daifu.htm">牙颌畸形</a></li>
+	 <li><a target="_blank" class="black_link" href="/jibing/zhongeryan/daifu.htm">中耳炎</a></li>
+	 <li><a target="_blank" class="black_link" href="/jibing/baineizhang/daifu.htm">白内障</a></li>
+	 <li><a target="_blank" class="black_link" href="/jibing/jianruishiyou/daifu.htm">尖锐湿疣</a></li>
+	 <li><a target="_blank" class="black_link" href="/jibing/yiyuzheng/daifu.htm">抑郁症</a></li>
+	 <li><a target="_blank" class="black_link" href="/jibing/xinlizixun/daifu.htm">心理咨询</a></li>
+	<li><a class="blue2" target="_blank" href="/jibing/qitakeshi/list.htm">更多&gt;&gt;</a></li>
+</ul>
+</div>
+<div class="clear"></div>
+</div>
+
+
+
+
+
+
+
+    </ul>
+  </div>
+</div>
+
+<div class="blk10 clear" style="height:10px;"></div>
+
+
+
+
+
+<div class="wlr-box">
+  <div class="wlr-box-hd">
+    <div class="wlr-box-ctrl2">在线咨询</div>
+  </div>
+  <div class="wlr-box-bd">
+<!--咨询列表-->
+<div class="J_tab">
+<div class="menu J_menu">
+<a id="jh_0" class="menu-active" target="_blank" href="#">妇科</a>
+<a id="jh_1" class="normal" target="_blank" href="#">儿外科</a>
+<a id="jh_2" class="normal" target="_blank" href="#">中医科</a>
+<a id="jh_3" class="normal" target="_blank" href="#">心血管外科</a>
+<a id="jh_4" class="normal" target="_blank" href="#">儿内科</a>
+<a id="jh_5" class="normal" target="_blank" href="#">产科</a>
+<a id="jh_6" class="normal" target="_blank" href="#">内科</a>
+<a id="jh_7" class="normal" target="_blank" href="#">皮肤科</a>
+<a id="jh_8" class="normal" target="_blank" href="#">眼科</a>
+</div>
+<div class="menu_con J_content">
+<div id="jhcon_0" style="display: block;" class="menu_con2">
+<ul class="homeTelUl">
+  <li class="homeTelLi "> <span class="homeTelLi_span0">
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="http://400.haodf.com/haodf/mdonglai"><img src="http://n2.hdfimg.com/g1/M00/17/E2/oYYBAFIlwGGAFFDLAAJ66YHO_XI392_58_58_1.jpg?06dd"></a></td>
+        </tr>
+      </tbody>
+    </table>
+    </span> <span class="homeTelLi_span1">
+    <p> <a class="blue2" href="http://400.haodf.com/haodf/mdonglai">马东来</a> 主任医师 </p>
+    <p>北京协和医院</p>
+    <p>皮肤科</p>
+    </span> <span class="homeTelLi_span1">
+    <p> <a href="http://www.haodf.com/wenda/mdonglai_g_1818634760.htm"> 白癜风 </a>&nbsp; </p>
+    <p>最近通话： 04-01 19:51</p>
+    <p><a href="http://400.haodf.com/haodf/mdonglai#successAnswer" target="_blank" class="blue">查看最新用户分享 &gt;&gt;</a></p>
+    </span> <span class="homeTelLi_span3"> <span class="mr5">300元/次(最长10分钟)</span> </span> <span class="homeTelLi_span4"> <a class="orange3" href="http://mdonglai.haodf.com/payment/servicelist">立刻预约</a> </span> </li>
+  <li class="homeTelLi gray5"> <span class="homeTelLi_span0">
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="http://400.haodf.com/haodf/wanweilin"><img src="http://n2.hdfimg.com/g1/M00/17/C1/oYYBAFIlv26AIRTAAAZ_MU0_tbc049_58_58_1.jpg?a8f7"></a></td>
+        </tr>
+      </tbody>
+    </table>
+    </span> <span class="homeTelLi_span1">
+    <p> <a class="blue2" href="http://400.haodf.com/haodf/wanweilin">万伟琳</a> 副主任医师 </p>
+    <p>北京协和医院</p>
+    <p>儿科</p>
+    </span> <span class="homeTelLi_span1">
+    <p> <a href="http://www.haodf.com/wenda/wanweilin_g_2365570018.htm"> 儿子三周，一到冬天就... </a>&nbsp; </p>
+    <p>最近通话： 04-01 21:09</p>
+    <p><a href="http://400.haodf.com/haodf/wanweilin#successAnswer" target="_blank" class="blue">查看最新用户分享 &gt;&gt;</a></p>
+    </span> <span class="homeTelLi_span3"> <span class="mr5"><span class="show_price">200元/次</span><span class="show_duration">(最长15分钟)</span></span> </span> <span class="homeTelLi_span4"> <a class="orange3" href="http://wanweilin.haodf.com/payment/servicelist">立刻预约</a> </span> </li>
+  <li class="homeTelLi "> <span class="homeTelLi_span0">
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="http://400.haodf.com/haodf/tongguoqing"><img src="http://n4.hdfimg.com/g2/M00/01/6D/pIYBAFIlwOGAWS1wAA6eBCz54qY716_58_58_1.jpg?4dbb"></a></td>
+        </tr>
+      </tbody>
+    </table>
+    </span> <span class="homeTelLi_span1">
+    <p> <a class="blue2" href="http://400.haodf.com/haodf/tongguoqing">童国庆</a> 主任医师 </p>
+    <p>上海曙光医院东院</p>
+    <p>生殖医学中心</p>
+    </span> <span class="homeTelLi_span1">
+    <p> <a href=""> </a>&nbsp; </p>
+    <p>最近通话： 暂无</p>
+    <p><a href="http://400.haodf.com/haodf/tongguoqing#successAnswer" target="_blank" class="blue">查看最新用户分享 &gt;&gt;</a></p>
+    </span> <span class="homeTelLi_span3"> <span class="mr5"><span class="show_price">200元/次</span><span class="show_duration">(最长10分钟)</span></span> </span> <span class="homeTelLi_span4"> <a class="orange3" href="http://tongguoqing.haodf.com/payment/servicelist">立刻预约</a> </span> </li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_2" style="display: none;" class="menu_con2">
+<ul class="homeTelUl">
+  <li class="homeTelLi "> <span class="homeTelLi_span0">
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="http://400.haodf.com/haodf/tongguoqing"><img src="http://n4.hdfimg.com/g2/M00/01/6D/pIYBAFIlwOGAWS1wAA6eBCz54qY716_58_58_1.jpg?4dbb"></a></td>
+        </tr>
+      </tbody>
+    </table>
+    </span> <span class="homeTelLi_span1">
+    <p> <a class="blue2" href="http://400.haodf.com/haodf/tongguoqing">童国庆</a> 主任医师 </p>
+    <p>上海曙光医院东院</p>
+    <p>生殖医学中心</p>
+    </span> <span class="homeTelLi_span1">
+    <p> <a href=""> </a>&nbsp; </p>
+    <p>最近通话： 暂无</p>
+    <p><a href="http://400.haodf.com/haodf/tongguoqing#successAnswer" target="_blank" class="blue">查看最新用户分享 &gt;&gt;</a></p>
+    </span> <span class="homeTelLi_span3"> <span class="mr5"><span class="show_price">200元/次</span><span class="show_duration">(最长10分钟)</span></span> </span> <span class="homeTelLi_span4"> <a class="orange3" href="http://tongguoqing.haodf.com/payment/servicelist">立刻预约</a> </span> </li>
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_3" style="display:none;" class="menu_con2">
+<ul>
+44444444</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_4" style="display:none;" class="menu_con2">
+<ul class="homeTelUl">
+ 33333333
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_5" style="display:none;" class="menu_con2">
+<ul class="homeTelUl">
+ddddddd
+</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_6" style="display:none;" class="menu_con2">
+<ul>
+444444</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_7" style="display: none;" class="menu_con2">
+<ul>
+5555</ul>
+<div class="clear"></div>
+</div>
+<div id="jhcon_8" style="display:none;" class="menu_con2">
+<ul>
+77777777777777
+</ul>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<!--咨询列表 end-->
+  </div>
+
+</div><!--电话咨询 end-->
+
+
+
+
+
+<div class="wlr-box">
+  <div class="wlr-box-hd">
+    <div class="wlr-box-ctrl2">网上咨询</div>
+  </div>
+  <div class="wlr-box-bd">
+<!--咨询列表-->
+<div class="J_tab">
+<div class="menu J_menu">
+<a id="jh_0" class="menu-active" target="_blank" href="#">妇科</a>
+<a id="jh_1" class="normal" target="_blank" href="#">儿外科</a>
+<a id="jh_2" class="normal" target="_blank" href="#">中医科</a>
+<a id="jh_3" class="normal" target="_blank" href="#">心血管外科</a>
+<a id="jh_4" class="normal" target="_blank" href="#">儿内科</a>
+<a id="jh_5" class="normal" target="_blank" href="#">产科</a>
+<a id="jh_6" class="normal" target="_blank" href="#">内科</a>
+<a id="jh_7" class="normal" target="_blank" href="#">皮肤科</a>
+<a id="jh_8" class="normal" target="_blank" href="#">眼科</a>
+</div>
+<div class="menu_con2 J_content">
+<div id="zxcon_0" style="display: block;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">天津总医院眼科&nbsp;&nbsp;陈松回复</span>
+    <a href="http://www.haodf.com/wenda/chensongzyy_g_1836022995.htm" target="_blank">小儿白内障</a> 
+    <a class="gray" style="text-decoration:none;">2分钟前</a>
+    </li>
+    <li class="zx_bg2">
+        <span class="gray f_rt">新华医院儿童内分泌科&nbsp;&nbsp;邱文娟回复</span>
+    <a href="http://www.haodf.com/wenda/qiuwenjuan_g_2373247727.htm" target="_blank">糖原累积症不吃玉米淀粉</a> 
+    <a class="gray" style="text-decoration:none;">2分钟前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_1" style="display: none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">北京同仁医院耳鼻咽喉头颈外科&nbsp;&nbsp;程晓华回复</span>
+    <a href="http://www.haodf.com/wenda/chengxiaohua010_g_2371197410.htm" target="_blank">耳声发射和aabr均通过，宝宝...</a> 
+    <a class="gray" style="text-decoration:none;">16分钟前</a>
+    </li>
+    <li class="zx_bg2">
+        <span class="gray f_rt">北京儿童医院耳鼻咽喉头颈外科&nbsp;&nbsp;陈敏回复</span>
+    <a href="http://www.haodf.com/wenda/chenmin121_g_2373173009.htm" target="_blank">听力下降</a> 
+    <a class="gray" style="text-decoration:none;">16分钟前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_2" style="display: none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">301医院口腔科&nbsp;&nbsp;徐璐璐回复</span>
+    <a href="http://www.haodf.com/wenda/xull_g_2372864588.htm" target="_blank">成人正畸矫正</a> 
+    <a class="gray" style="text-decoration:none;">51分钟前</a>
+    </li>
+    <li class="zx_bg2">
+        <span class="gray f_rt">88医院口腔科&nbsp;&nbsp;田晓光回复</span>
+    <a href="http://www.haodf.com/wenda/tianxgdr_g_2372702217.htm" target="_blank">牙齿矫正问题</a> 
+    <a class="gray" style="text-decoration:none;">1小时前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_3" style="display: none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">空军总医院肝胆外科&nbsp;&nbsp;刘承利回复</span>
+    <a href="http://www.haodf.com/wenda/liuchengli_g_2364269015.htm" target="_blank">肝胆管细胞癌</a> 
+    <a class="gray" style="text-decoration:none;">2分钟前</a>
+    </li>
+    <li class="zx_bg2">
+        <span class="gray f_rt">南京鼓楼医院肝胆外科&nbsp;&nbsp;施晓雷回复</span>
+    <a href="http://www.haodf.com/wenda/njsxl_g_2373241645.htm" target="_blank">血管瘤的治疗</a> 
+    <a class="gray" style="text-decoration:none;">4分钟前</a>
+    </li>
+    <li class="zx_bg1">
+        <span class="gray f_rt">南京军区总医院肿瘤内科&nbsp;&nbsp;苏全胜回复</span>
+    <a href="http://www.haodf.com/wenda/suquansheng_g_2373208060.htm" target="_blank">求肝癌保守治疗方法</a> 
+    <a class="gray" style="text-decoration:none;">10分钟前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_4" style="display:none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">河南省人民医院生殖医学中心&nbsp;&nbsp;张翠莲回复</span>
+    <a href="http://www.haodf.com/wenda/luckyzhcl_g_2373217215.htm" target="_blank">抽血化验怀孕了不知道孕酮低...</a> 
+    <a class="gray" style="text-decoration:none;">8分钟前</a>
+    </li>
+    <li class="zx_bg2">
+        <span class="gray f_rt">北大人民医院产科&nbsp;&nbsp;魏俊回复</span>
+    <a href="http://www.haodf.com/wenda/weijun90_g_2373211796.htm" target="_blank">超声检查NT值：5.5 孕期10 6</a> 
+    <a class="gray" style="text-decoration:none;">9分钟前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_5" style="display:none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">上海华东医院血管外科&nbsp;&nbsp;崔佳森回复</span>
+    <a href="http://www.haodf.com/wenda/cuijiasen_g_2371146167.htm" target="_blank">婴儿血管瘤</a> 
+    <a class="gray" style="text-decoration:none;">15分钟前</a>
+    </li>
+    <li class="zx_bg2">
+        <span class="gray f_rt">上海第九人民医院口腔颌面外科&nbsp;&nbsp;范新东回复</span>
+    <a href="http://www.haodf.com/wenda/fanxindong_g_2373149074.htm" target="_blank">6个月宝宝 血管瘤</a> 
+    <a class="gray" style="text-decoration:none;">19分钟前</a>
+    </li>
+    <li class="zx_bg1">
+        <span class="gray f_rt">珠江医院皮肤科&nbsp;&nbsp;张堂德回复</span>
+    <a href="http://www.haodf.com/wenda/tdgz70_g_2373054766.htm" target="_blank">血管瘤</a> 
+    <a class="gray" style="text-decoration:none;">21分钟前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_6" style="display: none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">河南省骨科医院足踝损伤科&nbsp;&nbsp;穆世民回复</span>
+    <a href="http://www.haodf.com/wenda/mushimin_g_2373247649.htm" target="_blank">距骨坏死脚不能向上勾起怎么办</a> 
+    <li class="zx_bg2">
+        <span class="gray f_rt">上海华山医院手外科&nbsp;&nbsp;韩栋回复</span>
+    <a href="http://www.haodf.com/wenda/genethik_g_2373035073.htm" target="_blank">无名指骨折有碎片</a> 
+    <a class="gray" style="text-decoration:none;">11分钟前</a>
+    </li>
+    <li class="zx_bg1">
+        <span class="gray f_rt">深圳市第二人民医院运动医学科&nbsp;&nbsp;欧阳侃回复</span>
+    <a href="http://www.haodf.com/wenda/ouyangkan_g_2242860662.htm" target="_blank">踝关节前内侧疼痛</a> 
+    <a class="gray" style="text-decoration:none;">16分钟前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_7" style="display: none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">北京儿童医院普通外科&nbsp;&nbsp;李小松回复</span>
+    <a href="http://www.haodf.com/wenda/xiaosonglee_g_2373233539.htm" target="_blank">腹股沟疝气</a> 
+    <a class="gray" style="text-decoration:none;">3分钟前</a>
+    </li>
+    <li class="zx_bg2">
+        <span class="gray f_rt">北京儿童医院普通外科&nbsp;&nbsp;李小松回复</span>
+    <a href="http://www.haodf.com/wenda/xiaosonglee_g_2373240495.htm" target="_blank">小儿腹股沟斜疝</a> 
+    <a class="gray" style="text-decoration:none;">4分钟前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_8" style="display: none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">广医二院呼吸内科&nbsp;&nbsp;林俊源回复</span>
+    <a href="http://www.haodf.com/wenda/linjunyuan_g_2371698771.htm" target="_blank">过敏咳嗽久咳不愈</a> 
+    <a class="gray" style="text-decoration:none;">17分钟前</a>
+    </li>
+    <li class="zx_bg2">
+        <span class="gray f_rt">广医二院呼吸内科&nbsp;&nbsp;林俊源回复</span>
+    <a href="http://www.haodf.com/wenda/linjunyuan_g_2373148981.htm" target="_blank">是不是过敏性咳嗽</a> 
+    <a class="gray" style="text-decoration:none;">19分钟前</a>
+    </li>
+</ul>
+</div>
+<div id="zxcon_9" style="display:none;">
+<ul>
+    <li class="zx_bg1">
+        <span class="gray f_rt">湖州中心医院外科&nbsp;&nbsp;余胜回复</span>
+    <a href="http://www.haodf.com/wenda/lzyusheng_g_2371468979.htm" target="_blank">成人腹股沟疝(小肠疝气)</a> 
+    <a class="gray" style="text-decoration:none;">12分钟前</a>
+    </li>
+</ul>
+</div>
+</div>
+
+<div class="zx_more">
+    <span class="f_rt">
+        <a href="http://zixun.haodf.com/dispatched/all.htm" class="blue2" target="_blank">查看全部18,632,602条咨询&gt;&gt;</a>
+    </span>
+</div>
+
+</div>
+<!--咨询列表 end-->
+  </div>
+
+</div>
+
+
+
+
+
+
+</div><!--left end-->
+
+
+
+
+
+<div class="right">
+
+<div class="bner_r">
+                <div class="b_left_a">
+                    <ul>
+                        <li class="bleft1">
+                            <p>
+                                <a href="javascript:;">首家医药销售平台</a></p>
+                            9年追求:客户满意,药品安全</li>
+                        <li class="bleft2">
+                            <p>
+                                <a href="/ShopsCheckInList.aspx">608家药房入驻818</a></p>
+                            万种热销商品供您选择...</li>
+                        <li class="bleft3">
+                            <p>
+                                <a href="javascript:;">21155666人体验了</a></p>
+                            医保宝网的健康服务</li>
+                    </ul>
+                </div>
+                <div class="b_left_b">
+                    <div class="b_tile">
+                        <h1>公告</h1>
+                    </div>
+                    <ul id="ulgonggao">
+                    <li><a title="818医药网关于"假客服电话诈骗"一事的官方声明" href="/helpcenter/2015/0121/0000000800.html">818医药网关于"假客服电话诈骗"一事的官方声明</a></li>
+                    <li><a title="药监局查处假冒保健品" href="/helpcenter/2013/0521/0000000641.html">药监局查处假冒保健品</a></li>
+                    <li><a title="2013年第2期违法广告公告" href="/helpcenter/2013/0805/0000000675.html">2013年第2期违法广告公告</a></li>
+                    <li><a title="关注珍菊降压片用药风险" href="/helpcenter/2013/0305/0000000608.html">关注珍菊降压片用药风险</a></li>
+                    </ul>
+                </div>
+            </div><!--公告 end-->
+
+
+
+<div class="popular cf">
+  <div class="popular-title"><a class="popular-title-more" href="#" rel="nofollow" target="_blank">更多</a>
+    <h2>网上咨询动态...</h2>
+  </div>
+  <div class="popular-board">
+    <ul>
+
+<div class="r_bar_doc3">
+  <div class="r_bar_doc3_l">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="padding: 0px; border: 1px solid #DFDFDF; height: 31px; vertical-align: middle; width: 31px;" align="center" valign="middle"><a target="_blank" href="http://chjh76.haodf.com"><img style="border:none;" src="http://n1.hdfimg.com/g3/M00/43/FE/p4YBAFIwhECAAEfZAAAH4eTfEf0542_31_31_1.jpg?02f0"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="r_bar_doc3_c"><span style="float:right;">2分钟前</span><a href="http://chjh76.haodf.com" class="blue2" target="_blank">陈建海</a> 副主任医师<br>
+    北大人民医院 
+    回复了患者 <br>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="r_bar_doc3">
+  <div class="r_bar_doc3_l">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="padding: 0px; border: 1px solid #DFDFDF; height: 31px; vertical-align: middle; width: 31px;" align="center" valign="middle"><a target="_blank" href="http://chjh76.haodf.com"><img style="border:none;" src="http://n1.hdfimg.com/g3/M00/43/FE/p4YBAFIwhECAAEfZAAAH4eTfEf0542_31_31_1.jpg?02f0"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="r_bar_doc3_c"><span style="float:right;">2分钟前</span><a href="http://chjh76.haodf.com" class="blue2" target="_blank">陈建海</a> 副主任医师<br>
+    北大人民医院 
+    回复了患者 <br>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="r_bar_doc3">
+  <div class="r_bar_doc3_l">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="padding: 0px; border: 1px solid #DFDFDF; height: 31px; vertical-align: middle; width: 31px;" align="center" valign="middle"><a target="_blank" href="http://chjh76.haodf.com"><img style="border:none;" src="http://n1.hdfimg.com/g3/M00/43/FE/p4YBAFIwhECAAEfZAAAH4eTfEf0542_31_31_1.jpg?02f0"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="r_bar_doc3_c"><span style="float:right;">2分钟前</span><a href="http://chjh76.haodf.com" class="blue2" target="_blank">陈建海</a> 副主任医师<br>
+    北大人民医院 
+    回复了患者 <br>
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+
+<div class="r_bar_doc3">
+  <div class="r_bar_doc3_l">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="padding: 0px; border: 1px solid #DFDFDF; height: 31px; vertical-align: middle; width: 31px;" align="center" valign="middle"><a target="_blank" href="http://chjh76.haodf.com"><img style="border:none;" src="http://n1.hdfimg.com/g3/M00/43/FE/p4YBAFIwhECAAEfZAAAH4eTfEf0542_31_31_1.jpg?02f0"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="r_bar_doc3_c"><span style="float:right;">2分钟前</span><a href="http://chjh76.haodf.com" class="blue2" target="_blank">陈建海</a> 副主任医师<br>
+    北大人民医院 
+    回复了患者 <br>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="r_bar_doc3">
+  <div class="r_bar_doc3_l">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="padding: 0px; border: 1px solid #DFDFDF; height: 31px; vertical-align: middle; width: 31px;" align="center" valign="middle"><a target="_blank" href="http://chjh76.haodf.com"><img style="border:none;" src="http://n1.hdfimg.com/g3/M00/43/FE/p4YBAFIwhECAAEfZAAAH4eTfEf0542_31_31_1.jpg?02f0"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="r_bar_doc3_c"><span style="float:right;">2分钟前</span><a href="http://chjh76.haodf.com" class="blue2" target="_blank">陈建海</a> 副主任医师<br>
+    北大人民医院 
+    回复了患者 <br>
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+<div class="index-banner-app">
+   <a href="#" title="APP！" target="_blank"><img  src="img/appd.jpg" alt="APP！"></a>
+</div>
+
+
+
+
+<div class="popular cf">
+  <div class="popular-title"><a class="popular-title-more" href="#" rel="nofollow" target="_blank">更多</a>
+    <h2>专家文章</h2>
+  </div>
+  <div class="popular-board">
+    <ul>
+  <li><a href="/xulingmin_2371689198.htm" target="_blank"> 您要求给孩子输液，你小时候输液多吗？...</a></li>
+  <li><a href="/TaoX_2368969395.htm" target="_blank"> 如何做一名"好的患者"</a></li>
+  <li><a href="/doctorwangxin_2367465749.htm" target="_blank"> 多指畸形，孩子多大时做手术最好？</a></li>
+  <li><a href="/zhuyilin_2367463435.htm" target="_blank"> 腹腔镜治疗成人腹股沟疝的四大优势</a></li>
+  <li><a href="/zhuyilin_2367456314.htm" target="_blank"> 腹腔镜治疗成人腹股沟疝 实现"量体裁...</a></li>
+  <li><a href="/yanzhengsong_2362752035.htm" target="_blank"> 脊柱结核手术 术前术后都需抗结核药!</a></li>
+  <li><a href="/yanzhengsong_2362749906.htm" target="_blank"> 疼痛、脓包、脊柱后凸 警惕脊柱结核!</a></li>
+  <li><a href="/mmzz_2362537881.htm" target="_blank"> 关于泌乳素---你想知道的</a></li>
+  <li><a href="/lym082_2362265696.htm" target="_blank"> 脑血管畸形什么情况容易破裂出血？</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><!--right end-->
+
+      <script type="text/javascript">
+            $(function(){
+                //右侧一周粉丝榜切换
+                $('.btn_top_fans1').click(function() {
+                    if($(this).hasClass("active")){
+                        return false;
+                    }
+                    $('.btn_top_fans2').removeClass('active');
+                    $('.btn_top_fans3').removeClass('active');
+                    $('.btn_top_fans1').addClass('active');
+                    $('.ul_top_fans2').hide();
+                    $('.ul_top_fans3').hide();
+                    $('.ul_top_fans1').show();
+                });
+                $('.btn_top_fans2').click(function() {
+                    if($(this).hasClass("active")){
+                        return false;
+                    }
+                    $('.btn_top_fans1').removeClass('active');
+                    $('.btn_top_fans3').removeClass('active');
+                    $('.btn_top_fans2').addClass('active');
+                    $('.ul_top_fans1').hide();
+                    $('.ul_top_fans3').hide();
+                    $('.ul_top_fans2').show();
+                });
+                $('.btn_top_fans3').click(function() {
+                    if($(this).hasClass("active")){
+                        return false;
+                    }
+                    $('.btn_top_fans2').removeClass('active');
+                    $('.btn_top_fans1').removeClass('active');
+                    $('.btn_top_fans3').addClass('active');
+                    $('.ul_top_fans2').hide();
+                    $('.ul_top_fans1').hide();
+                    $('.ul_top_fans3').show();
+                });
+
+
+
+            })
+
+        </script>
+
+
+
+
+
+
+
+</div>
+
+</div><!--main end-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="blk20 clear"></div>
+<div class="foot">
+  <p class="company-job-index"> 提示：任何关于疾病的建议都不能替代执业医师的面对面诊断。所有门诊时间仅供参考，最终以医院当日公布为准。网友、医生言论仅代表其个人观点，不代表本站同意其说法，请谨慎参阅，本站不承担由此引起的法律责任。 </p>
+  <p>
+  				<a href="#" target="_blank" title="关于我们" rel="nofollow"> 关于我们 </a><i>|</i>
+				<a href="#" target="_blank" title="联系我们" rel="nofollow"> 联系我们 </a><i>|</i>
+				<a href="#" target="_blank" title="帮助中心" rel="nofollow"> 帮助中心 </a><i>|</i>
+				<a href="#" target="_blank" title="友情链接" rel="nofollow"> 友情链接 </a><i>|</i>
+				<a href="#" target="_blank" title="网站地图"> 网站地图 </a>
+				
+			</p>
+			<p class="copyright">
+				Copyright<span class="copySymbol">&copy;</span>2015 医保宝
+				<a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow" class="grayC">皖ICP备000000号</a>
+			</p>
+
+ 
+  </div>
+</div>
+<style type="text/css">
+            .ajax-progress{z-index: 2000}
+            .ajax-mask{position: fixed;top: 0;right: 0;bottom: 0;left: 0; z-index: 1000; background-color: #000000}
+</style>
+        
+</body>
+</html>

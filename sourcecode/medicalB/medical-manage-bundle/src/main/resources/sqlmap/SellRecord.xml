@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.SellRecordDao">
+
+    <sql id="sellRecordColumn">
+        select X.id,X.userId,X.orderCode,X.goodsCode,X.localCode,X.totalFee,X.style,X.sellTime,X.productNum,X.status,X.ispay,Y.acceptName,Y.phone,Y.telephone,Y.enable 
+        from tb_product_sell_record X inner join tb_user_accept_info Y on X.acceptId=Y.id
+    </sql>
+    
+	<select id="queryCount" parameterType="map" resultType="java.lang.Long">
+		select  count(1) from (<include refid="sellRecordColumn"/>) as count
+		<where>
+		    <if test="acceptName !=null and acceptName !=''">
+		        and acceptName=#{acceptName}
+		    </if>
+		    <if test="phone !=null and phone !=''">
+		        and phone=#{phone}
+		    </if>
+		    <if test="telephone !=null and telephone !=''">
+		        and telephone=#{telephone}
+		    </if>
+		</where>
+    </select>
+
+    <select id="queryList" parameterType="map" resultType="com.netbull.shop.common.vo.SellRecordVo">
+		<include refid="sellRecordColumn"/>
+		<where>
+		    <if test="acceptName !=null and acceptName !=''">
+		        and acceptName=#{acceptName}
+		    </if>
+		    <if test="phone !=null and phone !=''">
+		        and phone=#{phone}
+		    </if>
+		    <if test="telephone !=null and telephone !=''">
+		        and telephone=#{telephone}
+		    </if>
+		</where>
+		<include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+	
+    <insert id="save" parameterType="com.netbull.shop.common.vo.SellRecordVo" 
+	    useGeneratedKeys="true" keyProperty="id">
+		insert tb_product_sell_record (userId,orderCode,goodsCode,localCode,totalFee,style,sellTime,productNum,status,ispay) 
+		values(#{userId},#{orderCode},#{goodsCode},#{localCode},#{totalFee},#{style},now(),#{productNum},#{status},#{ispay})
+	</insert>
+	
+    <update id="updateStatus" parameterType="map">
+	    update tb_product_sell_record 
+	    <set>
+			<if test="status !=null and status !=''">
+			    status=#{status},
+			</if>
+			updateTime=now()        
+	    </set>
+	    <where>
+	        <if test="mailNo !=null and mailNo !=''">
+	            and mailNo=#{mailNo}
+	        </if>
+	        <if test="orderCode !=null and orderCode !=''">
+	            and orderCode=#{orderCode}
+	        </if>
+	    </where>
+	</update>
+	
+    <select id="queryEntityById" parameterType="java.lang.Long" resultType="com.netbull.shop.common.vo.SellRecordVo">
+        select * from tb_product_sell_record
+        <where>
+            <if test="_parameter !=null and _parameter !=''">
+                id=#{value}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryByParams" parameterType="java.util.Map" resultType="com.netbull.shop.common.vo.SellRecordVo">
+        select * from tb_product_sell_record X
+        <where>
+            <if test="userId !=null and userId !=''">
+                and X.userId=#{userId}
+            </if>
+           and X.ispay=0
+        </where>
+    </select>
+</mapper>

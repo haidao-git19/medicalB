@@ -1,0 +1,65 @@
+.nav-tabs>.active>a,.nav-tabs>.active>a:hover,.nav-tabs>.active>a:focus
+	{
+	background-color: #0088cc;
+	color: #fff;
+}
+
+.msg_div_white {
+	border: 1px solid #bbb;
+	background-color: #fff;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+
+.file-wrapper {
+	cursor: pointer;
+	display: inline-block;
+	overflow: hidden;
+	position: relative;
+	*display: inline;
+	zoom: 1;
+}
+
+.file-wrapper input {
+	cursor: pointer;
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 26px;
+}
+
+.container-fluid input {
+	margin-bottom: 0;
+	margin-left: 15px;
+}
+
+.file-wrapper .button {
+	cursor: pointer;
+	display: inline-block;
+	width: 60px;
+	height: 26px;
+	*display: inline;
+	zoom: 1;
+}
+
+.edit_hotel_box {
+	height: 40px;
+	margin-bottom: 0;
+}
+
+.control-group .edit_hotel_title {
+	margin-top: -10px;
+	float: left;
+	width: 67px;
+	text-align: right;
+}
+
+.control-group .edit_hotel_controls {
+	border: 1px solid #ccc;
+	float: right;
+	width: 82%;
+	margin-right: 15px;
+	border-radius: 4px;
+}

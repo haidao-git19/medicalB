@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.section.dao.SectionDao">
+
+   
+   <select id="findAll" resultType="com.netbull.shop.section.entity.Section" >
+	  SELECT * FROM tb_medical_section s  
+   </select>
+   <select id="findFirstLevelSections" resultType="com.netbull.shop.section.entity.Section">
+		SELECT t1.* FROM tb_medical_section t1 where t1.level  = 1 and t1.parentid = 0
+   </select>
+   
+   <select id="findBySectionId" parameterType="map"  resultType="com.netbull.shop.section.entity.Section">
+        SELECT t1.* FROM tb_medical_section t1
+		where t1.parentid = #{sectionId}
+   </select>
+   
+    <select id="findById" parameterType="long"  resultType="com.netbull.shop.section.entity.Section">
+        SELECT t1.* FROM tb_medical_section t1
+		where t1.id = #{id}
+   </select>
+   
+   <select id="queryList" parameterType="java.util.Map" resultType="com.netbull.shop.section.entity.Section">
+       SELECT * FROM tb_medical_section
+       <where>
+           <if test="level !=null and level !=''">
+               and level=#{level}
+           </if>
+           <if test="parentid !=null and parentid !=''">
+               and parentid = #{parentid}
+           </if>
+       </where>
+   </select>
+   
+   <insert id="saveRelatedSection" parameterType="java.util.Map">
+       INSERT tb_medical_hospital_section(hospitalID,sectionID) VALUES(#{hospitalID},#{sectionID})
+   </insert>
+   
+   <select id="queryRelatedSection" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT * FROM tb_medical_hospital_section 
+       <where>
+           <if test="hospitalID !=null and hospitalID !=''">
+               and hospitalID=#{hospitalID}
+           </if>
+       </where>
+   </select>
+   
+   <delete id="deleteRelatedSection" parameterType="java.util.Map" >
+       DELETE FROM tb_medical_hospital_section 
+       <where>
+           <if test="hospitalID !=null and hospitalID !='' and sectionID !=null and sectionID !=''">
+               and hospitalID = #{hospitalID} 
+               and sectionID = #{sectionID}
+           </if>
+       </where>
+   </delete>
+   
+</mapper>
