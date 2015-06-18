@@ -173,6 +173,12 @@
 															<input type="text"  id="locationY" name="lat" value="${hospl.lat }">
 														</label>
 												</div>
+												<div class="control-group">
+														<label class="control-label">
+															<span class="help-inline">*</span><font class="msg_font_bold">医院门诊备注</font>
+														</label>
+														<textarea name="remark" style="width: 63%;height: 100px;">${hospl.remark}</textarea>
+												</div>
 										</table>
 									</div>
 									<div style="margin-top: 20px;">
@@ -208,21 +214,25 @@
 														
 													</select>
 													<span class="help-inline">*</span><font class="msg_font_bold">二级科室</font>
-													<div id="sectionContainer" style="display:inline;margin-left: 5px;position:absolute;width: 30%">
+													<div id="sectionContainer" style="display:inline;margin-left: 5px;position:absolute;width: 45%">
 														<ul id="operArea_" class="operArea">
 															
 														</ul>
 													</div>
 												</label>
 											</div>
-											<!-- <div class="control-group">
-												<label class="control-label">
-													<span class="help-inline">*</span><font class="msg_font_bold">二级科室</font>
-												</label>
-												<ul id="operArea" class="operArea">
-													
-												</ul>
-											</div> -->
+											<div id="introductionContainer">
+												
+											</div>
+											<div id="introductionTemplate" style="display:none">
+												<div class="control-group" id="intro_{0}" style="display:none">
+													<label class="control-label">
+														<span class="help-inline">*</span><font class="msg_font_bold">{1}科室介绍(一级)</font>
+													</label>
+													<textarea name="introduction_{0}" id="introduction_{0}" style="width: 63%;height: 100px;"></textarea>
+												</div>
+											</div>
+											
 										</table>
 									</div>
 									<div style="margin-top: 20px;">

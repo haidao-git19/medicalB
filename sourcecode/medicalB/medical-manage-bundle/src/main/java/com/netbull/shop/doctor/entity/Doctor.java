@@ -40,6 +40,10 @@ public class Doctor {
 	
 	private String avatar; //头像路径
 	private int status; //0表示删除  1表示正常
+	
+	private String remind;//门诊提示
+	private String remindTime;//提示发布时间
+	private int specialist;//0表示非顶级专家，1表示顶级专家
 
 	public long getDoctorID() {
 		return doctorID;
@@ -280,6 +284,30 @@ public class Doctor {
 
 	public void setDoctorPassword(String doctorPassword) {
 		this.doctorPassword = doctorPassword;
+	}
+
+	public String getRemind() {
+		return remind;
+	}
+
+	public void setRemind(String remind) {
+		this.remind = remind;
+	}
+
+	public String getRemindTime() {
+		return remindTime;
+	}
+
+	public void setRemindTime(String remindTime) {
+		this.remindTime = remindTime;
+	}
+
+	public int getSpecialist() {
+		return specialist;
+	}
+
+	public void setSpecialist(int specialist) {
+		this.specialist = specialist;
 	}
 	
 }

@@ -57,8 +57,8 @@
    </select>
    
    <insert id="save" parameterType="com.netbull.shop.hospital.entity.Hospital" useGeneratedKeys="true" keyProperty="hospitalID">
-   	insert into tb_medical_hospital (hospitalName,linkMan,linkPhone,areaID,hospitalLevel,address,lng,lat,ctNum,cgNum,skill,type,areaName,userID,isCooperation,physicsAddress,summary,recomFlag)
-   	values (#{hospitalName},#{linkMan},#{linkPhone},#{areaID},#{hospitalLevel},#{address},#{lng},#{lat},#{ctNum},#{cgNum},#{skill},#{type},#{areaName},#{userID},#{isCooperation},#{physicsAddress},#{summary},#{recomFlag})
+   	insert into tb_medical_hospital (hospitalName,linkMan,linkPhone,areaID,hospitalLevel,address,lng,lat,ctNum,cgNum,skill,type,areaName,userID,isCooperation,physicsAddress,summary,recomFlag,remark)
+   	values (#{hospitalName},#{linkMan},#{linkPhone},#{areaID},#{hospitalLevel},#{address},#{lng},#{lat},#{ctNum},#{cgNum},#{skill},#{type},#{areaName},#{userID},#{isCooperation},#{physicsAddress},#{summary},#{recomFlag},#{remark})
    </insert>
    
    <update id="update" parameterType="com.netbull.shop.hospital.entity.Hospital">
@@ -78,7 +78,8 @@
 	   summary=#{summary},
 	   recomFlag=#{recomFlag},
 	   isCooperation=#{isCooperation},
-	   physicsAddress=#{physicsAddress}
+	   physicsAddress=#{physicsAddress},
+	   remark=#{remark}
 	   where hospitalID=#{hospitalID}
    </update>
    

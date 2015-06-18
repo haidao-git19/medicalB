@@ -11,6 +11,9 @@ public class Section {
 	private int level;
 	private int sort;
     private List<ChildSection> childlist;
+    
+    private String introduction;
+    
 	public long getId() {
 		return id;
 	}
@@ -65,6 +68,14 @@ public class Section {
 
 	public void setChildlist(List<ChildSection> childlist) {
 		this.childlist = childlist;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 
 }

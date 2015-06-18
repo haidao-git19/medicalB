@@ -11,8 +11,8 @@
 .ft_friendlylink img{
 	width: 90px;
 }
-.tsSlide { width:510px;}
-.main-l{width:510px;}
+.tsSlide {}
+.main-l{}
 .market_box{ width:988px;}
 .floor_l{
 	width: 179px;
@@ -27,12 +27,10 @@
 	width: 200px;
 }
 .main_ul{
-	width: 513px;
 	margin-right: -3px;
 }
 
 .main_ul li{
-	width: 245px;
 }
 
 .main_ul li.last{

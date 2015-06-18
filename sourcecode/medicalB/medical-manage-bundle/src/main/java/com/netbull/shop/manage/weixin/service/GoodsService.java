@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.netbull.shop.common.config.ConfigLoadUtil;
 import com.netbull.shop.common.page.Page;
 import com.netbull.shop.common.util.NullUtil;
 import com.netbull.shop.common.vo.GoodsClob;
@@ -63,7 +64,8 @@ public class GoodsService extends MyBatisDao<GoodsVo, Integer>{
 	 */
 	public void goodsSave(String MYBATIS_PREFIX,GoodsVo goodsVo,CommonsMultipartFile file){
 		String fileName=uploadFileUtil.createFile(file, null);
-		goodsVo.setImgPath(fileName);
+		String realPath=ConfigLoadUtil.loadConfig().getPropertie("accessUrl");
+		goodsVo.setImgPath(realPath+fileName);
 		goodsVo.setCreatePerson(BaseDao.queryCurrentShiroUser().getLoginName());
 		
 		Map parameter=new HashMap();
@@ -84,7 +86,8 @@ public class GoodsService extends MyBatisDao<GoodsVo, Integer>{
 	 */
 	public void goodsUpdate(String MYBATIS_PREFIX,GoodsVo goodsVo,CommonsMultipartFile file){
 		String fileName=uploadFileUtil.createFile(file, null);
-		goodsVo.setImgPath(fileName);
+		String realPath=ConfigLoadUtil.loadConfig().getPropertie("accessUrl");
+		goodsVo.setImgPath(realPath+fileName);
 		goodsVo.setUpdatePerson(BaseDao.queryCurrentShiroUser().getLoginName());
 		update(MYBATIS_PREFIX, goodsVo);
 	}

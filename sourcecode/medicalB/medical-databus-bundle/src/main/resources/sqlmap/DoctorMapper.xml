@@ -5,6 +5,11 @@
 
     <select id="queryDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
         <choose>
+            <when test="sectionid !=null and sectionid !='' and hospitalID != null and hospitalID != ''">
+                select distinct (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,D.*,H.hospitalName from tb_medical_doctor d
+                	left join tb_medical_hospital H on d.hospitalID=H.hospitalID where d.doctorID in (select s.doctorid from tb_medical_doctor_section s where s.sectionid = #{sectionid})
+				    or d.sectionID=#{sectionid} and H.hospitalID=#{hospitalID} and d.status=1 LIMIT  #{start}, #{limit} 
+            </when>
             <when test="sectionid !=null and sectionid !=''">
                 select distinct (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,D.*,H.hospitalName from tb_medical_doctor d
                 	left join tb_medical_hospital H on d.hospitalID=H.hospitalID where d.doctorID in (select s.doctorid from tb_medical_doctor_section s where s.sectionid = #{sectionid})
@@ -57,7 +62,8 @@
 	</select>
 	
 	<select id="queryDoctorListByParams" parameterType="java.util.Map" resultType="java.util.Map">
-        select D.doctorID,(select u.true_name from vauth.user_info u where u.id = D.loginID) as doctorName,D.hospitalID,D.sectionID,D.doctorLevel,D.skill,D.avatar,H.hospitalName,H.type,S.attrname sectionName 
+        select D.doctorID,(select u.true_name from vauth.user_info u where u.id = D.loginID) as doctorName,D.hospitalID,D.sectionID,D.doctorLevel,D.skill,D.avatar,
+        D.isNetCT,D.isAudioCT,H.hospitalName,H.type,S.attrname sectionName 
         	from tb_medical_doctor D 
         	left join tb_medical_hospital H on D.hospitalID=H.hospitalID
         	left join tb_medical_section S on D.sectionID=S.id

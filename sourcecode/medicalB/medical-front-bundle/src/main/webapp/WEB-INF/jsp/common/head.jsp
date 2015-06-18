@@ -89,79 +89,11 @@
 	<div class="headerNavMain">
 
 		<ul class="sitenav" id="sideNav">
-			<li class="s_m home"><a href="http://www.111.com.cn/"
-				class="nav_link" target="_self">首页</a></li>
-			<li class="s_m"><a class="nav_link" data-rel="navHover1">常见病<i></i></a>
-				<ul style="display: none;" id="navHover1">
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014030501/">感冒发烧</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014061302/">皮炎癣症</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014062301/">风湿骨病</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014030402/">失眠</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2015013001/">查看更多</a></li>
-				</ul></li>
-			<li class="s_m"><a class="nav_link" data-rel="navHover2">慢性病<i></i></a>
-				<ul style="display: none;" id="navHover2">
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014030301/">肺癌</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014081101/">尖锐湿疣</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014040204/">抑郁症</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014040302/">帕金森</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014121701/">查看更多</a></li>
-				</ul></li>
-			<li class="s_m"><a class="nav_link" data-rel="navHover3">妈妈&宝宝<i></i></a>
-				<ul style="display: none;" id="navHover3">
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/list/955412-0-0-0-0-0-0-1.html">面部护理</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2015021102/">减肥美颜</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014090502/">厨房助手</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014010302/">孕妈养成</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014072801/">查看更多</a></li>
-				</ul></li>
-			<li class="s_m"><a class="nav_link" data-rel="navHover4">女性&男性<i></i></a>
-				<ul style="display: none;" id="navHover4">
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014111004/">补肾壮阳</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014051301/">早泄神药</a></li>
-					<li><a
-						href="http://www.111.com.cn/list/971522-0-0-0-0-0-0-1.html">运动健康</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/list/964106-0-1_93499_138826-0-0-0-0-1.html">解酒护肝</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2015031706/">查看更多</a></li>
-				</ul></li>
-			<li class="s_m"><a class="nav_link" data-rel="navHover6">保健&器械<i></i></a>
-				<ul style="display: none;" id="navHover6">
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/list/971495-0-0-0-0-0-0-1.html/">婴儿奶粉</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014082801/">宝宝纸尿裤</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/list/965399-0-0-0-0-0-0-1.html">宝宝喂养</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014050402/">孕育总动员</a></li>
-					<li><a rel="nofollow"
-						href="http://www.111.com.cn/cmsPage/2014050801/">查看更多</a></li>
-				</ul></li>
-		</ul>
-		</li>
-
-		</ul>
-		</li>
-
+			<li class="s_m home">
+				<a href="http://www.111.com.cn/" class="nav_link" target="_self">首页</a>
+			</li>
+			
+			<div id="headChannel"></div>
 		</ul>
 
 		<div class="searchForm" style="display: none">

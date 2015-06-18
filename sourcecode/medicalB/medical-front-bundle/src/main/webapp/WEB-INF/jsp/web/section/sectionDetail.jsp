@@ -37,7 +37,7 @@
 	<div class="comp-detail-left">
 
 		<ul class="comp-gen-words cf">
-		  <li class="gen-assL"> 　 朝阳医院妇产科展开床位116张，医生34名，护士78名。在院领导的支持下，在核心领导小组的率领下，在妇产科全体人员的努力下，妇产科发展势头持续稳定。圆满超额完成医院的各项指标，成为医院优良医疗指标的贡献者。总手术量、大中手术量、内窥镜手术量稳居全院之首！妇产科坚持医疗与科研、教学并进，注重学科建设。被确定为学校"妇... <a class="clr-08c" href="#" rel="nofollow">展开详情</a> </li>
+		  <li class="gen-assL"> ${sectionIntroduction} <a class="clr-08c" href="#" rel="nofollow">展开详情</a> </li>
 		  <li class="gen-assL">
 		    <label for="comment">预约加号：</label>
 		    本科室开通加号服务的大夫<span class="clr-org">${subscribe_plus_count}</span>名，已成功加号患者<span class="clr-org">${plus_success_count}</span>人次</li>
@@ -202,7 +202,7 @@
 					<li>两周回复(<span class="clr-org">79</span>)</li>
 				</td>
 			</tr> -->
-			<tr>
+			<!-- <tr>
 			  <td class="tda" style="width:80px;">
 			    <li class="clearfix"><a target="_blank" href="DE4r0eJWGqZNGRG0h2ImZ99C2br23VVO.htm" title="李媛">李媛</a>
 			      <a href="http://sdliyuan." title="李媛大夫的个人网站" target="_blank"> <img src="http://i1.hdfimg.com/images/common/iconhome16.gif" id="homepage_199944" align="absmiddle" height="16" width="16"></a>
@@ -265,7 +265,7 @@
 			      <a target="_blank" href="http://jiahao.doctor/sdliyuan/index.htm" rel="nofollow">可加号</a>
 			      </li>
 			    </td>
-			  </tr>
+			  </tr> -->
 			</tbody>
 		</table>
 
@@ -276,7 +276,7 @@
 <div id="doctorDutyContainer" style="display:none">
 	<table>
 		<tbody>
-		<tr>
+		<tr id="tr_{0}">
 			  <td class="tda" style="width:80px;">
 			    <li class="clearfix"><a target="_blank" href="javascript:toDoctorMainPage({0})" title="{1}">{1}</a>
 			      <a href="javascript:toDoctorMainPage({0})" title="{1}的个人网站" target="_blank"> <img src="http://i1.hdfimg.com/images/common/iconhome16.gif" id="homepage_199944" align="absmiddle" height="16" width="16"></a>
@@ -297,12 +297,8 @@
 			        <li class="bg">日</li>
 			        <li class="bg">上</li>
 			        <li> 
-			          <img src="http://i1.hdfimg.com/images/doctor/star_red.gif" title="专家门诊 挂号费：100.00元" align="absmiddle">
-			          
 			          </li><li>  
 			            </li><li> 
-			              <img src="http://i1.hdfimg.com/images/doctor/star_red.gif" title="专家门诊 挂号费：100.00元" align="absmiddle">
-			              
 			              </li><li>  
 			                </li><li>  
 			                  </li><li>  
@@ -330,14 +326,26 @@
 			      </div>
 			    
 			    </td>
-			  <td class="tde" style="width:80px;">		<li><a class="blue" target="_blank" href="javascript:toDoctorMainPage({0})" title="{1}大夫的个人网站">访问个人网站&gt;&gt;</a></li>
-			    <li class="mesicon"><a href="http://zixun.ask.php?host_user_id=199944" target="_blank" style="color: green;" rel="nofollow"> 可咨询 </a></li>
-			    
-			    <li>两周回复(<span class="clr-org">131</span>)</li>
-			    <li class="telicon"><span class="clr-org"> <a href="http://400.haodf/sdliyuan" target="_blank" style="color: #ff6600;" rel="nofollow"> 可通电话 </a> </span></li>
-			    <li style="padding-left: 18px; background: url(http://i1.hdfimg.com/space/booking/images/jiahao_03.gif) no-repeat 0px 3px;">
-			      <a target="_blank" href="http://jiahao.doctor/sdliyuan/index.htm" rel="nofollow">可加号</a>
-			      </li>
+			  	<td class="tde" style="width:80px;">		
+				  	<li>
+				  		<a class="blue" target="_blank" href="javascript:toDoctorMainPage({0})" title="{1}大夫的个人网站">访问个人网站&gt;&gt;</a>
+				  	</li>
+				   
+				    <li class="mesicon" style="display:none">
+				    	<a href="http://zixun.ask.php?host_user_id=199944" target="_blank" style="color: green;" rel="nofollow"> 可咨询 </a>
+				    </li>
+				    
+				    <li>两周回复(<span class="clr-org">{4}</span>)</li>
+				    
+				    <li class="telicon" style="display:none">
+				    	<span class="clr-org"> 
+				    		<a href="http://400.haodf/sdliyuan" target="_blank" style="color: #ff6600;" rel="nofollow"> 可通电话 </a> 
+				    	</span>
+				    </li>
+				    
+				    <li style="padding-left: 18px; background: url(http://i1.hdfimg.com/space/booking/images/jiahao_03.gif) no-repeat 0px 3px;">
+				      <a target="_blank" href="http://jiahao.doctor/sdliyuan/index.htm" rel="nofollow">可加号</a>
+				    </li>
 			    </td>
 			  </tr>
 		</tbody>
@@ -363,7 +371,7 @@
 						  </a>
 		                </div>
 		                <ul class="bole-info">
-		                    <li class="fnt-14 clr-08c"><a class=" clr-08c fnt-14 " href="#" target="_blank" title="{1}">{1}</a><span  class="icon-id">{2}</span></li>
+		                    <li class="fnt-14 clr-08c"><a class=" clr-08c fnt-14 " href="javascript:toDoctorMainPage({5})" target="_blank" title="{1}">{1}</a><span  class="icon-id">{2}</span></li>
 		                    <li class="bole-info-zn" title="{3}·{4}">{3}·{4}</li>
 		                    <li class="binfo-pn"><a class="clr-grn" title="关注" rel="nofollow" href="javascript:void(0)"></a>　</li>
 		

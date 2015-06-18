@@ -40,6 +40,13 @@ public class IndexController {
 		return "shop/floor";
 	}
 	
+	@RequestMapping(value="/anon/index/channel")
+	public String channel(HttpServletRequest request, HttpServletResponse response) {
+		List<Floor> floors = indexService.queryFloors();
+		request.setAttribute("floors", floors);
+		return "shop/channel";
+	}
+	
 	/**
 	 * 查询首页海报图
 	 * @param request

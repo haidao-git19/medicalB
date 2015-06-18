@@ -31,4 +31,24 @@
 	var url = "${url}";
 	var ctx = "${ctx}";
 	var version = "${version}";
+	
+	$(document).ready(function(){
+		loadChannel();
+	});
+	
+	function loadChannel() {
+		$.ajax({
+			type: "GET",
+			url: ctx+"/anon/index/channel?rnd="+Math.random(),
+			data: "",
+			success : function(data) {
+				$('#headChannel').empty().append(data);
+			},
+			error : function() {alert('loadFloor error');}
+		});
+	}
+	
+	function _hover(id) {
+		$("#"+id).show();
+	}
 </script>

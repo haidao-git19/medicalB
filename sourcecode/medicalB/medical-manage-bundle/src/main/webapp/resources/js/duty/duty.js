@@ -39,3 +39,17 @@ function formSumbit() {
 function toDoctorList() {
 	window.location.href = ctx + '/doctor';
 }
+
+function commitDutyRemind(){
+	$.ajax({
+		type : "post",
+		url : ctx + '/doctor/commitDutyRemind',
+		data : {"doctorID":$("#doctorId").val(),"remind":$("#remind").val()},
+		dataType : "json",
+		success : function(data) {
+			if (data.flag == true) {
+				window.location.href = ctx + '/doctor';
+			}
+		}
+	})
+}

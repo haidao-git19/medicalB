@@ -8,7 +8,8 @@
 			<li id="producteg_806224">
 				<div class="itemSearchResultCon">
 					<a class="product_pic pro_img" target="_blank" href="${ctx}/shop/anon/goods/detail?_gc=${goods.goodsCode}">
-						<img width="205" height="188" src="${goods.imgPath}" />
+						<c:if test="${not empty goods.imgPath}"><img width="205" height="188" src="${goods.imgPath}" /></c:if>
+						<c:if test="${empty goods.imgPath}"><img width="205" height="188" src="${ctx }/shop/resources/third-party/images/no_200_200_200.jpg" /></c:if>
 					</a>
                   	<p class="price">
                   		<span style="color: red; font-weight: bold;">${goods.marketPrice}</span> 

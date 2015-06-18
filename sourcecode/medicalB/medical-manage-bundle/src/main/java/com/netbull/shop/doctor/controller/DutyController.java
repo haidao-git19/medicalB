@@ -46,6 +46,7 @@ public class DutyController {
 		
 		request.setAttribute("doctorId", doctorId);
 		request.setAttribute("doctorName", doctor.getRealName());
+		request.setAttribute("remind", doctor.getRemind());
 		request.setAttribute("thisWeekDutys", thisWeekDutys);
 		request.setAttribute("nextWeekDutys", nextWeekDutys);
 		
@@ -104,5 +105,5 @@ public class DutyController {
 		
 		return json.toString();
 	}
-
+	
 }

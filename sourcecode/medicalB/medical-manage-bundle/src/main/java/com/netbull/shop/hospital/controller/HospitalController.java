@@ -136,6 +136,22 @@ public class HospitalController {
 				}
 			}
 			
+			List<Map> newRelatedSectionList=sectionService.queryRelatedSectionList(parameter);
+			for(Map nr:newRelatedSectionList){
+				Map pram=new HashMap();
+				if(!NullUtil.isNull(request.getParameter("introduction_"+nr.get("sectionID")))){
+					pram.put("introduction", request.getParameter("introduction_"+nr.get("sectionID")));
+					pram.put("hospitalID", hospital.getHospitalID());
+					pram.put("sectionID", nr.get("sectionID"));
+					sectionService.updateRelatedSection(pram);
+				}else{
+					pram.put("introduction", "");
+					pram.put("hospitalID", hospital.getHospitalID());
+					pram.put("sectionID", nr.get("sectionID"));
+				}
+				sectionService.updateRelatedSection(pram);
+			}
+			
 			json.put("flag", true);
 		}else{
 			//判断以是否已存在 该名称的医院
@@ -145,11 +161,15 @@ public class HospitalController {
 			}else{
 				json.put("flag", true);
 				hospitalService.save(hospital);
-				Map parameter=new HashMap();
-				parameter.put("hospitalID", hospital.getHospitalID());
+				
 				if(!NullUtil.isNull(sectionIDList)){
 					for(Integer sectionID:sectionIDList){
+						Map parameter=new HashMap();
+						parameter.put("hospitalID", hospital.getHospitalID());
 						parameter.put("sectionID", sectionID);
+						if(!NullUtil.isNull(request.getParameter("introduction_"+sectionID))){
+							parameter.put("introduction", request.getParameter("introduction_"+sectionID));
+						}
 						sectionService.saveRelatedSection(parameter);
 					}
 				}

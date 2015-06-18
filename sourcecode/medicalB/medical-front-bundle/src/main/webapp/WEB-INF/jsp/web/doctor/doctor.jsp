@@ -33,17 +33,17 @@
   <div class="card-photo"> 
   	<c:choose>
   		<c:when test="${empty doctor.avatar}">
-  			<img src="${ctx }/resources/web/img/nouimg.jpg" title="${doctor.doctorName }" alt="${doctor.doctorName }">
+  			<img src="${ctx }/resources/web/img/nouimg.jpg" title="${doctor.realName}" alt="${doctor.realName }">
   		</c:when>
   		<c:otherwise>
-  			<img src="${doctor.avatar}" title="${doctor.doctorName }" alt="${doctor.doctorName }">
+  			<img src="${doctor.avatar}" title="${doctor.realName}" alt="${doctor.realName}">
   		</c:otherwise>
   	</c:choose>
     <p>一天前来过</p>
   </div>
   <div class="card-words">
     <ul class="card-info">
-      <li> <a title="${doctor.doctorName }" href="#" class=" clr-08c fnt-14">${doctor.doctorName }</a><span class="city">${doctor.hospitalName}-${doctor.sectionName} ${doctor.doctorLevel}</span> </li>
+      <li> <a title="${doctor.realName}" href="#" class=" clr-08c fnt-14">${doctor.realName}</a><span class="city">${doctor.hospitalName}-${doctor.sectionName} ${doctor.doctorLevel}</span> </li>
       <li class="clr-666">医院地址：${doctor.address }  </li>
       <li class="clr-666">擅长：${doctor.skill}</li>
       <li class="clr-666"> 简介：${doctor.experience}<a href="#" class="clr-08c">查看完整简&gt;&gt;</a>  </li>
@@ -108,7 +108,7 @@
         <div class="wlr-box-hd">
             <div class="wlr-box-more">
             </div>
-            <h3 class="clr-grn">赵全明大夫的门诊时间</h3>
+            <h3 class="clr-grn">${doctor.realName }大夫的门诊时间</h3>
         </div>
         <div class="wlr-box-bd">
 
@@ -123,14 +123,12 @@
       </tr>
       <tr>
         <td class="bg_f9" height="36">周一</td>
-        <td><a href="/index/ajaxschedule" id="showschedule" class="popupwindow">
-          <p>专家</p>
-          <p>14 元</p>
-          </a></td>
-        <td><a href="/index/ajaxschedule" id="showschedule" class="popupwindow">
-          <p>专家</p>
-          <p>14 元</p>
-          </a></td>
+        <td>
+        	
+        </td>
+        <td>
+        
+        </td>
         <td></td>
       </tr>
       <tr>
@@ -147,10 +145,9 @@
       </tr>
       <tr>
         <td class="bg_f9" height="36">周四</td>
-        <td><a href="/index/ajaxschedule" id="showschedule" class="popupwindow">
-          <p>特需</p>
-          <p>300.00 元</p>
-          </a></td>
+        <td>
+        	
+        </td>
         <td></td>
         <td></td>
       </tr>
@@ -178,13 +175,13 @@
     <div class="comp-right-box cf">
       <ul class="comp-right-info"><p class="clr-org">出诊提示：</p>
       <li> 
-2012年12月24日起，调整出诊时间。新时间如下：周一全天（上午和下午），为专家门诊，挂号费14元；周四上午，仍然是特需门诊，挂号费300元。
-<p class="clr-999">(由赵全明大夫本人发表于2014-10-15 22:20:24)  </p></li>
+		${doctor.remind}
+<p class="clr-999">(由${doctor.realName}大夫本人发表于${doctor.remindTime})  </p></li>
 
 
 <p class="clr-org">备注：</p>
 
-突发原因导致门诊时间、出诊地点、门诊类型（普通、专家或特需门诊）、挂号费用的改变，请以医院当日公布为准，或拨打医院电话确认：010-114(预约挂号),010-64412431(总机),010-64456260(挂号室),010-64456637(门诊部咨询)
+	${hospital.remark}
       
       </ul>
       

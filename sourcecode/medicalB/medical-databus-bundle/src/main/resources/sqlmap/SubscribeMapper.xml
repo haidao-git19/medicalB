@@ -134,7 +134,7 @@
     
     <select id="queryRcentiSubscribe" parameterType="java.util.Map" resultType="java.util.Map">
         <![CDATA[
-        	select X.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_order X LEFT JOIN tb_medical_doctor d on X.doctorID = d.doctorID LEFT JOIN tb_medical_patient p on X.patientID = p.patientID where X.state in (0,-1) and X.isnotice!=1 and str_to_date(CONCAT(X.orderDate," ",X.startTime),'%Y-%m-%d %H:%i:%s') >= date_add(now(), interval -${minitue} MINUTE)
+        	select X.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_order X LEFT JOIN tb_medical_doctor d on X.doctorID = d.doctorID LEFT JOIN tb_medical_patient p on X.patientID = p.patientID where X.state in (0,-1) and X.isnotice!=1 and X.paystate = 1 and str_to_date(CONCAT(X.orderDate," ",X.startTime),'%Y-%m-%d %H:%i:%s') >= date_add(now(), interval -${minitue} MINUTE)
          ]]>
     </select>
     

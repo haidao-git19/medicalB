@@ -34,11 +34,11 @@
     
     <insert id="save" parameterType="com.netbull.shop.common.vo.GoodsVo" 
         useGeneratedKeys="true" keyProperty="id">
-		INSERT tb_product_goods(categoryCode,longName,mediumName,shortName,secondName,brandId,style,model,
+		INSERT tb_product_goods(categoryCode,longName,mediumName,shortName,secondName,brandId,style,model,coverImgPath
 			imgPath,goodsCode,isDraft,marketPrice,shopPrice,goodsType,sellCharacter,sellAttr,label,status,isShow,
 				sellingPoints,packageList,buyNote,content,saleTime,shopId,createPerson,updatePerson,createTime,updateTime,navicatId)
 		
-		VALUES(#{categoryCode},#{longName},#{mediumName},#{shortName},#{secondName},#{brandId},#{style},#{model},
+		VALUES(#{categoryCode},#{longName},#{mediumName},#{shortName},#{secondName},#{brandId},#{style},#{model},#{coverImgPath},
 			#{imgPath},#{goodsCode},#{isDraft},#{marketPrice},#{shopPrice},#{goodsType},#{sellCharacter},#{sellAttr},#{label},#{status},'1',
 				#{sellingPoints},#{packageList},#{buyNote},#{content},#{saleTime},#{shopId},#{createPerson},#{updatePerson},now(),now(),#{navicatId})
     </insert>
@@ -72,6 +72,9 @@
             </if>
             <if test="imgPath !=null and imgPath !=''">
                 imgPath=#{imgPath},
+            </if>
+            <if test="coverImgPath !=null and coverImgPath !=''">
+                coverImgPath=#{coverImgPath},
             </if>
             <if test="isDraft !=null and isDraft !=''">
                 isDraft=#{isDraft},

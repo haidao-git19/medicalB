@@ -24,6 +24,7 @@ public class Hospital {
 	private String areaName;
 	private String summary;
 	private Integer recomFlag;
+	private String remark;
 	
 	private List<Integer> sectionList; 
 	
@@ -153,4 +154,12 @@ public class Hospital {
 	public void setCgNum(Integer cgNum) {
 		this.cgNum = cgNum;
 	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	
 }

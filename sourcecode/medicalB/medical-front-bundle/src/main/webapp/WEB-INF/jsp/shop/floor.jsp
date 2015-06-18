@@ -27,7 +27,8 @@
 							<c:if test="${not empty floorItem.link}">
 							<a class="f_img" target="_blank" href="${floorItem.link}">
 							</c:if>
-								<img width="215" height="195" src="${floorItem.coverImg}">
+								<c:if test="${not empty floorItem.coverImg}"><img width="215" height="195" src="${floorItem.coverImg}"></c:if>
+								<c:if test="${empty floorItem.coverImg}"><img width="205" height="188" src="${ctx }/resources/third-party/images/no_200_200_200.jpg" /></c:if>
 							<c:if test="${not empty floorItem.link}">
 							</a>
 							</c:if>
@@ -42,7 +43,8 @@
 						<div class="f_prod">
 							<div class="pic">
 								<a target="_blank" href="${ctx}/anon/goods/detail?_gc=${floorItem.goodsCode}">
-									<img src="${floorItem.imgPath}">
+									<c:if test="${not empty floorItem.imgPath}"><img src="${floorItem.imgPath}"></c:if>
+									<c:if test="${empty floorItem.imgPath}"><img width="205" height="188" src="${ctx }/resources/third-party/images/no_200_200_200.jpg" /></c:if>
 								</a>
 							</div>
 							<div class="title">
@@ -56,64 +58,3 @@
 		</div>
 	</div>
 </c:forEach>
-
-<%--
-<div class="wrap floor clearfix">
-	<div class="floorNav">
-		<h3 class="floorName">
-			<span>1F<a class="ml13">维生素、钙片</a></span>
-		</h3>
-	</div>
-
-	<div id="fl1" class="floor_l">
-		<a href="http://180.153.55.124:8089/shop/anon/list?id=654326509">螯合钙</a>
-		<a href="http://180.153.55.124:8089/shop/anon/list?id=654326510">液体钙</a>
-	</div>
-	
-	<div id="fr1" class="floor_r">
-		<ul class="diseaseType">
-			<li>
-				<h3>
-					<a href="http://180.153.55.124:8089/shop/anon/goods/detail?_gc=CATEGORY_DRUG_CLKS1">螯合钙</a>
-				</h3>
-				<a class="f_img" href="http://180.153.55.124:8089/shop/anon/goods/detail?_gc=CATEGORY_DRUG_CLKS1">
-					<img width="215" height="195" src="http://180.153.55.124:8089/shop/resources/third-party/images/no_200_200_200.jpg">
-				</a>
-			</li>
-			<li>
-				<h3>
-					<a href="http://180.153.55.124:8089/shop/anon/goods/detail?_gc=CATEGORY_DRUG_CLKS1">螯合钙</a>
-				</h3>
-				<a class="f_img" href="http://180.153.55.124:8089/shop/anon/goods/detail?_gc=CATEGORY_DRUG_CLKS1">
-					<img width="215" height="195" src="http://180.153.55.124:8089/shop/resources/third-party/images/no_200_200_200.jpg">
-				</a>
-			</li>
-		</ul>
-		
-		<div class="showPro">
-			<div class="f_prod">
-				<div class="pic">
-					<a target="_blank" href="http://180.153.55.124:8089/shop/anon/goods/detail?_gc=CATEGORY_DRUG_CLKS1">
-						<img src="http://180.153.55.124:8089/shop/resources/third-party/images/no_pic_80_80.jpg">
-					</a>
-				</div>
-				<div class="title">
-					<a target="_blank" href="http://180.153.55.124:8089/shop/anon/goods/detail?_gc=CATEGORY_DRUG_CLKS1">痤康王</a>
-				</div>
-				<span class="price_l"><i>¥</i>9.8</span>
-			</div>
-			<div class="f_prod">
-				<div class="pic">
-					<a target="_blank" href="http://180.153.55.124:8089/shop/anon/goods/detail?_gc=CATEGORY_DRUG_CLKS1">
-						<img src="http://180.153.55.124:8089/shop/resources/third-party/images/no_pic_80_80.jpg">
-					</a>
-				</div>
-				<div class="title">
-					<a target="_blank" href="http://180.153.55.124:8089/shop/anon/goods/detail?_gc=CATEGORY_DRUG_CLKS1">痤康王</a>
-				</div>
-				<span class="price_l"><i>¥</i>9.8</span>
-			</div>
-		</div>
-	</div>
-</div>
---%>

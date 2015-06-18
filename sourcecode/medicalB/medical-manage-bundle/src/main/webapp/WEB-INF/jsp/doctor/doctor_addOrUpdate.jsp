@@ -16,7 +16,7 @@
 		<div class="row-fluid">
 			<ul class="breadcrumb">
 				<li class="active">专家管理<span class="divider">/</span></li>
-				<li class="active">专家编辑</li>
+				<li class="active">专家编辑1</li>
 			</ul>
 			
 			<form id="postForm">
@@ -163,6 +163,12 @@
 																<option value="" <c:if test="${empty doctor.isVisit}">selected="selected"</c:if>>--选择--</option>	
 																<option value="0" <c:if test="${doctor.isVisit eq 0}">selected="selected"</c:if>>不支持</option>
 																<option value="1" <c:if test="${doctor.isVisit eq 1}">selected="selected"</c:if>>支持</option>
+															</select>
+															
+															<span class="help-inline">&nbsp;&nbsp;</span><font class="msg_font_bold">顶级专家</font>
+															<select style="width:140px;" name="specialist" id="specialist">
+																<option value="0" <c:if test="${doctor.specialist eq 0}">selected="selected"</c:if>>否</option>
+																<option value="1" <c:if test="${doctor.specialist eq 1}">selected="selected"</c:if>>是</option>
 															</select>
 														</label>	
 													</div>

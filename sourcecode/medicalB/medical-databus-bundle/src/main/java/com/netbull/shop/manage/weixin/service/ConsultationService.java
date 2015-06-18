@@ -8,8 +8,12 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
+import com.netbull.shop.manage.weixin.dao.ConsultDispatcherDao;
 import com.netbull.shop.manage.weixin.dao.ConsultationDao;
+import com.netbull.shop.manage.weixin.vo.ConsultationDispatcher;
 import com.netbull.shop.manage.weixin.vo.ConsultationVo;
 
 @Service
@@ -19,13 +23,30 @@ public class ConsultationService {
     
 	@Resource
 	private ConsultationDao consultationDao;
+	@Resource
+	private ConsultDispatcherDao consultDispDao;
 
 	public List<Map> queryConsultationList(Map paramter) {		
 		return consultationDao.queryConsultationList(paramter);
 	}
-	
-	public Integer modifyConsultation(Map paramter) {		
-		return consultationDao.modifyConsultation(paramter);
+	@Transactional
+	public Integer modifyConsultation(Map paramter) {	
+		//TODO 修改咨询信息，判断如果有推荐的医生或科室进行保存
+		Integer rlt= consultationDao.modifyConsultation(paramter);
+		String state=(String) paramter.get("state");
+		if("2".equals(state)){
+			String disType=(String) paramter.get("dispatcherType");
+			String dispdatas=(String) paramter.get("dataItems");
+			List<ConsultationDispatcher> list=JSON.parseArray(dispdatas, ConsultationDispatcher.class);
+			if(list!=null){
+				for(ConsultationDispatcher disp:list){
+					disp.setDispatcherType(Integer.parseInt(disType));
+					disp.setConsultationID(Long.valueOf((String)paramter.get("consultationID")));
+					consultDispDao.saveConsultDispatcher(disp);
+				}
+			}
+		}
+		return rlt;
 	}
 	
 	public Integer saveConsultationInfo(ConsultationVo consultationVo) {		

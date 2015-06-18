@@ -37,11 +37,33 @@ function initFirstLevelSection(){
 			if(data.sectionList){
 				$.each(data.sectionList,function(i,s){
 					$("#firstLevel").append("<option value='"+s.id+"'>"+s.attrname+"</option>");
-					$("#parentSectionArea").append("<input type='hidden' id='parentSection_"+s.id+"'>")
+					$("#parentSectionArea").append("<input type='hidden' id='parentSection_"+s.id+"'>");
+					
+					var introTemp=$("#introductionTemplate").html();
+					var _introTemp=introTemp.format(s.id,s.attrname);
+					$("#introductionContainer").append(_introTemp);
+					initSectionIntroduction(s.id);
 				});
 			}
 		}
 	});
+}
+
+function initSectionIntroduction(sectionid){
+	if($("#hospitalID").val()){
+		$.ajax({
+			url:ctx+"/section/querySectionIntroduction",
+			type:"post",
+			data:{"hospitalID":$("#hospitalID").val(),"sectionID":sectionid},
+			dataType:"json",
+			async:false,
+			success:function(data){
+				if(data&&data.section){
+					$("#introduction_"+sectionid).val(data.section.introduction);
+				}
+			}
+		});
+	}
 }
 
 function initAllGroupSection(){
@@ -91,36 +113,18 @@ function onchangeParentLevel(obj){
 		$(operAreaObj).siblings().hide();
 		$(operAreaObj).show();
 	}
-}
-
-function toupdateHospital(id){
-	   window.location.href=ctx+'/hospital/initAddOrUpdate?hospitalID='+id; 
+	
+	if(obj.value!=''&&typeof(obj.value)!='undefined'&&obj.value!=null){
+		$("#intro_"+obj.value).show().siblings().hide();
+	}else{
+		$("div[id^='intro_']").hide();
+	}
 }
 
 function showHospital(id){
 	   window.location.href=ctx+'/hospital/showHospital?hospitalID='+id; 
 }
 
-
-function deleteHospital(id){
-
-	 var url=ctx+'/hospital/del';
-	 var param='hospitalID='+id;
-	 if(confirm("确定要删除?")){
-		 //ajax 删除事件
-			$.ajax({
-					type: "post",
-		            url: url,
-		            data: param,
-		            dataType: "json",
-		            success: function(data){
-		            	alert('删除成功');
-		            	location.reload()
-		               }
-		            })
-	 }
-
-}
 
 function formSumbit(){
 	

@@ -10,7 +10,7 @@
 		<title>用户管理</title>
 		<jsp:include page="/WEB-INF/jsp/common.jsp"></jsp:include>
 		<script type="text/javascript" src="${ctx }/resources/js/hospital/hospital.js"></script>
-		<script type="text/javascript" src="${ctx }/resources/js/hospital/editHospital.js"></script>
+		<%-- <script type="text/javascript" src="${ctx }/resources/js/hospital/editHospital.js"></script> --%>
 		<style type="text/css">
 		#user_table {
 			min-width : 800px;

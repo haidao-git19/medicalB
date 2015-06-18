@@ -45,4 +45,12 @@ public class DoctorService {
 	public long queryIsAudioCTCount(Map parameter){
 		return doctorDao.queryIsAudioCTCount(parameter);
 	}
+	
+	public Map queryDoctorFee(Map parameter){
+		return doctorDao.queryDoctorFee(parameter);
+	}
+	
+	public List<Map> queryDoctorFeeList(Map parameter){
+		return doctorDao.queryDoctorFeeList(parameter);
+	}
 }

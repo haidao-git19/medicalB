@@ -41,6 +41,10 @@ public class SectionService {
 		return sectionDao.queryRelatedSectionList(parameter);
 	}
 	
+	public Map queryRelatedSection(Map parameter){
+		return sectionDao.queryRelatedSection(parameter);
+	}
+	
 	public Integer deleteRelatedSection(Map parameter){
 		return sectionDao.deleteRelatedSection(parameter);
 	}

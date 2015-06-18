@@ -23,6 +23,7 @@ public class Hospital {
 	private String type;
 	private String areaName;
 	private String summary;
+	private String remark;
 	
 	private List<Integer> sectionList; 
 	
@@ -145,6 +146,12 @@ public class Hospital {
 	}
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 }

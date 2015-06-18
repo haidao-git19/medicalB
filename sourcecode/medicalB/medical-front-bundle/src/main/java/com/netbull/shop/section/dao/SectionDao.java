@@ -45,6 +45,10 @@ public class SectionDao {
 		return session.selectList(NAMESPACE+".queryRelatedSection", parameter);
 	}
 	
+	public Map queryRelatedSection(Map parameter){
+		return session.selectOne(NAMESPACE+".queryRelatedSection", parameter);
+	}
+	
 	public Integer deleteRelatedSection(Map parameter){
 		return session.delete(NAMESPACE+".deleteRelatedSection", parameter);
 	}

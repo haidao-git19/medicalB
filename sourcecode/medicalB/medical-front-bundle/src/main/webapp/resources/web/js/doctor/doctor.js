@@ -1,5 +1,6 @@
 $(function(){
 	initLatestConsultList();
+	queryDutyTimeList();
 });
 
 function initLatestConsultList(){
@@ -24,6 +25,22 @@ function initLatestConsultList(){
 				});
 			}else{
 				$("#latestConsultContainer table tbody").append('<tr><td width="60%">暂无数据</td></tr>');
+			}
+		}
+	});
+}
+
+function queryDutyTimeList(){
+	$.ajax({
+		url:ctx+"/anon/web/queryPersonalDutyTimeList",
+		type:"post",
+		data:{"doctorID":doctorID},
+		dataType:"json",
+		success:function(data){
+			if(data){
+				$.each(data,function(i,d){
+					$(".menzhen_time table tbody").find("tr:eq("+d.weekNum+")").find("td:eq("+d.dayFlag+")").append('<a href="/index/ajaxschedule" id="showschedule" class="popupwindow"><p>门诊</p><p>'+d.fee+'元</p></a>');
+				});
 			}
 		}
 	});

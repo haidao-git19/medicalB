@@ -68,4 +68,8 @@ public class ConsultService {
 	public List<Map> queryLatestConsultList(Map parameter){
 		return consultDao.queryLatestConsultList(parameter);
 	}
+	
+	public List<Map> queryConsultCountList(Map parameter){
+		return consultDao.queryConsultCountList(parameter);
+	}
 }

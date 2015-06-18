@@ -47,4 +47,12 @@ public class DoctorDao {
 	public long queryIsAudioCTCount(Map parameter){
 		return session.selectOne(NAMESPACE+".query_isAudioCT_count", parameter);
 	}
+	
+	public Map queryDoctorFee(Map parameter){
+		return session.selectOne(NAMESPACE+".query_doctor_fee", parameter);
+	}
+	
+	public List<Map> queryDoctorFeeList(Map parameter){
+		return session.selectList(NAMESPACE+".query_doctor_fee", parameter);
+	}
 }

@@ -121,6 +121,7 @@ public class DoctorCotroller extends AbstractController{
 			paramter.put("limit", Integer.parseInt(showCount));
 			paramter.put("diseaseId", requestMap.get("diseaseId"));
 			paramter.put("sectionid", requestMap.get("sectionid"));
+			paramter.put("hospitalID", requestMap.get("hospitalID"));
 			
 			List<Map> doctorList = null;
 			if(requestMap.containsKey("startTime") 

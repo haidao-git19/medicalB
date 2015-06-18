@@ -48,47 +48,56 @@ public class ConsultationTipsQuartz {
 		String consultationID = StringUtil.getString(paramter.get("consultationID"));
 		String doctorID = StringUtil.getString(paramter.get("doctorID"));
 		String patientID = StringUtil.getString(paramter.get("patientID"));
+		String isnotice = StringUtil.getString(paramter.get("isnotice"));
 		
 		String doctorName = StringUtil.getString(paramter.get("doctorName"));
 		String patientName = StringUtil.getString(paramter.get("patientName"));
 		
-		String aliases = "YS_"+doctorID;
-		String alert = ConfigLoadUtil.loadConfig().getPropertie("Send_Doctor_Notice_Consultation_Msg");
-		alert = alert.replace("#name#", doctorName);
+		String aliases;
+		String alert;
 		
-		if(HttpXmlUtil.sendYSNoticeMsg(aliases, alert,1)){
-			requestMap.put("status", "0");
-		}else{
-			requestMap.put("status", "1");
+		if("0".equals(isnotice)){//患者咨询完成，给医生发送咨询提醒；
+			aliases = "YS_"+doctorID;
+			alert = ConfigLoadUtil.loadConfig().getPropertie("Send_Doctor_Notice_Consultation_Msg");
+			alert = alert.replace("#name#", doctorName);
+			
+			if(HttpXmlUtil.sendYSNoticeMsg(aliases, alert,1)){
+				requestMap.put("status", "0");
+			}else{
+				requestMap.put("status", "1");
+			}
+			
+			requestMap.put("aliases",aliases);
+			requestMap.put("aliasesType", "0");
+			requestMap.put("alert", alert);
+			requestMap.put("bizType", "1");
+			requestMap.put("bizId", consultationID);
+			jPushService.savePushLogInfo(requestMap);
+			
+			requestMap.put("consultationID",consultationID);
+			requestMap.put("isnotice", "1");
+			this.consultationService.modifyConsultation(requestMap);
+		}else if("1".equals(isnotice)){//医生答复完，给患者发送答复提醒；
+			aliases = "HZ_"+patientID;
+			alert = ConfigLoadUtil.loadConfig().getPropertie("Send_Patient_Notice_Consultation_Msg");
+			alert = alert.replace("#name#", patientName);
+			
+			if(HttpXmlUtil.sendNoticeMsg(aliases, alert,1)){
+				requestMap.put("status", "0");
+			}else{
+				requestMap.put("status", "1");
+			}
+			
+			requestMap.put("aliases",aliases);
+			requestMap.put("aliasesType", "1");
+			requestMap.put("alert", alert);
+			requestMap.put("bizType", "1");
+			requestMap.put("bizId", consultationID);
+			jPushService.savePushLogInfo(requestMap);
+			
+			requestMap.put("consultationID",consultationID);
+			requestMap.put("isnotice", "2");
+			this.consultationService.modifyConsultation(requestMap);
 		}
-		
-		requestMap.put("aliases",aliases);
-		requestMap.put("aliasesType", "0");
-		requestMap.put("alert", alert);
-		requestMap.put("bizType", "1");
-		requestMap.put("bizId", consultationID);
-		jPushService.savePushLogInfo(requestMap);
-		
-		aliases = "HZ_"+patientID;
-		alert = ConfigLoadUtil.loadConfig().getPropertie("Send_Patient_Notice_Consultation_Msg");
-		alert = alert.replace("#name#", patientName);
-		
-		if(HttpXmlUtil.sendNoticeMsg(aliases, alert,1)){
-			requestMap.put("status", "0");
-		}else{
-			requestMap.put("status", "1");
-		}
-		
-		requestMap.put("aliases",aliases);
-		requestMap.put("aliasesType", "1");
-		requestMap.put("alert", alert);
-		requestMap.put("bizType", "1");
-		requestMap.put("bizId", consultationID);
-		jPushService.savePushLogInfo(requestMap);
-		
-		requestMap.put("consultationID",consultationID);
-		requestMap.put("isnotice", "1");
-		this.consultationService.modifyConsultation(requestMap);
-		
 	}
 }

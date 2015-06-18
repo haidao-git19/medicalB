@@ -91,13 +91,20 @@
 													</tr>
 												</c:forEach>
 											</table>
-											
+											<br>
+											<div class="control-group">
+														<label class="control-label">
+															<font class="msg_font_bold">门诊提示 : </font>
+														</label>
+														<textarea id="remind" name="remind" style="width: 58%;height: 100px;">${remind}</textarea>
+												</div>
 										</div>
 									</div>
 								</div>
 								
-								<div style="margin-top: 5px;margin-left: 315px;">
-									<div align="center">
+								<div style="margin-top: 20px;padding-bottom: 20px;">
+									<div align="center" style="margin-top: 10px;">
+										<button type="button" class="btn btn-primary"  onclick="commitDutyRemind();">保存</button>
 								 		<button type="button" class="btn btn-primary" onclick="toDoctorList();">返回</button>
 									</div>
 								</div>

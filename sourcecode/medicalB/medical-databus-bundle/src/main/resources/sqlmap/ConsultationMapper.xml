@@ -27,8 +27,8 @@
 				 LIMIT  #{start}, #{limit}
             </when>
             <otherwise>
-                select 
-					c.title,c.answer,c.answerDate,c.consultationDate,c.consultationID,c.doctorID,c.evaluation,c.isPrescribe,
+                 select 
+					c.title,c.answer,c.answerDate,c.consultationDate,c.consultationID,c.doctorID,c.evaluation,c.isPrescribe,p.nickName,
 					c.isFree,c.isRepeat,c.patientID, e.patientName, e.patientAge, e.patientSex, c.question,c.state,c.title,c.type,d.avatar,d.ctArea,d.doctorLevel,
 					(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,
 					d.experience,d.hospitalID,d.isAudioCT,d.isNetCT,d.isRecommend,d.isVideoCT,d.isZZ,d.netctArea,
@@ -37,6 +37,7 @@
 				    tb_medical_consultation c 
 					left join tb_medical_doctor d on c.doctorID = d.doctorID
 					left join tb_medical_patient e on c.patientID = e.patientID
+					LEFT JOIN tb_medical_patient p on c.patientID = p.patientID
 				<where>
 					<if test="doctorID != null and doctorID !=''">
 					     and c.doctorID = #{doctorID}
@@ -119,7 +120,7 @@
 	
     <select id="queryRcentiConsultation" parameterType="java.util.Map" resultType="java.util.Map">
         <![CDATA[
-        	select X.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_consultation X LEFT JOIN tb_medical_doctor d on X.doctorID = d.doctorID LEFT JOIN tb_medical_patient p on X.patientID = p.patientID where X.state in (0,1) and X.isnotice=0 and str_to_date(X.consultationDate,'%Y-%m-%d %H:%i:%s') >= date_add(now(), interval -${minitue} MINUTE)
+        	select X.*,(select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,p.patientName from tb_medical_consultation X LEFT JOIN tb_medical_doctor d on X.doctorID = d.doctorID LEFT JOIN tb_medical_patient p on X.patientID = p.patientID where X.state in (0,1) and (X.isFree=0 or X.isFree=1 and X.paystate=1) and (X.isnotice=0 or X.isnotice=1 and X.state=1) and str_to_date(X.consultationDate,'%Y-%m-%d %H:%i:%s') >= date_add(now(), interval -${minitue} MINUTE)
          ]]>
     </select>
     

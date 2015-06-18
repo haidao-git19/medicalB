@@ -127,15 +127,12 @@ public class GoodsController {
 			logger.debug("enter the " + this.getClass().getName() + " class goodsEdit method.");
 		}
 		Map<String,String> requestMap = RequestUtils.parameterToMap(request);
-		String realPath = ConfigLoadUtil.loadConfig().getPropertie("accessAddress");
 		GoodsVo goodsVo=new GoodsVo();
 		Map<String,String> clobsMap=new HashMap<String,String>();
 		if(id!=null&&id!=0){
 			goodsVo=goodsService.get(MYBATIS_PREFIX, id);
 			if(!NullUtil.isNull(goodsVo)){
 				requestMap.put("goodsCode", goodsVo.getGoodsCode());
-				
-				goodsVo.setImgPath(realPath+goodsVo.getImgPath());
 				
 				for(String column:columnsArray){
 					String columnVal=StringUtil.getString(PropertyUtils.getProperty(goodsVo, column));

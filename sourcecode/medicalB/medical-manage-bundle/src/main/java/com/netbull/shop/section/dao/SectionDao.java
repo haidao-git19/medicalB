@@ -45,8 +45,16 @@ public class SectionDao {
 		return session.insert(NAMESPACE+".saveRelatedSection", parameter);
 	}
 	
+	public Integer updateRelatedSection(Map parameter){
+		return session.update(NAMESPACE+".updateRelatedSection", parameter);
+	}
+	
 	public List<Map> queryRelatedSectionList(Map parameter){
 		return session.selectList(NAMESPACE+".queryRelatedSection", parameter);
+	}
+	
+	public Map queryRelatedSection(Map parameter){
+		return session.selectOne(NAMESPACE+".queryRelatedSection", parameter);
 	}
 	
 	public Integer deleteRelatedSection(Map parameter){

@@ -103,11 +103,11 @@
    
 	 
 	 <select id="queryLatestConsultList" parameterType="java.util.Map" resultType="java.util.Map">
-	     SELECT t1.*,t2.doctorName,t3.attrName sectionName FROM tb_medical_consultation t1 
+	     SELECT t1.*,(select u.true_name from vauth.user_info u where u.id = t2.loginID) as doctorName,t3.attrName sectionName FROM tb_medical_consultation t1 
 	     LEFT JOIN tb_medical_doctor t2 ON t1.doctorID = t2.doctorID
 	     LEFT JOIN tb_medical_section t3 ON t2.sectionID = t3.id
 	     <where>
-	         1=1 and type in (0,1)
+	         1=1 and t1.type in (0,1)
 	         <if test="hospitalID !=null and hospitalID !=''">
 	             and t2.hospitalID = #{hospitalID}
 	         </if>
@@ -127,4 +127,22 @@
 	     ORDER BY t1.consultationDate DESC
 	      LIMIT  #{start}, #{limit}
 	 </select>
+	 
+	 <select id="query_reply_count_lately" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT t1.doctorID,COUNT(1) as consult_answer_count FROM tb_medical_consultation t1 
+	    LEFT JOIN tb_medical_doctor t2  ON t1.doctorID=t2.doctorID
+	    <where>
+	         1=1 
+	         and t1.type in (0,1)
+	         and t1.isRepeat=0
+	         and t1.state = 1
+	         <if test="hospitalID !=null and hospitalID !=''">
+	             and t2.hospitalID = #{hospitalID}
+	         </if>
+	         <if test="sectionID !=null and sectionID !=''">
+	             and t2.sectionID = #{sectionID}
+	         </if>
+	         and DATE_FORMAT(t1.consultationDate,'%Y-%m-%d') between #{date_start} and #{date_end}
+	     </where>
+	</select>
 </mapper>

@@ -4,9 +4,6 @@ package com.netbull.shop.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.web.subject.WebSubject;
-
 import com.alibaba.fastjson.JSONObject;
 import com.netbull.shop.common.config.ConfigLoadUtil;
 import com.netbull.shop.common.util.NullUtil;

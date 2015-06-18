@@ -46,14 +46,21 @@
    </select>
    
    <insert id="saveRelatedSection" parameterType="java.util.Map">
-       INSERT tb_medical_hospital_section(hospitalID,sectionID) VALUES(#{hospitalID},#{sectionID})
+       INSERT tb_medical_hospital_section(hospitalID,sectionID,introduction) VALUES(#{hospitalID},#{sectionID},#{introduction})
    </insert>
+   
+   <update id="updateRelatedSection" parameterType="java.util.Map">
+       UPDATE tb_medical_hospital_section SET introduction=#{introduction} WHERE hospitalID=#{hospitalID} and sectionID=#{sectionID}
+   </update>
    
    <select id="queryRelatedSection" parameterType="java.util.Map" resultType="java.util.Map">
        SELECT * FROM tb_medical_hospital_section 
        <where>
            <if test="hospitalID !=null and hospitalID !=''">
                and hospitalID=#{hospitalID}
+           </if>
+           <if test="sectionID !=null and sectionID !=''">
+               and sectionID = #{sectionID}
            </if>
        </where>
    </select>
@@ -69,4 +76,5 @@
            </if>
        </where>
    </delete>
+
 </mapper>

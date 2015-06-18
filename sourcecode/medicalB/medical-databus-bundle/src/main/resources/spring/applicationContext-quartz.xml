@@ -11,9 +11,8 @@
 		<!-- Triggers集成 -->
 		<property name="triggers">
 			<list>
-			    <ref bean="subscribeTipsTrigger" />
 			    <ref bean="consultationTipsTrigger" />
-			    
+			    <ref bean="subscribeTipsTrigger" />
 			    <ref bean="prescribeTipsTrigger" />
 			    <ref bean="questionnaireTipsTrigger" />
 			    <ref bean="plusTipsTrigger" />

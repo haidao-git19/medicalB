@@ -85,4 +85,7 @@ public class DoctorService {
 		return doctorDao.queryAllRecommDoctorList(param);
 	}
 	
+	public Integer updateRemind(Map parameter){
+		return doctorDao.updateRemind(parameter);
+	}
 }

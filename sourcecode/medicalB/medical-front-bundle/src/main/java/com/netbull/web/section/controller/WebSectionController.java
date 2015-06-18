@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.netbull.shop.common.config.ConfigLoadUtil;
 import com.netbull.shop.common.util.StringTools;
+import com.netbull.shop.common.util.StringUtil;
 import com.netbull.shop.section.entity.Section;
 import com.netbull.shop.section.service.SectionService;
 import com.netbull.shop.util.HttpXmlUtil;
@@ -58,6 +59,7 @@ public class WebSectionController {
 		return sectionList;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value="/anon/web/sectionDetail")
 	public String sectionDetail(ModelMap model,HttpServletRequest request){
 		String hospitalID=request.getParameter("hospitalID");
@@ -76,7 +78,23 @@ public class WebSectionController {
 		Section section=sectionService.findById(Long.parseLong(sectionID));
 		model.addAttribute("section", section);
 		
+		Map pram=new HashMap();
+		pram.put("hospitalID", hospitalID);
+		pram.put("sectionID", section.getParentid());
+		Map parentSection=sectionService.queryRelatedSection(pram);
+		String sectionIntroduction=String.valueOf(parentSection.get("introduction"));
+		if(StringUtil.isEmpty(sectionIntroduction)){
+			if(sectionIntroduction.length()>150){
+				model.addAttribute("sectionIntroduction", sectionIntroduction.substring(0, 150)+"...");
+			}else{
+				model.addAttribute("sectionIntroduction", sectionIntroduction);
+			}
+		}else{
+			model.addAttribute("sectionIntroduction", "暂无数据");
+		}
+		
 		requestMap.put("sectionID", sectionID);
+		
 		model.addAttribute("subscribe_plus_count", doctorService.querySubscribePlusCount(requestMap));
 		model.addAttribute("isAudioCT_count", doctorService.queryIsAudioCTCount(requestMap));
 		model.addAttribute("plus_success_count", plusService.queryPlusSuccessCount(requestMap));

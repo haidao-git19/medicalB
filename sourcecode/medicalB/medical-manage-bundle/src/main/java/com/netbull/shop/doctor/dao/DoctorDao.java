@@ -81,4 +81,8 @@ public class DoctorDao extends BaseDao{
 	public Doctor queryByParam(Map param){
 		return session.selectOne(NAMESPACE+".queryByParam", param);
 	}
+	
+	public Integer updateRemind(Map parameter){
+		return session.update(NAMESPACE+".updateRemind", parameter);
+	}
 }

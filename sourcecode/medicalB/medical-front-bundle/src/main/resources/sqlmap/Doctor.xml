@@ -27,7 +27,8 @@
 	</select>
 	
 	<select id="queryRecomDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
-	    SELECT t1.*,t5.*,t3.hospitalName,t4.attrname sectionName FROM tb_medical_doctor t1 
+	    SELECT t1.doctorID,(select u.true_name from vauth.user_info u where u.id = t1.loginID) as doctorName,t1.hospitalID,t1.sectionID,t1.doctorLevel,t1.skill,t1.experience,t1.avatar,
+	    t5.*,t3.hospitalName,t4.attrname sectionName FROM tb_medical_doctor t1 
 	    LEFT JOIN tb_medical_doctor_disease t2 ON t1.doctorID=t2.doctorID
 	    LEFT JOIN tb_medical_hospital t3 ON t1.hospitalID=t3.hospitalID
 	    LEFT JOIN tb_medical_section t4 ON t1.sectionID=t4.id
@@ -47,15 +48,16 @@
 	</select>
 	
 	<select id="queryDoctorDutyList" parameterType="java.util.Map" resultType="java.util.Map">
-	    SELECT * FROM tb_medical_doctor t1
-	    LEFT JOIN tb_medical_freetime t2 ON t1.doctorID= t2.doctorID
+	    SELECT t1.* FROM tb_medical_freeTime t1
+	    LEFT JOIN tb_medical_doctor t2 ON t1.doctorID=t2.doctorID
 	    <where>
 	        <if test="hospitalID !=null and hospitalID !=''">
-	            and t1.hospitalID = #{hospitalID}
+	            and t2.hospitalID = #{hospitalID}
 	        </if>
 	        <if test="sectionID !=null and sectionID !=''">
-	            and t1.sectionID = #{sectionID}
+	            and t2.sectionID = #{sectionID}
 	        </if>
+	        and t1.weekFlag=0
 	    </where>
 	</select>
 	
@@ -68,4 +70,21 @@
 	    SELECT COUNT(t1.doctorID) as subscribe_plus_count FROM tb_medical_doctor t1 
 	    WHERE t1.hospitalID=#{hospitalID} and t1.sectionID=#{sectionID} and isAudioCT=1
 	</select>
+	
+	<select id="query_doctor_fee" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT t1.* FROM tb_medical_doctor_fee t1 LEFT JOIN tb_medical_doctor t2 ON t1.doctorID = t2.doctorID
+	    <where>
+	        <if test="hospitalID !=null and hospitalID !=''">
+	            and t2.hospitalID = #{hospitalID}
+	        </if>
+	        <if test="sectionID !=null and sectionID !=''">
+	            and t2.sectionID = #{sectionID}
+	        </if>
+	        <if test="doctorID !=null and doctorID !=''">
+	            and t1.doctorID = #{doctorID}
+	        </if>
+		    and t1.type=2
+	    </where> 
+	</select>
+	
 </mapper>

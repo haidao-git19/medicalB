@@ -43,6 +43,9 @@
            <if test="hospitalID !=null and hospitalID !=''">
                and hospitalID=#{hospitalID}
            </if>
+           <if test="sectionID !=null and sectionID !=''">
+               and sectionID=#{sectionID}
+           </if>
        </where>
    </select>
    

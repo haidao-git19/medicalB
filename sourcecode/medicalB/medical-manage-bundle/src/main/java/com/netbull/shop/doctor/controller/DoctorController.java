@@ -243,4 +243,15 @@ public class DoctorController {
 		json.put("flag", rc > 0);
 		return json.toString();
 	}
+	
+	@RequestMapping(value="/doctor/commitDutyRemind")
+	@ResponseBody
+	public String commitDutyRemind(Integer doctorID,HttpServletRequest request){
+		JSONObject json=new JSONObject();
+		int count=0;
+		Map<String,String> requestMap=RequestUtils.parameterToMap(request);
+		count=doctorService.updateRemind(requestMap);
+		json.put("flag", count==1);
+		return json.toString();
+	}
 }

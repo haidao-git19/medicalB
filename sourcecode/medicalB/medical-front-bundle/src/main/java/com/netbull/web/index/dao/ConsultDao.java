@@ -72,4 +72,8 @@ public class ConsultDao {
 	public List<Map> queryLatestConsultList(Map parameter){
 		return session.selectList(MYBATIS_PREFIX+".queryLatestConsultList", parameter);
 	}
+	
+	public List<Map> queryConsultCountList(Map parameter){
+		return session.selectList(MYBATIS_PREFIX+".query_reply_count_lately", parameter);
+	}
 }

@@ -91,4 +91,14 @@ public class SectionController {
 		}
 		return sections;
 	}
+	
+	@RequestMapping(value="/section/querySectionIntroduction")
+	@ResponseBody
+	public String querySectionIntroduction(HttpServletRequest request){
+		JSONObject json=new JSONObject();
+		Map<String,String> requestMap=RequestUtils.parameterToMap(request);
+		Map sectionMap=sectionService.queryRelatedSection(requestMap);
+		json.put("section", sectionMap);
+		return json.toString();
+	}
 }

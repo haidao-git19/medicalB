@@ -48,8 +48,8 @@
 	</select>
 	
 	<insert id="save" parameterType="com.netbull.shop.doctor.entity.Doctor" useGeneratedKeys="true" keyProperty="doctorID">
-		INSERT INTO tb_medical_doctor(doctorName,doctorPassword,avatar, hospitalID, sectionID, doctorLevel, balance, skill, experience, ctArea, netctArea, practice, isNetCT, isVideoCT, isAudioCT, isZZ, isRecommend, creator, loginID, createTime,isVisit)
-		VALUES (#{doctorName},#{doctorPassword},#{avatar},#{hospitalID},#{sectionID},#{doctorLevel},#{balance},#{skill},#{experience},#{ctArea},#{netctArea},#{practice}, #{isNetCT},#{isVideoCT},#{isAudioCT},#{isZZ}, #{isRecommend}, #{creator}, #{loginID}, NOW(),#{isVisit})
+		INSERT INTO tb_medical_doctor(doctorName,doctorPassword,avatar, hospitalID, sectionID, doctorLevel, balance, skill, experience, ctArea, netctArea, practice, isNetCT, isVideoCT, isAudioCT, isZZ, isRecommend, creator, loginID, createTime,isVisit,remind,specialist)
+		VALUES (#{doctorName},#{doctorPassword},#{avatar},#{hospitalID},#{sectionID},#{doctorLevel},#{balance},#{skill},#{experience},#{ctArea},#{netctArea},#{practice}, #{isNetCT},#{isVideoCT},#{isAudioCT},#{isZZ}, #{isRecommend}, #{creator}, #{loginID}, NOW(),#{isVisit},#{remind},#{specialist})
 	</insert>
 	
 	<insert id="saveUserInfo" parameterType="com.netbull.shop.doctor.entity.UserInfo" useGeneratedKeys="true" keyProperty="id">
@@ -87,9 +87,15 @@
 		isAudioCT=#{isAudioCT},
 		isZZ=#{isZZ},
 		isVisit=#{isVisit},
+		remind=#{remind},
+		specialist=#{specialist},
 		updateTime=NOW()
 		WHERE doctorID=#{doctorID}
    </update>
+   
+	<update id="updateRemind" parameterType="java.util.Map">
+	    UPDATE tb_medical_doctor SET remind=#{remind},remindTime=now() WHERE doctorID=#{doctorID} 
+	</update>
    
 	<select id="queryAllRecommDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
         select D.doctorID,(select u.true_name from vauth.user_info u where u.id = D.loginID) as true_name,D.hospitalID,D.sectionID,D.doctorLevel,D.skill,D.avatar,H.hospitalName,S.attrname sectionName 
