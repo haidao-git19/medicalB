@@ -67,17 +67,17 @@
 												<div class="control-group">
 													<label class="control-label">
 														<span class="help-inline">*</span><font class="msg_font_bold">医院名称</font>
-														<input type="text" id="hospitalName" name="hospitalName" value="${hospl.hospitalName }" />
+														<input type="text" id="hospitalName" name="hospitalName" value="${hospl.hospitalName }" style="width:16%"/>
 														<span class="help-inline">*</span><font class="msg_font_bold">联系人&nbsp;&nbsp;</font>
-														<input type="text" id="linkMan" name="linkMan" value="${hospl.linkMan }" />
+														<input type="text" id="linkMan" name="linkMan" value="${hospl.linkMan }" style="width:16%"/>
 														<span class="help-inline">*</span><font class="msg_font_bold">联系方式</font>
-														<input type="text" name="linkPhone" id="linkPhone" value="${hospl.linkPhone }" />
+														<input type="text" name="linkPhone" id="linkPhone" value="${hospl.linkPhone }" style="width:16%"/>
 													</label>
 												</div>
 												<div class="control-group">
 													<label class="control-label">
 														<span class="help-inline">*</span><font class="msg_font_bold">医院等级</font>
-														<select type="text" id="hospitalLevel" name="hospitalLevel">
+														<select type="text" id="hospitalLevel" name="hospitalLevel" style="width:16.5%">
 															<option value="" selected="selected">--选择等级--</option>
 															<option value="二级甲等" <c:if test="${hospl.hospitalLevel eq '二级甲等'}">selected="selected"</c:if>>二级甲等</option>
 															<option value="二级" <c:if test="${hospl.hospitalLevel eq '二级'}">selected="selected"</c:if>>二级</option>
@@ -85,21 +85,25 @@
 															<option value="三级" <c:if test="${hospl.hospitalLevel eq '三级'}">selected="selected"</c:if>>三级</option>
 															<option value="社区医院" <c:if test="${hospl.hospitalLevel eq '社区医院'}">selected="selected"</c:if>>社区医院</option>
 														</select>
-														<span class="help-inline">*</span><font class="msg_font_bold">本地网&nbsp;</font>
-														<select type="text" id="areaID" name="areaID"></select>
-														<input type="hidden" name="areaName" id="areaName" value="${hospl.areaName}">
 														<span class="help-inline">*</span><font class="msg_font_bold">合作医院</font>
-														<select id="isCooperation" name="isCooperation"><option value="1">是</option><option value="0">否</option></select>
+														<select id="isCooperation" name="isCooperation" style="width:16.5%"><option value="1">是</option><option value="0">否</option></select>
+														
+														<span class="help-inline">*</span><font class="msg_font_bold">省&nbsp;&nbsp;&nbsp;&nbsp;直&nbsp;&nbsp;</font>
+														<select type="text" id="p_areaID" name="p_areaID" style="width:6.5%" onchange="javascript:loadCityAreaList(this.value);"></select>
+														
+														<span class="help-inline">*</span><font class="msg_font_bold">本地网&nbsp;</font>
+														<select type="text" id="areaID" name="areaID" style="width:6.5%"></select>
+														<input type="hidden" name="areaName" id="areaName" value="${hospl.areaName}">
 													</label>
 												</div>
 												<div class="control-group">
 													<label class="control-label">
 														<span class="help-inline">*</span><font class="msg_font_bold">医院地址</font>
-														<input type="text" name="address" id="address" value="${hospl.address }"/>
+														<input type="text" name="address" id="address" value="${hospl.address }" style="width:16%"/>
 														<span class="help-inline">*</span><font class="msg_font_bold">医院特色</font>
-														<input type="text" name="skill" value="${hospl.skill }">
+														<input type="text" name="skill" value="${hospl.skill }" style="width:16%">
 														<span class="help-inline">*</span><font class="msg_font_bold">医院类型</font>
-														<select type="text" id="type" name="type">
+														<select type="text" id="type" name="type" style="width:17%">
 															<option value="" selected="selected">--选择类型--</option>
 															<option value="1" <c:if test="${hospl.type eq '1'}">selected="selected"</c:if>>专家医院</option>
 															<option value="0" <c:if test="${hospl.type eq '0'}">selected="selected"</c:if>>社区医院</option>
@@ -247,6 +251,7 @@
 					</div>
 				</div>
 			</form>
+			<input type="hidden" id="p_latnId" value="${area.parentID}"/>
 			<input type="hidden" id="latnId" value="${hospl.areaID}" />
 			<input type="hidden" id="defaultCooperation" value="${hospl.isCooperation}" />
 		</div>

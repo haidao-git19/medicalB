@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.AccountDao">
+	<select id="queryAccountByPatient" parameterType="java.lang.Long"
+		resultType="com.netbull.shop.manage.weixin.vo.Account">
+        <![CDATA[
+        SELECT 	ACCID,PATIENTID, BALANCE, AVAILDBALANCE, ACCOUNTTEXT, DATE_FORMAT(LASTMODIFYDATE,'%Y-%m-%d %H:%i:%s') LASTMODIFYDATE, ACCSTATE
+	 	FROM TB_MEDICAL_ACCOUNT where PATIENTID=#{patientId}
+       ]]>
+	</select>
+
+	<insert id="saveAccount" parameterType="com.netbull.shop.manage.weixin.vo.Account"
+		useGeneratedKeys="true" keyProperty="accId">
+		INSERT INTO tb_medical_account
+		(patientId, balance, availdbalance, accounttext,lastmodifyDate)
+		VALUES(#{patientId}, #{balance},
+		#{availdbalance}, #{accounttext},now())
+	</insert>
+
+	<update id="updateAccount" parameterType="com.netbull.shop.manage.weixin.vo.Account">
+		UPDATE tb_medical_account F
+		SET
+		<if test="patientId != null and patientId !=''">
+			patientId = #{patientId},
+		</if>
+		<if test="balance != null and balance !=''">
+			balance = #{balance},
+		</if>
+		<if test="availdbalance != null and availdbalance !=''">
+			availdbalance = #{availdbalance},
+		</if>
+		<if test="accounttext != null and accounttext !=''">
+			accounttext = #{accounttext},
+		</if>
+		lastmodifyDate = now()
+		WHERE accId = #{accId}
+	</update>
+
+	<insert id="saveAccountLog" parameterType="com.netbull.shop.manage.weixin.vo.AccountLog"
+		useGeneratedKeys="true" keyProperty="acc_log_id">
+		INSERT INTO tb_medical_account_log
+		(accId, createDate, orderNumber, fee, serviceType, tradeType,
+		serviceNumber, logstate,tradebank,bankACC,bankUserName,branchBank,refund_no)
+		VALUES(#{accId}, now(),
+		#{orderNumber},
+		#{fee}, #{serviceType}, #{tradeType},
+		#{serviceNumber},
+		#{logstate},#{tradebank}, #{bankACC},#{bankUserName},#{branchBank},#{refundNo})
+	</insert>
+
+	<select id="queryAccLogListTotalCount" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(1)
+		from tb_medical_account_log a
+		<where>
+			  a.accId=(select accId from tb_medical_account where patientId = #{patientId})
+		    <if test="logstate != null and logstate !=''">
+			     and a.logstate = ${logstate}
+			</if>
+		</where>
+		
+	</select>
+
+	<select id="queryAccLogList" parameterType="java.util.HashMap"
+		resultType="com.netbull.shop.manage.weixin.vo.AccountLog">
+		select acc_log_id, accId, DATE_FORMAT(createDate,'%Y-%m-%d %H:%i:%s') createDate, orderNumber, fee, serviceType, tradeType,
+		 serviceNumber, logstate, tradebank, bankACC, bankUserName, branchBank,refund_no refundNo
+		 from tb_medical_account_log a
+		<where>
+			  a.accId=(select accId from tb_medical_account where patientId = #{patientId})
+		    <if test="logstate != null and logstate !=''">
+			     and a.logstate = ${logstate}
+			</if>
+		</where>
+		limit ${startIndex}, ${pageSize}
+	</select>
+
+	<select id="queryAccLogReCharge" parameterType="java.util.HashMap"
+		resultType="com.netbull.shop.manage.weixin.vo.AccountLog">
+		SELECT * FROM tb_medical_account_log a WHERE
+		orderNumber=#{orderNumber}
+		AND tradeType=2 AND serviceType=6
+	</select>
+
+	<update id="updateAccountLogState" parameterType="com.netbull.shop.manage.weixin.vo.Account">
+		UPDATE
+		tb_medical_account_log
+		SET
+		orderNumber = #{orderNumber} ,
+		logstate =
+		#{logstate}
+		WHERE
+		acc_log_id = #{acc_log_id}
+	</update>
+
+	<update id="updateAccountLogPay" parameterType="com.netbull.shop.manage.weixin.vo.AccountLog">
+		UPDATE
+		tb_medical_account_log
+		SET
+		orderNumber = #{orderNumber} ,
+		logstate =
+		#{logstate}
+		WHERE
+		orderNumber = #{orderNumber} and tradeType=4
+	</update>
+
+	<select id="queryAccLogByOrderNumber" parameterType="java.util.HashMap"
+		resultType="com.netbull.shop.manage.weixin.vo.AccountLog">
+		select * from tb_medical_account_log a
+		where orderNumber = #{orderNumber} and tradeType=4 and logstate=0
+	</select>
+	
+	<select id="queryAccountByAccId" parameterType="java.lang.Long"
+		resultType="com.netbull.shop.manage.weixin.vo.Account">
+        <![CDATA[
+        SELECT 	ACCID,PATIENTID, BALANCE, AVAILDBALANCE, ACCOUNTTEXT, LASTMODIFYDATE, ACCSTATE
+	 	FROM TB_MEDICAL_ACCOUNT where accId=#{accId}
+       ]]>
+	</select>
+</mapper>

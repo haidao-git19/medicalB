@@ -39,11 +39,21 @@
         	</where>
 	</select>
 	
-    <select id="queryDoctorListByTime" parameterType="java.util.Map" resultType="java.util.Map">
+    <!-- <select id="queryDoctorListByTime" parameterType="java.util.Map" resultType="java.util.Map">
          <![CDATA[
         	select distinct (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,D.*,H.hospitalName from tb_medical_doctor d
               left join tb_medical_hospital H on d.hospitalID=H.hospitalID where d.doctorID in (
                 	select s.doctorid from tb_medical_doctor_section s,tb_medical_order o  where s.doctorid = o.doctorID and s.sectionid = #{sectionid} and str_to_date(CONCAT(o.orderDate," ",o.startTime),'%Y-%m-%d %H:%i:%s')>=#{startTime} and str_to_date(CONCAT(o.orderDate," ",o.endTime),'%Y-%m-%d %H:%i:%s')<=#{endTime}
+              )
+			  and d.status=1 LIMIT  #{start}, #{limit} 
+			]]>
+	</select> -->
+	
+	<select id="queryDoctorListByTime" parameterType="java.util.Map" resultType="java.util.Map">
+         <![CDATA[
+        	select distinct (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,D.*,H.hospitalName from tb_medical_doctor d
+              left join tb_medical_hospital H on d.hospitalID=H.hospitalID where d.doctorID in (
+              		select R.doctorID from tb_medical_doctor R,tb_medical_freetime f where R.doctorID=f.doctorID and R.sectionID=#{sectionid} and f.weekFlag=#{weekFlag} and f.weekNum=#{weekNum}
               )
 			  and d.status=1 LIMIT  #{start}, #{limit} 
 			]]>
@@ -74,7 +84,7 @@
             <if test="sectionID !=null and sectionID !=''">
                 and D.sectionID = #{sectionID}
             </if>
-            and D.status=1
+            and D.status=1 ORDER BY D.specialist DESC,D.isRecommend DESC
         </where>
         <include refid="com.odchia.dao.Dao.pageComponent"/>
     </select>
@@ -103,8 +113,9 @@
 	</select>
 	
     <select id="queryDoctorLogin" parameterType="map" resultType="map">
-        select u.login_name,u.true_name,u.phone,u.sex,d.* from vauth.user_info u ,tb_medical_doctor d
+        select u.login_name,u.true_name,u.phone,u.sex,d.*,h.type from vauth.user_info u ,tb_medical_doctor d,tb_medical_hospital h
          <where>
+         		h.hospitalID=d.hospitalID and
              	u.id = d.loginID
              	and d.status !=  0
             	<if test="doctorName != null and doctorName !=''">
@@ -287,4 +298,20 @@
 	<select id="queryDoctorGroupConsulationRDetail" parameterType="java.util.Map" resultType="java.util.Map">
         select * from tb_medical_group_consulation_relation g where g.id=#{id}
 	</select>
+	
+	
+	<select id="queryNearDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
+        select D.doctorID,(select u.true_name from vauth.user_info u where u.id = D.loginID) as doctorName,D.hospitalID,D.sectionID,D.doctorLevel,D.skill,D.avatar,
+        D.isNetCT,D.isAudioCT,H.hospitalName,H.type,S.attrname sectionName 
+        	from tb_medical_doctor D 
+        	left join tb_medical_hospital H on D.hospitalID=H.hospitalID
+        	left join tb_medical_section S on D.sectionID=S.id
+        <where>
+            <if test="hids !=null and hids !=''">
+                and D.hospitalID in (${hids})
+            </if>
+            and D.status=1 ORDER BY D.specialist DESC,D.isRecommend DESC
+        </where>
+        <include refid="com.odchia.dao.Dao.pageComponent"/>
+    </select>
 </mapper>

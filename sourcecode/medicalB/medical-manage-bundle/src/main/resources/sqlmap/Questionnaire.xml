@@ -3,7 +3,7 @@
 <mapper namespace="com.netbull.shop.questionnaire.dao.QuestionnaireDao">
     <!-- Questionnaire -->
     <sql id="questionnaireColumn">
-        SELECT X.id,X.name,X.note,X.doctorId,Y.doctorName,DATE_FORMAT(X.createTime,'%Y-%m-%d %H:%i') createTime 
+        SELECT X.id,X.name,X.note,X.doctorId,X.pushDays,Y.doctorName,DATE_FORMAT(X.createTime,'%Y-%m-%d %H:%i') createTime 
         FROM tb_questionnaire X LEFT JOIN tb_medical_doctor Y ON X.doctorId=Y.doctorID
     </sql>
     
@@ -43,24 +43,11 @@
     </select>
     
    <insert id="saveQuestionnaire" parameterType="com.netbull.shop.questionnaire.entity.Questionnaire" useGeneratedKeys="true" keyProperty="id">
-       INSERT tb_questionnaire(doctorId,name,createTime,note) VALUES(#{doctorId},#{name},now(),#{note})
+       INSERT tb_questionnaire(doctorId,name,createTime,note,pushDays) VALUES(#{doctorId},#{name},now(),#{note},#{pushDays})
    </insert>
    
    <update id="updateQuestionnaire" parameterType="com.netbull.shop.questionnaire.entity.Questionnaire">
-       UPDATE tb_questionnaire 
-       <set>
-           <if test="name !=null and name !=''">
-               name = #{name},
-           </if>
-           <if test="note !=null and note !=''">
-               note = #{note},
-           </if>
-       </set>
-       <where>
-           <if test="id !=null and id !=''">
-               and id = #{id}
-           </if>
-       </where>
+       UPDATE tb_questionnaire SET  name = #{name}, note = #{note}, pushDays = #{pushDays} WHERE id=#{id}
    </update>
    
    <delete id="deleteQuestionnaire" parameterType="java.lang.Integer">
@@ -279,4 +266,17 @@
    <delete id="deleteQuestionnaireCaseOption" parameterType="java.lang.Long">
        DELETE FROM tb_questionnaire_case_option where id = #{id}
    </delete>
+   
+   <select id="queryQuestionnairePatientMappingList" resultType="java.util.Map">
+       select * from tb_questionnaire_patient_mapping
+   </select>
+   
+   <select id="queryGroupedQnPMList" resultType="java.util.Map">
+       select a.* from tb_questionnaire_patient_mapping a group by a.qnId,a.patientId,a.doctorId
+   </select>
+   
+   <insert id="saveQuestionnairePatientMapping" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+       INSERT tb_questionnaire_patient_mapping(qnId,patientId,doctorId,bindTime,state,paystate,isnotice,updateTime,qnPushState) 
+       VALUES(#{qnId},#{patientId},#{doctorId},now(),0,#{paystate},0,now(),#{qnPushState})
+   </insert>
 </mapper>

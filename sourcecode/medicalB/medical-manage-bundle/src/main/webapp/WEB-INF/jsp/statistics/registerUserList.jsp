@@ -20,8 +20,8 @@
 				<div class="form-inline">
 					<div class="control-group inline">
 						<label class="inline" for="name">时间段:</label> 
-						<input id="startTime" name="startTime" class="Wdate"  style="width:30%;" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" />-
-						<input id="endTime" name="endTime" class="Wdate"  style="width:30%;" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" />
+						<input id="startTime" name="startTime" class="Wdate"  style="width:30%;" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />-
+						<input id="endTime" name="endTime" class="Wdate"  style="width:30%;" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
 					</div>
 					<div class="control-group inline pull-right">
 						<button type="button" id="query_btn" class="btn btn-primary">查询</button>

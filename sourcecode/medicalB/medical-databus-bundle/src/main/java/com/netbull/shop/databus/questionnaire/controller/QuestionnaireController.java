@@ -1,5 +1,7 @@
 package com.netbull.shop.databus.questionnaire.controller;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +23,7 @@ import com.netbull.shop.databus.questionnaire.model.Questionnaire;
 import com.netbull.shop.databus.questionnaire.model.Result;
 import com.netbull.shop.databus.questionnaire.service.QuestionnaireService;
 import com.netbull.shop.manage.common.http.Resp;
+import com.netbull.shop.util.RequestUtils;
 
 /**
  * 问卷Controller
@@ -29,129 +32,184 @@ import com.netbull.shop.manage.common.http.Resp;
  */
 @Controller("questionnaireController")
 public class QuestionnaireController {
-	
+
 	private static final Logger logger = Logger.getLogger("controlerLog");
 
 	@Resource
 	private QuestionnaireService questionnaireService;
-	
+
 	/**
 	 * 医生问卷列表
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/anon/doctor/questionnaire/list" , produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/anon/doctor/questionnaire/list", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String questionnaireList(HttpServletRequest reqest) throws Exception {
 		String req = RequestUtil.getPostData(reqest);
 		logger.info("req=" + req);
-		
+
 		Questionnaire qn = JSON.parseObject(req, Questionnaire.class);
-		QuestionnaireListResp resp = questionnaireService.getQuestionnaireListResp(qn.getDoctorId());
+		QuestionnaireListResp resp = questionnaireService
+				.getQuestionnaireListResp(qn.getDoctorId());
 		return JSON.toJSONString(resp);
 	}
 
 	/**
 	 * 问卷详情
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/anon/doctor/questionnaire/detail" , produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/anon/doctor/questionnaire/detail", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String questionnaireDetail(HttpServletRequest reqest) throws Exception {
+	public String questionnaireDetail(HttpServletRequest reqest)
+			throws Exception {
 		String req = RequestUtil.getPostData(reqest);
 		logger.info("req=" + req);
-		
+
 		Questionnaire qn = JSON.parseObject(req, Questionnaire.class);
-		QuestionnaireResp resp = questionnaireService.getQuestionnaireResp(qn.getId());
+		QuestionnaireResp resp = questionnaireService.getQuestionnaireResp(qn
+				.getId());
 		return JSON.toJSONString(resp);
 	}
-	
+
 	/**
 	 * 问卷绑定给患者
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/anon/questionnaire/patient/bind" , produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/anon/questionnaire/patient/bind", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String bind(HttpServletRequest reqest) throws Exception {
 		String req = RequestUtil.getPostData(reqest);
 		logger.info("req=" + req);
-		
+
 		PatientBind bind = JSON.parseObject(req, PatientBind.class);
 		Resp resp = questionnaireService.bind(bind);
 		return JSON.toJSONString(resp);
 	}
-	
+
 	/**
 	 * 提交问卷
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/anon/questionnaire/commit" , produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/anon/questionnaire/commit", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String questionnaireCommit(HttpServletRequest reqest) throws Exception {
+	public String questionnaireCommit(HttpServletRequest reqest)
+			throws Exception {
 		String req = RequestUtil.getPostData(reqest);
 		logger.info("req=" + req);
-		
+
 		Result rslt = JSON.parseObject(req, Result.class);
 		Resp resp = questionnaireService.commit(rslt);
 		return JSON.toJSONString(resp);
 	}
-	
+
 	/**
 	 * 异常列表查询
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/anon/questionnaire/exception/list" , produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/anon/questionnaire/exception/list", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String exceptionList(HttpServletRequest reqest) throws Exception {
 		String req = RequestUtil.getPostData(reqest);
 		logger.info("req=" + req);
-		
+
 		Questionnaire qn = JSON.parseObject(req, Questionnaire.class);
-		ExceptionResultResp resp = questionnaireService.exceptionResultList(qn.getDoctorId());
+		ExceptionResultResp resp = questionnaireService.exceptionResultList(qn
+				.getDoctorId());
 		return JSON.toJSONString(resp);
 	}
-	
+
 	/**
 	 * 异常项查询
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/anon/questionnaire/exceptionOption" , produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/anon/questionnaire/exceptionOption", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String exceptionOption(HttpServletRequest reqest) throws Exception {
 		String req = RequestUtil.getPostData(reqest);
 		logger.info("req=" + req);
-		
+
 		Result rslt = JSON.parseObject(req, Result.class);
-		ExceptionOptionResp resp = questionnaireService.exceptionOption(rslt.getId());
+		ExceptionOptionResp resp = questionnaireService.exceptionOption(rslt
+				.getId());
 		return JSON.toJSONString(resp);
 	}
-	
+
 	/**
 	 * 问卷反馈提交
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/anon/questionnaire/feedback/commit" , produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/anon/questionnaire/feedback/commit", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String feedbackCommit(HttpServletRequest reqest) throws Exception {
 		String req = RequestUtil.getPostData(reqest);
 		logger.info("req=" + req);
-		
+
 		Feedback feedback = JSON.parseObject(req, Feedback.class);
 		Resp resp = questionnaireService.feedback(feedback);
 		return JSON.toJSONString(resp);
 	}
-	
+
 	/**
 	 * 问卷反馈查询
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/anon/questionnaire/feedback/query" , produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/anon/questionnaire/feedback/query", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String feedbackQuery(HttpServletRequest reqest) throws Exception {
 		String req = RequestUtil.getPostData(reqest);
 		logger.info("req=" + req);
-		
+
 		Feedback feedback = JSON.parseObject(req, Feedback.class);
 		FeedbackDto resp = questionnaireService.getFeedback(feedback.getId());
+		return JSON.toJSONString(resp);
+	}
+
+	// 保存委托填写的医生
+	@RequestMapping(value = "/anon/questionnaire/deputeDoctor", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String deputeDoctor(HttpServletRequest reqest) throws Exception {
+		String req = RequestUtil.getPostData(reqest);
+		logger.info("req=" + req);
+//		req = "{ \"qnId\":1,\"patientId\":1103259796, \"doctorId\":1,\"deputeDoctor\":1 }";
+		Result rslt = JSON.parseObject(req, Result.class);
+		Resp resp = questionnaireService.deputeDoctor(rslt);
+		return JSON.toJSONString(resp);
+	}
+
+	// 被委托医生查询 列表
+	@SuppressWarnings({ "rawtypes" })
+	@RequestMapping(value = "/anon/questionnaire/depute/list", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String deputeList(HttpServletRequest request) throws Exception {
+		Map<String, String> requestMap = RequestUtils.parameterToMap(request);
+		Map resp = questionnaireService.queryDeputeQuestionnaire(requestMap);
+		return JSON.toJSONString(resp);
+	}
+
+	// 被委托医生查询 列表
+	@SuppressWarnings({ "rawtypes" })
+	@RequestMapping(value = "/anon/questionnaire/doctor/result", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String doctorResult(HttpServletRequest request) throws Exception {
+		Map<String, String> requestMap = RequestUtils.parameterToMap(request);
+		Map resp = questionnaireService.queryDoctorResult(requestMap);
+		return JSON.toJSONString(resp);
+	}
+	//查询医生回访跟踪
+	@SuppressWarnings({ "rawtypes" })
+	@RequestMapping(value = "/anon/questionnaire/doctor/patient", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String doctorPatient(HttpServletRequest request) throws Exception {
+		Map<String, String> requestMap = RequestUtils.parameterToMap(request);
+		Map resp = questionnaireService.findDoctorquesPatient(requestMap);
 		return JSON.toJSONString(resp);
 	}
 }

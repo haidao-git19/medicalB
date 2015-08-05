@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!doctype html>
 <html>
 <head>
@@ -12,6 +13,17 @@
 <script src="${ctx }/resources/web/js/global.js" type="text/javascript"></script>
 <link href='${ctx }/resources/web/css/hospital.css' rel='stylesheet' type='text/css' />
 <link href='${ctx }/resources/web/css/global-v5.css' rel='stylesheet' type='text/css' />
+<script type="text/javascript">
+	function hosSummaryPreview(p){
+		if(p=="l"){
+			document.querySelector(".s_m").style.display="none";
+			document.querySelector(".s_l").style.display="block";
+		}else{
+			document.querySelector(".s_l").style.display="none";
+			document.querySelector(".s_m").style.display="block";
+		}
+	}
+</script>
     </head>
     <body>
  <input type="hidden" id="hosid" value="${hospitalDetails.hospitalDetail.hospitalID}">
@@ -47,9 +59,16 @@
   <li class="comp-addL">
     <label for="address">医院地址：</label>
     <span title=" ${hospitalDetails.hospitalDetail.address }"> ${hospitalDetails.hospitalDetail.address }</span> <a class="clr-08c" target="_blank" href="#" rel="nofollow">地图</a> </li>
-  <li class="comp-gen-txarea"> ${hospitalDetails.hospitalDetail.skill } </li>
+  	<c:choose>
+  		<c:when test="${not empty (hospitalDetails.hospitalDetail.summary) }">
+  			<li class="comp-gen-txarea s_m"> ${fn:substring(hospitalDetails.hospitalDetail.summary,0,100) } <a href="javascript:hosSummaryPreview('l');">更多&gt;&gt;</a></li>
+		  	<li class="comp-gen-txarea s_l" style="display:none;"> ${hospitalDetails.hospitalDetail.summary} <a href="javascript:hosSummaryPreview('m');">&lt;&lt;收起</a></li>
+  		</c:when>
+  		<c:otherwise>
+  			<li class="comp-gen-txarea">暂无医院介绍</li>
+  		</c:otherwise>
+  	</c:choose>
 </ul>
-
 
 
 
@@ -61,32 +80,32 @@
               <span class="ctg-titleR">科室
               <span class="clr-org"> ${allcount} </span>个　|　大夫<span class="clr-org"> 23 </span>人</span>
           </div>
-          <div class="salary-table">
-<table >
-  <tbody>
-    <c:forEach var="fissection" items="${firstselist}">
-    <tr>
-      <td class="position-title" width="12%">${fissection.sectionName}</td>
-      <td><table id="hosbra" border="0" cellpadding="0" cellspacing="0" width="100%">
-          <tbody>
-          <c:forEach var="subSection" items="${allselist}" varStatus="status">
-            <c:if test="${fissection.sectionParentid eq subSection.sectionParentid}">
-                <tr>
-	              <td width="50%"><a href="${ctx }/anon/web/sectionDetail?hospitalID=${hospitalDetails.hospitalDetail.hospitalID}&sectionID=${subSection.sectionID}" target="_blank" class="blue">${subSection.sectionName}</a> </td>
-	            </tr>
-            </c:if>
-            </c:forEach>
-          </tbody>
-        </table></td>
-    </tr>
-    </c:forEach>
-    <c:if test="${allcount==0}">
-               <tr>
-	              <td width="50%">暂无记录</td>
-	            </tr>                 
-     </c:if>
-  </tbody>
-</table>
+          <div class="salary-table" id="hos_sections_init_area">
+			<%-- <table >
+			  <tbody>
+			   <c:forEach var="fissection" items="${firstselist}">
+			    <tr>
+			      <td class="position-title" width="12%">${fissection.sectionName}</td>
+			      <td><table id="hosbra" border="0" cellpadding="0" cellspacing="0" width="100%">
+			          <tbody>
+			          <c:forEach var="subSection" items="${allselist}" varStatus="status">
+			            <c:if test="${fissection.sectionParentid eq subSection.sectionParentid}">
+			                <tr>
+				              <td width="50%"><a href="${ctx }/anon/web/sectionDetail?hospitalID=${hospitalDetails.hospitalDetail.hospitalID}&sectionID=${subSection.sectionID}" target="_blank" class="blue">${subSection.sectionName}</a> </td>
+				            </tr>
+			            </c:if>
+			            </c:forEach>
+			          </tbody>
+			        </table></td>
+			    </tr>
+			    </c:forEach>
+			    <c:if test="${allcount==0}">
+			        <tr>
+				       <td width="50%">暂无记录</td>
+				    </tr>                        
+			     </c:if>
+			  </tbody>
+			</table> --%>
           </div>
       </div>
 

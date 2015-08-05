@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.account.dao.AccountDao">
+   <select id="pageList" parameterType="map" resultType="map">
+		SELECT acc_log_id,p.patientName,p.nickName,p.contactPhone,createDate,fee,logstate,tradebank,bankUserName,branchBank
+		FROM tb_medical_account_log l,tb_medical_account a,tb_medical_patient p
+		WHERE tradeType=5 AND a.accId=l.accId AND p.patientID=a.patientId
+		<if test="patientCard !=null and patientCard !=''">
+            and p.patientCard =#{patientCard}
+        </if>
+		<if test="startTime !=null and startTime !=''">
+            and DATE_FORMAT(l.createDate,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
+        </if>
+        <if test="endTime !=null and endTime !=''">
+            and DATE_FORMAT(l.createDate,'%Y-%m-%d') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d')
+        </if>
+        order by logstate asc
+       <include refid="com.odchia.dao.Dao.pageComponent" />
+	</select>
+    <select id="count" parameterType="map" resultType="long">
+       SELECT count(1) FROM tb_medical_account_log l,tb_medical_account a,tb_medical_patient p
+		WHERE tradeType=5 AND a.accId=l.accId AND p.patientID=a.patientId
+		<if test="patientCard !=null and patientCard !=''">
+            and p.patientCard =#{patientCard}
+        </if>
+		<if test="startTime !=null and startTime !=''">
+            and DATE_FORMAT(l.createDate,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
+        </if>
+        <if test="endTime !=null and endTime !=''">
+            and DATE_FORMAT(l.createDate,'%Y-%m-%d') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d')
+        </if>
+   </select>
+ 
+</mapper>

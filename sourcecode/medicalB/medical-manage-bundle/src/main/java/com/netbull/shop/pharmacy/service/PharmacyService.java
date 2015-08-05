@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -14,9 +13,7 @@ import com.netbull.shop.common.config.ConfigLoadUtil;
 import com.netbull.shop.common.page.Page;
 import com.netbull.shop.common.util.NullUtil;
 import com.netbull.shop.common.util.StringUtil;
-import com.netbull.shop.doctor.entity.UserInfo;
 import com.netbull.shop.patient.dao.PatientDao;
-import com.netbull.shop.patient.entity.Patient;
 import com.netbull.shop.patient.entity.Picture;
 import com.netbull.shop.pharmacy.dao.PharmacyDao;
 import com.netbull.shop.pharmacy.entity.Pharmacy;
@@ -43,17 +40,17 @@ public class PharmacyService {
 
 
 	public int save(Pharmacy pharmacy,CommonsMultipartFile file) {
-		UserInfo userInfo = new UserInfo();
-		userInfo.setLoginName(pharmacy.getLoginAccount());
-		userInfo.setPassword(DigestUtils.md5Hex(pharmacy.getLoginPwd()));
-		userInfo.setParentid(pharmacy.getCreator());
-		userInfo.setPhone(pharmacy.getPhone());
-		userInfo.setTrueName(pharmacy.getShopName());
+		//UserInfo userInfo = new UserInfo();
+		//userInfo.setLoginName(pharmacy.getLoginAccount());
+		//userInfo.setPassword(DigestUtils.md5Hex(pharmacy.getLoginPwd()));
+		//userInfo.setParentid(pharmacy.getCreator());
+		//userInfo.setPhone(pharmacy.getPhone());
+		//userInfo.setTrueName(pharmacy.getShopName());
 		
-		userInfo = pharmacyDao.saveUserInfo(userInfo);
+		//userInfo = pharmacyDao.saveUserInfo(userInfo);
 		int pharmacyRoleId = StringUtil.parseInt(ConfigLoadUtil.loadConfig().getPropertie("PHARMACY_ROLE_ID"), 0);
-		pharmacyDao.saveRoleUserInfo(pharmacyRoleId, userInfo.getId());
-		pharmacy.setLoginID(userInfo.getId());
+		//pharmacyDao.saveRoleUserInfo(pharmacyRoleId, userInfo.getId());
+		//pharmacy.setLoginID(userInfo.getId());
 		
 		String fileName=uploadFileUtil.createFile(file, null);
 		String realPath=ConfigLoadUtil.loadConfig().getPropertie("accessUrl");
@@ -63,11 +60,11 @@ public class PharmacyService {
 
 
 	public int update(Pharmacy pharmacy,CommonsMultipartFile file) {
-		UserInfo userInfo = new UserInfo();
-		userInfo.setTrueName(pharmacy.getShopName());
-		userInfo.setPhone(pharmacy.getPhone());
-		userInfo.setId(pharmacy.getLoginID());
-		pharmacyDao.updateUserInfo(userInfo);
+		//UserInfo userInfo = new UserInfo();
+		//userInfo.setTrueName(pharmacy.getShopName());
+		//userInfo.setPhone(pharmacy.getPhone());
+		//userInfo.setId(pharmacy.getLoginID());
+		//pharmacyDao.updateUserInfo(userInfo);
 		
 		if(!NullUtil.isNull(file)&&file.getSize()>0){
 			String fileName=uploadFileUtil.createFile(file, null);

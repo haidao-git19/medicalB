@@ -113,4 +113,8 @@ public class DoctorService {
 	public Map queryDoctorGroupConsulationRDetail(Map paramter) {		
 		return doctorDao.queryDoctorGroupConsulationRDetail(paramter);
 	}
+
+	public List<Map> queryNearDoctorList(Map requestMap) {
+		return doctorDao.queryNearDoctorList(requestMap);
+	}
 }

@@ -42,16 +42,20 @@
 						</select>
 					</div>
 					<div class="control-group inline">
-						<label class="inline" for="hospitalLevel">本地网:</label> 
-						<select type="text" id="areaID" name="areaID"></select>
-					</div>
-					<div class="control-group inline">
 						<label class="inline" for="hospitalLevel">医院类型:</label> 
 						<select type="text" id="type" name="type">
 							<option value="" selected="selected">--选择类型--</option>
 							<option value="1">专家医院</option>
 							<option value="0">社区医院</option>
 						</select>
+					</div>
+					<div class="control-group inline">
+						<label class="inline" for="hospitalLevel">省直:</label> 
+						<select type="text" id="p_areaID" name="p_areaID" onchange="javascript:loadCityAreaList(this.value);"></select>
+					</div>
+					<div class="control-group inline">
+						<label class="inline" for="hospitalLevel">本地网:</label> 
+						<select type="text" id="areaID" name="areaID"></select>
 					</div>
 					<div class="control-group inline pull-right">
 						<button type="button" id="query_btn" class="btn btn-primary">查询</button>

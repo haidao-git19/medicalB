@@ -27,17 +27,24 @@
 										<div class="span6 msg_div_white" style="line-height: 300%; margin-right: 0px; height: auto; margin-left: 2%; width: 80%">
 											<div style="margin-left: 5%; margin-top: 20px; margin-bottom: 50px; height: auto">
 												<div class="control-group">
-													<label class="control-label">
-														<span class="help-inline">*</span><font class="msg_font_bold">问卷名称：</font>
-														<input type="text" style="width: 60%" id="_name" value="${questionnaire.name}"/>
-													</label>
-												</div>
-												<div class="control-group">
 														<label class="control-label">
-															<span class="help-inline">*</span><font class="msg_font_bold">问卷备注：</font>
-															<textarea rows="" cols="" style="width: 60%" id="_note">${questionnaire.note}</textarea>
+															<span class="help-inline">*</span><font class="msg_font_bold">问卷名称：</font>
+															<input type="text" style="width: 60%" id="_name" value="${questionnaire.name}"/>
 														</label>
+													</div>
+													<div class="control-group">
+															<label class="control-label">
+																<span class="help-inline">*</span><font class="msg_font_bold">问卷备注：</font>
+																<textarea rows="" cols="" style="width: 60%" id="_note">${questionnaire.note}</textarea>
+															</label>
 													</div>	
+													<div class="control-group">
+															<label class="control-label">
+																<span class="help-inline">*</span><font class="msg_font_bold">推送间隔：</font>
+																<input type="text" style="width: 60%" id="_pushDays" value="${questionnaire.pushDays}"/>(单位:天)
+															</label>
+														</div>	
+													</div>
 												</div>
 										</div>
 									</div>

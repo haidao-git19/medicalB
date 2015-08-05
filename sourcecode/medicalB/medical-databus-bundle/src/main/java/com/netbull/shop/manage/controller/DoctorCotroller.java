@@ -1,6 +1,9 @@
 package com.netbull.shop.manage.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -129,8 +132,10 @@ public class DoctorCotroller extends AbstractController{
 					&& !NullUtil.isNull(requestMap.get("startTime")) 
 					&& !NullUtil.isNull(requestMap.get("endTime"))){
 				
-				paramter.put("startTime", requestMap.get("startTime"));
-				paramter.put("endTime", requestMap.get("endTime"));
+//				paramter.put("startTime", requestMap.get("startTime"));
+//				paramter.put("endTime", requestMap.get("endTime"));
+				paramter.put("weekFlag", timeToCalendarParams(requestMap.get("startTime")).get("weekFlag"));
+				paramter.put("weekNum", timeToCalendarParams(requestMap.get("startTime")).get("weekNum"));
 				doctorList = doctorService.queryDoctorListByTime(paramter);
 			}else{
 				doctorList = doctorService.queryDoctorList(paramter);
@@ -559,6 +564,7 @@ public class DoctorCotroller extends AbstractController{
 			Map user = doctorService.queryDoctorDetail(requestMap);
 			Float betterRate = evaluateService.queryBetterRate(requestMap);
 			if(!NullUtil.isNull(user)){
+				user.put("monthlyDesc", Constants.MONTHLYDESC);
 				user.put("betterRate", betterRate);
 				user.put("feeList", DoctorDC.getInstance().querydoctorFeeMap(StringUtil.getString(user.get("doctorID"))));
 				user.put("avatar", ConfigLoadUtil.loadConfig().getPropertie("accessAddress") + user.get("avatar"));
@@ -658,4 +664,32 @@ public class DoctorCotroller extends AbstractController{
 		SubAccount.put("status", "0");
 		return SubAccount;
 	}
+	
+	private Map<String,Object> timeToCalendarParams(String time) throws Exception{
+		Map<String,Object> map=new HashMap<String, Object>();
+		int[] daysOfWeek={7,1,2,3,4,5,6};
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		Date date=sdf.parse(time);
+		Calendar cal=Calendar.getInstance();
+		int cur_week=cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+		
+		cal.setTime(date);
+		int conv_week=cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+		
+		if(cur_week==conv_week){
+			map.put("weekFlag", 0);
+		}else if(conv_week-cur_week==1){
+			map.put("weekFlag", 1);
+		}
+		
+		int d=cal.get(Calendar.DAY_OF_WEEK)-1;
+		if(d<0)d=0;
+		int dok=daysOfWeek[d];
+		
+		map.put("weekNum", dok);	
+			
+		return map;
+	}
+	
 }

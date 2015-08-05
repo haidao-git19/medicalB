@@ -57,9 +57,6 @@ public class WebDoctorController {
 		if(skill.length()>20){
 			doctor.setSkill(skill.substring(0, 20)+"...");
 		}
-		if(experience.length()>40){
-			doctor.setExperience(experience.substring(0, 40)+"...");
-		}
 		
 		String realPath=ConfigLoadUtil.loadConfig().getPropertie("accessUrl");
 		if(StringUtil.isEmpty(doctor.getAvatar())){

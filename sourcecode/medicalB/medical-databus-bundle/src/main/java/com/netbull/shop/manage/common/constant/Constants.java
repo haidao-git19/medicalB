@@ -171,6 +171,7 @@ public class Constants {
 	public static final String HOSTPITAL_TYPE_1 = "1";
 	
 	public static final String CONSULATOIN_PAY_STATE_FINISH = "1";
+	
 	public static final String CONSULATOIN_PAY_STATE_FAIL = "2";
 	public static final String SUBSCRIBE_PAY_STATE_FINISH = "1";
 	public static final String SUBSCRIBE_PAY_STATE_FAIL = "2";
@@ -178,4 +179,9 @@ public class Constants {
 	public static final String CONSULATOIN_PAY_TYPE = "1";
 	public static final String SUBSCRIBE_PAY_TYPE = "2";
 	public static final String PLUS_PAY_TYPE = "3";
+	public static final String RECHARGE_PAY_TYPE = "6";
+	public static final String MONTHSERVICE_PAY_TYPE = "7";
+	public static final String HOMESERVICE_PAY_TYPE = "8";
+	public static final Object MONTHLYDESC = "缴费后30天内医生所有服务都免费（注：仅限本人）";
+	public static final String MONTH_SERVICE_PAY_STATE_FINISH = "1";
 }

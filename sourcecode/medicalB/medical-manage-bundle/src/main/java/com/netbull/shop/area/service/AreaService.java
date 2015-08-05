@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.netbull.shop.area.dao.AreaDao;
 import com.netbull.shop.area.entity.Area;
+import com.netbull.shop.util.MyBatisDao;
 
 @Service("areaService")
-public class AreaService {
+public class AreaService extends MyBatisDao<Area, Integer>{
 
 	@Resource
 	private AreaDao areaDao;
@@ -20,6 +21,9 @@ public class AreaService {
 		return areaDao.findAll();
 	}
 	
+	public List<Area> queryAreasByParams(Map parameter){
+		return areaDao.queryByParams(parameter);
+	}
 	
 	public Map<Integer,String> handleAllAreaMap(){
 		List<Area> areaList=areaDao.findAll();

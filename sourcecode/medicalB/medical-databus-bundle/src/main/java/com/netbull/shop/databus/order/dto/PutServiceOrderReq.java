@@ -9,6 +9,8 @@ public class PutServiceOrderReq {
 	private long prescriptionId;
 	private int fee;
 	private String sign;
+	private int accpay;
+	private int accpayfee;
 
 	public long getPatientId() {
 		return patientId;
@@ -72,6 +74,22 @@ public class PutServiceOrderReq {
 
 	public void setSign(String sign) {
 		this.sign = sign;
+	}
+
+	public int getAccpay() {
+		return accpay;
+	}
+
+	public void setAccpay(int accpay) {
+		this.accpay = accpay;
+	}
+
+	public int getAccpayfee() {
+		return accpayfee;
+	}
+
+	public void setAccpayfee(int accpayfee) {
+		this.accpayfee = accpayfee;
 	}
 
 }

@@ -8,5 +8,11 @@
 	    SELECT  areaID,areaName,parentID ,C.index FROM tb_medical_area C order by C.index
 	</select>
    
+    <select id="query_by_params" parameterType="java.util.Map" resultType="com.netbull.shop.area.entity.Area">
+       SELECT  areaID,areaName,parentID ,C.index FROM tb_medical_area C WHERE C.parentID=#{parentID} order by C.index asc
+   </select>
    
+    <select id="queryEntityById" parameterType="java.lang.Integer" resultType="com.netbull.shop.area.entity.Area">
+        SELECT * FROM tb_medical_area WHERE areaID=#{areaID}
+    </select>
 </mapper>

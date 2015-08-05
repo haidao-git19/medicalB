@@ -116,4 +116,16 @@ public class QuestionnaireService {
 	public void deleteQuestionnaireCaseOption(Integer id){
 		questionnaireDao.deleteQuestionnaireCaseOption(id);
 	}
+	
+	public List<Map> queryQuestionnairePatientMappingList(){
+		return questionnaireDao.queryQuestionnairePatientMappingList();
+	}
+	
+	public List<Map> queryGroupedQnPMList(){
+		return questionnaireDao.queryGroupedQnPMList();
+	}
+	
+	public void saveQuestionnairePatientMapping(Map parameter){
+		questionnaireDao.saveQuestionnairePatientMapping(parameter);
+	}
 }

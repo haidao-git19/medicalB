@@ -2,8 +2,11 @@ package com.netbull.shop.manage.weixin.dao;
 
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Repository;
+
 import com.netbull.shop.common.dao.SqlSession;
 import com.netbull.shop.manage.weixin.vo.ConsultationVo;
 
@@ -42,5 +45,13 @@ public class ConsultationDao {
 	
 	public List<Map> queryRcentiConsultation(Map paramter) {		
 		return session.selectList(MYBATIS_PREFIX + ".queryRcentiConsultation",paramter);
+	}
+
+	public Object queryConsultDispDocs(Map consultationMap) {
+		return session.selectList(MYBATIS_PREFIX + ".queryConsultDispDocs",consultationMap);
+	}
+
+	public Object queryConsultDispSections(Map consultationMap) {
+		return session.selectList(MYBATIS_PREFIX + ".queryConsultDispSections",consultationMap);
 	}
 }

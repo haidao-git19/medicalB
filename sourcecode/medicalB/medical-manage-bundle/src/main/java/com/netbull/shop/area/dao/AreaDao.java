@@ -1,6 +1,7 @@
 package com.netbull.shop.area.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -21,5 +22,9 @@ public class AreaDao {
 	public List<Area> findAll() {
 		// TODO Auto-generated method stub
 		return session.find(MYBATIS_PREFIX+".findAll");
+	}
+	
+	public List<Area> queryByParams(Map parameter){
+		return session.selectList(MYBATIS_PREFIX+".query_by_params", parameter);
 	}
 }

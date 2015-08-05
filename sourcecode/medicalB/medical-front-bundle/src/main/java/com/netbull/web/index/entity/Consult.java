@@ -21,6 +21,10 @@ public class Consult {
 	private String attrname;
 	private String doctorLevel;
 	private String hospitalName;
+	private Integer doctorID;
+	private Integer hospitalID;
+	private Integer sectionID;
+	
 	public int getConsultationID() {
 		return consultationID;
 	}
@@ -122,6 +126,24 @@ public class Consult {
 	}
 	public void setHospitalName(String hospitalName) {
 		this.hospitalName = hospitalName;
+	}
+	public Integer getDoctorID() {
+		return doctorID;
+	}
+	public void setDoctorID(Integer doctorID) {
+		this.doctorID = doctorID;
+	}
+	public Integer getHospitalID() {
+		return hospitalID;
+	}
+	public void setHospitalID(Integer hospitalID) {
+		this.hospitalID = hospitalID;
+	}
+	public Integer getSectionID() {
+		return sectionID;
+	}
+	public void setSectionID(Integer sectionID) {
+		this.sectionID = sectionID;
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.netbull.shop.manage.weixin.dao.SubscribeDao;
 import com.netbull.shop.manage.weixin.vo.EMRecord;
@@ -26,9 +27,10 @@ public class SubscribeService {
 	public List<Map> querySubscribeList(Map parameter){
 		return subscribeDao.querySubscribeList(parameter); 
 	}
-	
+	@Transactional
 	public void cancelOrder(Map parameter){
 		subscribeDao.cancelOrder(parameter);
+		
 	}
 	
 	public Map querySubscribeByParams(Map parameter){

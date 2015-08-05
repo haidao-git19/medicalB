@@ -29,7 +29,7 @@ public class StatisticsDao extends BaseDao{
 	}
 	
 	public Page queryShopOrderPage(Integer iDisplayStart, Integer iDisplayLength,Map requestMap){
-		requestMap.put("users", this.handleQueryOrgan());
+		//requestMap.put("users", this.handleQueryOrgan());
 		return session.page(MYBATIS_PREFIX+".queryShopOrderList", MYBATIS_PREFIX+".queryShopOrderCount", requestMap, iDisplayStart, iDisplayLength);
 	}
 	
@@ -52,6 +52,10 @@ public class StatisticsDao extends BaseDao{
 	public Page queryHospitalBusinessPage(Integer iDisplayStart, Integer iDisplayLength,Map requestMap){
 		requestMap.put("users", this.handleQueryOrgan());
 		return session.page(MYBATIS_PREFIX+".queryHospitalBusinessList", MYBATIS_PREFIX+".queryHospitalBusinessCount", requestMap, iDisplayStart, iDisplayLength);
+	}
+	
+	public Page queryConpanyPatient(Integer iDisplayStart, Integer iDisplayLength,Map requestMap){
+		return session.page(MYBATIS_PREFIX+".queryConpanyPatient", MYBATIS_PREFIX+".queryConpanyPatientCount", requestMap, iDisplayStart, iDisplayLength);
 	}
 	
 	public Integer queryDRV(Map parameter){

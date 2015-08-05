@@ -53,12 +53,13 @@
 	</insert>
 	
 	<insert id="saveUserInfo" parameterType="com.netbull.shop.doctor.entity.UserInfo" useGeneratedKeys="true" keyProperty="id">
-		INSERT into vauth.user_info(login_name, true_name, password, phone, parentid,area_id) values(#{loginName}, #{trueName}, #{password}, #{phone}, #{parentid},'0')
+		INSERT into vauth.user_info(login_name, true_name, password, phone, parentid,area_id,status) values(#{loginName}, #{trueName}, #{password}, #{phone}, #{parentid},'0','1')
 	</insert>
 	
 	<update id="updateUserInfo" parameterType="com.netbull.shop.doctor.entity.UserInfo">
 		UPDATE vauth.user_info SET  
 		true_name=#{trueName},
+		area_id=#{area_id},
 		phone=#{phone}
 		WHERE login_Name=#{loginName}
 	</update>

@@ -32,6 +32,9 @@ function queryQuestionnaireList(){
 							{
 							  "sTitle" : "备注",
 							},
+							{
+							  "sTitle" : "推送间隔(天)"
+							},
 							{ "sTitle" : "操作",
 							  "fnRender" : function(obj) {
 								  var id = obj.aData[0];
@@ -60,6 +63,7 @@ function openAddOrModifyQuestionnaire(id){
 					$("#_id").val(data.id);
 					$("#_name").val(data.name);
 					$("#_note").val(data.note);
+					$("#_pushDays").val(data.pushDays);
 				}
 			}
 		});
@@ -67,6 +71,7 @@ function openAddOrModifyQuestionnaire(id){
 		$("#_id").val('');
 		$("#_name").val('');
 		$("#_note").val('');
+		$("#_pushDays").val('');
 	}
 	$("#modal_parameter").modal();
 }
@@ -102,7 +107,7 @@ function submitQuestionnaire(){
 	$.ajax({
 		url:ctx+"/questionnaire/addOrUpdateQuestionnaire",
 		type:"post",
-		data:{"id":$("#_id").val(),"name":$("#_name").val(),"note":$("#_note").val()},
+		data:{"id":$("#_id").val(),"name":$("#_name").val(),"note":$("#_note").val(),"pushDays":$("#_pushDays").val()},
 		dataType:"json",
 		async:false,
 		success:function(data){
@@ -119,6 +124,14 @@ function closeModal(){
 function validateMsg(){
 	if(!$.trim($("#_name").val())){
 		alert( "请填写问卷名称!");
+		return false;
+	}
+	
+	if(isNaN($("#_pushDays").val())){
+		alert("请输入正确的数字!");
+		return false;
+	}else if(Number($("#_pushDays").val())>=365){
+		alert("数字过大,请重新输入!");
 		return false;
 	}
 }

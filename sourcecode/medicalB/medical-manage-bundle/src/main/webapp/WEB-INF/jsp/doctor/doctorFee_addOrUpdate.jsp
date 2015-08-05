@@ -44,6 +44,8 @@
 															<option value="3" <c:if test="${doctorFee.type eq 3}">selected="selected"</c:if>>语音咨询</option>
 															<option value="4" <c:if test="${doctorFee.type eq 4}">selected="selected"</c:if>>视频咨询</option>
 															<option value="5" <c:if test="${doctorFee.type eq 5}">selected="selected"</c:if>>加号</option>
+															<option value="7" <c:if test="${doctorFee.type eq 7}">selected="selected"</c:if>>包月</option>
+															<option value="8" <c:if test="${doctorFee.type eq 8}">selected="selected"</c:if>>上门服务</option>
 														</select>
 													</div>
 												</div>

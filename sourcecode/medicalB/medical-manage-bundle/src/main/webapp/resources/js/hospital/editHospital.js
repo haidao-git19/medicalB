@@ -2,22 +2,29 @@ $(document).ready(function(){
 	initFirstLevelSection();
 	initAllGroupSection();
 	queryCheckedSection();
-//加载本地网
-	$.ajax({
-		url:ctx+"/area/handleAllArea",
-		async:false,
-		dataType:"json",
-		success:function(data){
-			$("#areaID").html("<option value=''>--选择城市--</option>");
-			if(data){
-				for(var i in data){
-					$("#areaID").append("<option value='"+data[i].areaID+"'>"+data[i].areaName+"</option>");
-				}
-			}
-		}
-	});
+	//加载省份直辖市
+	loadProvinceAreaList(0);
+
+//	//加载本地网
+//	$.ajax({
+//		url:ctx+"/area/handleAllArea",
+//		async:false,
+//		dataType:"json",
+//		success:function(data){
+//			$("#areaID").html("<option value=''>--选择城市--</option>");
+//			if(data){
+//				for(var i in data){
+//					$("#areaID").append("<option value='"+data[i].areaID+"'>"+data[i].areaName+"</option>");
+//				}
+//			}
+//		}
+//	});
+	if($("#p_latnId").val()){
+		$("#p_areaID").val($("#p_latnId").val());
+		loadCityAreaList($("#p_latnId").val());
+		$('#areaID').val($('#latnId').val());
+	}
 	
-	$('#areaID').val($('#latnId').val());
 	$('#isCooperation').val($('#defaultCooperation').val());
 	
 	$("#areaID").change(function(){
@@ -25,6 +32,48 @@ $(document).ready(function(){
 		$("#areaName").val(areaName);
 	});
 });
+
+function loadProvinceAreaList(parentID){
+	$.ajax({
+		url:ctx+"/area/queryAreasByParams",
+		type:"post",
+		data:{"parentID":parentID},
+		async:false,
+		dataType:"json",
+		success:function(data){
+			$("#p_areaID").html("<option value=''>--选择省--</option>");
+			$("#areaID").empty().append("<option value=''>--选择市--</option>");
+			if(data){
+				for(var i in data){
+					$("#p_areaID").append("<option value='"+data[i].areaID+"'>"+data[i].areaName+"</option>");
+				}
+			}
+		}
+	});
+}
+
+function loadCityAreaList(value){
+	if(value!=null&&value!=''){
+		//加载本地网
+		$.ajax({
+			url:ctx+"/area/queryAreasByParams",
+			type:"post",
+			data:{"parentID":value},
+			async:false,
+			dataType:"json",
+			success:function(data){
+				$("#areaID").html("<option value=''>--选择市--</option>");
+				if(data){
+					for(var i in data){
+						$("#areaID").append("<option value='"+data[i].areaID+"'>"+data[i].areaName+"</option>");
+					}
+				}
+			}
+		});
+	}else{
+		$("#areaID").empty().append("<option value=''>--选择市--</option>");
+	}
+}
 
 function initFirstLevelSection(){
 	$.ajax({

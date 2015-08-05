@@ -23,6 +23,7 @@ import com.netbull.shop.common.util.StringTools;
 import com.netbull.shop.common.util.StringUtil;
 import com.netbull.shop.manage.common.constant.Constants;
 import com.netbull.shop.manage.common.util.HttpXmlUtil;
+import com.netbull.shop.manage.weixin.service.AccountmanageService;
 import com.netbull.shop.manage.weixin.service.DoctorService;
 import com.netbull.shop.manage.weixin.service.FreeTimeService;
 import com.netbull.shop.manage.weixin.service.JPushService;
@@ -53,6 +54,8 @@ public class SubscribeController extends AbstractController{
 	private MultiMediaService multiMediaService;
 	@Autowired
 	private ReturnVisitService returnVisitService;
+	@Autowired
+	private AccountmanageService accService;
 	
 	/**
 	 * 取消预约
@@ -89,7 +92,14 @@ public class SubscribeController extends AbstractController{
 			}
 			requestMap.put("state", "-1");
 			subscribeService.cancelOrder(requestMap);
-			
+			// 如果已经付款进行退款
+			Integer paystate = (Integer) subscribe.get("paystate");
+			if (Constants.CONSULATOIN_PAY_STATE_FINISH.equals(paystate)) {
+				Long serviceNumber = (Long) subscribe
+						.get("orderID");
+				Long patientID = (Long) subscribe.get("patientID");
+				accService.returnsFee(Constants.SUBSCRIBE_PAY_TYPE, String.valueOf(serviceNumber), String.valueOf(patientID));
+			}
 			String aliases=null;
 			if(StringTools.equals("0", type)){
 				aliases = StringUtil.getString(subscribe.get("patientID"));
@@ -230,8 +240,8 @@ public class SubscribeController extends AbstractController{
 				logger.debug("获取专家预约信息，参数：" + requestMap.toString());
 			}
 			Map freeTimeMap=freeTimeService.queryFreeTime(requestMap);
-			
-			Integer timeCount=Integer.parseInt(requestMap.get("timeCount"));
+			//预约时间为空或为0，就默认为20分钟
+			Integer timeCount=Integer.parseInt(((requestMap.get("timeCount")==null)||(String.valueOf(requestMap.get("timeCount")).equals("0")))?"20":String.valueOf(requestMap.get("timeCount")));
 			
 			Map parameter=new HashMap();
 			parameter.put("doctorID", Integer.parseInt(requestMap.get("doctorID")));

@@ -49,15 +49,16 @@ function initPharmacyValidate() {
 			lat : {
 				required : true,
 				maxlength : 200
-			},
-			loginAccount : {
-				required : true,
-				maxlength : 200
-			},
-			loginPwd : {
-				required : true,
-				maxlength : 200
 			}
+			//,
+			//loginAccount : {
+			//	required : true,
+			//	maxlength : 200
+			//},
+			//loginPwd : {
+			//	required : true,
+			//	maxlength : 200
+			//}
 		},
 		showErrors : function(errorMap, errorList) {
 			$(this.currentForm).find("span.error").remove();

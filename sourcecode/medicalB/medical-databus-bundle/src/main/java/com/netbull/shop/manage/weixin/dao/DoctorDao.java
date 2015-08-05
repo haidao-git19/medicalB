@@ -121,4 +121,8 @@ public class DoctorDao {
 	public Map queryDoctorGroupConsulationRDetail(Map paramter) {		
 		return session.selectOne(MYBATIS_PREFIX + ".queryDoctorGroupConsulationRDetail",paramter);
 	}
+
+	public List<Map> queryNearDoctorList(Map requestMap) {
+		return session.selectList(MYBATIS_PREFIX+".queryNearDoctorList", requestMap);
+	}
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.MonthServiceDao">
+	<select id="findAreadyMonth" parameterType="java.util.Map"
+		resultType="com.netbull.shop.manage.weixin.vo.MonthService">
+        <![CDATA[
+        SELECT 	msid, patientId, doctorId, fee, payState, createDate, DATE_FORMAT(beginDate,'%Y-%m-d') beginDate, DATE_FORMAT(endDate,'%Y-%m-d') endDate
+	 	FROM tb_medicalb_monthservice 
+	 	where patientId=#{patientId}
+			and doctorId=#{doctorId}
+			and payState=1
+			and beginDate<=#{beginDate}
+			and endDate>=#{beginDate}
+			order by endDate desc LIMIT 0,1
+       ]]>
+	</select>
+	<select id="queryMonthService" parameterType="java.util.Map"
+		resultType="com.netbull.shop.manage.weixin.vo.MonthService">
+        <![CDATA[
+        SELECT 	msid, patientId, doctorId, fee, payState, createDate, DATE_FORMAT(beginDate,'%Y-%m-d') beginDate, DATE_FORMAT(endDate,'%Y-%m-d') endDate
+	 	FROM tb_medicalb_monthservice 
+	 	where patientId=#{patientId}
+			and doctorId=#{doctorId}
+			and payState=1
+			AND DATE_FORMAT(beginDate,'%Y-%m-d')<=DATE_FORMAT(NOW(),'%Y-%m-d')
+			AND DATE_FORMAT(endDate,'%Y-%m-d')>=DATE_FORMAT(NOW(),'%Y-%m-d')
+			order by endDate desc LIMIT 0,1
+       ]]>
+	</select>
+	<insert id="saveMonthService" parameterType="com.netbull.shop.manage.weixin.vo.MonthService"
+		useGeneratedKeys="true" keyProperty="msid">
+		<![CDATA[	
+			INSERT INTO tb_medicalb_monthservice(patientId, doctorId, fee, payState, createDate, beginDate, endDate)
+			VALUES(#{patientId}, #{doctorId}, #{fee}, 0, now(), #{beginDate}, #{endDate}) 
+		]]>
+	</insert>
+	<update id="updateMonthPayState" parameterType="java.util.Map">
+		<![CDATA[
+       		update tb_medicalb_monthservice 
+			set payState=#{payState}
+			where msid=#{msid}
+       ]]>
+	</update>
+
+</mapper>

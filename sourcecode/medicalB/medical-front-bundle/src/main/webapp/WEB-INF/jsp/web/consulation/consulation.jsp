@@ -18,7 +18,7 @@
 
 <body>
 <!--头部开始-->
-<div class="top-wrap">
+<!-- <div class="top-wrap">
     <div class="top-body clearfix">
       <ul class="top-login-status clearfix" id="top-login-status">
         <li>您好，欢迎来到医保宝网</li>
@@ -30,45 +30,59 @@
         <li><a href="#" onClick="addFavorite('http://www.cn','医保宝');">加入收藏</a></li>
       </ul>
     </div>
-  </div>
+  </div> -->
 <!--头部结束-->
-<div class="head"> 
-  <div class="ucenter">
-    <div> <a rel="nofollow" class="clr-08c" href="user/home/"></a><a rel="nofollow" id="ucenter-message" class="ucenter-message ucenter-message-no" href="javascript:void(0);">消息</a><a rel="nofollow" class="ucenter-tc" href="secure/logout/">退出</a>
-      <div class="ucenter-message-list" style="display: none;"> <span class="ucenter-message-active">消息</span>
-        <ul>
-          <li><a href="user/renmai/index/?type=2" target="_blank"><span id="notify_count_001" class="f-r clr-org"></span>查看粉丝</a></li>
-          <li><a href="user/message/index/" target="_blank"><span id="notify_count_002" class="f-r clr-org"></span>查看私信</a></li>
-          <li><a href="user/comment/index/" target="_blank"><span id="notify_count_004" class="f-r clr-org"></span>查看评价</a></li>
-          <li><a href="user/company/my_company_comment/" target="_blank"><span id="notify_count_006" class="f-r clr-org"></span>查看回复</a></li>
-        </ul>
-      </div>
-      <div class="ucenter-message-new" style="display: none;"> <a href="javascript:void(0);" class="ucenter-message-new-close"><i class="icon-msg-close"></i></a>
-        <ul id="ucenter-message-new-list">
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+	<c:if test="${not empty doctor}">
+		<div class="head"> 
+		  <div class="ucenter">
+		    <div> <a rel="nofollow" class="clr-08c" href="user/home/"></a><a rel="nofollow" id="ucenter-message" class="ucenter-message ucenter-message-no" href="javascript:void(0);">消息</a><a rel="nofollow" class="ucenter-tc" href="secure/logout/">退出</a>
+		      <div class="ucenter-message-list" style="display: none;"> <span class="ucenter-message-active">消息</span>
+		        <ul>
+		          <li><a href="user/renmai/index/?type=2" target="_blank"><span id="notify_count_001" class="f-r clr-org"></span>查看粉丝</a></li>
+		          <li><a href="user/message/index/" target="_blank"><span id="notify_count_002" class="f-r clr-org"></span>查看私信</a></li>
+		          <li><a href="user/comment/index/" target="_blank"><span id="notify_count_004" class="f-r clr-org"></span>查看评价</a></li>
+		          <li><a href="user/company/my_company_comment/" target="_blank"><span id="notify_count_006" class="f-r clr-org"></span>查看回复</a></li>
+		        </ul>
+		      </div>
+		      <div class="ucenter-message-new" style="display: none;"> <a href="javascript:void(0);" class="ucenter-message-new-close"><i class="icon-msg-close"></i></a>
+		        <ul id="ucenter-message-new-list">
+		        </ul>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</c:if>
 <div class="main">
-    <div class="top-ch-loc">
-       	当前位置：
-        <a class="clr-08c" href="#" target="_blank">医保宝</a><span class="clr-ccc"> &gt; </span>			<span class="clr-999">网上咨询</span>
-    </div>
+	<c:if test="${not empty doctor}">
+	    <div class="top-ch-loc">
+	       	当前位置：
+	        <a class="clr-08c" href="#" target="_blank">医保宝</a><span class="clr-ccc"> &gt; </span>			<span class="clr-999">网上咨询</span>
+	    </div>
+	</c:if>
 <!--comp-detail-left end-->
 <div class="comp-detail-left">
-<div class="person-file-card cf">
-  <div class="card-photo"> <img src="${ctx }/resources/third-party/images/nouimg.jpg" title="杨桥云" alt="杨桥云">
-    <p>一天前来过</p>
-  </div>
-  <div class="card-words">
-    <ul class="card-info">
-      <li> <a title="杨桥云" href="#" class=" clr-08c fnt-14">杨桥云</a><span class="city">北京安贞医院-心脏内科中心 主任医师</span> </li>
-      <li class="clr-666">擅长： 冠心病，介入治疗 </li>
-      <li class="clr-666"> 简介：赵全明，博士，主任医师，教授，博士研究生导师。1989年西安医科大学内科硕士毕业，1997年底</li>
-    </ul>
-  </div>
-</div>
+	<c:if test="${not empty doctor}">
+		<div class="person-file-card cf" >
+		  <div class="card-photo"> 
+		  	<c:choose>
+		  		<c:when test="${not empty doctor.avatar}">
+		  			<img src="${doctor.avatar}" title="${doctor.realName}" alt="${doctor.realName}">
+		  		</c:when>
+		  		<c:otherwise>
+		  			<img src="${ctx }/resources/third-party/images/nouimg.jpg" title="${doctor.realName}" alt="${doctor.realName}">
+		  		</c:otherwise>
+		  	</c:choose>
+		    <p>一天前来过</p>
+		  </div>
+		  <div class="card-words">
+		    <ul class="card-info">
+		      <li> <a title="${doctor.realName}" href="${ctx}/anon/web/doctor?hospitalID=${doctor.hospitalID}&sectionID=${doctor.sectionID}&doctorID=${doctor.doctorID}" class=" clr-08c fnt-14">${doctor.realName}</a><span class="city">${doctor.hospitalName}-${doctor.sectionName} ${doctor.doctorLevel}</span> </li>
+		      <li class="clr-666">擅长：${doctor.skill} </li>
+		      <li class="clr-666">简介：${doctor.experience}</li>
+		    </ul>
+		  </div>
+		</div>
+	</c:if>
 <!--选择服务内容-->
 <div class="ctg-box cf">
           <div class="ctg-title">

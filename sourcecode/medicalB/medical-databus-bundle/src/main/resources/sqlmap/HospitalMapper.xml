@@ -17,8 +17,8 @@
    </select>
    
    <select id="queryVirtualHospital" parameterType="java.util.Map" resultType="java.util.Map">
-        select s.id, CONCAT(s.attrvalue,"专科医院") hospitalName,'1' as isRecommend from tb_medical_section s where s.id in (select d.sectionID from tb_medical_doctor d where d.isRecommend = 1 and d.doctorID NOT in (select pd.doctorID from tb_medical_patient_doctor pd where pd.doctorType = 0))
+        select s.id, CONCAT(s.attrvalue,"专科医院") hospitalName,'1' as isRecommend from tb_medical_section s where s.id in (select d.sectionID from tb_medical_doctor d where d.isRecommend = 1 )
 		UNION
-		select s.id, CONCAT(s.attrvalue,"专科医院") hospitalName,'0' as isRecommend from tb_medical_section s where s.id in (select d.sectionID from tb_medical_doctor d where d.isRecommend = 0 and d.doctorID NOT in (select pd.doctorID from tb_medical_patient_doctor pd where pd.doctorType = 0)) 
+		select s.id, CONCAT(s.attrvalue,"专科医院") hospitalName,'0' as isRecommend from tb_medical_section s where s.id in (select d.sectionID from tb_medical_doctor d where d.isRecommend = 0 ) 
    </select>
 </mapper>

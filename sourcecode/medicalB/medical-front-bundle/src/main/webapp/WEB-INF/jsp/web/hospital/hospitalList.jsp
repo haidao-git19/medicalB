@@ -38,7 +38,7 @@
 					<ul>
 					<c:forEach items="${area.hospitalList}" var="hos">
 					
-					<li><a href="${ctx }/web/hospitalDetais?hospitalID=${hos.hospitalID}" target="_blank" class="blue" title="${hos.hospitalName }">${hos.hospitalName }</a><span class="clr-999"> (${hos.hospitalLevel }, 特色:${hos.skill })</span></li>
+					<li><a href="${ctx }/web/hospitalDetais?hospitalID=${hos.hospitalID}" target="_blank" class="blue" title="${hos.hospitalName }">${hos.hospitalName }</a><span class="clr-999"> (${hos.hospitalLevel })</span></li>
 					
 					</c:forEach>
 					</ul>

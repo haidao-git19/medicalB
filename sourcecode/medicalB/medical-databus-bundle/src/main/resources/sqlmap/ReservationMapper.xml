@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.manage.weixin.dao.ReservationDao">
+	<insert id="saveReservation" parameterType="com.netbull.shop.manage.weixin.vo.ReservationVo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_medical_reservation
+		(patientId, doctorId, serviceDate, createDate, paystatus, servicedesc, state)
+		VALUES(#{patientId}, #{doctorId},#{serviceDate},now(), 0, #{servicedesc}, 0)
+	</insert>
+
+	<select id="queryReservationList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<choose>
+			<when test="type !=null and type ==1">
+				SELECT c.*,p.contactPhone,p.isComp,p.patientAge,p.patientCard,p.patientName
+				,p.patientSex,p.patientLevel,p.nickName,p.address
+				FROM tb_medical_reservation c ,tb_medical_patient p
+				<where>
+					c.patientID = p.patientID
+					<if test="patientId != null and patientId !=''">
+						and c.patientId = #{patientId}
+					</if>
+					<if test="state != null and state !=''">
+						and c.state = #{state}
+					</if>
+				</where>
+				ORDER BY c.serviceDate desc LIMIT #{start}, #{limit}
+			</when>
+			<otherwise>
+				SELECT c.*, e.patientName, e.patientAge,e.patientSex,
+				d.avatar,d.ctArea,d.doctorLevel,
+				(SELECT u.true_name FROM vauth.user_info u WHERE u.id = d.loginID)
+				AS doctorName,
+				d.experience,d.hospitalID,d.isAudioCT,d.isNetCT,d.isRecommend,d.isVideoCT,d.isZZ,d.netctArea,
+				d.netDesc,d.practice,d.sectionID,d.skill,d.`status`,d.subscribeDesc,d.subscribeFlag
+				FROM
+				tb_medical_reservation c
+				LEFT JOIN tb_medical_doctor d ON c.doctorID = d.doctorID
+				LEFT JOIN tb_medical_patient e ON c.patientID = e.patientID
+				<where>
+					<if test="doctorId != null and doctorId !=''">
+						and c.doctorId = #{doctorId}
+					</if>
+					<if test="state != null and state !=''">
+						and c.state = #{state}
+					</if>
+				</where> 
+				ORDER BY c.serviceDate desc LIMIT #{start}, #{limit}
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="queryConsultationDetail" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select c.*,(select u.true_name from vauth.user_info u where u.id =
+		d.loginID) as doctorName,p.patientName from tb_medical_reservation c
+		LEFT JOIN tb_medical_doctor d on c.doctorID = d.doctorID left JOIN
+		tb_medical_patient p on c.patientID = p.patientID
+			<if test="id != null and id !=''">
+				and c.id = #{id}
+			</if>
+	</select>
+	
+	<update id="modifyReservation" parameterType="com.netbull.shop.manage.weixin.vo.ReservationVo">
+		UPDATE tb_medical_reservation
+		SET createDate = now()
+		<if test="patientId != null and patientId !=''">
+			,patientId = #{patientId}
+		</if>
+		<if test="doctorId != null and doctorId !=''">
+			,doctorId = #{doctorId}
+		</if>
+		<if test="serviceDate != null and serviceDate !=''">
+			,serviceDate = #{serviceDate}
+		</if>
+		<if test="paystatus != null and paystatus !=''">
+			,paystatus = #{paystatus}
+		</if>
+		<if test="servicedesc != null and servicedesc !=''">
+			,servicedesc = #{servicedesc}
+		</if>
+		<if test="state != null and state !=''">
+			,state = #{state}
+		</if>
+		WHERE
+		id = #{id}
+	</update>
+
+</mapper>

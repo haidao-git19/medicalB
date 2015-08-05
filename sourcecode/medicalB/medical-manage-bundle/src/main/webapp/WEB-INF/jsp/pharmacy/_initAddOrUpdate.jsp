@@ -29,6 +29,7 @@
 							
 							<input type="hidden" name="shopID" value="${ph.shopID }"/>
 							<input type="hidden" name="loginID" value="${ph.loginID}">
+							<input type="hidden" name="companyId" value="${ph.companyId}">
 							<input type="hidden" id="latnId"  value="${ph.latnId }"/>
 							<input type="hidden" name="img" id="img"  value="${ph.logo }"/>
 							
@@ -54,6 +55,7 @@
 															<input type="text" style="width: 88%"  name="code" id="code" value="${ph.code }" />
 														</div>
 													</div>
+													<!-- 
 													<div class="control-group">
 														<label class="control-label">
 															<span class="help-inline">*</span><font class="msg_font_bold">登录账号</font>
@@ -63,6 +65,7 @@
 															<input style="width: 28.5%;" type="password" id="loginPwd" name="loginPwd" value="${ph.loginPwd}" <c:if test="${ph.shopID gt 0}">readonly="readonly"</c:if> />
 														</label>
 													</div>
+													 -->
 													<div class="control-group">
 														<label class="control-label">
 															<span class="help-inline">*</span><font class="msg_font_bold">药店电话</font>

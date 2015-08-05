@@ -5,25 +5,28 @@
 
    
    <select id="pageHospital" parameterType="map" resultType="map">
-	    SELECT  *   FROM tb_medical_hospital C
+	    SELECT  *   FROM tb_medical_hospital C LEFT JOIN tb_medical_area A ON C.areaID=A.areaID
 	    where 1=1 and userID in 
 	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
   			#{item}  
  		 </foreach>
 	    <if test="hospitalName!=null and hospitalName != ''">
-	      and  hospitalName like CONCAT('%','${hospitalName}','%' )
+	      and  C.hospitalName like CONCAT('%','${hospitalName}','%' )
 	    </if>
 	    <if test="hospitalLevel!=null and hospitalLevel != ''">
-	      and  hospitalLevel like CONCAT('%','${hospitalLevel}','%' )
+	      and  C.hospitalLevel like CONCAT('%','${hospitalLevel}','%' )
 	    </if>
 	    <if test="isCooperation!=null and isCooperation != ''">
-	      and  isCooperation =#{isCooperation}
+	      and  C.isCooperation =#{isCooperation}
 	    </if>
 	    <if test="areaID !=null and areaID !=''">
-	        and areaID = #{areaID}
+	        and C.areaID = #{areaID}
+	    </if>
+	    <if test="p_areaID !=null and p_areaID !=''">
+	        and A.parentID=#{p_areaID}
 	    </if>
 	    <if test="type !=null and type !=''">
-	        and type = #{type}
+	        and C.type = #{type}
 	    </if>
 	    
        <include refid="com.odchia.dao.Dao.pageComponent"/>
@@ -32,26 +35,29 @@
    
    <select id="countHospital" parameterType="map"
   	 resultType="long">
-        SELECT COUNT(1)  FROM tb_medical_hospital C
+        SELECT COUNT(1)  FROM tb_medical_hospital C LEFT JOIN tb_medical_area A ON C.areaID=A.areaID
         where 1=1
          and userID in 
 	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
   			#{item}  
  		 </foreach>
-          <if test="hospitalName!=null and hospitalName != ''">
-	      and  hospitalName like CONCAT('%','${hospitalName}','%' )
+         <if test="hospitalName!=null and hospitalName != ''">
+	      and  C.hospitalName like CONCAT('%','${hospitalName}','%' )
 	    </if>
 	    <if test="hospitalLevel!=null and hospitalLevel != ''">
-	      and  hospitalLevel like CONCAT('%','${hospitalLevel}','%' )
+	      and  C.hospitalLevel like CONCAT('%','${hospitalLevel}','%' )
 	    </if>
-	     <if test="isCooperation!=null and isCooperation != ''">
-	      and  isCooperation =#{isCooperation}
+	    <if test="isCooperation!=null and isCooperation != ''">
+	      and  C.isCooperation =#{isCooperation}
 	    </if>
 	    <if test="areaID !=null and areaID !=''">
-	        and areaID = #{areaID}
+	        and C.areaID = #{areaID}
+	    </if>
+	    <if test="p_areaID !=null and p_areaID !=''">
+	        and A.parentID=#{p_areaID}
 	    </if>
 	    <if test="type !=null and type !=''">
-	        and type = #{type}
+	        and C.type = #{type}
 	    </if>
         	
    </select>

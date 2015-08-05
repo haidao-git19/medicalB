@@ -12,13 +12,13 @@ function initIsConsultDoctorList(){
 		data:{"hospitalID":hospitalID,"sectionID":sectionID},
 		dataType:"json",
 		success:function(data){
-			if(data){
+			if(data.length>0){
 				$.each(data,function(i,d){
 					var isConsultTemp=$("#isConsultTemp").html();
 					$(".wlr-box-bd").append(isConsultTemp.format(d.avatar,d.doctorName,d.doctorLevel,d.hospitalName,d.sectionName,d.doctorID));
 				});
 			}else{
-				$(".wlr-box-bd").append("暂无数据");
+				$(".wlr-box-bd").empty().append("<div style='text-align:center;color:#333;'>暂无数据</div>");
 			}
 		}
 	});
@@ -31,7 +31,7 @@ function initLatestConsultQuestionList(){
 		data:{"hospitalID":hospitalID,"sectionID":sectionID},
 		dataType:"json",
 		success:function(data){
-			if(data){
+			if(data.length>0){
 				var limitLen=30;
 				$.each(data,function(i,c){
 					var question='';
@@ -45,7 +45,7 @@ function initLatestConsultQuestionList(){
 					$("#latestConsultContainer table tbody").append('<tr><td width="60%"><a href="superfawn_g_2375108068" target="_blank" class="blue" title="'+c.question+'">'+question+'</a></td><td class="clr-999" width="40%" style="text-align:right;"><a href="DE4rO-XCoLUmy75Bfmw7E-sSlj" target="_blank" class="clr-666" title="'+c.doctorName+'">'+c.sectionName+'&nbsp;'+c.doctorName+'</a>&nbsp;回复 </td></tr>');
 				});
 			}else{
-				$("#latestConsultContainer table tbody").append('<tr><td width="60%">暂无数据</td></tr>');
+				$("#latestConsultContainer").append("<div style='text-align:center;color:#333;'>暂无数据</div>");
 			}
 		}
 	});
@@ -58,7 +58,7 @@ function initRecomDoctorList(){
 		data:{"hospitalID":hospitalID,"sectionID":sectionID},
 		dataType:"json",
 		success:function(data){
-			if(data){
+			if(data.length>0){
 				$.each(data,function(i,D){
 					var recomDoctorTemp='<tr><td><a href="/mianjijingluan" class="clr-org" target="_blank">{0}</a><span class="clr-ccc">：</span>'.format(D.diseaseMap.diseaseName);
 					if(D.doctorList){
@@ -72,6 +72,15 @@ function initRecomDoctorList(){
 						$("#recomDoctorsContainer table tbody").append(recomDoctorTemp);
 					}
 				});
+				
+				var res=$.trim($("#recomDoctorsContainer table tbody").html());
+				if(res){
+					$("#recomDoctorsContainer table tbody").append('<tr><td><a href="yiyuan/DE4raCNSz6OmG3OUNZWCWNv0" target="_blank" class="blue">查看全部推荐专家&gt;&gt;</a></td></tr>');
+				}else{
+					$("#recomDoctorsContainer").append("<div style='text-align:center;color:#333;'>暂无数据</div>");
+				}
+			}else{
+				$("#recomDoctorsContainer").append("<div style='text-align:center;color:#333;'>暂无数据</div>");
 			}
 		}
 	});
@@ -88,7 +97,7 @@ function initDoctorDutyList(){
 		data:{"hospitalID":hospitalID,"sectionID":sectionID},
 		dataType:"json",
 		success:function(data){
-			if(data){
+			if(data.length>0){
 				$.each(data,function(i,M){
 					var doctorDutyTemp=$("#doctorDutyContainer table tbody").html();
 					
@@ -123,6 +132,8 @@ function initDoctorDutyList(){
 						});
 					}
 				});
+			}else{
+				$(".doctor-table").empty().append("<div style='text-align:center;color:#333;'>暂无数据</div>");
 			}
 		}
 	})

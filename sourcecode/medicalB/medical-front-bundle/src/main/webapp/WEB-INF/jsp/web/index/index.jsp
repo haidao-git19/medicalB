@@ -65,30 +65,30 @@ $(".pic_banner").slide({ titCell:".num ul" , mainCell:".pics" , effect:"fold", a
 <!--按医院找 -->
 <div class="J_tab">
 <div class="menu J_menu" id="hospitalLatn">
-<c:forEach 	var="area" items="${areaList }" varStatus="var">
-	<a id="jh_${area.areaID}" 
-	<c:choose>
-	<c:when test="${area.areaID==551 }">
-	class="menu-active"
-	</c:when>
-	<c:otherwise>
-	class="normal"
-	</c:otherwise>
-	</c:choose>
-	 target="_blank" latn="${area.areaID}" href="#">${area.areaName }</a>
-</c:forEach>
+	<c:forEach 	var="area" items="${areaList }" varStatus="var">
+		<a id="jh_${area.areaID}" 
+			<c:choose>
+				<c:when test="${area.areaID==551 }">
+					class="menu-active"
+				</c:when>
+				<c:otherwise>
+					class="normal"
+				</c:otherwise>
+			</c:choose>
+		 target="_blank" title="${area.areaName}" href="#">${area.areaName }</a>
+	</c:forEach>
 </div>
 <div class="menu_con J_content">
 
 <c:forEach var="unitList" items="${hospitalList.hospitalList }">
-<div id="hospitalLatn_${unitList.key}" class="menu_con_bg">
-<ul>
-	<c:forEach var="hospital" items="${unitList.list }">
-		<li><a href="/hospital/DE4roiYGYZwWG0YFEgXN3cgkJ.htm" target="_blank">${hospital.hospitalName }</a><span class="gray">(111)</span></li>
-	</c:forEach>
-</ul>
-<div class="clear"></div>
-</div>
+	<div id="hospitalLatn_${unitList.key}" class="menu_con_bg">
+		<ul>
+			<c:forEach var="hospital" items="${unitList.list }">
+				<li><a href="${ctx }/web/hospitalDetais?hospitalID=${hospital.hospitalID}" target="_blank">${hospital.hospitalName }</a><span class="gray">(111)</span></li>
+			</c:forEach>
+		</ul>
+		<div class="clear"></div>
+	</div>
 
 </c:forEach>
 <div id="hospitalLatn_none" style="display: block;" class="menu_con_bg">

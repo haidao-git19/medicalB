@@ -15,6 +15,7 @@ public class Result {
 	private long patientId;
 	private Date commitTime;
 	private int state;
+	private long deputeDoctor;
 
 	// --
 	private List<ResultDetail> details;
@@ -73,6 +74,14 @@ public class Result {
 
 	public void setDetails(List<ResultDetail> details) {
 		this.details = details;
+	}
+
+	public long getDeputeDoctor() {
+		return deputeDoctor;
+	}
+
+	public void setDeputeDoctor(long deputeDoctor) {
+		this.deputeDoctor = deputeDoctor;
 	}
 
 }

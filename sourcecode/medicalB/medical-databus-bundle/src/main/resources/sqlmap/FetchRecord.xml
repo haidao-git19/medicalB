@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.databus.prescription.dao.FetchRecordDao">
+
+	<select id="findFecthRecord" parameterType="java.util.Map"
+		resultType="java.util.Map">
+			SELECT * tb_medical_fetchrecord f 
+			where f.prescriptionId=#{prescriptionId}
+	</select>
+	
+	<insert id="saveFetchRecord" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+		
+		INSERT INTO tb_medical_fetchrecord (fetchDate, prescriptionId)VALUES(now(), #{prescriptionId})
+
+	</insert>
+
+</mapper>

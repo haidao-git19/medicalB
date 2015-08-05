@@ -5,6 +5,7 @@ public class ConsultationDispatcher {
 	private Long consultationID;
 	private int dispatcherType;
 	private Long targetId;
+	private Long hospitalID;
 
 	public Long getDispatcherId() {
 		return dispatcherId;
@@ -36,6 +37,14 @@ public class ConsultationDispatcher {
 
 	public void setTargetId(Long targetId) {
 		this.targetId = targetId;
+	}
+
+	public Long getHospitalID() {
+		return hospitalID;
+	}
+
+	public void setHospitalID(Long hospitalID) {
+		this.hospitalID = hospitalID;
 	}
 
 }

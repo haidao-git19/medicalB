@@ -75,10 +75,10 @@ public class WebHospitalController {
 							if(String.valueOf(ar.getAreaID()).equals(String.valueOf(h.getAreaID()))){
 								hlist.add(h);
 								countareahospital++;
+								ar.setHospitalList(hlist);
+								ar.setCounthospital(countareahospital);
 							}
 						}
-						ar.setHospitalList(hlist);
-						ar.setCounthospital(countareahospital);
 					}
 					newareaList.add(ar);
 			 }
@@ -153,11 +153,27 @@ public class WebHospitalController {
 		}
 		String hospitalID=request.getParameter("hospitalID");
 		Map paramter = new HashMap();
-		paramter.put("start",1);
+		paramter.put("start",0);
 		paramter.put("limit", 5);
 		paramter.put("hospitalID", Long.parseLong(hospitalID));
 		List<Doctor> doctorList = this.doctorService.query_by_hosid(paramter);
 		return doctorList;
 	}
 	
+	@RequestMapping(value="/anon/web/queryhosSections")
+	@ResponseBody
+	public Map<String,Object> queryhosSections(HttpServletRequest request){
+		if (logger.isDebugEnabled()) {
+			logger.debug("enter the " + this.getClass().getName() + " class queryhosSections method.");
+		}
+		Map<String,Object> resultMap=new HashMap<String, Object>();
+		String hospitalID=request.getParameter("hospitalID");
+		Map<String,Integer> reqintMap = new HashMap<String, Integer>();
+		reqintMap.put("hospitalID",Integer.parseInt(hospitalID));
+		List<HospitalSection> firstselist=hospitalSectionService.queryFirstSectionList(reqintMap);
+		List<HospitalSection> allselist=hospitalSectionService.queryAllList(reqintMap);
+		resultMap.put("firstselist", firstselist);
+		resultMap.put("allselist", allselist);
+		return resultMap;
+	}
 }

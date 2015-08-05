@@ -23,6 +23,7 @@
 		where a.orderNumber=#{orderNumber}
 	</update>
 	
+	
 	<select id="patientOrderListTotalCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
 		select count(1)
 		from tb_medicalb_order_service a
@@ -91,4 +92,57 @@
 		select * from tb_medicalb_order_service a where a.orderNumber=#{orderNumber}
 	</select>
 	
+	<select id="findOrderPaymentByService" parameterType="java.util.HashMap"  resultType="com.netbull.shop.databus.order.model.OrderPayment">
+		SELECT b.serviceNumber,b.serviceType,	a.id, a.orderNumber, a.payPrice, a.payStatus, a.payMode, a.payPlatformCode, a.payTime
+		FROM tb_medicalb_order_payment a
+		LEFT JOIN tb_medicalb_order_service b ON a.orderNumber=b.orderNumber
+		 <where>
+            <if test="serviceNumber !=null and serviceNumber !=''">
+                and b.serviceNumber = #{serviceNumber}
+            </if>
+            <if test="serviceType !=null and serviceType !=''">
+                and b.serviceType = #{serviceType}
+            </if>
+            <if test="orderNumber !=null and orderNumber !=''">
+                and a.orderNumber = #{orderNumber}
+            </if>
+        </where>
+		and a.payStatus=1 AND b.refund=0
+		LIMIT 0,1
+	</select>
+	<update id="refundOrderService" parameterType="java.util.HashMap">
+		update tb_medicalb_order_service a
+		set a.refund=#{refund}, a.refundDate=NOW()
+		where a.orderNumber=#{orderNumber}
+	</update>
+	
+	<select id="findReFundServiceTotal" parameterType="java.util.HashMap"  resultType="java.lang.Integer">
+		SELECT count(1) FROM tb_medicalb_order_service a
+		LEFT JOIN tb_medicalb_order_base b ON a.orderNumber=b.orderNumber
+		<where>
+			serviceType IN(1,2) AND refund=1 
+			<if test="serviceType!=null and serviceType!=''">
+				AND a.serviceType=#{serviceType}
+			</if>
+			<if test="doctorId!=null and doctorId!=''">
+				AND a.doctorId=#{doctorId}
+			</if>
+		</where> 
+		 
+	</select>
+	<select id="findReFundService" parameterType="java.util.HashMap"  resultType="java.util.HashMap">
+		SELECT a.id,a.serviceNumber,a.serviceType,a.patientId,a.doctorId,a.orderNumber,DATE_FORMAT(a.refundDate,'%Y-%m-%d %H:%i:%s') refundDate,b.totalPrice
+		FROM tb_medicalb_order_service a
+		LEFT JOIN tb_medicalb_order_base b ON a.orderNumber=b.orderNumber
+		<where>
+			serviceType IN(1,2) AND refund=1 
+			<if test="serviceType!=null and serviceType!=''">
+				AND a.serviceType=#{serviceType}
+			</if>
+			<if test="doctorId!=null and doctorId!=''">
+				AND a.doctorId=#{doctorId}
+			</if>
+		</where> 
+		limit ${pageIndex}, ${pageSize}
+	</select>
 </mapper>

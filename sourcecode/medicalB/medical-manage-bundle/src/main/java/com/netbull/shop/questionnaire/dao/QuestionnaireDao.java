@@ -143,4 +143,16 @@ public class QuestionnaireDao extends BaseDao{
 	public void deleteQuestionnaireCaseOption(Integer id){
 		session.delete(MYBATIS_PREFIX+".deleteQuestionnaireCaseOption", id);
 	}
+	
+	public List<Map> queryQuestionnairePatientMappingList(){
+		return session.selectList(MYBATIS_PREFIX+".queryQuestionnairePatientMappingList");
+	}
+	
+	public List<Map> queryGroupedQnPMList(){
+		return session.selectList(MYBATIS_PREFIX+".queryGroupedQnPMList");
+	}
+	
+	public void saveQuestionnairePatientMapping(Map parameter){
+		session.insert(MYBATIS_PREFIX+".saveQuestionnairePatientMapping", parameter);
+	}
 }

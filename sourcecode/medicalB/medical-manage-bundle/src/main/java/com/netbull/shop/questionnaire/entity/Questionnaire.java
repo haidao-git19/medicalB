@@ -7,6 +7,7 @@ public class Questionnaire {
 	private String name;
 	private String createTime;
 	private String note;
+	private Integer pushDays;
 	public Integer getId() {
 		return id;
 	}
@@ -37,6 +38,11 @@ public class Questionnaire {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
+	public Integer getPushDays() {
+		return pushDays;
+	}
+	public void setPushDays(Integer pushDays) {
+		this.pushDays = pushDays;
+	}
 	
 }

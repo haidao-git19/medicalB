@@ -83,7 +83,7 @@ public class WebSectionController {
 		pram.put("sectionID", section.getParentid());
 		Map parentSection=sectionService.queryRelatedSection(pram);
 		String sectionIntroduction=String.valueOf(parentSection.get("introduction"));
-		if(StringUtil.isEmpty(sectionIntroduction)){
+		if(StringUtil.isEmpty(sectionIntroduction)&&!sectionIntroduction.equals("null")){
 			if(sectionIntroduction.length()>150){
 				model.addAttribute("sectionIntroduction", sectionIntroduction.substring(0, 150)+"...");
 			}else{

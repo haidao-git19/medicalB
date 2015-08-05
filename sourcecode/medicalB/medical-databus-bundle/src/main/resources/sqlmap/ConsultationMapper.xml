@@ -115,6 +115,9 @@
 				<if test="type != null and type !=''">
 				     ,type = #{type}
 				</if>
+				<if test="dispatcherType != null and dispatcherType !=''">
+				     ,dispatcherType = #{dispatcherType}
+				</if>
 		WHERE F.consultationID = #{consultationID}
 	</update>
 	
@@ -128,8 +131,9 @@
         select count(1) count from tb_medical_consultation X 
         <where>
             <![CDATA[
-            	 and date_sub(curdate(),interval ${days} day) <= DATE_FORMAT(X.consultationDate,'%Y-%m-%d')
+            	 and date_sub(curdate(),interval ${days} day) >= DATE_FORMAT(X.consultationDate,'%Y-%m-%d')
             	 and X.doctorId = #{doctorId}
+            	 and X.isRepeat=0 and X.isFree=1 and X.state=0
             	 ]]>
         </where>
     </select>
@@ -138,5 +142,16 @@
 		INSERT INTO tb_medical_consultation (title,userID,consultationDate,patientID,doctorID,question,level,isRepeat,sourceID,isFree,fee,isPrescribe,type,state) 
 		VALUES(#{title},#{userID},now(),#{patientID},#{doctorID},#{question},#{level},#{isRepeat},#{sourceID},#{isFree},#{fee},#{isPrescribe},#{type},'0')
 	</insert>
+	<select id="queryConsultDispDocs" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT * from (select distinct (select u.true_name from vauth.user_info u where u.id = d.loginID) as doctorName,D.avatar,D.balance,D.createTime,D.creator,D.ctArea,D.doctorID,D.doctorLevel,D.experience,D.hospitalID,D.isAudioCT,D.isNetCT,D.isRecommend,D.isVideoCT,D.isVisit,D.isZZ,D.netctArea,D.netDesc,D.practice,D.sectionID,D.skill,D.`status`,D.subscribeDesc,D.subscribeFlag,D.updateTime,H.hospitalName from tb_medical_doctor d
+                	left join tb_medical_hospital H on d.hospitalID=H.hospitalID where d.status=1) XX
+        WHERE xx.doctorID IN (SELECT targetId FROM tb_medical_consultation_dispatcher WHERE consultationID=#{consultationID} AND dispatcherType=1) 
+	</select>
 	
+	 <select id="queryConsultDispSections" parameterType="java.util.Map" resultType="java.util.Map">
+      	SELECT a.*,b.hospitalID FROM tb_medical_section a
+		LEFT JOIN tb_medical_consultation_dispatcher b
+		ON a.id=b.targetId AND  b.dispatcherType=2
+		WHERE consultationID=#{consultationID}
+  	 </select>
 </mapper>

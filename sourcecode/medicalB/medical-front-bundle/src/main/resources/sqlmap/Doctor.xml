@@ -3,7 +3,7 @@
 <mapper namespace="com.netbull.web.index.entity.Doctor">
     
 	<select id="query_for_bigSerction" parameterType="java.lang.Integer" resultType="com.netbull.web.index.entity.Doctor">
-		SELECT t1.*, t3.attrname sectionName,t4.hospitalName hospitalName  FROM tb_medical_doctor t1,tb_medical_section t3,tb_medical_hospital t4
+		SELECT t1.*,(select u.true_name from vauth.user_info u where u.id = t1.loginID) as realName, t3.attrname sectionName,t4.hospitalName hospitalName  FROM tb_medical_doctor t1,tb_medical_section t3,tb_medical_hospital t4
 		WHERE t1.`sectionID`=t3.`id` AND t1.status = 1 and t1.hospitalID=t4.hospitalID AND t3.parentid=${sectionid} 
 		AND isRecommend=1 
 	</select>

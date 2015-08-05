@@ -3,8 +3,50 @@
 <mapper namespace="com.netbull.shop.databus.questionnaire.model.PatientBind">
 
 	<insert id="save" parameterType="com.netbull.shop.databus.questionnaire.model.PatientBind" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO tb_questionnaire_patient_mapping(qnId, doctorId, patientId, bindTime, state)
-		VALUES (#{qnId}, #{doctorId}, #{patientId}, NOW(), 0)
+		INSERT INTO tb_questionnaire_patient_mapping(consultationId,qnId, doctorId, patientId, bindTime, state)
+		VALUES (#{consultationId},#{qnId}, #{doctorId}, #{patientId}, NOW(), 0)
 	</insert>
-
+	<update id="setDeputeDoctor" parameterType="com.netbull.shop.databus.questionnaire.model.Result">
+		update tb_questionnaire_patient_mapping
+		set deputeDoctor=#{deputeDoctor}
+		where id=#{id}
+	</update>
+	
+	<select id="queryCurrentMapping" parameterType="java.util.Map" resultType="com.netbull.shop.databus.questionnaire.model.PatientBind">
+		select * from tb_questionnaire_patient_mapping t 
+		where qnId=#{qnId} and doctorId=#{doctorId} and patientId=#{patientId}
+		ORDER BY bindtime DESC LIMIT 0,1
+	</select>
+	
+	<select id="queryDeputeQuestionnaire" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT t.name,t.note,p.patientName,p.patientSex,d.doctorName,a.* 
+		FROM tb_questionnaire t,tb_questionnaire_patient_mapping a
+		LEFT JOIN tb_medical_patient p ON a.patientId=p.patientID
+		LEFT JOIN tb_medical_doctor d ON d.doctorID=a.doctorId
+		<where>
+			  t.id=a.qnId
+		    <if test="doctorId != null and doctorId !=''">
+			      AND deputeDoctor =#{doctorId}
+			</if>
+			<if test="patientId != null and patientId !=''">
+			      AND a.patientId =#{patientId}
+			</if>
+		</where>
+		ORDER BY bindtime limit ${startIndex}, ${pageSize}
+	</select>
+	
+	<select id="queryDeputeQuestionnaireTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT count(1) FROM tb_questionnaire t,tb_questionnaire_patient_mapping a
+		LEFT JOIN tb_medical_patient p ON a.patientId=p.patientID
+		LEFT JOIN tb_medical_doctor d ON d.doctorID=a.doctorId
+		<where>
+			  t.id=a.qnId
+		    <if test="doctorId != null and doctorId !=''">
+			      AND deputeDoctor =#{doctorId}
+			</if>
+			<if test="patientId != null and patientId !=''">
+			      AND a.patientId =#{patientId}
+			</if>
+		</where>
+	</select>
 </mapper>

@@ -3,8 +3,8 @@
 <mapper namespace="com.netbull.shop.databus.questionnaire.model.Result">
 
 	<insert id="save" parameterType="com.netbull.shop.databus.questionnaire.model.Result" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO tb_questionnaire_result(qnId, doctorId, patientId, commitTime, state)
-		VALUES (#{qnId}, #{doctorId}, #{patientId}, NOW(), 1)
+		INSERT INTO tb_questionnaire_result(qnId, doctorId, patientId, commitTime, state,deputeDoctor)
+		VALUES (#{qnId}, #{doctorId}, #{patientId}, NOW(), 1,#{deputeDoctor})
 	</insert>
 	
 	<select id="find_exceptionResults" parameterType="long" resultType="com.netbull.shop.databus.questionnaire.dto.ExceptionResult">
@@ -23,5 +23,50 @@
 			a.qnId = b.qnId and a.patientId = b.patientId and a.doctorId = #{doctorId}
 			and b.id in (select DISTINCT t.rId from tb_questionnaire_result_detail t where t.exceptionFlag = 1)
 	</select>
-
+	
+	<select id="find_DoctorResults" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT r.id,qnId,q.name,r.doctorId,r.patientId,p.patientName,r.commitTime,IFNULL(r.deputeDoctor,0) deputeDoctor,IFNULL(d.doctorName,'无') deputeDoctorName,IFNULL(e.exnum,0) exnum
+		 FROM tb_questionnaire_result r
+		LEFT JOIN tb_questionnaire q ON q.id=r.qnId
+		LEFT JOIN tb_medical_doctor d ON r.deputeDoctor=d.doctorID
+		LEFT JOIN tb_medical_patient p ON r.patientId=p.patientID
+		LEFT JOIN 
+		(SELECT COUNT(1) exnum,rid FROM tb_questionnaire_result_detail WHERE exceptionFlag=1 GROUP BY rid) e ON r.id=e.rid
+		<where>
+			 <if test="doctorId != null and doctorId !=''">
+			     and r.doctorId = ${doctorId}
+			</if>
+		    <if test="patientId != null and patientId !=''">
+			     and r.patientId = ${patientId}
+			</if>
+		</where>
+		 ORDER BY r.commitTime DESC limit ${startIndex}, ${pageSize}
+	</select>
+	<select id="find_DoctorResultsTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT count(1) FROM tb_questionnaire_result r
+		LEFT JOIN tb_questionnaire q ON q.id=r.qnId
+		LEFT JOIN tb_medical_doctor d ON r.deputeDoctor=d.doctorID
+		LEFT JOIN tb_medical_patient p ON r.patientId=p.patientID
+		<where>
+			 <if test="doctorId != null and doctorId !=''">
+			     and r.doctorId = ${doctorId}
+			</if>
+		    <if test="patientId != null and patientId !=''">
+			     and r.patientId = ${patientId}
+			</if>
+		</where>
+	</select>
+	<select id="find_DoctorquesPatient" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT a.patientId,a.doctorId,a.lastBindTime, p.patientSex,p.patientName,p.patientAge FROM
+		(SELECT DISTINCT patientId,doctorId,MAX(bindTime) lastBindTime FROM tb_questionnaire_patient_mapping GROUP BY patientId,doctorId) a
+		LEFT JOIN tb_medical_patient p ON p.patientID=a.patientId
+		where a.doctorId=#{doctorId}
+		 ORDER BY a.lastBindTime DESC limit ${startIndex}, ${pageSize}
+	</select>
+	<select id="find_DoctorquesPatientTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT count(1) FROM
+		(SELECT DISTINCT patientId,doctorId,MAX(bindTime) lastBindTime FROM tb_questionnaire_patient_mapping GROUP BY patientId,doctorId) a
+		LEFT JOIN tb_medical_patient p ON p.patientID=a.patientId
+		where a.doctorId=#{doctorId}
+	</select>
 </mapper>

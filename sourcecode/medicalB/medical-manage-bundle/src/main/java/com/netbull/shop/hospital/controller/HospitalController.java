@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.netbull.shop.area.dao.AreaDao;
 import com.netbull.shop.area.entity.Area;
 import com.netbull.shop.area.service.AreaService;
 import com.netbull.shop.common.page.Page;
@@ -185,6 +186,10 @@ public class HospitalController {
 		Hospital hospl=new Hospital();
 		if(hospital.getHospitalID()>0){
 			hospl=hospitalService.findById(hospital);
+			if(!NullUtil.isNull(hospl)&&!NullUtil.isNull(hospl.getAreaID())){
+				Area area=areaService.get(AreaDao.class.getName(), hospl.getAreaID());
+				request.setAttribute("area", area);
+			}
 		}
 		
 		request.setAttribute("hospl",hospl);

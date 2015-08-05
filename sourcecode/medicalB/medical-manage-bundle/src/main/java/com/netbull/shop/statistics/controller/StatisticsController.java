@@ -9,22 +9,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
 import com.netbull.shop.common.page.Page;
-import com.netbull.shop.common.util.DateUtil;
 import com.netbull.shop.common.util.NullUtil;
 import com.netbull.shop.common.util.StringUtil;
+import com.netbull.shop.company.entity.CompanyVo;
+import com.netbull.shop.company.service.CompanyService;
+import com.netbull.shop.dao.BaseDao;
 import com.netbull.shop.hospital.service.HospitalService;
+import com.netbull.shop.shiro.ShiroUser;
 import com.netbull.shop.statistics.service.StatisticsService;
 import com.netbull.shop.util.DataTableUtils;
 import com.netbull.shop.util.RequestUtils;
@@ -36,7 +38,8 @@ public class StatisticsController {
 	private StatisticsService statisticsService;
 	@Autowired
 	private HospitalService hospitalService;
-	
+	@Resource
+	private CompanyService companyService;
 	@RequestMapping(value="/statistics/registerUserList")
 	public String registerUserList(HttpServletRequest request){
 		return "statistics/registerUserList";
@@ -80,9 +83,70 @@ public class StatisticsController {
 		return "statistics/shopOrderList";
 	}
 	
+	@RequestMapping(value="/statistics/companyOrderList")
+	public String companyOrderList(Model model){
+		ShiroUser currUser = BaseDao.queryCurrentShiroUser();
+		Map parameter1 = new HashMap();
+		parameter1.put("loginId", currUser.getId());
+		CompanyVo company = companyService.findByParam(parameter1);
+		if (company == null) {
+			model.addAttribute("companyId", "0");
+		} else {
+			model.addAttribute("companyId", company.getCompanyId());
+		}
+		return "statistics/companyOrderList";
+	}
+	
+	@RequestMapping(value="/statistics/companyPatientList")
+	public String companyPatientList(Model model){
+		ShiroUser currUser = BaseDao.queryCurrentShiroUser();
+		Map parameter1 = new HashMap();
+		parameter1.put("loginId", currUser.getId());
+		CompanyVo company = companyService.findByParam(parameter1);
+		if (company == null) {
+			model.addAttribute("companyId", "0");
+		} else {
+			model.addAttribute("companyId", company.getCompanyId());
+		}
+		return "statistics/companyPatientList";
+	}
+	
+	@RequestMapping(value="/statistics/companyPatientPage")
+	@ResponseBody
+	public  Map<String,Object> companyPatientPage(Integer sEcho,Integer companyId, Integer iColumns, Integer iDisplayStart, 
+			Integer iDisplayLength,HttpServletRequest request) {
+		
+		Map<String, String> requestMap =  RequestUtils.parameterToMap(request);
+		
+		Page page = statisticsService.companyPatientPage(iDisplayStart, iDisplayLength, requestMap);
+		 List<List<?>> aaData = new ArrayList<List<?>>();
+		 Map<String, Object> resultMap = DataTableUtils.initResultMap(sEcho , page.getTotal());
+		  for (Object o : page.getResult()) {
+				Map map = (Map)o;
+				List<Object> list = new ArrayList<Object>();
+				list.add(map.get("patientID"));
+				list.add(map.get("patientName"));
+				list.add(map.get("nickName"));
+				list.add(map.get("contactPhone"));
+				list.add(map.get("patientSex"));
+				list.add(map.get("patientAge"));
+				list.add(map.get("patientCard"));
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				String createTime=null;
+				if(!NullUtil.isNull(map.get("createTime"))){
+					createTime=sdf.format(map.get("createTime"));
+				}
+				list.add(createTime);
+				aaData.add(list);
+			}
+		  
+			resultMap.put("aaData", aaData);
+		   return resultMap;
+	}
+	
 	@RequestMapping(value="/statistics/queryShopOrderPage")
 	@ResponseBody
-	public  Map<String,Object> queryShopOrderPage(Integer sEcho, Integer iColumns, Integer iDisplayStart, 
+	public  Map<String,Object> queryShopOrderPage(Integer sEcho,Integer companyId, Integer iColumns, Integer iDisplayStart, 
 			Integer iDisplayLength,HttpServletRequest request) {
 		
 		Map<String, String> requestMap =  RequestUtils.parameterToMap(request);

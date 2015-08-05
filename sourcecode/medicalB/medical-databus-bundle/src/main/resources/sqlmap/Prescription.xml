@@ -21,8 +21,8 @@
 	</insert>
    
     <insert id="save_Prescription" parameterType="com.netbull.shop.databus.prescription.model.Prescription" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO tb_medical_prescription(doctorId, title, application, remark, status, isShow, qrCodePath, createTime)
-		VALUES (#{doctorId}, #{title}, #{application}, #{remark}, #{status}, #{isShow}, #{qrCodePath}, NOW())
+		INSERT INTO tb_medical_prescription(doctorId,consultationId, title, application, remark, status, isShow, qrCodePath, createTime)
+		VALUES (#{doctorId},#{consultationId}, #{title}, #{application}, #{remark}, #{status}, #{isShow}, #{qrCodePath}, NOW())
 	</insert>
 	
 	<update id="update_Prescription" parameterType="com.netbull.shop.databus.prescription.model.Prescription">
@@ -55,9 +55,13 @@
 	</select>
 	
 	<select id="query_PatientPrescription_by_id" parameterType="map" resultType="com.netbull.shop.databus.prescription.dto.PatientPrescription">
-		select b.id, b.prescriptionId, a.title, a.application, a.remark, a.qrCodePath, b.creator binder, b.createTime bindTime
-		from tb_medical_prescription a
-		left join tb_medical_prescription_relation b on a.id = b.prescriptionId
+		SELECT b.id, b.prescriptionId, a.title, a.application, a.remark, a.qrCodePath, b.creator binder, b.createTime bindTime,
+		(CASE WHEN o.unionTradeMsg='ok' THEN 1 ELSE 0 END) payStatus,(CASE WHEN f.id >0 THEN 1 ELSE 0 END) fetchStatus
+		FROM tb_medical_prescription a
+		LEFT JOIN tb_medical_prescription_relation b ON a.id = b.prescriptionId
+		LEFT JOIN tb_medicalb_order_service o ON o.prescriptionId=a.id AND o.unionTradeMsg='ok'
+		LEFT JOIN tb_medical_fetchrecord f ON f.prescriptionId=a.id 
+
 		where b.id = #{id}
 	</select>
 	

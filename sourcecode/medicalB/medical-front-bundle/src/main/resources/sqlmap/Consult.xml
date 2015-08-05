@@ -63,7 +63,7 @@
    </delete>
    
    <select id="queryDetailList" parameterType="java.util.Map" resultType="com.netbull.web.index.entity.Consult">
-		SELECT h.*,i.doctorName doctorName,q.attrname attrname,i.doctorLevel doctorLevel,c.hospitalName hospitalName,
+		SELECT h.*,i.doctorID,i.hospitalID,i.sectionID,v.true_name doctorName,q.attrname attrname,i.doctorLevel doctorLevel,c.hospitalName hospitalName,
 		CASE WHEN SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",1)>=1 
           THEN CONCAT(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",1),"小时前")
       WHEN SUBSTRING(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",2),1,4)='00:0'
@@ -73,7 +73,7 @@
            CONCAT(SUBSTRING(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",2),4,LENGTH(SUBSTRING_INDEX(TIMEDIFF(SYSDATE(),h.`consultationDate`),":",2))),"分钟前")
           END DATEDIFF
           FROM tb_medical_consultation h LEFT JOIN tb_medical_doctor i
-		  ON h.doctorID=i.doctorID
+		  ON h.doctorID=i.doctorID LEFT JOIN vauth.user_info v ON i.loginID=v.id 
 		  left join tb_medical_hospital c on i.hospitalID=c.hospitalID
 		  left join tb_medical_section q on i.sectionID=q.id
 		 WHERE 1=1

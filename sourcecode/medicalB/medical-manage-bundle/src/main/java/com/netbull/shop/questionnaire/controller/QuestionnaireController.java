@@ -56,6 +56,7 @@ public class QuestionnaireController {
 				list.add(map.get("name"));
 				list.add(map.get("createTime"));
 				list.add(map.get("note"));
+				list.add(map.get("pushDays"));
 				list.add(map.get(""));
 				aaData.add(list);
 			}

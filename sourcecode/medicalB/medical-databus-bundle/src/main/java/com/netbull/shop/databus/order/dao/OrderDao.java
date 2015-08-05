@@ -19,7 +19,7 @@ import com.netbull.shop.databus.order.model.ServiceOrder;
 @Repository
 public class OrderDao {
 	private static final Logger logger = Logger.getLogger("daoLog");
-	
+
 	private static final String NAMESPACE = OrderBase.class.getName();
 
 	@Resource
@@ -28,52 +28,77 @@ public class OrderDao {
 	public void saveOrderBase(OrderBase orderBase) {
 		session.insert(NAMESPACE + ".save_OrderBase", orderBase);
 	}
-	
+
 	public void saveServiceOrder(ServiceOrder service) {
 		session.insert(NAMESPACE + ".save_ServiceOrder", service);
 	}
-	
+
 	public ServiceOrder findServiceOrder(String orderNumber) {
-		return session.selectOne(NAMESPACE + ".findServiceOrderByOrderNumber", orderNumber);
+		return session.selectOne(NAMESPACE + ".findServiceOrderByOrderNumber",
+				orderNumber);
 	}
-	
+
 	public void saveOrderPayment(OrderPayment orderPayment) {
 		session.insert(NAMESPACE + ".save_OrderPayment", orderPayment);
 	}
-	
+
 	public int updateOrderPayment(OrderPayment orderPayment) {
 		return session.insert(NAMESPACE + ".update_OrderPayment", orderPayment);
 	}
-	
+
 	public int patientOrderListTotalCount(Map<String, Object> param) {
-		return (Integer)session.selectOne(NAMESPACE + ".patientOrderListTotalCount", param);
+		return (Integer) session.selectOne(NAMESPACE
+				+ ".patientOrderListTotalCount", param);
 	}
-	
+
 	public List<PatientOrder> patientOrderList(Map<String, Object> param) {
 		return session.selectList(NAMESPACE + ".patientOrderList", param);
 	}
-	
+
 	public int doctorOrderListTotalCount(Map<String, Object> param) {
-		return (Integer)session.selectOne(NAMESPACE + ".doctorOrderListTotalCount", param);
+		return (Integer) session.selectOne(NAMESPACE
+				+ ".doctorOrderListTotalCount", param);
 	}
-	
+
 	public List<DoctorOrder> doctorOrderList(Map<String, Object> param) {
 		return session.selectList(NAMESPACE + ".doctorOrderList", param);
 	}
-	
+
 	public int totalIncome(Map<String, Object> param) {
-		return (Integer)session.selectOne(NAMESPACE + ".totalIncome", param);
+		return (Integer) session.selectOne(NAMESPACE + ".totalIncome", param);
 	}
-	
+
 	public int recentMonthIncome(Map<String, Object> param) {
-		return (Integer)session.selectOne(NAMESPACE + ".recentMonthIncome", param);
+		return (Integer) session.selectOne(NAMESPACE + ".recentMonthIncome",
+				param);
 	}
 
 	public int shopOrderListTotalCount(Map<String, Object> param) {
-		return (Integer)session.selectOne(NAMESPACE + ".shopOrderListTotalCount", param);
+		return (Integer) session.selectOne(NAMESPACE
+				+ ".shopOrderListTotalCount", param);
 	}
-	
+
 	public List<ShopOrder> shopOrderList(Map<String, Object> param) {
 		return session.selectList(NAMESPACE + ".shopOrderList", param);
+	}
+
+	public OrderPayment findOrderPaymentByService(Map<String, Object> param) {
+		return session.selectOne(NAMESPACE + ".findOrderPaymentByService",
+				param);
+	}
+
+	public int updateRefundOrderService(Map<String, Object> params) {
+		return session.update(NAMESPACE + ".refundOrderService", params);
+
+	}
+
+	public int findReFundServiceTotal(Map<String, String> requestMap) {
+		return (Integer) session.selectOne(NAMESPACE
+				+ ".findReFundServiceTotal", requestMap);
+	}
+
+	public List<Map<String, Object>> findReFundService(
+			Map<String, String> requestMap) {
+		return session.selectList(NAMESPACE + ".findReFundService", requestMap);
 	}
 }

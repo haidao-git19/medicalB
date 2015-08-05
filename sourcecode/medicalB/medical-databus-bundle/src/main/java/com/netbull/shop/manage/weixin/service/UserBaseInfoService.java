@@ -11,78 +11,90 @@ import org.springframework.stereotype.Service;
 
 import com.netbull.shop.common.vo.Patient;
 import com.netbull.shop.common.vo.UserVo;
+import com.netbull.shop.manage.weixin.dao.AccountDao;
 import com.netbull.shop.manage.weixin.dao.UserBaseInfoDao;
 
 @Service
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class UserBaseInfoService {
 	private static final Log log = LogFactory.getLog(UserBaseInfoService.class);
-    
+
 	@Resource
 	private UserBaseInfoDao userBaseInfoDao;
+	@Resource
+	private AccountDao accountDao;
 
 	/**
 	 * 查询用户信息
+	 * 
 	 * @param paramter
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Patient queryUserBaseInfo(Map paramter) {		
+	public Patient queryUserBaseInfo(Map paramter) {
 		return userBaseInfoDao.queryUserBaseInfo(paramter);
 	}
-	
+
 	/**
 	 * 查询用户信息
+	 * 
 	 * @param map
 	 * @return
 	 */
-	public UserVo queryUserByParams(Map<String,String> map){
+	public UserVo queryUserByParams(Map<String, String> map) {
 		return userBaseInfoDao.queryUser(map);
 	}
-	
+
 	/**
 	 * 查询用户信息
+	 * 
 	 * @param paramter
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public List<UserVo> queryUserBaseInfoList(Map paramter){
+	public List<UserVo> queryUserBaseInfoList(Map paramter) {
 		return userBaseInfoDao.queryUserBaseInfoList(paramter);
 	}
-	
+
 	/**
 	 * 修改用户信息
+	 * 
 	 * @param paramter
 	 * @return
 	 */
-	public Integer modifyUserBaseInfo(Patient patient) {		
+	public Integer modifyUserBaseInfo(Patient patient) {
 		return userBaseInfoDao.modifyUserBaseInfo(patient);
 	}
-	
+
 	/**
-	 * 添加用户信息
+	 * 添加用户信息 同时进行开资金账户
+	 * 
 	 * @param paramter
 	 * @return
 	 */
-	public Integer saveUserBaseInfo(Patient patient) {		
-		return userBaseInfoDao.saveUserBaseInfo(patient);
+	public Integer saveUserBaseInfo(Patient patient) {
+		Integer patientID = userBaseInfoDao.saveUserBaseInfo(patient);
+		accountDao.createAccount(Long.valueOf(patient.getPatientID()));
+		return patientID;
 	}
 
 	/**
 	 * 更新用户信息
+	 * 
 	 * @param map
 	 */
-	public Integer updateUser(Map<String,String> map){
+	public Integer updateUser(Map<String, String> map) {
 		return userBaseInfoDao.update(map);
 	}
-	
+
 	/**
 	 * 修改用户密码信息
+	 * 
 	 * @param paramter
 	 * @return
 	 */
 	public Integer modifyPassword(Map paramter) {
 		return userBaseInfoDao.modifyPassword(paramter);
 	}
-	
+
 }

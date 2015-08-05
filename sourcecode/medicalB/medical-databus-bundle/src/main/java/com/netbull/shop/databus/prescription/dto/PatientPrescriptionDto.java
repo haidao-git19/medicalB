@@ -18,7 +18,8 @@ public class PatientPrescriptionDto {
 	private String qrCodePath;// 处方二维码图片路径
 	private long binder;// 病人处方绑定人
 	private String bindTime; // 病人处方绑定时间
-
+	private Integer payStatus;
+	private Integer fetchStatus;
 	private List<PrescriptionItem> items; // 处方清单
 
 	public long getId() {
@@ -83,6 +84,22 @@ public class PatientPrescriptionDto {
 
 	public void setItems(List<PrescriptionItem> items) {
 		this.items = items;
+	}
+
+	public Integer getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(Integer payStatus) {
+		this.payStatus = payStatus;
+	}
+
+	public Integer getFetchStatus() {
+		return fetchStatus;
+	}
+
+	public void setFetchStatus(Integer fetchStatus) {
+		this.fetchStatus = fetchStatus;
 	}
 
 }

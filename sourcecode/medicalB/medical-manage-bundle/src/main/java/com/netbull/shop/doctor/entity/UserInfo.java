@@ -8,7 +8,7 @@ public class UserInfo {
 	private String password;
 	private String phone;
 	private long parentid;
-
+	private Integer status;
 	public long getId() {
 		return id;
 	}
@@ -55,6 +55,14 @@ public class UserInfo {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }

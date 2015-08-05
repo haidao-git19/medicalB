@@ -7,10 +7,6 @@
    <select id="pageList" parameterType="map" resultType="map">
 	    SELECT  *   FROM tb_medical_pharmacy C
 	    where 1=1
-	    	and userID in 
-	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
-  			#{item}  
- 		 </foreach>  
 	     <if test="shopName!=null and shopName != ''">
 	      	and  shopName like CONCAT('%','${shopName}','%' )
 	     </if>
@@ -20,6 +16,9 @@
 	     <if test="type !=null and type !=''">
 	        and type = #{type}
 	     </if>
+	     <if test="companyId !=null and companyId !=''">
+	        and companyId = #{companyId}
+	     </if>
 	     and state = 0
        <include refid="com.odchia.dao.Dao.pageComponent"/>
 	</select>
@@ -28,10 +27,6 @@
    <select id="count" parameterType="map" resultType="long">
         SELECT COUNT(1)  FROM tb_medical_pharmacy C
            where 1=1
-           and userID in 
-	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
-  			#{item}  
- 		 </foreach>  
   	     <if test="shopName!=null and shopName != ''">
 	      	and  shopName like CONCAT('%','${shopName}','%' )
 	     </if>
@@ -41,12 +36,15 @@
 	     <if test="type !=null and type !=''">
 	        and type = #{type}
 	     </if>
+	     <if test="companyId !=null and companyId !=''">
+	        and companyId = #{companyId}
+	     </if>
 	     and state = 0
    </select>
    
    <insert id="save" parameterType="com.netbull.shop.pharmacy.entity.Pharmacy" useGeneratedKeys="true" keyProperty="shopID">
-   	insert into tb_medical_pharmacy (shopName,code,description,userID,crtDate,address,latnId,lng,lat,physicsAddress,type,logo,phone,state,creator,loginID,url)
-   	values (#{shopName},#{code},#{description},#{userID},#{crtDate},#{address},#{latnId},#{lng},#{lat},#{physicsAddress},#{type},#{logo},#{phone},'0',#{creator},#{loginID},#{url})
+   	insert into tb_medical_pharmacy (shopName,code,description,userID,crtDate,address,latnId,lng,lat,physicsAddress,type,logo,phone,state,creator,loginID,url,companyId)
+   	values (#{shopName},#{code},#{description},#{userID},#{crtDate},#{address},#{latnId},#{lng},#{lat},#{physicsAddress},#{type},#{logo},#{phone},'0',#{creator},#{loginID},#{url},#{companyId})
    </insert>
    
    <update id="update" parameterType="com.netbull.shop.pharmacy.entity.Pharmacy">
@@ -94,6 +92,9 @@
 	       <if test="url !=null and url !=''">
 	           url = #{url},
 	       </if>
+	        <if test="companyId !=null and companyId !=''">
+	           companyId = #{companyId},
+	       </if>
 	   </set>
 	   <where>
 	       <if test="shopID !=null and shopID !=''">
@@ -126,13 +127,14 @@
    </delete>
    
    <insert id="saveUserInfo" parameterType="com.netbull.shop.pharmacy.entity.UserInfo" useGeneratedKeys="true" keyProperty="id">
-		INSERT into vauth.user_info(login_name, true_name, password, phone, parentid) values(#{loginName}, #{trueName}, #{password}, #{phone}, #{parentid})
+		INSERT into vauth.user_info(login_name, true_name, password, phone, parentid,status,create_time,area_id) values(#{loginName}, #{trueName}, #{password}, #{phone}, #{parentid},
+		 #{status},now(),0)
 	</insert>
    
    <update id="updateUserInfo" parameterType="com.netbull.shop.pharmacy.entity.UserInfo">
-		UPDATE vauth.user_info SET  
-		true_name=#{trueName},
-		phone=#{phone}
+		UPDATE vauth.user_info SET 
+		true_name= #{trueName}, 
+		status=#{status}
 		WHERE id=#{id}
 	</update>
 	

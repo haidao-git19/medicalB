@@ -26,13 +26,15 @@ public class PharmacyDao extends BaseDao{
 	public Page page(Integer iDisplayStart, Integer iDisplayLength,
 			Map requestMap) {
 		//设置权限
-		requestMap.put("users", handleQueryOrgan());
+		//requestMap.put("users", handleQueryOrgan());
+		//只能看到自己公司的药店
+		
 		return session.page(MYBATIS_PREFIX+".pageList", MYBATIS_PREFIX+".count",
 				requestMap, iDisplayStart, iDisplayLength);
 	}
 
 	public int save(Pharmacy pharmacy) {
-		// TODO Auto-generated method stub
+		//保存医药公司的ID
 		pharmacy.setUserID(this.queryCurrentShiroUser().getLoginName());
 		return session.insert(MYBATIS_PREFIX+".save", pharmacy);
 	}

@@ -14,6 +14,7 @@ public class PrescriptionDto {
 
 	private long id;
 	private long doctorId;// 开处方的医生ID
+	private long consultationId;//处方关联的咨询ID
 	private String title; // 处方名字
 	private String application; // 适用症
 	private String remark; // 备注
@@ -102,6 +103,14 @@ public class PrescriptionDto {
 
 	public void setItems(List<PrescriptionItem> items) {
 		this.items = items;
+	}
+
+	public long getConsultationId() {
+		return consultationId;
+	}
+
+	public void setConsultationId(long consultationId) {
+		this.consultationId = consultationId;
 	}
 
 }

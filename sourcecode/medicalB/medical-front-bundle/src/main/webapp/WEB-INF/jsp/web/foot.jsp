@@ -13,7 +13,7 @@
 			</p>
 			<p class="copyright">
 				Copyright<span class="copySymbol">&copy;</span>2015 医保宝
-				<a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow" class="grayC">皖ICP备000000号</a>
+				<a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow" class="grayC">皖ICP备11018724号</a>
 			</p>
 
  

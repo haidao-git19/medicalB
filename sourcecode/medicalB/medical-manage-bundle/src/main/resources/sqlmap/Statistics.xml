@@ -6,10 +6,10 @@
         SELECT * FROM tb_medical_patient
         <where>
 	        <if test="startTime !=null and startTime !=''">
-	            and DATE_FORMAT(createTime,'%Y-%m-%d %H:%i') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(createTime,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
 	        </if>
 	        <if test="endTime !=null and endTime !=''">
-	            and DATE_FORMAT(createTime,'%Y-%m-%d %H:%i') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(createTime,'%Y-%m-%d') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d')
 	        </if>
 	    </where>
 	    <include refid="com.odchia.dao.Dao.pageComponent"/>
@@ -19,10 +19,10 @@
 	    SELECT COUNT(1) FROM tb_medical_patient 
 	    <where>
 	        <if test="startTime !=null and startTime !=''">
-	            and DATE_FORMAT(createTime,'%Y-%m-%d %H:%i') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(createTime,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
 	        </if>
 	        <if test="endTime !=null and endTime !=''">
-	            and DATE_FORMAT(createTime,'%Y-%m-%d %H:%i') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(createTime,'%Y-%m-%d') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d')
 	        </if>
 	    </where>
 	</select>
@@ -46,21 +46,21 @@
 	<select id="queryShopOrderList" parameterType="java.util.Map" resultType="java.util.Map">
         <include refid="shopOrderColumn"/>
         <where>
-            1=1 and Z.userID in
-            <foreach collection="users" item="userID" index="index" open="(" separator="," close=")">
-                #{userID}
-            </foreach>
-             <if test="shopId !=null and shopId !=''">
+            1=1 
+            <if test="shopId !=null and shopId !=''">
 	            and X.shopId = #{shopId}
+	        </if>
+	        <if test="companyId !=null and companyId !=''">
+	            and X.shopId in(select shopId from tb_medical_pharmacy where companyId =#{companyId}) 
 	        </if>
 	        <if test="orderNumber !=null and orderNumber !=''">
 	            and Y.orderNumber=#{orderNumber}
 	        </if>
 	        <if test="startTime !=null and startTime !=''">
-	            and DATE_FORMAT(P.createTime,'%Y-%m-%d %H:%i') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(P.createTime,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
 	        </if>
 	        <if test="endTime !=null and endTime !=''">
-	            and DATE_FORMAT(P.createTime,'%Y-%m-%d %H:%i') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(P.createTime,'%Y-%m-%d') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d')
 	        </if>
 	        and Y.serviceType = 5
 	        and Q.payStatus = 1
@@ -71,10 +71,10 @@
 	<select id="queryShopOrderCount" parameterType="java.util.Map" resultType="java.lang.Long">
 	    SELECT COUNT(1) FROM (<include refid="shopOrderColumn"/>
 	    <where>
-	        1=1 and Z.userID in
-            <foreach collection="users" item="userID" index="index" open="(" separator="," close=")">
-                #{userID}
-            </foreach>
+	        1=1 
+	        <if test="companyId !=null and companyId !=''">
+	            and X.shopId in(select shopId from tb_medical_pharmacy where companyId =#{companyId}) 
+	        </if>
              <if test="shopId !=null and shopId !=''">
 	            and X.shopId = #{shopId}
 	        </if>
@@ -82,10 +82,10 @@
 	            and Y.orderNumber=#{orderNumber}
 	        </if>
 	        <if test="startTime !=null and startTime !=''">
-	            and DATE_FORMAT(P.createTime,'%Y-%m-%d %H:%i') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(P.createTime,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
 	        </if>
 	        <if test="endTime !=null and endTime !=''">
-	            and DATE_FORMAT(P.createTime,'%Y-%m-%d %H:%i') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(P.createTime,'%Y-%m-%d') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d')
 	        </if>
 	        and Y.serviceType = 5
 	         and Q.payStatus = 1
@@ -117,10 +117,10 @@
 	            and X.orderNumber = #{orderNumber}
 	        </if>
 	        <if test="startTime !=null and startTime !=''">
-	            and DATE_FORMAT(Y.payTime,'%Y-%m-%d %H:%i') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(Y.payTime,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
 	        </if>
 	        <if test="endTime !=null and endTime !=''">
-	            and DATE_FORMAT(Y.payTime,'%Y-%m-%d %H:%i') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(Y.payTime,'%Y-%m-%d') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d')
 	        </if>
 	        and X.serviceType in (1,2,3)
 	    </where>
@@ -143,10 +143,10 @@
 	            and X.orderNumber = #{orderNumber}
 	        </if>
 	        <if test="startTime !=null and startTime !=''">
-	            and DATE_FORMAT(Y.payTime,'%Y-%m-%d %H:%i') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(Y.payTime,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
 	        </if>
 	        <if test="endTime !=null and endTime !=''">
-	            and DATE_FORMAT(Y.payTime,'%Y-%m-%d %H:%i') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i')
+	            and DATE_FORMAT(Y.payTime,'%Y-%m-%d') &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d')
 	        </if>
 	        and X.serviceType in (1,2,3)
 	    </where>
@@ -201,4 +201,33 @@
 	    GROUP BY A.doctorId
 	    ) as count
 	</select>
+	<select id="queryConpanyPatient" parameterType="java.util.Map" resultType="java.util.Map">
+		    SELECT p.*,ph.shopName FROM tb_medical_patient p,tb_medicalb_order_service s,tb_medicalb_order_item o,tb_medical_pharmacy ph
+	 		WHERE p.patientID=s.patientId AND s.orderNumber=o.orderNumber AND o.shopId=ph.shopID
+	 		<if test="companyId!=null and companyId!=''">
+	 			and ph.companyId=#{companyId}
+	 		</if>
+	 		<if test="patientName!=null and patientName!=''">
+	 			and ph.companyId=#{companyId}
+	 		</if>
+	 		<if test="shopId!=null and shopId!=''">
+	 			and ph.shopId=#{shopId}
+	 		</if>
+	     <include refid="com.odchia.dao.Dao.pageComponent"/>
+	</select>
+	
+	<select id="queryConpanyPatientCount" parameterType="java.util.Map" resultType="java.lang.Long">
+	    	SELECT count(*) FROM tb_medical_patient p,tb_medicalb_order_service s,tb_medicalb_order_item o,tb_medical_pharmacy ph
+	 		WHERE p.patientID=s.patientId AND s.orderNumber=o.orderNumber AND o.shopId=ph.shopID
+	 		<if test="companyId!=null and companyId!=''">
+	 			and ph.companyId=#{companyId}
+	 		</if>
+	 		<if test="patientName!=null and patientName!=''">
+	 			and ph.companyId=#{companyId}
+	 		</if>
+	 		<if test="shopId!=null and shopId!=''">
+	 			and ph.shopId=#{shopId}
+	 		</if>
+	</select>
+	
 </mapper>

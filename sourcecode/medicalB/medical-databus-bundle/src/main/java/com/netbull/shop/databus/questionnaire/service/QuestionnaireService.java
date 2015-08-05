@@ -1,5 +1,6 @@
 package com.netbull.shop.databus.questionnaire.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ import com.netbull.shop.databus.questionnaire.model.Result;
 import com.netbull.shop.databus.questionnaire.model.ResultDetail;
 import com.netbull.shop.manage.common.constant.Constants;
 import com.netbull.shop.manage.common.http.Resp;
+import com.netbull.shop.manage.weixin.vo.AccountLog;
 
 /**
  * 问卷Service
@@ -42,7 +44,7 @@ import com.netbull.shop.manage.common.http.Resp;
 @Service
 public class QuestionnaireService {
 	private static final Logger logger = Logger.getLogger("serviceLog");
-	
+
 	@Resource
 	private CaseDao caseDao;
 	@Resource
@@ -59,169 +61,257 @@ public class QuestionnaireService {
 	private FeedbackDao feedbackDao;
 	@Resource
 	private PatientBindDao patientBindDao;
-	
+
 	public QuestionnaireListResp getQuestionnaireListResp(long doctorId) {
 		QuestionnaireListResp resp = new QuestionnaireListResp();
-		
-		try{
-			List<Questionnaire> questionnaires = questionnaireDao.getQuestionnairesByDoctorId(doctorId);
+
+		try {
+			List<Questionnaire> questionnaires = questionnaireDao
+					.getQuestionnairesByDoctorId(doctorId);
 			resp.setQuestionnaires(questionnaires);
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			resp.setCode(Constants.FAIL);
 			resp.setMsg(Constants.FAIL_MSG);
 		}
-		
+
 		return resp;
 	}
-	
+
 	/**
-	 * @param qnId 问卷ID
+	 * @param qnId
+	 *            问卷ID
 	 * @return
 	 */
 	public QuestionnaireResp getQuestionnaireResp(long qnId) {
 		QuestionnaireResp resp = new QuestionnaireResp();
-		
-		try{
+
+		try {
 			List<CaseClass> questionClasses = buildQuestionClasses(qnId);
-			
+
 			Questionnaire questionnaire = questionnaireDao.getById(qnId);
 			questionnaire.setCaseClasses(questionClasses);
-			
+
 			resp.setQuestionnaire(questionnaire);
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			resp.setCode(Constants.FAIL);
 			resp.setMsg(Constants.FAIL_MSG);
 		}
-		
+
 		return resp;
 	}
-	
+
 	private List<CaseClass> buildQuestionClasses(long qnId) {
 		List<CaseClass> classes = caseClassDao.findCaseClassList(qnId);
-		for(CaseClass cls : classes) {
+		for (CaseClass cls : classes) {
 			List<Case> questions = buildClassQuestions(cls.getId());
 			cls.setCases(questions);
 		}
 		return classes;
 	}
-	
+
 	private List<Case> buildClassQuestions(long classId) {
 		List<Case> questions = caseDao.findCasesByClsId(classId);
-		for(Case question : questions) {
-			List<CaseOption> questionOptions = caseOptionDao.findCaseOptions(question.getId());
+		for (Case question : questions) {
+			List<CaseOption> questionOptions = caseOptionDao
+					.findCaseOptions(question.getId());
 			question.setCaseOptions(questionOptions);
 		}
 		return questions;
 	}
-	
+
 	public Resp commit(Result rslt) {
 		Resp resp = new Resp();
 		
-		try{
+		try {
 			long rId = resultDao.save(rslt);
-			for(ResultDetail detail : rslt.getDetails()) {
+			for (ResultDetail detail : rslt.getDetails()) {
 				detail.setRId(rId);
 				resultDetailDao.save(detail);
 			}
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			resp.setCode(Constants.FAIL);
 			resp.setMsg(Constants.FAIL_MSG);
 		}
-		
+
 		return resp;
 	}
 
 	public ExceptionOptionResp exceptionOption(long rId) {
 		ExceptionOptionResp resp = new ExceptionOptionResp();
-		
-		try{
-			List<ExceptionOption> options = resultDetailDao.findExceptionOptions(rId);
+
+		try {
+			List<ExceptionOption> options = resultDetailDao
+					.findExceptionOptions(rId);
 			resp.setOptions(options);
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			resp.setCode(Constants.FAIL);
 			resp.setMsg(Constants.FAIL_MSG);
 		}
-		
+
 		return resp;
 	}
-	
+
 	public Resp feedback(Feedback feedback) {
 		Resp resp = new Resp();
-		
-		try{
+
+		try {
 			feedbackDao.save(feedback);
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			resp.setCode(Constants.FAIL);
 			resp.setMsg(Constants.FAIL_MSG);
 		}
-		
+
 		return resp;
 	}
-	
+
 	public Resp bind(PatientBind bind) {
 		Resp resp = new Resp();
-		
-		try{
+
+		try {
 			patientBindDao.save(bind);
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			resp.setCode(Constants.FAIL);
 			resp.setMsg(Constants.FAIL_MSG);
 		}
-		
+
 		return resp;
 	}
-	
+
 	public FeedbackDto getFeedback(long id) {
 		FeedbackDto resp = new FeedbackDto();
-		
-		try{
+
+		try {
 			Feedback feedback = feedbackDao.findById(id);
 			resp.setFeedback(feedback);
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("", e);
 			resp.setCode(Constants.FAIL);
 			resp.setMsg(Constants.FAIL_MSG);
 		}
-		
+
 		return resp;
 	}
-	
+
 	public ExceptionResultResp exceptionResultList(long doctorId) {
 		ExceptionResultResp resp = new ExceptionResultResp();
-		
-		try{
-			List<ExceptionResult> list = resultDao.findExceptionResults(doctorId);
+
+		try {
+			List<ExceptionResult> list = resultDao
+					.findExceptionResults(doctorId);
 			resp.setList(list);
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("", e);
 			resp.setCode(Constants.FAIL);
 			resp.setMsg(Constants.FAIL_MSG);
 		}
-		
+
+		return resp;
+	}
+
+	public List<Map> queryRcentiQuestionnaires(Map parameter) {
+		return questionnaireDao.queryRcentiQuestionnaires(parameter);
+	}
+
+	public Integer update(Map parameter) {
+		return questionnaireDao.update(parameter);
+	}
+
+	public Resp deputeDoctor(Result rslt) {
+		Resp resp = new Resp();
+		try {
+			PatientBind bind=patientBindDao.queryCurrentMapping(rslt);
+			rslt.setId(bind.getId());
+			patientBindDao.deputeDoctor(rslt);
+			resp.setCode(Constants.SUCCESS);
+			resp.setMsg(Constants.SUCCESS_MSG);
+		} catch (Exception e) {
+			resp.setCode(Constants.FAIL);
+			resp.setMsg(Constants.FAIL_MSG);
+		}
+
 		return resp;
 	}
 	
-	public List<Map> queryRcentiQuestionnaires(Map parameter){
-		return questionnaireDao.queryRcentiQuestionnaires(parameter);
+	
+	public Map<String, Object> queryDeputeQuestionnaire(Map<String, String> requestMap) {
+		Map<String, Object> resp = new HashMap<String, Object>();
+		try {
+			Integer pageNum = Integer.parseInt(requestMap.get("pageNum"));
+			Integer pageSize = Integer.parseInt(requestMap.get("pageSize"));
+			requestMap.put("startIndex",
+					String.valueOf((pageNum - 1) * pageSize));
+			int totalCount = patientBindDao.queryDeputeQuestionnaireTotal(requestMap);
+			List<Map> list = patientBindDao.queryDeputeQuestionnaire(requestMap);
+			resp.put("pageNum", pageNum);
+			resp.put("pageSize", pageSize);
+			resp.put("totalCount", totalCount);
+			resp.put("list", list);
+			resp.put("code", Constants.SUCCESS);
+			resp.put("msg", Constants.SUCCESS_MSG);
+		} catch (Exception e) {
+			resp.put("code", Constants.FAIL);
+			resp.put("msg", Constants.FAIL_MSG);
+		}
+		return resp;
+	}
+
+	public Map queryDoctorResult(Map<String, String> requestMap) {
+		Map<String, Object> resp = new HashMap<String, Object>();
+		try {
+			Integer pageNum = Integer.parseInt(requestMap.get("pageNum"));
+			Integer pageSize = Integer.parseInt(requestMap.get("pageSize"));
+			requestMap.put("startIndex",
+					String.valueOf((pageNum - 1) * pageSize));
+			int totalCount = resultDao.queryDoctorResultTotal(requestMap);
+			List<Map> list = resultDao.queryDoctorResult(requestMap);
+			resp.put("pageNum", pageNum);
+			resp.put("pageSize", pageSize);
+			resp.put("totalCount", totalCount);
+			resp.put("list", list);
+			resp.put("code", Constants.SUCCESS);
+			resp.put("msg", Constants.SUCCESS_MSG);
+		} catch (Exception e) {
+			resp.put("code", Constants.FAIL);
+			resp.put("msg", Constants.FAIL_MSG);
+		}
+		return resp;
 	}
 	
-	public Integer update(Map parameter){
-		return questionnaireDao.update(parameter);
+	public Map findDoctorquesPatient(Map<String, String> requestMap) {
+		Map<String, Object> resp = new HashMap<String, Object>();
+		try {
+			Integer pageNum = Integer.parseInt(requestMap.get("pageNum"));
+			Integer pageSize = Integer.parseInt(requestMap.get("pageSize"));
+			requestMap.put("startIndex",
+					String.valueOf((pageNum - 1) * pageSize));
+			int totalCount = resultDao.findDoctorquesPatientTotal(requestMap);
+			List<Map> list = resultDao.findDoctorquesPatient(requestMap);
+			resp.put("pageNum", pageNum);
+			resp.put("pageSize", pageSize);
+			resp.put("totalCount", totalCount);
+			resp.put("list", list);
+			resp.put("code", Constants.SUCCESS);
+			resp.put("msg", Constants.SUCCESS_MSG);
+		} catch (Exception e) {
+			resp.put("code", Constants.FAIL);
+			resp.put("msg", Constants.FAIL_MSG);
+		}
+		return resp;
 	}
 }

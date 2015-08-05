@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netbull.shop.company.dao.CompanyDao">
+   <select id="pageList" parameterType="map" resultType="map">
+		SELECT 	companyId, companyName, linkPhone, companyaddress, latnId, 
+		loginId, creator, state, userID, crtDate,companyDesc
+		 FROM tb_medical_company 
+		 where 1=1
+	    	and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>  
+	     <if test="companyName!=null and companyName != ''">
+	      	and  companyName like CONCAT('%','${companyName}','%' )
+	     </if>
+	     <if test="latnId!=null and latnId != ''">
+	      	and  latnId =#{latnId}
+	     </if>
+	     and state = 0
+       <include refid="com.odchia.dao.Dao.pageComponent" />
+	</select>
+    <select id="count" parameterType="map" resultType="long">
+        SELECT COUNT(1)  FROM tb_medical_company C
+          where 1=1
+	    	and userID in 
+	     <foreach item="item" index="index" collection="users" open="(" separator="," close=")">  
+  			#{item}  
+ 		 </foreach>
+
+	     <if test="companyName!=null and companyName != ''">
+	      	and  companyName like CONCAT('%','${companyName}','%' )
+	     </if>
+	     <if test="latnId!=null and latnId != ''">
+	      	and  latnId =#{latnId}
+	     </if>
+	     and state = 0
+   </select>
+   
+   
+     <select id="findByParam" parameterType="java.util.Map"  resultType="com.netbull.shop.company.entity.CompanyVo">
+        SELECT C.*,U.login_name loginAccount,U.password loginPwd 
+        	FROM tb_medical_company C LEFT JOIN vauth.user_info U on C.loginID = U.id
+        where 1=1
+ 		 <if test="loginId!=null and loginId != ''">
+	      	and  loginId =#{loginId}
+	     </if>  
+ 		 <if test="companyId!=null and companyId != ''">
+	      	and  C.companyId =#{companyId}
+	     </if>
+	     <if test="companyName !=null and companyName!=''">
+	         and C.companyName = #{companyName}
+	     </if>
+   </select>
+   
+   <delete id="del" parameterType="java.lang.Integer" >
+  	 DELETE FROM tb_medical_company where  companyId =#{companyId}
+   </delete>
+   
+     <insert id="save" parameterType="com.netbull.shop.company.entity.CompanyVo" useGeneratedKeys="true" keyProperty="shopID">
+		INSERT INTO tb_medical_company ( companyName, linkPhone, companyaddress, latnId, loginId, creator, state, userID, crtDate, companyDesc)
+		VALUES ( #{companyName}, #{linkPhone}, #{companyaddress}, #{latnId}, #{loginId}, #{creator}, 0, #{userID}, now(), #{companyDesc})
+  	</insert>
+   
+   	<update id="update" parameterType="com.netbull.shop.company.entity.CompanyVo">
+	   update tb_medical_company 
+	   <set>
+	       <if test="companyName !=null and companyName !=''">
+	           companyName = #{companyName},
+	       </if>
+	       <if test="linkPhone !=null and linkPhone !=''">
+	           linkPhone = #{linkPhone},
+	       </if>
+	       <if test="companyaddress !=null and companyaddress !=''">
+	           companyaddress = #{companyaddress},
+	       </if>
+	       <if test="latnId !=null and latnId !=''">
+	           latnId = #{latnId},
+	       </if>
+	       <if test="loginId !=null and loginId !=''">
+	           loginId = #{loginId},
+	       </if>
+	       <if test="creator !=null and creator !=''">
+	           creator = #{creator},
+	       </if>
+	       <if test="state !=null and state!=''">
+	           state = #{state},
+	       </if>
+	       <if test="userID !=null and userID !=''">
+	           userID = #{userID},
+	       </if>
+	       <if test="companyDesc !=null and companyDesc !=''">
+	           companyDesc = #{companyDesc},
+	       </if>
+	   </set>
+	     where  companyId =#{companyId}
+   </update>
+</mapper>

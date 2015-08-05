@@ -211,6 +211,8 @@ public class PrescriptionService {
 			dto.setBinder(prescription.getBinder());
 			dto.setBindTime(prescription.getBindTime());
 			dto.setItems(prescriptionItems);
+			dto.setPayStatus(prescription.getPayStatus());
+			dto.setFetchStatus(prescription.getFetchStatus());
 			resp.setData(dto);
 			resp.setCode(Constants.SUCCESS);
 			resp.setMsg(Constants.SUCCESS_MSG);

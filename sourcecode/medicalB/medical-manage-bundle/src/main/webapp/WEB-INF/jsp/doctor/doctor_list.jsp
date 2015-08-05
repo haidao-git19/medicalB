@@ -39,9 +39,9 @@
 			</form>
 			
 			<div class="row-fluid toolbar">
-				<shiro:hasRole name="医院管理员">
+				<shiro:hasAnyRoles name="平台管理员,医院管理员">
 	        		<button type="button" class="btn btn-primary" onclick="window.location.href='${ctx }/doctor/initAddOrUpdate'">新增</button>
-				</shiro:hasRole>
+				</shiro:hasAnyRoles>
         	</div>
 	        <table id="doctor_table" class="table table-hover table-bordered table-condensed table-striped">
 				<thead>

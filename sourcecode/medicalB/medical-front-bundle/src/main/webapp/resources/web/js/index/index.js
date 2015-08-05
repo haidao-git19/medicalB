@@ -133,21 +133,24 @@ function seeDoc(secid,length,i)
 				}
 				else if(data != undefined && data != null){
 					$.each(data,function(i, a) {
+						if(!a.avatar){
+							a.avatar="userimg_no.png";
+						}
 						strdoc=strdoc+"<li class=\"homeTelLi\"> ";
 						strdoc=strdoc+"<span class=\"homeTelLi_span0\">";
 						strdoc=strdoc+"<table><tbody><tr>";
-						strdoc=strdoc+"<td><a href=\"http://400.haodf.com/haodf/mdonglai\"><img src=\""+basesrc+a.avatar+"\"></a></td>";
+						strdoc=strdoc+"<td><a href=\""+ctx+"/anon/web/doctor?hospitalID="+a.hospitalID+"&sectionID="+a.sectionID+"&doctorID="+a.doctorID+"\"><img style='height:100%; width:100%;' src=\""+basesrc+a.avatar+"\"></a></td>";
 						strdoc=strdoc+"</tr></tbody></table></span>";
 						strdoc=strdoc+"<span class=\"homeTelLi_span1\">";
-						strdoc=strdoc+"<p> <a class=\"blue2\" href=\"http://400.haodf.com/haodf/mdonglai\">"+a.doctorName+"</a> "+a.doctorLevel+" </p>";
+						strdoc=strdoc+"<p> <a class=\"blue2\" href=\""+ctx+"/anon/web/doctor?hospitalID="+a.hospitalID+"&sectionID="+a.sectionID+"&doctorID="+a.doctorID+"\">"+a.realName+"</a> "+a.doctorLevel+" </p>";
 						strdoc=strdoc+"<p>"+a.hospitalName+"</p>";
 						strdoc=strdoc+"<p>"+a.sectionName+"</p></span>";
 						strdoc=strdoc+"<span class=\"homeTelLi_span1\">";
-						strdoc=strdoc+"<p> <a href=\"http://www.haodf.com/wenda/mdonglai_g_1818634760.htm\"> 白癜风 </a>&nbsp; </p>";
+						strdoc=strdoc+"<p> <a href=\"#\"> 白癜风 </a>&nbsp; </p>";
 						strdoc=strdoc+"<p>最近通话： 04-01 19:51</p>";
-						strdoc=strdoc+"<p><a href=\"http://400.haodf.com/haodf/mdonglai#successAnswer\" target=\"_blank\" class=\"blue\">查看最新用户分享 &gt;&gt;</a></p>";
+						strdoc=strdoc+"<p><a href=\"#\" target=\"_blank\" class=\"blue\">查看最新用户分享 &gt;&gt;</a></p>";
 						strdoc=strdoc+"</span> ";
-						strdoc=strdoc+" <span class=\"homeTelLi_span4\"> <a class=\"orange3\" href=\"http://mdonglai.haodf.com/payment/servicelist\">立刻预约</a> </span> ";
+						strdoc=strdoc+" <span class=\"homeTelLi_span4\"> <a class=\"orange3\" href=\""+ctx+"/anon/consulation?doctorID="+a.doctorID+"\">立刻预约</a> </span> ";
 						strdoc=strdoc+"</li>";
 					});
 				}
@@ -239,9 +242,14 @@ function seeZx(secid,length,i)
 				}
 				else if(data != undefined && data != null){
 					$.each(data,function(i, a) {
+						var _question="";
+						if(a.question){
+							_question=a.question.length>24?a.question.substring(0,24)+"...":a.question;
+						}
+						
 						wsstrdoc=wsstrdoc+"<li class=\"zx_bg1\">";
 						wsstrdoc=wsstrdoc+"<span class=\"gray f_rt\">"+a.hospitalName+a.attrname+"&nbsp;&nbsp;"+a.doctorName+"&nbsp;回复</span>";
-						wsstrdoc=wsstrdoc+"<a href=\"http://www.haodf.com/wenda/chensongzyy_g_1836022995.htm\" target=\"_blank\">"+a.question+"</a> ";
+						wsstrdoc=wsstrdoc+"<a href=\"#\" target=\"_blank\" title=\""+a.question+"\">"+_question+"</a> ";
 						wsstrdoc=wsstrdoc+"<a class=\"gray\" style=\"text-decoration:none;\">"+a.datediff+"</a>";
 						wsstrdoc=wsstrdoc+"</li>";
 					});
@@ -366,7 +374,7 @@ function seeConsult() {
 					$("#zxtdnr").append("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr>");
 					$("#zxtdnr").append("<td style=\"padding: 0px; border: 1px solid #DFDFDF; height: 31px; vertical-align: middle; width: 31px;\" align=\"center\" valign=\"middle\"><a target=\"_blank\" href=\"http://chjh76.haodf.com\"><img style=\"border:none;\" src=\"http://n1.hdfimg.com/g3/M00/43/FE/p4YBAFIwhECAAEfZAAAH4eTfEf0542_31_31_1.jpg?02f0\"></a></td>");
 					$("#zxtdnr").append("</tr></tbody> </table></div>");
-					$("#zxtdnr").append("<div class=\"r_bar_doc3_c\"><span style=\"float:right;\">"+a.datediff+"</span><a href=\"http://chjh76.haodf.com\" class=\"blue2\" target=\"_blank\">"+a.doctorName+"</a> "+a.doctorLevel);
+					$("#zxtdnr").append("<div class=\"r_bar_doc3_c\"><span style=\"float:right;\">"+a.datediff+"</span><a href=\""+ctx+"/anon/web/doctor?hospitalID="+a.hospitalID+"&sectionID="+a.sectionID+"&doctorID="+a.doctorID+"\" class=\"blue2\" target=\"_blank\">"+a.doctorName+"</a> "+a.doctorLevel);
 					$("#zxtdnr").append("<br/>"+a.hospitalName+" ");
 					$("#zxtdnr").append("回复了患者 <br>");
 					$("#zxtdnr").append("</div><div class=\"clear\"></div>");
@@ -390,14 +398,14 @@ $(document).ready(function(){
 			function(){ 
 				$(this).siblings().addClass('normal').removeClass('menu-active')
 				$(this).addClass('menu-active'); 
-				var latnId=$(this).attr('latn');
-				if($('#hospitalLatn_'+latnId).length<1){
+				var areaName=$(this).attr('title');
+				if($('#hospitalLatn_'+areaName).length<1){
 					//暂无数据
 					$('#hospitalLatn_none').show();
 					$('#hospitalLatn_none').siblings().hide();
 				}else{
-					$('#hospitalLatn_'+latnId).show();
-					$('#hospitalLatn_'+latnId).siblings().hide();
+					$('#hospitalLatn_'+areaName).show();
+					$('#hospitalLatn_'+areaName).siblings().hide();
 				}
 			}, 
 			function(){ 

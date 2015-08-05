@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.netbull.shop.manage.weixin.service.PatientService;
 import com.netbull.shop.common.util.NullUtil;
 import com.netbull.shop.common.util.StringUtil;
@@ -103,9 +104,14 @@ public class ConsultationCotroller {
 				resultMap.put("msg", Constants.FAIL_NULL_RESULT_MSG);
 				return JsonUtils.obj2Json(resultMap);
 			}
-			
+			//放置repeat记录
 			consultationMap.put("repeatList", consultationService.queryConsultationRepeatList(consultationMap));
-			
+			//放置咨询分诊记录
+			Integer dispatcherType= (Integer) consultationMap.get("dispatcherType");
+			//已经分诊 查询分诊信息
+			if(dispatcherType!=null){
+				resultMap.put("consultDispatcherDetail",consultationService.queryConsultDispatcherDetail(consultationMap));
+			}
 			resultMap.put("code", Constants.SUCCESS);
 			resultMap.put("msg", Constants.SUCCESS_MSG);
 			resultMap.put("consultationtDetail", consultationMap);

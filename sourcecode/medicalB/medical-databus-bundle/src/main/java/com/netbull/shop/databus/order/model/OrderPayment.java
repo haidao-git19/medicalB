@@ -12,7 +12,8 @@ public class OrderPayment {
 	public static final int ONLINE_PAY_MODE = 1;
 	/** 货到付款 */
 	public static final int ARRIVAL_PAY_MODE = 2;
-	
+	/** 余额付款 */
+	public static final int ACC_PAY_MODE = 3;
 	private long id;
 	private String orderNumber;
 	private int payPrice;

@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class PatientBind {
 	private long id;
+	private long consultationId;
 	private long qnId;
 	private long patientId;
 	private long doctorId;
@@ -61,6 +62,14 @@ public class PatientBind {
 
 	public void setState(int state) {
 		this.state = state;
+	}
+
+	public long getConsultationId() {
+		return consultationId;
+	}
+
+	public void setConsultationId(long consultationId) {
+		this.consultationId = consultationId;
 	}
 
 }

@@ -37,4 +37,9 @@ public class StatisticsService {
 	public Integer queryMRV(Map parameter){
 		return statisticsDao.queryMRV(parameter);
 	}
+
+	public Page companyPatientPage(Integer iDisplayStart,
+			Integer iDisplayLength, Map<String, String> requestMap) {
+		return statisticsDao.queryConpanyPatient(iDisplayStart, iDisplayLength, requestMap);
+	}
 }

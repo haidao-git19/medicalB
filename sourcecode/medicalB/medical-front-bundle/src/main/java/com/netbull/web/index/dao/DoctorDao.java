@@ -29,7 +29,7 @@ public class DoctorDao {
 		return session.selectOne(NAMESPACE+".query_by_id", id);
 	}
 	public List<Doctor> query_by_hosid(Map paramter) {
-		return session.selectOne(NAMESPACE+".query_by_hosid", paramter);
+		return session.selectList(NAMESPACE+".query_by_hosid", paramter);
 	}
 	
 	public List<Map> queryRecomDoctorList(Map parameter){
